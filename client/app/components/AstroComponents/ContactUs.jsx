@@ -38,11 +38,11 @@ function ContactInfo() {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-black">
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-6">
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
         {contactData.map((item) => (
           <div
             key={item.id}
-            className={`rounded-lg p-6 flex flex-col items-center space-y-4 border border-gray-700 bg-gradient-to-br from-black via-gray-900 to-gray-800 shadow-lg transition-transform transform hover:scale-105 ${item.hoverBg}`}
+            className={`rounded-lg p-8 flex flex-col items-center space-y-4 border border-gray-700 bg-gradient-to-br from-black via-gray-900 to-gray-800 shadow-lg transition-transform transform hover:scale-105 ${item.hoverBg}`}
           >
             <div className="p-4 rounded-full bg-gradient-to-r from-gray-700 to-black shadow-md">
               {item.icon}
