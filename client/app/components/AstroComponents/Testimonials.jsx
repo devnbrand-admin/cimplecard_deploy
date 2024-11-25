@@ -33,7 +33,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="text-center py-20 bg-black text-white">
+    <section className="text-center pt-10 bg-black text-white">
       <h2 className="text-4xl font-bold mb-12 mt-10">What My Clients Say</h2>
       <div className="container mx-auto">
         <Swiper

@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center p-6 bg-black text-white">
+    <header className="fixed z-50 flex justify-between items-center p-6 text-white w-full bg-white/10 backdrop-blur-md">
       <div className="text-xl font-bold">Witchcraft</div>
       <nav className="space-x-6">
         <a href="#" className="hover:text-purple-400">Home</a>

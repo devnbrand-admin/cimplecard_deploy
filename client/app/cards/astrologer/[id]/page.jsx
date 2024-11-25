@@ -8,6 +8,8 @@ import StayUpdated from "@/app/components/AstroComponents/StayUpdated";
 import Testimonials from "@/app/components/AstroComponents/Testimonials";
 import React from "react";
 import "../../../globals.css"
+import SocialMediaEmbeds from "@/app/components/AstroComponents/SocialMediaHandlers";
+import ContactInfo from "@/app/components/AstroComponents/ContactUs";
 
 const App = () => {
   
@@ -26,8 +28,13 @@ const App = () => {
       {/* Reading Section */}
       <PsychicReadings/>
 
+      {/* SocialMediaEmbeds Section */}
+      <SocialMediaEmbeds/>
+
       {/* Testimonial Carousel Section */}
       <Testimonials/>
+
+      <ContactInfo/>
       
       {/* Subscribe Section */}
       <StayUpdated/>
