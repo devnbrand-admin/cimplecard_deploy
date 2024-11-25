@@ -18,6 +18,9 @@ export default function Services() {
                             <h1 className="absolute text-black text-2xl font-semibold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                 Web Development
                             </h1>
+                            <button className="relative bg-black text-white py-[5px] px-[10px] rounded-[20px] mt-[10vh] text-1xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                Inquire Now
+                            </button>
                         </div>
                     ))}
             </div>

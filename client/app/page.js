@@ -17,6 +17,7 @@ export default function Home() {
     <Services></Services>
     <Testimonial></Testimonial>
     <Youtube></Youtube>
+    <Instagram></Instagram>
     </>
   );
 }
