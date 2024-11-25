@@ -27,7 +27,7 @@ function ContactInfo() {
     {
       id: 4,
       title: "Galactic Address",
-      icon: <MdLocationOn className="text-4xl text-pink-400" />,
+      icon: <MdLocationOn className="text-4xl text-pink-300" />,
       details: [
         "Galaxy Avenue, Nebula City, Star Cluster Z89",
         "Moonlight Street, Lunar Base, Orbit Station X32",
