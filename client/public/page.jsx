@@ -22,7 +22,7 @@ const App = () => {
       <Header/>
      
       {/* Hero Section */}
-      <HeroSection/>
+      {/* <HeroSection/> */}
 
       {/* guidance Section */}
       <GuidanceSection/>
