@@ -14,3 +14,9 @@
   font-weight: normal; /* You can specify font-weight if you have multiple weights */
   font-style: normal; /* Specify if the font is italic or normal */
 }
+
+  /* Tailwind Customizations */
+.bg-cover {
+  background-size: cover;
+  background-position: center;
+}

@@ -8,6 +8,18 @@ import Youtube from "./Components/Youtube/Youtube";
 import Instagram from "./Components/Instagram/Instgram";
 
 export default function Home() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? reviews.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
     <>
     <Header></Header>
@@ -19,5 +31,7 @@ export default function Home() {
     <Youtube></Youtube>
     <Instagram></Instagram>
     </>
+    <div className="bg-[url('/hero-bg.jpg')] bg-cover bg-center text-white min-h-screen">
+    </div>
   );
 }
