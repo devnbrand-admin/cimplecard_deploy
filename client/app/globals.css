@@ -2,9 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-
-  /* Tailwind Customizations */
-.bg-cover {
-  background-size: cover;
-  background-position: center;
-}

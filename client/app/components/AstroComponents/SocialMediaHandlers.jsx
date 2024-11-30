@@ -2,14 +2,14 @@ import React from "react";
 
 function SocialMediaEmbeds() {
   return (
-    <div className="w-full min-h-screen bg-black text-white">
+    <div className="w-full min-h-screen bg-[#2b1923] text-white">
       <div className="max-w-6xl w-full mx-auto p-8">
-        <h2 className="text-3xl font-extrabold text-center text-purple-100 mb-14 mt-28">
+        <h2 className="text-4xl font-extrabold text-center text-teal-300 mb-14 mt-20">
           Connect With Us Beyond the Stars
         </h2>
 
-        <div className="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 border border-purple-500 mb-12 bg-gradient-to-br from-black via-purple-900 to-black">
-          <h3 className="text-lg font-semibold text-purple-300 p-4 border-b border-purple-700 text-center">
+        <div className="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 border border-teal-500 mb-12 bg-gradient-to-br from-black via-teal-900 to-black">
+          <h3 className="text-lg font-semibold text-teal-200 p-4 border-b border-teal-700 text-center">
             Cosmic YouTube Channel
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
@@ -20,7 +20,7 @@ function SocialMediaEmbeds() {
                 height="400"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                className="rounded-lg border border-purple-400 shadow-inner"
+                className="rounded-lg border border-teal-400 shadow-inner"
               ></iframe>
             </div>
             <div className="flex items-center justify-center">
@@ -30,7 +30,7 @@ function SocialMediaEmbeds() {
                 height="400"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                className="rounded-lg border border-purple-400 shadow-inner"
+                className="rounded-lg border border-teal-400 shadow-inner"
               ></iframe>
             </div>
             <div className="flex items-center justify-center">
@@ -40,14 +40,14 @@ function SocialMediaEmbeds() {
                 height="400"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                className="rounded-lg border border-purple-400 shadow-inner"
+                className="rounded-lg border border-teal-400 shadow-inner"
               ></iframe>
             </div>
           </div>
         </div>
 
-        <div className="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 border border-purple-500 bg-gradient-to-br from-black via-purple-900 to-black">
-          <h3 className="text-lg font-semibold text-purple-300 p-4 border-b border-purple-700 text-center">
+        <div className="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 border border-teal-500 bg-gradient-to-br from-black via-teal-900 to-black">
+          <h3 className="text-lg font-semibold text-teal-200 p-4 border-b border-teal-700 text-center">
             Galactic Instagram Highlights
           </h3>
           <div className="flex items-center justify-center p-4 min-h-[300px]">
@@ -56,7 +56,7 @@ function SocialMediaEmbeds() {
               width="40%"
               height="700"
               allow="encrypted-media"
-              className="rounded-lg border border-purple-400 shadow-inner"
+              className="rounded-lg border border-teal-400 shadow-inner"
             ></iframe>
           </div>
         </div>

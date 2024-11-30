@@ -7,7 +7,7 @@ import HeroSection from "@/app/components/astrocomponents/HeroSection";
 import PsychicReadings from "@/app/components/astrocomponents/PsychicReadings";
 import StayUpdated from "@/app/components/astrocomponents/StayUpdated";
 import Testimonials from "@/app/components/astrocomponents/Testimonials";
-import "@/app/style/astrologer.css";
+import "./style.css";
 import SocialMediaEmbeds from "@/app/components/astrocomponents/SocialMediaHandlers";
 import ContactInfo from "@/app/components/astrocomponents/ContactUs";
 import WhatsAppButton from "@/app/components/astrocomponents/WhatsappContact";
@@ -22,7 +22,7 @@ const App = () => {
       <Header/>
      
       {/* Hero Section */}
-      <HeroSection/>
+      {/* <HeroSection/> */}
 
       {/* guidance Section */}
       <GuidanceSection/>
