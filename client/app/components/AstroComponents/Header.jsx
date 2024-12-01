@@ -2,13 +2,22 @@ import React from "react";
 
 const Header = () => {
   return (
-    <header className="fixed z-50 flex justify-between items-center p-6 text-white w-full bg-white/10 backdrop-blur-md">
-      <div className="text-xl font-bold">Witchcraft</div>
-      <nav className="space-x-6">
-        <a href="#" className="hover:text-purple-400">Home</a>
-        <a href="#" className="hover:text-purple-400">About</a>
-        <a href="#" className="hover:text-purple-400">Readings</a>
-        <a href="#" className="hover:text-purple-400">Contact</a>
+    <header className="w-full bg-white/10 fixed z-50 backdrop-blur-xl text-teal-400 shadow-md">
+      <nav className="container mx-auto flex justify-between items-center py-4 px-6">
+
+        <h1 className="text-2xl font-bold tracking-wide">Witchcraft</h1>
+
+
+        <ul className="flex gap-8">
+          {["Home", "About", "Readings", "Contact"].map((link) => (
+            <li
+              key={link}
+              className="text-lg hover:text-teal-500 transition-all cursor-pointer"
+            >
+              {link}
+            </li>
+          ))}
+        </ul>
       </nav>
     </header>
   );
