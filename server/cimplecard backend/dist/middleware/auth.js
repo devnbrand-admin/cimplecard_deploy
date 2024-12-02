@@ -2,15 +2,22 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import prisma from "../DB/dbconfig.js";
 dotenv.config();
+// Centralised Token Extration
+const extractToken = (req)=>{ 
+    return req.cookies.token ||
+           req.body.token ||
+           req.headers.authorization?.replace('Bearer','');
+};
+
 export const verifyToken = async (req, res, next) => {
     try {
         // Extracting the token from various sources
-        const token = req.cookies.token || req.body.token || req.headers.authorization;
+        const token = extractToken(req);
         // If token is missing
         if (!token) {
             return res.status(401).json({
                 success: false,
-                message: "Token is missing",
+                message: "Authentication token required",
             });
         }
         // Verifying the token
@@ -19,17 +26,24 @@ export const verifyToken = async (req, res, next) => {
             const user = await prisma.user.findUnique({
                 where: { id: payload.id },
             });
-            // Use 'as string' for type assertion
+            // Added success:false to error response for frontend compatibility
+            if(!user){
+                return res.status(401).json({
+                    success: false,
+                    message: "Invalid User",
+                });
+            }
             req.user = payload; // Assign the decoded user to the request object
+            next();
         }
-        catch (error) {
+        catch (verificationerror) {
             // Verification issue
             return res.status(401).json({
                 success: false,
                 message: "Token is invalid",
             });
         }
-        next(); // Proceed to the next middleware
+        
     }
     catch (error) {
         return res.status(401).json({
@@ -41,23 +55,33 @@ export const verifyToken = async (req, res, next) => {
 export const isAdmin = (req, res, next) => {
     try {
         // Get the token from the request header (assuming it's sent as a Bearer token)
-        const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+        const token = extractToken(req);
         if (!token) {
-            return res.status(403).json({ message: "No token provided, access denied." });
+            return res.status(403).json({ 
+                success: false,
+                message: "Authentication token required",
+            });
         }
         // Verify the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         // Check the user's role
         if (decoded.role === "Admin") {
+            return res.status(403).json({
+                success: false,
+                message: "Admin access required.",
+            });
             // User is an admin, proceed to the next middleware or route handler
+            req.user = decoded;
             return next();
-        }
-        else {
-            return res.status(403).json({ message: "Access denied. User is not an admin." });
-        }
+        } 
     }
+        
+    // User is not an admin, return 403 Forbidden
     catch (error) {
-        console.error("Error verifying token:", error);
-        return res.status(401).json({ message: "Unauthorized." });
+        console.error("Admin verification error:", error);
+        return res.status(401).json({ 
+            success: false,  
+            message: "Authentication failed" 
+        });
     }
 };
