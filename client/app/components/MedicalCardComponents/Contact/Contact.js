@@ -10,7 +10,7 @@ export default function Contact() {
   useEffect(() => {
     const fetchCardData = async () => {
       try {
-        const response = await fetch(import.meta.env.VITE_SERVER_URL);
+        const response = await fetch(import.meta.env.SERVER_URL);
         const data = await response.json();
         if (data.success) {
           setCardData(data.card);

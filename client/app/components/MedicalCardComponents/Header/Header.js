@@ -8,7 +8,7 @@ export default function Header() {
     useEffect(() => {
         const fetchCardData = async () => {
             try {
-                const response = await axios.get(import.meta.env.VITE_SERVER_URL);
+                const response = await axios.get(import.meta.env.SERVER_URL);
                 if (response.data.success) {
                     setCardData(response.data.card);
                 }
