@@ -7,7 +7,9 @@ import Testimonial from "@/app/components/MedicalCardComponents/Testimonial/Test
 import Youtube from "@/app/components/MedicalCardComponents/Youtube/Youtube";
 import Instagram from "@/app/components/MedicalCardComponents/Instagram/Instgram";
 
-export default function Home() {
+import '@/app/style/MedicalCard.css'
+
+export default function MedicalCard () {
 
   return (
     <>
@@ -22,3 +24,4 @@ export default function Home() {
     </>
   );
 }
+

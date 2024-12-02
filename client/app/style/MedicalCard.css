@@ -1,0 +1,11 @@
+body {
+    font-family: "Montserrat";
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../public/fonts/Montserrat-VariableFont_wght.ttf') format('truetype'); 
+    font-weight: normal;
+  }

@@ -1,14 +1,13 @@
-'use client'
+'use client';
 import { useState, useEffect } from "react";
 
 export default function About() {
   const [aboutUs, setAboutUs] = useState("");
 
   useEffect(() => {
-    // Fetch the data from the API
     const fetchAboutUs = async () => {
       try {
-        const response = await fetch("https://cimple-card.onrender.com/api/card/get/1"); // Replace with the actual API endpoint
+        const response = await fetch(import.meta.env.VITE_SERVER_URL); 
         const data = await response.json();
         if (data.success) {
           setAboutUs(data.card.aboutUs);
@@ -22,7 +21,7 @@ export default function About() {
   }, []);
 
   if (!aboutUs) {
-    return <div>Loading...</div>; // Display a loading message until the data is fetched
+    return <div>Loading...</div>; 
   }
 
   return (

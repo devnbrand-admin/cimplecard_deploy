@@ -10,7 +10,7 @@ export default function Socials() {
   useEffect(() => {
     const fetchSocialLinks = async () => {
       try {
-        const response = await axios.get("https://cimple-card.onrender.com/api/card/get/1");
+        const response = await axios.get(import.meta.env.VITE_SERVER_URL);
         const { personalSocialMediaLinks, companySocialMediaLink } = response.data.card;
 
         // Set personal and company social media links

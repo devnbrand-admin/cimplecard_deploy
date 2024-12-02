@@ -6,12 +6,9 @@ export default function Header() {
     const [cardData, setCardData] = useState(null);
 
     useEffect(() => {
-        // Fetch data from the API
         const fetchCardData = async () => {
             try {
-                const response = await axios.get(
-                    "https://cimple-card.onrender.com/api/card/get/1"
-                );
+                const response = await axios.get(import.meta.env.VITE_SERVER_URL);
                 if (response.data.success) {
                     setCardData(response.data.card);
                 }

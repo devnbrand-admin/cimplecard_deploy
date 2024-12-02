@@ -10,7 +10,7 @@ export default function Contact() {
   useEffect(() => {
     const fetchCardData = async () => {
       try {
-        const response = await fetch("https://cimple-card.onrender.com/api/card/get/1");
+        const response = await fetch(import.meta.env.VITE_SERVER_URL);
         const data = await response.json();
         if (data.success) {
           setCardData(data.card);
