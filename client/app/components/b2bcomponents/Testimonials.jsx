@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
+import PeopleImage from "@/app/assets/people.png";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const testimonials = [
@@ -78,79 +79,86 @@ function TestimonialCarousel() {
   };
 
   return (
-    <div className="w-full bg-gray-100 py-12">
-      <h2 className="text-center text-4xl font-bold mb-8 tracking-wide text-black">
-  What Our Client Say's
-</h2>
-<p>
-  
-</p>
+    <div
+  className="w-full h-screen bg-cover bg-center relative flex justify-center items-center"
+  style={{ backgroundImage: `url(${PeopleImage.src})` }}
+>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-blue-400 bg-opacity-50"></div>
 
+  <div className="relative w-full max-w-6xl">
+    <h2 className="text-center text-5xl font-bold mb-10 tracking-wide text-white z-10">
+      What Our Client Says
+    </h2>
 
-      <div className="relative w-full overflow-hidden">
-        <button
-          onClick={handlePrev}
-          className="absolute top-1/2 left-72 transform -translate-y-1/2 bg-gray-300 p-3 rounded-full shadow-md hover:bg-gray-400 z-10"
-        >
-          <MdArrowBack size={30} />
-        </button>
+    {/* Testimonial Card */}
+    <div className="relative w-full overflow-hidden">
+      <button
+        onClick={handlePrev}
+        className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:bg-gray-200 z-20"
+      >
+        <MdArrowBack size={25} />
+      </button>
 
-        <div
-          className="flex transition-transform duration-300 ease-in-out"
-          style={{
-            transform: `translateX(calc(-${currentIndex * 100}% + ${dragDistance}px))`,
-          }}
-          onMouseDown={handleDragStart}
-          onMouseMove={handleDragMove}
-          onMouseUp={handleDragEnd}
-          onMouseLeave={handleDragEnd}
-          onTouchStart={handleDragStart}
-          onTouchMove={handleDragMove}
-          onTouchEnd={handleDragEnd}
-        >
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="min-w-full flex-shrink-0 flex justify-center"
-            >
-              <div className="bg-white rounded-lg shadow-lg p-8 mx-4 flex flex-col items-center space-y-6 max-w-2xl">
-                <span className="text-red-500 text-8xl font-bold">
-                  &#x07F5;&#x07F5;
-                </span>
-                <p className="italic text-xl text-center text-gray-700">
+      <div
+        className="flex transition-transform duration-300 ease-in-out"
+        style={{
+          transform: `translateX(calc(-${currentIndex * 100}% + ${dragDistance}px))`,
+        }}
+        onMouseDown={handleDragStart}
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
+        onTouchStart={handleDragStart}
+        onTouchMove={handleDragMove}
+        onTouchEnd={handleDragEnd}
+      >
+        {testimonials.map((testimonial, index) => (
+          <div
+            key={index}
+            className="min-w-full flex-shrink-0 flex justify-center"
+          >
+            <div className="bg-white rounded-lg shadow-xl p-12 mx-8 flex items-center space-x-10 max-w-4xl relative h-80">
+              {/* Circular Image */}
+              <div className="flex-shrink-0 relative">
+                <div className="w-40 h-40 rounded-full border-4 border-blue-400 overflow-hidden">
+                  <img
+                    src={testimonial.profileImg}
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Testimonial Content */}
+              <div className="flex flex-col space-y-4">
+                <p className="text-xl italic text-gray-700">
                   "{testimonial.testimonial}"
                 </p>
-
-                <img
-                  src={testimonial.profileImg}
-                  alt={testimonial.name}
-                  className="w-24 h-24 rounded-full shadow-lg object-cover"
-                />
-
-                
                 <div>
-                
-                <p className="text-2xl font-bold">
-                  {testimonial.name}
-                </p>
-                <p className="text-red-500 text-sm text-center font-medium">
-                  {testimonial.designation}
-                </p>
-
+                  <p className="text-2xl font-bold text-blue-600">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-gray-500 font-medium">
+                    {testimonial.designation}
+                  </p>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        <button
-          onClick={handleNext}
-          className="absolute top-1/2 right-72 transform -translate-y-1/2 bg-gray-300 p-3 rounded-full shadow-md hover:bg-gray-400 z-10"
-        >
-          <MdArrowForward size={30} />
-        </button>
+          </div>
+        ))}
       </div>
+
+      <button
+        onClick={handleNext}
+        className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:bg-gray-200 z-20"
+      >
+        <MdArrowForward size={25} />
+      </button>
     </div>
+  </div>
+</div>
+
   );
 }
 
