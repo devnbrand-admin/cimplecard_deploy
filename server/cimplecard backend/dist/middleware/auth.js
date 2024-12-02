@@ -83,5 +83,4 @@ export const isAdmin = (req, res, next) => {
             success: false,  
             message: "Authentication failed" 
         });
-    }
-};
+    }};
