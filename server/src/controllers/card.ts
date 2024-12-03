@@ -5,10 +5,47 @@ import prisma from "../DB/dbconfig.js";
 
 
 // Create a new card
-export const createCard:any = async (req: Request, res: Response) => {
-    try {
-      const userId = req.user.id;
-      const {
+export const createCard: any = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user.id;
+    const {
+      title,
+      bio,
+      phoneNumbers,
+      emails,
+      addresses,
+      jobTitle,
+      companyName,
+      dateOfBirth,
+      personalSocialMediaLinks,
+      companySocialMediaLink,
+      profileImageUrl,
+      templateType,
+      uniqueUrl,
+      qrCodeUrl,
+      aboutUs,
+      instagramVideoLink,
+      youtubeVideoLink,
+      services,
+      testimonials,
+      SocialMediaLink,
+    } = req.body;
+
+    // Make sure personalSocialMediaLinks and SocialMediaLink have the expected structure
+    const formattedPersonalSocialMediaLinks = personalSocialMediaLinks?.map((link: any) => ({
+      platform: link.platform,
+      url: link.url,
+      iconUrl: link.iconUrl,
+    }));
+
+    const formattedSocialMediaLink = SocialMediaLink?.map((link: any) => ({
+      platform: link.platform,
+      url: link.url,
+      iconUrl: link.iconUrl,
+    }));
+
+    const newCard = await prisma.card.create({
+      data: {
         title,
         bio,
         phoneNumbers,
@@ -16,8 +53,10 @@ export const createCard:any = async (req: Request, res: Response) => {
         addresses,
         jobTitle,
         companyName,
-        dateOfBirth,
-        personalSocialMediaLinks,
+        dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
+        personalSocialMediaLinks: {
+          create: formattedPersonalSocialMediaLinks,
+        },
         companySocialMediaLink,
         profileImageUrl,
         templateType,
@@ -26,37 +65,33 @@ export const createCard:any = async (req: Request, res: Response) => {
         aboutUs,
         instagramVideoLink,
         youtubeVideoLink,
-      
-      } = req.body;
-  
-      const newCard = await prisma.card.create({
-        data: {
-          title,
-          bio,
-          phoneNumbers,
-          emails,
-          addresses,
-          jobTitle,
-          companyName,
-          dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
-          personalSocialMediaLinks,
-          companySocialMediaLink,
-          profileImageUrl,
-          templateType,
-          uniqueUrl,
-          qrCodeUrl,
-          aboutUs,
-          instagramVideoLink,
-          youtubeVideoLink,
-          userId,
+        services: {
+          create: services?.map((service: any) => ({
+            name: service.name,
+            imageUrl: service.imageUrl,
+            serviceUrl: service.serviceUrl,
+          })),
         },
-      });
-  
-      res.status(201).json({ success: true, card: newCard });
-    } catch (error:any) {
-      res.status(500).json({ success: false, error: error.message });
-    }
-  };
+        testimonials: {
+          create: testimonials?.map((testimonial: any) => ({
+            authorName: testimonial.authorName,
+            content: testimonial.content,
+            designation: testimonial.designation,
+          })),
+        },
+        SocialMediaLink: {
+          create: formattedSocialMediaLink,
+        },
+        userId,
+      },
+    });
+
+    res.status(201).json({ success: true, card: newCard });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
   
   // Get all cards
   export const getAllCards:any = async (req: Request, res: Response) => {
