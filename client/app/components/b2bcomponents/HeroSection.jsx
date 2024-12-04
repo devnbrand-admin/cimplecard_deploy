@@ -1,115 +1,116 @@
 import React from "react";
-import HeroImage from "@/public/hero1.jpg";
-import ProfileImage from "@/public/Profile.jpg";
 import Image from "next/image";
 import { FaLinkedin, FaTwitter, FaFacebook, FaBuilding } from "react-icons/fa";
 
 function HeroSection() {
-  const personalSocials = [
-    {
-      id: 1,
-      title: "LinkedIn",
-      url: "https://linkedin.com/in/johndoe",
-      icon: <FaLinkedin className="text-blue-600" size={30} />,
-    },
-    {
-      id: 2,
-      title: "Twitter",
-      url: "https://twitter.com/johndoe",
-      icon: <FaTwitter className="text-blue-400" size={30} />,
-    },
-    {
-      id: 3,
-      title: "Facebook",
-      url: "https://facebook.com/johndoe",
-      icon: <FaFacebook className="text-blue-700" size={30} />,
-    },
-  ];
-
-  const companySocials = [
-    {
-      id: 4,
-      title: "Company LinkedIn",
-      url: "https://linkedin.com/company/techsolutions",
-      icon: <FaBuilding className="text-gray-600" size={30} />,
-    },
-  ];
-
   return (
-    <div className="w-full h-auto bg-gray-100">
-      <div className="relative w-full h-60 md:h-72">
-        <Image
-          src={HeroImage}
-          layout="fill"
-          objectFit="cover"
-          alt="Hero Background"
-          priority
-          className="object-cover"
-        />
+    <div className="min-h-screen">
+      {/* Header Section */}
+      <div className="bg-[#37729D] flex justify-center items-center px-6 py-4">
+        <div className="relative ml-[200px]">
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-[700px] py-2 px-4 rounded-md bg-white text-gray-800 placeholder-gray-500 focus:outline-none"
+          />
+          {/* <span className="absolute top-2 right-3 text-gray-500 material-icons">
+            search
+          </span> */}
+        </div>
+        <button className="text-white text-lg font-medium ml-[200px]">
+          Home
+        </button>
       </div>
+      <div className="border-b-[1px] border-white"></div>
 
-      <div className="relative bg-white shadow-md px-6 md:px-16 py-8 -mt-24 z-10">
-        <div className="absolute left-1/2 -top-24 transform -translate-x-1/2 md:left-20 md:-translate-x-0">
-          <div className="w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg">
-            <Image
-              src={ProfileImage}
-              alt="Profile Image"
-              layout="responsive"
-              width={224}
-              height={224}
-              objectFit="cover"
-              className="rounded-full"
-            />
-          </div>
-        </div>
+      {/* Main Section */}
+      <div className="relative">
+        {/* Blue Background Section */}
+        <div className="bg-[#37729D] h-[333px] py-10 px-6 md:px-16 flex justify-center items-end">
+          <div className="">
+            {/* Profile Image */}
+            <div className="absolute w-40 h-40 md:w-96 md:h-96 left-24 top-36 rounded-full overflow-hidden border-4 border-white ">
+              <Image
+                src="/Profile.jpg" // Replace with the actual path of the profile image
+                alt="Profile Picture"
+                layout="responsive"
+                width={192}
+                height={192}
+              />
+            </div>
 
-        <div className="flex flex-col items-center md:items-start md:ml-64 text-center md:text-left">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
-            John Doe
-          </h1>
-          <h2 className="text-lg md:text-xl font-medium text-gray-600 mt-2">
-            Chief Technology Officer at{" "}
-            <span className="text-blue-600 font-semibold">Tech Solutions Inc.</span>
-          </h2>
-          <p className="text-sm md:text-base text-gray-500 mt-3 max-w-3xl">
-            Passionate about leading technology teams, building innovative solutions, and delivering exceptional value.
-          </p>
-        </div>
+            {/* Profile Information */}
+            <div className="mt-4 md:ml-80 text-center md:text-left">
+              <h1 className="text-7xl font-bold text-white font-mono ">
+                John Doe
+              </h1>
 
-        <div className="mt-6 flex flex-col gap-8">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Personal Socials</h3>
-            <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              {personalSocials.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg px-4 py-2 shadow-md transition-all"
-                >
-                  {link.icon}
-                  <span className="text-lg font-medium">{link.title}</span>
-                </a>
-              ))}
+              <p className="text-3xl text-white mt-2 tracking-wider">
+                Chief Technology Officer at{" "}
+                <span className="font-semibold">Tech Solutions Inc.</span>
+              </p>
+              <p className="text-white text-xl tracking-wider mt-1">
+                Mumbai, India
+              </p>
             </div>
           </div>
+        </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Company Socials</h3>
-            <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              {companySocials.map((link) => (
+        {/* White Background Section */}
+        <div className="py-8 md:px-16 h-[333px] flex justify-center">
+          <div className="font-mono ml-8 font-extrabold flex flex-col gap-6">
+            {/* Personal Socials */}
+            <div className="w-[500px]">
+              <h3 className="text-3xl text-gray-800">
+                Personal Socials
+              </h3>
+              <div className="flex gap-4 mt-4 text-lg">
                 <a
-                  key={link.id}
-                  href={link.url}
+                  href="https://linkedin.com/in/johndoe"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg px-4 py-2 shadow-md transition-all"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#DEDEDE] hover:bg-[#c9c9c9] text-gray-800 rounded-lg shadow-md transition"
                 >
-                  {link.icon}
-                  <span className="text-lg font-medium">{link.title}</span>
+                  <FaLinkedin className="text-blue-600" size={20} />
+                  <span>LinkedIn</span>
                 </a>
-              ))}
+                <a
+                  href="https://twitter.com/johndoe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#DEDEDE] hover:bg-[#c9c9c9] text-gray-800 rounded-lg shadow-md transition"
+                >
+                  <FaTwitter className="text-blue-400" size={20} />
+                  <span>Twitter</span>
+                </a>
+                <a
+                  href="https://facebook.com/johndoe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#DEDEDE] hover:bg-[#c9c9c9] text-gray-800 rounded-lg shadow-md transition"
+                >
+                  <FaFacebook className="text-blue-700" size={20} />
+                  <span>Facebook</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Company Socials */}
+            <div className="mt-8">
+              <h3 className="text-3xl text-gray-800">
+                Company Socials
+              </h3>
+              <div className="flex gap-4 mt-4 text-lg">
+                <a
+                  href="https://linkedin.com/company/techsolutions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#DEDEDE] hover:bg-[#c9c9c9] text-gray-800 rounded-lg shadow-md transition"
+                >
+                  <FaBuilding className="text-gray-600" size={20} />
+                  <span>Company LinkedIn</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
