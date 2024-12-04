@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import OfficeImage from "@/app/assets/group.png";
+import OfficeImage from "../../assets/group.png";
 
 function AboutUs() {
   return (
@@ -23,13 +23,13 @@ function AboutUs() {
           </span>{" "}
           that drive business growth and efficiency. Our mission is to empower
           organizations with cutting-edge tools and strategies for long-term
-          success. By fostering innovation and collaboration, we help
-          businesses navigate the ever-evolving technological landscape.
+          success. By fostering innovation and collaboration, we help businesses
+          navigate the ever-evolving technological landscape.
         </p>
         <p className="text-lg md:text-xl text-white text-start leading-relaxed tracking-wide font-medium max-w-4xl">
           With a dedicated team of professionals, we prioritize delivering
-          quality, reliability, and value to our clients, ensuring their
-          journey to success is seamless and impactful.
+          quality, reliability, and value to our clients, ensuring their journey
+          to success is seamless and impactful.
         </p>
       </div>
     </div>
