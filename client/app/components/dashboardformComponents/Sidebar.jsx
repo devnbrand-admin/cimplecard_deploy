@@ -3,7 +3,7 @@ import React from 'react';
 
 const Sidebar = ({ activeStep, handleStepClick, steps }) => {
   return (
-    <div className="w-1/4 bg-[#F1F2F7] text-[#273240] p-6 rounded-l-lg font-sans">
+    <div className="w-1/4 bg-[#F1F2F7] text-[#273240] p-6 rounded-l-lg font-sans overflow-hidden">
       <ul>
         {steps.map((step) => (
           <li
