@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import ModalForm from '../../components/dashboardformComponents/ModalForm';
+import ModalForm from '../../../components/dashboardformComponents/ModalForm';
 
 export default function DashboardPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);

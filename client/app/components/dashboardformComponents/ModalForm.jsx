@@ -12,9 +12,9 @@ export default function ModalForm() {
     { id: 3, label: 'Social Media Links', icon: <BsLinkedin /> },
     { id: 4, label: 'Product / Services', icon: <BsCartCheckFill /> },
     { id: 5, label: 'Testimonials', icon: <BsPersonVideo /> },
-    { id: 6, label: 'Appointment Fields',icon: <BsPencilSquare /> },
-    { id: 7, label: 'Business Hours', icon: <BsClockHistory />  },
-    { id: 8, label: 'Help', icon: <BsChat />  },
+    // { id: 6, label: 'Appointment Fields',icon: <BsPencilSquare /> },
+    { id: 6, label: 'Business Hours', icon: <BsClockHistory />  },
+    { id: 7, label: 'Help', icon: <BsChat />  },
   ];
 
   const handleStepClick = (stepId) => {
@@ -54,7 +54,7 @@ export default function ModalForm() {
               <div
                   className="text-white text-center text-4xl font-semibold py-6 px-6"
                   style={{
-                      backgroundImage: `url('../ModalHeader.svg')`,
+                      backgroundImage: `url('../../ModalHeader.svg')`,
                       backgroundSize: 'contain',
                       backgroundPosition: 'top',
                       backgroundRepeat: 'no-repeat',
@@ -213,7 +213,7 @@ export default function ModalForm() {
                 <div
                   className="py-2"
                   style={{
-                    backgroundImage: `url('../ContactDetails.svg')`,
+                    backgroundImage: `url('../../ContactDetails.svg')`,
                     backgroundSize: 'contain',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -306,7 +306,7 @@ export default function ModalForm() {
                 <div
                   className="py-2"
                   style={{
-                    backgroundImage: `url('../SocialMediaLinks.svg')`,
+                    backgroundImage: `url('../../SocialMediaLinks.svg')`,
                     backgroundSize: 'contain',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -458,12 +458,12 @@ export default function ModalForm() {
               </div>
             )}
 
-            {activeStep === 7 && (
+            {activeStep === 6 && (
               <div>
                 <div
                   className="py-2"
                   style={{
-                    backgroundImage: `url('../BusinessHours.svg')`,
+                    backgroundImage: `url('../../BusinessHours.svg')`,
                     backgroundSize: 'contain',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -506,12 +506,12 @@ export default function ModalForm() {
               </div>
             )}
 
-            {activeStep === 8 && (
+            {activeStep === 7 && (
               <div>
                 <div
                   className="py-2"
                   style={{
-                    backgroundImage: `url('../Help.svg')`,
+                    backgroundImage: `url('../../Help.svg')`,
                     backgroundSize: 'contain',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -555,7 +555,7 @@ export default function ModalForm() {
           <div className="mt-8 flex justify-end space-x-2">
                 <div className="text-white text-center text-4xl font-semibold py-6 px-6"
                   style={{
-                      backgroundImage: `url('../Underline.svg')`,
+                      backgroundImage: `url('../../Underline.svg')`,
                       backgroundSize: 'contain',
                       backgroundPosition: 'left',
                       backgroundRepeat: 'no-repeat',
