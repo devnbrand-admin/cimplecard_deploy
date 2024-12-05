@@ -16,7 +16,7 @@ model User {
   resetPasswordExpires DateTime? // Expiration time for the reset token
   profilePictureUrl String? // Optional profile picture
   createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+ 
   role              Role     @default(User)
 
   cards             Card[]   
