@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import prisma from "../DB/dbconfig.js";
-
+import { randomUUID, randomBytes } from 'crypto';
 
 
 // Create a new card
@@ -43,7 +43,8 @@ export const createCard: any = async (req: Request, res: Response) => {
       url: link.url,
       iconUrl: link.iconUrl,
     }));
-
+    const customId: string = randomBytes(16).toString('hex');
+    const url = `http://localhost:3000/medical/${customId}`;
     const newCard = await prisma.card.create({
       data: {
         title,
@@ -60,7 +61,7 @@ export const createCard: any = async (req: Request, res: Response) => {
         companySocialMediaLink,
         profileImageUrl,
         templateType,
-        uniqueUrl,
+        uniqueUrl:url,
         qrCodeUrl,
         aboutUs,
         instagramVideoLink,
