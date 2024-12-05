@@ -8,20 +8,25 @@ datasource db {
 }
 
 model User {
-  id                Int      @id @default(autoincrement())
-  email             String   @unique
-  password          String
-  username          String
-  resetToken        String?  @unique // Token for password reset or email verification
+  id                   Int       @id @default(autoincrement())
+  email                String    @unique
+  password             String
+  username             String
+  resetToken           String?   @unique // Token for password reset or email verification
   resetPasswordExpires DateTime? // Expiration time for the reset token
-  profilePictureUrl String? // Optional profile picture
-  createdAt         DateTime @default(now())
- 
-  role              Role     @default(User)
+  profilePictureUrl    String?   // Optional profile picture
+  designation          String?   // User's designation or job title
+  contactNumber        String?   // Contact number
+  availability         Json?     // Availability date and time (stored as JSON for flexibility)
+  bio                  String?   // User's bio or brief introduction
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  role                 Role      @default(User)
 
-  cards             Card[]   
-  Appointment       Appointment[] 
+  cards       Card[]
+  Appointment Appointment[]
 }
+
 
 model Card {
   id                       Int       @id @default(autoincrement())
@@ -40,16 +45,16 @@ model Card {
   uniqueUrl                String    @unique // Unique URL for sharing the card
   qrCodeUrl                String? // URL for QR code
   aboutUs                  String? // About Us section
-  instagramVideoLink       String[] // Instagram video link
-  youtubeVideoLink         String[] // YouTube video link
+  instagramVideoLink       String? // Instagram video link
+  youtubeVideoLink         String? // YouTube video link
   createdAt                DateTime  @default(now())
   updatedAt                DateTime  @updatedAt
 
-  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user            User              @relation(fields: [userId], references: [id])
   userId          Int
-  services        Service[] 
-  testimonials    Testimonial[] 
-  SocialMediaLink SocialMediaLink[] 
+  services        Service[] // Array of services provided
+  testimonials    Testimonial[] // Array of testimonials
+  SocialMediaLink SocialMediaLink[] // Social media links for the card
 }
 model OTP {
   id        Int      @id @default(autoincrement()) // Auto-incrementing ID field
@@ -61,6 +66,7 @@ model OTP {
   @@index([email]) // Optional: To index the email field for faster queries
 }
 
+
 model Appointment {
   id          Int      @id @default(autoincrement())
   name        String
@@ -70,7 +76,7 @@ model Appointment {
   createdAt   DateTime @default(now())
 
   userId Int // Reference to the user who created the appointment
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User @relation(fields: [userId], references: [id])
 }
 
 model Service {
@@ -79,7 +85,7 @@ model Service {
   imageUrl   String? // URL for the service image
   serviceUrl String? // URL for the service
   cardId     Int // Reference to the associated card
-  card       Card    @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  card       Card    @relation(fields: [cardId], references: [id])
 }
 
 model Testimonial {
@@ -89,7 +95,7 @@ model Testimonial {
   imageUrl    String? // Optional image URL of the author
   designation String? // Author's designation
   cardId      Int // Reference to the associated card
-  card        Card    @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  card        Card    @relation(fields: [cardId], references: [id])
 }
 
 model SocialMediaLink {
@@ -98,7 +104,7 @@ model SocialMediaLink {
   iconUrl  String? // Optional icon URL for the platform
   url      String // URL of the social media
   cardId   Int? // Reference to the associated card
-  card     Card?               @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  card     Card?               @relation(fields: [cardId], references: [id])
 }
 
 model Company {
