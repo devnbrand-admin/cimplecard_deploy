@@ -3,7 +3,8 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import img from "../../assets/auth/signin/img.png"
 import btn_img from "../../assets/auth/signin/Verify_Button.png"
-
+import google_icon from "../../assets/auth/signin/google-removebg-preview 1.svg"
+import eye_cross from "../../assets/auth/eye_cross.png"
 
 export default function SignIn({ setIsLogin }) {
   const router = useRouter();
@@ -101,32 +102,45 @@ export default function SignIn({ setIsLogin }) {
 
           {/* Password Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Password <span className="text-red-500">*</span>
-            </label>
-            <div className="relative">
-              <input
-                type={isPwdVisible ? 'text' : 'password'}
-                name="password"
-                aria-invalid={errors.password ? 'true' : 'false'}
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-                className={`w-full px-3 py-2 mt-1 border rounded-md focus:outline-none ${errors.password ? 'border-red-500' : 'border-gray-300'
-                  }`}
-              />
-              <span
-                className="absolute top-3 right-3 cursor-pointer"
-                onClick={togglePasswordVisibility}
-                aria-label="Toggle password visibility"
-              >
-                {isPwdVisible ? '🎧' : '🎸'}
-              </span>
-            </div>
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-            )}
-          </div>
+  <label className="block text-sm font-medium text-gray-700">
+    Password <span className="text-red-500">*</span>
+  </label>
+  <div className="relative">
+    <input
+      type={isPwdVisible ? 'text' : 'password'}
+      name="password"
+      aria-invalid={errors.password ? 'true' : 'false'}
+      value={formData.password}
+      onChange={handleChange}
+      placeholder="Enter your password"
+      className={`w-full px-3 py-2 mt-1 border rounded-md focus:outline-none ${
+        errors.password ? 'border-red-500' : 'border-gray-300'
+      }`}
+    />
+    <span
+      className="absolute top-3 right-3 cursor-pointer"
+      onClick={togglePasswordVisibility}
+      aria-label="Toggle password visibility"
+    >
+      {isPwdVisible ? (
+        '🎧'
+      ) : (
+        <span className=" relative h-6 w-6" style={{display:"block"}}>
+          <Image
+            src={eye_cross}
+            alt="eye_cross"
+            fill
+            className="object-cover"
+          />
+        </span>
+      )}
+    </span>
+  </div>
+  {errors.password && (
+    <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+  )}
+</div>
+
 
           {/* Remember Me & Forgot Password */}
           <div className="flex justify-between items-center">
@@ -183,8 +197,14 @@ export default function SignIn({ setIsLogin }) {
 
           {/* Google Button */}
           <button className="flex items-center justify-center w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-md hover:bg-gray-200">
-            <span className="mr-2">🌐</span>
-            <span className="text-sm">Login with Google</span>
+            <span className="relative h-6 w-6"> 
+             <Image
+                src={google_icon}
+                alt="Google icon"
+                fill
+                className="object-cover "
+              /></span>
+            <span className="text-sm ml-1">Login with Google</span>
           </button>
 
           {/* Toggle Login */}

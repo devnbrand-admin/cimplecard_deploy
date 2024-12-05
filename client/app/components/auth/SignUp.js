@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import img from "./../../assets/auth/signup/image.png";
+import eye_cross from "../../assets/auth/eye_cross.png"
+import google_icon from "../../assets/auth/signin/google-removebg-preview 1.svg"
+
 
 export default function SignUp({ setIsLogin }) {
   const router = useRouter();
@@ -142,7 +145,14 @@ export default function SignUp({ setIsLogin }) {
                 className="absolute top-3 right-3 cursor-pointer"
                 onClick={() => setIsPwdVisible(!isPwdVisible)}
               >
-                {isPwdVisible ? "🎧" : "🎸"}
+                {isPwdVisible ? "🎧" :  <span className=" relative h-6 w-6" style={{display:"block"}}>
+          <Image
+            src={eye_cross}
+            alt="eye_cross"
+            fill
+            className="object-cover"
+          />
+        </span>}
               </span>
             </div>
             {errors.password && (
@@ -170,7 +180,14 @@ export default function SignUp({ setIsLogin }) {
                 className="absolute top-3 right-3 cursor-pointer"
                 onClick={() => setIsConfirmPwdVisible(!isConfirmPwdVisible)}
               >
-                {isConfirmPwdVisible ? "🎧" : "🎸"}
+                {isConfirmPwdVisible ? "🎧" :  <span className=" relative h-6 w-6" style={{display:"block"}}>
+          <Image
+            src={eye_cross}
+            alt="eye_cross"
+            fill
+            className="object-cover"
+          />
+        </span>}
               </span>
             </div>
 
@@ -227,8 +244,13 @@ export default function SignUp({ setIsLogin }) {
 
           {/* Google Button */}
           <button className="flex items-center justify-center w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-md hover:bg-gray-200">
-            <span className="mr-2">🌐</span>
-            <span className="text-sm">Sign up with Google</span>
+          <span className="relative h-6 w-6"> 
+             <Image
+                src={google_icon}
+                alt="Google icon"
+                fill
+                className="object-cover "
+              /></span>            <span className=" ml-2 text-sm">Sign up with Google</span>
           </button>
 
           {/* Toggle Login */}
