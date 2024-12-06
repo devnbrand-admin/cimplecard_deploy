@@ -1,10 +1,27 @@
 'use client';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCardData } from '../../../store/cardSlice';  // Import the setCardData action
 import Sidebar from './Sidebar';
-import { BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsPencilSquare, BsClockHistory, BsCartCheckFill, BsChat, BsCamera, BsEnvelopeAt} from "react-icons/bs";
+import { BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsPencilSquare, BsClockHistory, BsCartCheckFill, BsChat, BsCamera, BsEnvelopeAt } from "react-icons/bs";
 
 export default function ModalForm() {
+  const dispatch = useDispatch();
   const [activeStep, setActiveStep] = useState(1);
+  const [profileImage, setProfileImage] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
+
+  const [formData, setFormData] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    companyName: '',
+    companyAddress: '',
+    jobRole: '',
+    aboutMe: '',
+    languageSpoken: '',
+    hobbies: '',
+  });
 
   const steps = [
     { id: 1, label: 'Profile', icon: <BsPerson /> },
@@ -12,15 +29,14 @@ export default function ModalForm() {
     { id: 3, label: 'Social Media Links', icon: <BsLinkedin /> },
     { id: 4, label: 'Product / Services', icon: <BsCartCheckFill /> },
     { id: 5, label: 'Testimonials', icon: <BsPersonVideo /> },
-    // { id: 6, label: 'Appointment Fields',icon: <BsPencilSquare /> },
-    { id: 6, label: 'Business Hours', icon: <BsClockHistory />  },
-    { id: 7, label: 'Help', icon: <BsChat />  },
+    { id: 6, label: 'Business Hours', icon: <BsClockHistory /> },
+    { id: 7, label: 'Help', icon: <BsChat /> },
   ];
 
   const handleStepClick = (stepId) => {
     setActiveStep(stepId);
   };
-  
+
   const handleProfileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -32,7 +48,6 @@ export default function ModalForm() {
     }
   };
 
-  // Handle cover image upload
   const handleCoverUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -42,6 +57,23 @@ export default function ModalForm() {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(setCardData(formData));
+
+    // axios.post('/api/cards', formData).then(response => { ... }).catch(error => { ... });
   };
 
   return (
