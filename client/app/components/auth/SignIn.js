@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import img from "../../assets/auth/signin/img.png"
-import btn_img from "../../assets/auth/signin/Verify_Button.png"
+import btn_img from "../../assets/auth/signin/login.png"
 import google_icon from "../../assets/auth/signin/google-removebg-preview 1.svg"
 import eye_cross from "../../assets/auth/eye_cross.png"
+import eye from "../../assets/auth/eye.png"
+
 
 export default function SignIn({ setIsLogin }) {
   const router = useRouter();
@@ -122,18 +124,14 @@ export default function SignIn({ setIsLogin }) {
       onClick={togglePasswordVisibility}
       aria-label="Toggle password visibility"
     >
-      {isPwdVisible ? (
-        '🎧'
-      ) : (
-        <span className=" relative h-6 w-6" style={{display:"block"}}>
+       <span className=" relative h-6 w-6" style={{display:"block"}}>
           <Image
-            src={eye_cross}
+            src={isPwdVisible ? eye : eye_cross}
             alt="eye_cross"
             fill
             className="object-cover"
           />
         </span>
-      )}
     </span>
   </div>
   {errors.password && (
@@ -167,12 +165,12 @@ export default function SignIn({ setIsLogin }) {
           <button
             type="submit"
             disabled={loading}
-            className={`relative w-full px-4 py-2 text-white rounded-md ${loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-[#9847cb]'
-            } hover:bg-[#69308d]`}
+            className={`relative w-full px-4 py-2 text-white rounded-xl ${loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-[#5a6acf]'
+            } hover:bg-[#212d7b]`}
 
           >
 
-            {/* <div className="absolute w-1/3 h-7 z-10">
+            <div className="absolute h-10 w-full top-0 -left-[1.5px] z-10">
               <Image
                 src={btn_img}
                 alt="Signin Background"
@@ -182,7 +180,7 @@ export default function SignIn({ setIsLogin }) {
             </div>
             <span className='absolute z-20'>
             
-            </span> */}
+            </span>
             {loading ? 'Processing...' : 'Sign In'}
           </button>
 

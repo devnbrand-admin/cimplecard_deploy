@@ -4,6 +4,8 @@ import Image from 'next/image';
 import img from "./../../assets/auth/signup/image.png";
 import eye_cross from "../../assets/auth/eye_cross.png"
 import google_icon from "../../assets/auth/signin/google-removebg-preview 1.svg"
+import eye from "../../assets/auth/eye.png"
+
 
 
 export default function SignUp({ setIsLogin }) {
@@ -145,14 +147,14 @@ export default function SignUp({ setIsLogin }) {
                 className="absolute top-3 right-3 cursor-pointer"
                 onClick={() => setIsPwdVisible(!isPwdVisible)}
               >
-                {isPwdVisible ? "🎧" :  <span className=" relative h-6 w-6" style={{display:"block"}}>
+                  <span className=" relative h-6 w-6" style={{display:"block"}}>
           <Image
-            src={eye_cross}
+            src={isPwdVisible ? eye : eye_cross}
             alt="eye_cross"
             fill
             className="object-cover"
           />
-        </span>}
+        </span>
               </span>
             </div>
             {errors.password && (
@@ -180,14 +182,14 @@ export default function SignUp({ setIsLogin }) {
                 className="absolute top-3 right-3 cursor-pointer"
                 onClick={() => setIsConfirmPwdVisible(!isConfirmPwdVisible)}
               >
-                {isConfirmPwdVisible ? "🎧" :  <span className=" relative h-6 w-6" style={{display:"block"}}>
+                <span className=" relative h-6 w-6" style={{display:"block"}}>
           <Image
-            src={eye_cross}
+            src={isConfirmPwdVisible ? eye : eye_cross}
             alt="eye_cross"
             fill
             className="object-cover"
           />
-        </span>}
+        </span>
               </span>
             </div>
 
