@@ -54,7 +54,7 @@ const OtpVerification = () => {
                 onChange={(e) => handleChange(e.target.value, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 maxLength="1"
-                className="mb-4 w-[70px] h-[70px]  mx-6 text-center border-[1px] border-black rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="mb-4 w-[70px] h-[70px]  mx-6 text-center border-[1px] border-black rounded-lg  text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             ))}
           </div>
