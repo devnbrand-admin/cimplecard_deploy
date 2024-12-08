@@ -81,8 +81,8 @@ export default function ModalForm() {
       <div className="bg-white rounded-lg w-full max-w-7xl h-[80%] flex">
         <Sidebar activeStep={activeStep} handleStepClick={handleStepClick} steps={steps} />
 
-        <div className="w-full px-6">
-            <div className="mb-8 relative">
+        <div className="w-full px-6 overflow-hidden">
+            <div className="mb-4 relative">
               <div
                   className="text-white text-center text-4xl font-semibold py-6 px-6"
                   style={{
@@ -118,28 +118,25 @@ export default function ModalForm() {
                     }}
                   >
                     <div
-                      className="w-32 h-32 mt-10 rounded-full bg-[#707FDD] bg-opacity-10 border-2 border-[#222745] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden"
+                      className="mt-10 rounded-full bg-[#707FDD] bg-opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden cursor-pointer"
                       style={{ zIndex: 2 }}
                     >
-                      <img
-                        src="https://via.placeholder.com/128"
-                        alt="Upload Your Picture"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute bottom-0 right-0 p-2 cursor-pointer bg-white rounded-full">
+                      <label htmlFor="profile-upload" className="w-full h-full flex items-center justify-center">
+                        <img
+                          src="../../ProfileAvatar.svg"
+                          alt="Upload Icon"
+                          className="w-100 h-100"
+                        />
                         <input
                           type="file"
                           accept="image/*"
-
                           onChange={handleProfileUpload}
                           className="hidden"
                           id="profile-upload"
                         />
-                        <label htmlFor="profile-upload">
-                          <BsCamera size={24} />
-                        </label>
-                      </div>
+                      </label>
                     </div>
+
                   </div>
 
                   
@@ -230,10 +227,30 @@ export default function ModalForm() {
                       <div className="flex-1">
                         <input
                           type="text"
-                          placeholder="Hobbies"
+                          placeholder="Date of Birth"
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
+                    </div>
+                    <div className="py-6 flex justify-end space-x-2">
+                      <div className="text-white text-center text-4xl font-semibold py-6 px-6"
+                        style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'left',
+                            backgroundRepeat: 'no-repeat',
+                            top: 0,
+                            left: 0,
+                            width: '70%',
+                            height: '10px',
+                        }}>
+                      </div>
+                      {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                        Preview Card
+                      </button> */}
+                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                        Save Changes
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -329,6 +346,26 @@ export default function ModalForm() {
                       />
                     </div>
                   </div>
+                    <div className="py-6 flex justify-end space-x-2">
+                      <div className="text-white text-center text-4xl font-semibold py-6 px-6"
+                        style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'left',
+                            backgroundRepeat: 'no-repeat',
+                            top: 0,
+                            left: 0,
+                            width: '70%',
+                            height: '10px',
+                        }}>
+                      </div>
+                      {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                        Preview Card
+                      </button> */}
+                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                        Save Changes
+                      </button>
+                    </div>
                 </div>
               </div>
             )}
@@ -396,6 +433,141 @@ export default function ModalForm() {
                       />
                     </div>
                   </div>
+                    <div className="py-6 flex justify-end space-x-2">
+                      <div className="text-white text-center text-4xl font-semibold py-6 px-6"
+                        style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'left',
+                            backgroundRepeat: 'no-repeat',
+                            top: 0,
+                            left: 0,
+                            width: '70%',
+                            height: '10px',
+                        }}>
+                      </div>
+                      {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                        Preview Card
+                      </button> */}
+                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                        Save Changes
+                      </button>
+                    </div>
+                </div>
+              </div>
+            )}
+
+            {activeStep === 4 && (
+              <div>
+                <div
+                  className="py-2"
+                  style={{
+                    backgroundImage: `url('../../Product&Services.svg')`,
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    width: '100%', 
+                    height: 'auto', 
+                    minHeight: '230px',
+                  }}
+                ></div>
+
+                <div className="space-y-4 mt-4">
+                  <div className="flex justify-center gap-4">
+                    <h1 className='text-2xl font-semibold text-[#707FDD]'>Choose What To Add</h1>
+                  </div>
+                  <div className="flex justify-center gap-4">
+                    <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                      Product
+                    </button>
+                    <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                      Service
+                    </button>
+                  </div>
+                  <div
+                    className="flex items-center justify-center"
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      width: '100%',
+                      height: '8rem', 
+                      overflowY: 'scroll',
+                      padding: '20px',
+                    }}
+                  >
+                    <div className="flex flex-col gap-2" style={{ width: '100%', maxWidth: '1080px' }}>
+                      {[...Array(5)].map((_, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between"
+                          style={{
+                            backgroundColor: '#F1F2FC',
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            width: '100%',
+                            height: '120px',
+                            padding: '20px',
+                            borderRadius: '8px',
+                          }}
+                        >
+                          <div className="flex-1" style={{ maxWidth: '80%' }}>
+                            <h1
+                              className="text-[#787F89] text-sm mb-1"
+                              style={{
+                                fontSize: '14px',
+                                textAlign: 'left',
+                              }}
+                            >
+                              Name of the Product/Services
+                            </h1>
+                            <input
+                              type="text"
+                              placeholder="Description of the Product/Services"
+                              className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                              style={{
+                                width: '100%',
+                                maxWidth: '1080px',
+                                display: 'block',
+                              }}
+                            />
+                          </div>
+
+                          <div
+                            className="ml-8"
+                            style={{
+                              width: '7rem',
+                              height: '6rem',
+                              backgroundColor: '#707FDD',
+                              borderRadius: '0.5rem',
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  
+
+                  <div className="py-6 flex justify-end space-x-2">
+                      <div className="text-white text-center text-4xl font-semibold py-6 px-6"
+                        style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'left',
+                            backgroundRepeat: 'no-repeat',
+                            top: 0,
+                            left: 0,
+                            width: '70%',
+                            height: '10px',
+                        }}>
+                      </div>
+                      {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                        Preview Card
+                      </button> */}
+                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                        Save Changes
+                      </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -403,39 +575,57 @@ export default function ModalForm() {
             {activeStep === 5 && (
               <div>
                 <div
-                  className="flex items-center justify-center"
+                  className="flex mt-6 items-center justify-center"
                   style={{
-                    backgroundColor: '#F1F2FC',
-                    backgroundSize: 'contain',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
+                    backgroundColor: '#FFFFFF',
                     width: '100%',
-                    height: '120px',
+                    height: '8rem', 
+                    overflowY: 'scroll',
                     padding: '20px',
                   }}
                 >
-                  <div className="flex-1" style={{ maxWidth: '80%' }}>
-                    <h1
-                      className="text-[#787F89] text-sm mb-1"
-                      style={{
-                        fontSize: '14px',
-                        textAlign: 'left',
-                      }}
-                    >
-                      Name | Job Role | Industry
-                    </h1>
-                    <input
-                      type="text"
-                      placeholder="Testimonial Message"
-                      className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                      style={{
-                        width: '100%',
-                        maxWidth: '1080px',
-                        display: 'block',
-                      }}
-                    />
+                  <div className="flex flex-col gap-2" style={{ width: '100%', maxWidth: '1080px' }}>
+                    {[...Array(5)].map((_, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-center"
+                        style={{
+                          backgroundColor: '#F1F2FC',
+                          backgroundSize: 'contain',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          width: '100%',
+                          height: '120px',
+                          padding: '20px',
+                          borderRadius: '8px',
+                        }}
+                      >
+                        <div className="flex-1" style={{ maxWidth: '80%' }}>
+                          <h1
+                            className="text-[#787F89] text-sm mb-1"
+                            style={{
+                              fontSize: '14px',
+                              textAlign: 'left',
+                            }}
+                          >
+                            Name | Job Role | Industry
+                          </h1>
+                          <input
+                            type="text"
+                            placeholder="Testimonial Message"
+                            className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                            style={{
+                              width: '100%',
+                              maxWidth: '1080px',
+                              display: 'block',
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
+
 
 
 
@@ -486,6 +676,26 @@ export default function ModalForm() {
                     Add Testimonial
                   </button>
                   </div>
+                    <div className="py-6 flex justify-end space-x-2">
+                      <div className="text-white text-center text-4xl font-semibold py-6 px-6"
+                        style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'left',
+                            backgroundRepeat: 'no-repeat',
+                            top: 0,
+                            left: 0,
+                            width: '70%',
+                            height: '10px',
+                        }}>
+                      </div>
+                      {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                        Preview Card
+                      </button> */}
+                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                        Save Changes
+                      </button>
+                    </div>
                 </div>
               </div>
             )}
@@ -508,20 +718,21 @@ export default function ModalForm() {
                 <div className="space-y-6 mt-4">
                   <div className="flex gap-4">
                     <div className="flex-1">
+                      <label className="block text-sm text-[#787F89] mb-1">From</label>
                       <input
-                        type="date"
-                        placeholder="From"
+                        type="time"
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
                     <div className="flex-1">
+                      <label className="block text-sm text-[#787F89] mb-1">To</label>
                       <input
-                        type="date"
-                        placeholder="To"
+                        type="time"
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
                     <div className="flex-1">
+                      <label className="block text-sm text-opacity-0 text-[#787F89] mb-1">Type</label>
                       <input
                         type="text"
                         placeholder="Type"
@@ -531,9 +742,29 @@ export default function ModalForm() {
                   </div>
                   <div className="flex justify-end gap-4 pb-10">
                   <button className="py-2 px-4 rounded-full text-sm text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                    Save Changes
+                    Save Timings
                   </button>
                   </div>
+                    <div className="py-6 flex justify-end space-x-2">
+                      <div className="text-white text-center text-4xl font-semibold py-6 px-6"
+                        style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'left',
+                            backgroundRepeat: 'no-repeat',
+                            top: 0,
+                            left: 0,
+                            width: '70%',
+                            height: '10px',
+                        }}>
+                      </div>
+                      {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                        Preview Card
+                      </button> */}
+                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                        Create Card
+                      </button>
+                    </div>
                 </div>
               </div>
             )}
@@ -584,7 +815,7 @@ export default function ModalForm() {
 
             
 
-          <div className="mt-8 flex justify-end space-x-2">
+          {/* <div className="mt-8 flex justify-end space-x-2">
                 <div className="text-white text-center text-4xl font-semibold py-6 px-6"
                   style={{
                       backgroundImage: `url('../../Underline.svg')`,
@@ -601,9 +832,9 @@ export default function ModalForm() {
               Preview Card
             </button>
             <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-              Save
+              Save Changes
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
