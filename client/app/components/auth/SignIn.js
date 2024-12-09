@@ -18,6 +18,8 @@ export default function SignIn({ setIsLogin }) {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [serverError,setServerError] = useState(null)
+
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api/user';
 

@@ -23,6 +23,8 @@ export default function SignUp({ setIsLogin }) {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [serverError,setServerError] = useState(null)
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

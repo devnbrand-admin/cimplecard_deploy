@@ -2,18 +2,22 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import img from "../../assets/auth/otp/otp_image.png"
 import side_img from "../../assets/auth/otp/otp_side_image.png"
+import axios from '../api_resources/axios';
+import axios from '../api_resources/axios';
 
 
 const OtpVerification = () => {
   const [otp, setOtp] = useState(new Array(4).fill(''));
+  const [serverError,setServerError] = useState(null)
+  const [clientError,setClientError] = useState(null)
 
   const handleChange = (value, index) => {
-    if (isNaN(value)) return; // Allow only numeric input
+    if (isNaN(value)) return; // allow only numeric input
     const newOtp = [...otp];
-    newOtp[index] = value.substring(value.length - 1); // Limit input to 1 digit
+    newOtp[index] = value.substring(value.length - 1); // limit input to 1 digit
     setOtp(newOtp);
 
-    // Focus next input
+    // focus next input
     if (value && index < 3) {
       document.getElementById(`otp-${index + 1}`).focus();
     }
@@ -25,8 +29,25 @@ const OtpVerification = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
+
     e.preventDefault();
+    if(otp.length>=4){
+      const response = await axios.post("/api/user/send-otp")
+      console.log(response)
+
+      try {
+        setClientError(null)
+        setServerError(null)
+        const response = await axios.post("")
+      } catch (error) {
+        console.log(error)
+        setServerError(error.message)
+        
+      }
+    }else{
+      setClientError("Enter your OPT completely")
+    }
     console.log('OTP Submitted:', otp.join(''));
   };
 
