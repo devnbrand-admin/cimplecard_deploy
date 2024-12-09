@@ -1,7 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setCardData } from '../../../store/cardSlice';  // Import the setCardData action
+import { setStepData } from '../../../store/cardSlice';
+import { createCard } from '../../utils/cardCreationApi';
 import Sidebar from './Sidebar';
 import { BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsPencilSquare, BsClockHistory, BsCartCheckFill, BsChat, BsCamera, BsEnvelopeAt } from "react-icons/bs";
 
@@ -20,7 +21,9 @@ export default function ModalForm() {
     jobRole: '',
     aboutMe: '',
     languageSpoken: '',
-    hobbies: '',
+    dateofbirth: '',
+    phoneNumber: '',
+    phoneNumbers: '',
   });
 
   const steps = [
@@ -68,12 +71,26 @@ export default function ModalForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSave = () => {
+    // Save current step data to Redux
+    dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
+  
+    // Move to the next step
+    if (activeStep < steps.length) {
+      setActiveStep(activeStep + 1);
+    }
+  };
+
+  const handleCreate = async (e) => {
     e.preventDefault();
-
-    dispatch(setCardData(formData));
-
-    // axios.post('/api/cards', formData).then(response => { ... }).catch(error => { ... });
+  
+    try {
+      const response = await createCard(formData);
+      console.log('Card saved successfully:', response);
+      dispatch(setCardData(formData)); // Update Redux store
+    } catch (error) {
+      console.error('Failed to save card:', error);
+    }
   };
 
   return (
@@ -159,6 +176,8 @@ export default function ModalForm() {
                         <input
                           type="text"
                           placeholder="First Name"
+                          value={formData.firstName}
+                          onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
@@ -166,6 +185,8 @@ export default function ModalForm() {
                         <input
                           type="text"
                           placeholder="Middle Name"
+                          value={formData.middleName}
+                          onChange={(e) => setFormData({ ...formData, middleName: e.target.value })}
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
@@ -173,6 +194,8 @@ export default function ModalForm() {
                         <input
                           type="text"
                           placeholder="Last Name"
+                          value={formData.lastName}
+                          onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
@@ -183,6 +206,8 @@ export default function ModalForm() {
                         <input
                           type="text"
                           placeholder="Company's Name"
+                          value={formData.companyName}
+                          onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
@@ -248,7 +273,9 @@ export default function ModalForm() {
                       {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
                         Preview Card
                       </button> */}
-                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                      <button 
+                        onClick={handleSave}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
                         Save Changes
                       </button>
                     </div>
@@ -278,6 +305,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Phone Number"
+                        value={formData.phoneNumber}
+                          onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -362,7 +391,9 @@ export default function ModalForm() {
                       {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
                         Preview Card
                       </button> */}
-                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                      <button 
+                        onClick={handleSave}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
                         Save Changes
                       </button>
                     </div>
@@ -761,7 +792,9 @@ export default function ModalForm() {
                       {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
                         Preview Card
                       </button> */}
-                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                      <button 
+                        onClick={handleCreate}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
                         Create Card
                       </button>
                     </div>
