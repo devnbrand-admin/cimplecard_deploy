@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = '';
+const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/card/create`;
 
 export const createCard = async (formData) => {
   try {
@@ -11,11 +11,7 @@ export const createCard = async (formData) => {
     };
 
     
-    const response = await axios.post(API_BASE_URL, requestData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const response = await axios.post(API_BASE_URL, requestData);
     return response.data;
   } catch (error) {
     console.error('Error creating card:', error);

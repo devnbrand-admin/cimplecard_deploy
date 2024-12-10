@@ -18,12 +18,33 @@ export default function ModalForm() {
     lastName: '',
     companyName: '',
     companyAddress: '',
-    jobRole: '',
-    aboutMe: '',
+    jobTitle: '',
+    bio: '',
     languageSpoken: '',
-    dateofbirth: '',
+    dateOfBirth: '',
     phoneNumber: '',
     phoneNumbers: '',
+    otherPhoneNumber: '',
+    emails: '',
+    otherEmails: '',
+    emergencyName: '',
+    emergencyRelationship: '',
+    emergencyNumber: '',
+    emergencyEmail: '',
+    uniqueUrl: '',
+    companySocialMediaLink: '',
+    instagramLink: '',
+    personalSocialMediaLinks: '',
+    githubLink: '',
+    additionalLink: '',
+    productDesc: '',
+    testimonialName: '',
+    testimonialRole: '',
+    testimonialIndustry: '',
+    testimonialMessage: '',
+    businesshoursFrom: '',
+    businesshoursTo: '',
+    businessType: '',
   });
 
   const steps = [
@@ -77,6 +98,9 @@ export default function ModalForm() {
   
     // Move to the next step
     if (activeStep < steps.length) {
+      if (activeStep === 6) {
+        return;
+      }
       setActiveStep(activeStep + 1);
     }
   };
@@ -135,15 +159,14 @@ export default function ModalForm() {
                     }}
                   >
                     <div
-                      className="mt-10 rounded-full bg-[#707FDD] bg-opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden cursor-pointer"
-                      style={{ zIndex: 2 }}
+                      className="mt-10 rounded-full bg-[#707FDD] bg-opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-visible cursor-pointer"
+                      style={{ zIndex: 60 }}
                     >
                       <label htmlFor="profile-upload" className="w-full h-full flex items-center justify-center">
                         <img
                           src="../../ProfileAvatar.svg"
                           alt="Upload Icon"
-                          className="w-100 h-100"
-                        />
+                          className="w-100 h-100"                        />
                         <input
                           type="file"
                           accept="image/*"
@@ -215,6 +238,8 @@ export default function ModalForm() {
                         <input
                           type="text"
                           placeholder="Company's Address"
+                          value={formData.companyAddress}
+                          onChange={(e) => setFormData({ ...formData, companyAddress: e.target.value })}
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
@@ -222,6 +247,8 @@ export default function ModalForm() {
                         <input
                           type="text"
                           placeholder="Job Role"
+                          value={formData.jobTitle}
+                          onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
@@ -231,6 +258,8 @@ export default function ModalForm() {
                         <input
                           type="text"
                           placeholder="Write briefly about yourself"
+                          value={formData.bio}
+                          onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
@@ -239,6 +268,8 @@ export default function ModalForm() {
                       <div className="flex-1">
                         <select
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                          value={formData.languageSpoken}
+                          onChange={(e) => setFormData({ ...formData, languageSpoken: e.target.value })}
                         >
                           <option value="" disabled>
                             Language Spoken
@@ -252,7 +283,9 @@ export default function ModalForm() {
                       <div className="flex-1">
                         <input
                           type="text"
-                          placeholder="Date of Birth"
+                          placeholder="Date of Birth (yyyy-mm-dd)"
+                          value={formData.dateOfBirth}
+                          onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
                           className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         />
                       </div>
@@ -275,7 +308,7 @@ export default function ModalForm() {
                       </button> */}
                       <button 
                         onClick={handleSave}
-                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
                         Save Changes
                       </button>
                     </div>
@@ -306,7 +339,7 @@ export default function ModalForm() {
                         type="text"
                         placeholder="Phone Number"
                         value={formData.phoneNumber}
-                          onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                        onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -314,6 +347,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Other Number"
+                        value={formData.phoneNumbers}
+                        onChange={(e) => setFormData({ ...formData, phoneNumbers: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -321,6 +356,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Other Number"
+                        value={formData.otherPhoneNumber}
+                        onChange={(e) => setFormData({ ...formData, otherPhoneNumber: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -331,6 +368,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Email Address"
+                        value={formData.emails}
+                        onChange={(e) => setFormData({ ...formData, emails: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -338,6 +377,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Other Email Address"
+                        value={formData.otherEmails}
+                        onChange={(e) => setFormData({ ...formData, otherEmails: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -350,6 +391,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Name"
+                        value={formData.emergencyName}
+                        onChange={(e) => setFormData({ ...formData, emergencyName: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -357,6 +400,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Relationship"
+                        value={formData.emergencyRelationship}
+                        onChange={(e) => setFormData({ ...formData, emergencyRelationship: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -364,6 +409,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Phone Number"
+                        value={formData.emergencyNumber}
+                        onChange={(e) => setFormData({ ...formData, emergencyNumber: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -371,6 +418,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Email Address"
+                        value={formData.emergencyEmail}
+                        onChange={(e) => setFormData({ ...formData, emergencyEmail: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -393,8 +442,7 @@ export default function ModalForm() {
                       </button> */}
                       <button 
                         onClick={handleSave}
-                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                        Save Changes
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                        Save Changes
                       </button>
                     </div>
                 </div>
@@ -422,6 +470,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Website/Portfolio URL"
+                        value={formData.uniqueUrl}
+                        onChange={(e) => setFormData({ ...formData, uniqueUrl: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -429,6 +479,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="LinkedIn (Optional)"
+                        value={formData.companySocialMediaLink}
+                        onChange={(e) => setFormData({ ...formData, companySocialMediaLink: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -436,6 +488,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Instagram (Optional)"
+                        value={formData.instagramLink}
+                        onChange={(e) => setFormData({ ...formData, instagramLink: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -446,6 +500,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Twitter (Optional)"
+                        value={formData.personalSocialMediaLinks}
+                        onChange={(e) => setFormData({ ...formData, personalSocialMediaLinks: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -453,6 +509,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="GitHub (Optional)"
+                        value={formData.githubLink}
+                        onChange={(e) => setFormData({ ...formData, githubLink: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -460,6 +518,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Additional Link"
+                        value={formData.additionalLink}
+                        onChange={(e) => setFormData({ ...formData, additionalLink: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -480,8 +540,9 @@ export default function ModalForm() {
                       {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
                         Preview Card
                       </button> */}
-                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                        Save Changes
+                      <button 
+                        onClick={handleSave}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                        Save Changes
                       </button>
                     </div>
                 </div>
@@ -554,6 +615,8 @@ export default function ModalForm() {
                             <input
                               type="text"
                               placeholder="Description of the Product/Services"
+                              value={formData.productDesc}
+                              onChange={(e) => setFormData({ ...formData, productDesc: e.target.value })}
                               className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                               style={{
                                 width: '100%',
@@ -595,8 +658,9 @@ export default function ModalForm() {
                       {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
                         Preview Card
                       </button> */}
-                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                        Save Changes
+                      <button 
+                        onClick={handleSave}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                        Save Changes
                       </button>
                   </div>
                 </div>
@@ -669,6 +733,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Name"
+                        value={formData.testimonialName}
+                        onChange={(e) => setFormData({ ...formData, testimonialName: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -676,12 +742,16 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Job Role"
+                        value={formData.testimonialRole}
+                        onChange={(e) => setFormData({ ...formData, testimonialRole: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
                     <div className="flex-1">
                       <select
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        value={formData.testimonialIndustry}
+                        onChange={(e) => setFormData({ ...formData, testimonialIndustry: e.target.value })}
                       >
                         <option value="" disabled>
                         Industry
@@ -698,6 +768,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Testimonial Message"
+                        value={formData.testimonialMessage}
+                        onChange={(e) => setFormData({ ...formData, testimonialMessage: e.target.value })}
                         className="w-full h-[120px] p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -723,8 +795,9 @@ export default function ModalForm() {
                       {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
                         Preview Card
                       </button> */}
-                      <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                        Save Changes
+                      <button 
+                        onClick={handleSave}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                        Save Changes
                       </button>
                     </div>
                 </div>
@@ -752,6 +825,8 @@ export default function ModalForm() {
                       <label className="block text-sm text-[#787F89] mb-1">From</label>
                       <input
                         type="time"
+                        value={formData.businesshoursFrom}
+                        onChange={(e) => setFormData({ ...formData, businesshoursFrom: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -759,6 +834,8 @@ export default function ModalForm() {
                       <label className="block text-sm text-[#787F89] mb-1">To</label>
                       <input
                         type="time"
+                        value={formData.businesshoursTo}
+                        onChange={(e) => setFormData({ ...formData, businesshoursTo: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -767,13 +844,16 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Type"
+                        value={formData.businessType}
+                        onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
                   </div>
                   <div className="flex justify-end gap-4 pb-10">
-                  <button className="py-2 px-4 rounded-full text-sm text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                    Save Timings
+                  <button 
+                    onClick={handleSave}
+                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                    Save Timings
                   </button>
                   </div>
                     <div className="py-6 flex justify-end space-x-2">
@@ -794,8 +874,7 @@ export default function ModalForm() {
                       </button> */}
                       <button 
                         onClick={handleCreate}
-                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                        Create Card
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                        Create Card
                       </button>
                     </div>
                 </div>
