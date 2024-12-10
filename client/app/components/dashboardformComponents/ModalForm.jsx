@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setStepData } from '../../../store/cardSlice';
 import { createCard } from '../../utils/cardCreationApi';
 import Sidebar from './Sidebar';
-import { BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsPencilSquare, BsClockHistory, BsCartCheckFill, BsChat, BsCamera, BsEnvelopeAt } from "react-icons/bs";
+import { BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsCamera, BsEnvelopeAt, BsImages} from "react-icons/bs";
 
 export default function ModalForm() {
   const dispatch = useDispatch();
@@ -83,6 +83,17 @@ export default function ModalForm() {
     }
   };
 
+  const handleProductUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -122,7 +133,7 @@ export default function ModalForm() {
       <div className="bg-white rounded-lg w-full max-w-7xl h-[80%] flex">
         <Sidebar activeStep={activeStep} handleStepClick={handleStepClick} steps={steps} />
 
-        <div className="w-full px-6 overflow-hidden">
+        <div className="w-full px-6 overflow-scroll">
             <div className="mb-4 relative">
               <div
                   className="text-white text-center text-4xl font-semibold py-6 px-6"
@@ -147,17 +158,59 @@ export default function ModalForm() {
                   <div
                     className="w-full"
                     style={{
-                      backgroundColor: '#707FDD',
-                      opacity: '20%',
+                      backgroundColor: '#eef0ff',
                       backgroundSize: 'cover',
                       backgroundPosition: 'top',
-                      height: '160px',
+                      height: '10rem',
                       position: 'absolute',
                       top: '0',
                       left: '0',
                       right: '0',
                     }}
                   >
+                    <button
+                      style={{
+                        position: 'absolute',
+                        bottom: '0',
+                        right: '0',
+                        marginRight: '4rem',
+                        transform: 'translate(0%, 50%)',
+                        width: '2.5rem',
+                        height: '2.5rem',
+                        background: 'none',
+                        border: 'none',
+                        padding: '0',
+                        cursor: 'pointer',
+                      }}
+                      aria-label="Upload Cover"
+                    >
+                      <label 
+                       htmlFor="cover-upload"
+                       className="w-full h-full flex items-center justify-center"
+                       style={{
+                         cursor: 'pointer',
+                         display: 'inline-flex',
+                         width: '100%',
+                         height: '100%',
+                       }}
+                      >
+                        <img
+                          src="../../BannerUpload.svg"
+                          alt="Upload Cover Icon"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                          }}
+                        />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleCoverUpload}
+                          className="hidden"
+                          id="cover-upload"
+                        />
+                      </label>
+                    </button>
                     <div
                       className="mt-10 rounded-full bg-[#707FDD] bg-opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-visible cursor-pointer"
                       style={{ zIndex: 60 }}
@@ -166,7 +219,8 @@ export default function ModalForm() {
                         <img
                           src="../../ProfileAvatar.svg"
                           alt="Upload Icon"
-                          className="w-100 h-100"                        />
+                          className="w-100 h-100"
+                        />
                         <input
                           type="file"
                           accept="image/*"
@@ -176,22 +230,7 @@ export default function ModalForm() {
                         />
                       </label>
                     </div>
-
                   </div>
-
-                  
-                  {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-[40px]">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleCoverUpload}
-                      className="hidden"
-                      id="cover-upload"
-                    />
-                    <label htmlFor="cover-upload" className="text-white cursor-pointer bg-blue-500 px-4 py-2 rounded-md">
-                      Upload Cover Banner
-                    </label>
-                  </div> */}
 
                   <div className="space-y-4 mt-52">
                     <div className="flex gap-4">
@@ -634,10 +673,25 @@ export default function ModalForm() {
                               backgroundColor: '#707FDD',
                               borderRadius: '0.5rem',
                             }}
-                          />
+                          >
+                            <label
+                              htmlFor={`product-upload-${index}`}
+                              className="w-full h-full flex items-center justify-center cursor-pointer"
+                            >
+                              <BsImages className="text-white text-2xl" />
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => handleProductUpload(e, index)}
+                                className="hidden"
+                                id={`product-upload-${index}`}
+                              />
+                            </label>
+                          </div>
                         </div>
                       ))}
                     </div>
+
                   </div>
 
                   
