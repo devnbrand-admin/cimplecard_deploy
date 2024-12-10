@@ -6,7 +6,8 @@ import btn_img from "../../assets/auth/signin/login.png"
 import google_icon from "../../assets/auth/signin/google-removebg-preview 1.svg"
 import eye_cross from "../../assets/auth/eye_cross.png"
 import eye from "../../assets/auth/eye.png"
-
+import axios from '../api_resources/axios';
+import {signInWithGoogle} from "../../utils/auth-firebase-logic/signInWithGoogle"
 
 export default function SignIn({ setIsLogin }) {
   const router = useRouter();
@@ -20,8 +21,6 @@ export default function SignIn({ setIsLogin }) {
   const [loading, setLoading] = useState(false);
   const [serverError,setServerError] = useState(null)
 
-
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api/user';
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -46,23 +45,25 @@ export default function SignIn({ setIsLogin }) {
   };
 
   const handleSubmit = async (e) => {
+    setServerError(null)
     e.preventDefault();
+    console.log("submit")
     if (validateForm()) {
       setLoading(true);
       try {
-        const response = await fetch(`${API_URL}/signin`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-        const data = await response.json();
+        const response = await axios.post("/api/user/login",
+          formData
+        )
 
-        if (data.success) {
-          router.push('/dashboard');
+        if (response.status===200) {
+          
+          console.log("logged in",response)
+          // router.push('/dashboard');
         } else {
           alert(data.message || 'Login failed. Please try again.');
         }
       } catch (error) {
+        setServerError(error.response.data.message)
         alert('An error occurred. Please try again.');
       } finally {
         setLoading(false);
@@ -121,6 +122,8 @@ export default function SignIn({ setIsLogin }) {
         errors.password ? 'border-red-500' : 'border-gray-300'
       }`}
     />
+              {serverError && <p className='text-red-600 text-sm'>{serverError}</p>}
+
     <span
       className="absolute top-3 right-3 cursor-pointer"
       onClick={togglePasswordVisibility}
@@ -196,16 +199,29 @@ export default function SignIn({ setIsLogin }) {
           </div>
 
           {/* Google Button */}
-          <button className="flex items-center justify-center w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-md hover:bg-gray-200">
-            <span className="relative h-6 w-6"> 
-             <Image
-                src={google_icon}
-                alt="Google icon"
-                fill
-                className="object-cover "
-              /></span>
-            <span className="text-sm ml-1">Login with Google</span>
-          </button>
+<button
+  type="button" 
+  onClick={async (e) => {
+    e.preventDefault(); 
+    try {
+      await signInWithGoogle(); 
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+    }
+  }}
+  className="flex items-center justify-center w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-md hover:bg-gray-200"
+>
+  <span className="relative h-6 w-6">
+    <Image
+      src={google_icon}
+      alt="Google icon"
+      fill
+      className="object-cover"
+    />
+  </span>
+  <span className="text-sm ml-1">Login with Google</span>
+</button>
+
 
           {/* Toggle Login */}
           <div className="flex items-center justify-center w-full px-4 py-2 mt-2">

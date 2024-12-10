@@ -11,9 +11,9 @@ export default function AuthPage() {
     //   <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
     <div>
       <div className=''>
-        <Otp/>
+        {/* <Otp/> */}
 
-        {/* {isLogin ? <Login setIsLogin={setIsLogin} /> : <SignUp setIsLogin={setIsLogin} />} */}
+        {isLogin ? <Login setIsLogin={setIsLogin} /> : <SignUp setIsLogin={setIsLogin} />}
       </div>
     </div>
   );

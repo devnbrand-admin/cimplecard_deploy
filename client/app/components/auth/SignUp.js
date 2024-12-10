@@ -5,6 +5,8 @@ import img from "./../../assets/auth/signup/image.png";
 import eye_cross from "../../assets/auth/eye_cross.png"
 import google_icon from "../../assets/auth/signin/google-removebg-preview 1.svg"
 import eye from "../../assets/auth/eye.png"
+import OtpVerification from './Otp';
+import axios from '../api_resources/axios';
 
 
 
@@ -19,6 +21,7 @@ export default function SignUp({ setIsLogin }) {
   });
   const [isPwdVisible, setIsPwdVisible] = useState(false)
   const [isConfirmPwdVisible, setIsConfirmPwdVisible] = useState(false)
+  const [isOpt,setIsOtp] = useState(false)
 
 
   const [errors, setErrors] = useState({});
@@ -51,24 +54,24 @@ export default function SignUp({ setIsLogin }) {
   };
 
   const handleSubmit = async (e) => {
+    setServerError(null)
     e.preventDefault();
+    setIsOtp(false)
     if (validateForm()) {
       setLoading(true);
       try {
-        const response = await fetch('/api/user/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-
-        if (data.success) {
-          router.push('/dashboard'); // Navigate to dashboard on successful signup
-        } else {
-          alert(data.message); // Show an error message if signup fails
+        const response = await axios.post("/api/user/send-otp",{email:formData.email})
+        if(response.status===200){
+          setIsOtp(true)
+        }else{
         }
+
+
+
       } catch (error) {
-        alert('An error occurred. Please try again.');
+        console.log(error)
+        setIsOtp(false)
+        setServerError(error.response.data.message)
       } finally {
         setLoading(false);
       }
@@ -76,7 +79,8 @@ export default function SignUp({ setIsLogin }) {
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
+    <>
+   {isOpt ? <OtpVerification  formData={formData} setIsLogin={setIsLogin}/> : <div className="flex flex-col md:flex-row min-h-screen">
       {/* Left Section */}
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 py-7">
 
@@ -204,30 +208,37 @@ export default function SignUp({ setIsLogin }) {
 
           {/* Terms Checkbox */}
           <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="terms"
-              checked={formData.terms}
-              onChange={handleChange}
-              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-            />
-            <label className="ml-2 text-sm text-gray-600">
-              By creating an account, you agree to the{' '}
-              <a href="#" className="text-[#9847cb] underline">
-                terms of use
-              </a>{' '}
-              and our{' '}
-              <a href="#" className="text-[#9847cb] underline">
-                privacy policy
-              </a>
-              .
-            </label>
-          </div>
+  <input
+    id="terms" // Add an id to the checkbox
+    type="checkbox"
+    name="terms"
+    checked={formData.terms}
+    onChange={handleChange}
+    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+  />
+  <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
+    By creating an account, you agree to the{' '}
+    <a href="#" className="text-[#9847cb] underline">
+      terms of use
+    </a>{' '}
+    and our{' '}
+    <a href="#" className="text-[#9847cb] underline">
+      privacy policy
+    </a>
+    .
+  </label>
+</div>
+
+
           {errors.terms && (
             <p className="mt-1 text-sm text-red-500">{errors.terms}</p>
           )}
 
           {/* Submit Button */}
+
+          {serverError && <p className='text-red-600 text-sm text-center'>{serverError}</p>}
+
+
           <button
             type="submit"
             disabled={loading}
@@ -276,6 +287,7 @@ export default function SignUp({ setIsLogin }) {
       <div className="hidden md:block md:w-1/2 relative">
         <Image src={img} alt="Signup Background" fill className="object-cover" />
       </div>
-    </div>
+    </div>}
+    </>
   );
 }

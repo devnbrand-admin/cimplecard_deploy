@@ -3,13 +3,20 @@ import React, { useState } from 'react';
 import img from "../../assets/auth/otp/otp_image.png"
 import side_img from "../../assets/auth/otp/otp_side_image.png"
 import axios from '../api_resources/axios';
-import axios from '../api_resources/axios';
+import { useRouter } from 'next/navigation';
 
 
-const OtpVerification = () => {
-  const [otp, setOtp] = useState(new Array(4).fill(''));
+
+const OtpVerification = ({
+  formData,
+  setIsLogin
+}) => {
+  const [otp, setOtp] = useState(new Array(6).fill(''));
   const [serverError,setServerError] = useState(null)
   const [clientError,setClientError] = useState(null)
+
+  const router = useRouter();
+
 
   const handleChange = (value, index) => {
     if (isNaN(value)) return; // allow only numeric input
@@ -18,7 +25,7 @@ const OtpVerification = () => {
     setOtp(newOtp);
 
     // focus next input
-    if (value && index < 3) {
+    if (value && index < 5) {
       document.getElementById(`otp-${index + 1}`).focus();
     }
   };
@@ -30,19 +37,34 @@ const OtpVerification = () => {
   };
 
   const handleSubmit =async (e) => {
+    if(clientError){
+      setOtp(new Array(6).fill(''))
 
+    }
     e.preventDefault();
-    if(otp.length>=4){
-      const response = await axios.post("/api/user/send-otp")
-      console.log(response)
-
+    if(otp.length>=6){
+      
       try {
         setClientError(null)
         setServerError(null)
-        const response = await axios.post("")
+        console.log({
+          email:formData.email,
+          username: formData.name,
+          password:formData.password,
+          otp:otp.join("")
+        })
+        const response = await axios.post("/api/user/verify-otp",{
+          email:formData.email,
+          username: formData.name,
+          password:formData.password,
+          otp:otp.join("")
+        })
+        if(response.status===201){
+          setIsLogin(true)
+        }
       } catch (error) {
         console.log(error)
-        setServerError(error.message)
+        setServerError(JSON.stringify(error.response.data.message))
         
       }
     }else{
@@ -75,12 +97,13 @@ const OtpVerification = () => {
                 onChange={(e) => handleChange(e.target.value, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 maxLength="1"
-                className="mb-4 w-[70px] h-[70px]  mx-6 text-center border-[1px] border-black rounded-lg  text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="mb-4 w-[70px] h-[70px]  mx-2 text-center border-[1px] border-black rounded-lg  text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             ))}
           </div>
+          {serverError && <p className='text-red-600 text-sm'>{serverError}</p>}
         <p className="  text-sm font-semibold text-gray-800 tracking-wide">
-          Didn't you receive the OTP? <span className="text-indigo-600 cursor-pointer">Resend OTP</span>
+          Didn't you receive the OTP? <span className="text-indigo-600 cursor-pointer" onClick={handleSubmit}>Resend OTP</span>
         </p>
         <button
   type="submit"
