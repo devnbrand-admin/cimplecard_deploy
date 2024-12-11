@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import img from "../../assets/auth/signin/img.png"
@@ -58,6 +58,24 @@ export default function SignIn({ setIsLogin }) {
         if (response.status===200) {
           
           console.log("logged in",response)
+          console.log("cookie",document.cookie)
+          
+          
+
+          const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJ2aWtraWdvdWRhNzNAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MzM4NTAwMzIsImV4cCI6MTczMzg1MzYzMn0._IetqAp739kLmR_E29w0Y2izSiCuoydwJCJqGIXyU44";
+
+            try {
+              const response = await axios.get('/api/user/getdetails', {
+                headers: {
+                  Authorization: ` ${token}`, // Set token in the Authorization header
+                },
+                withCredentials: true, // Include cookies if necessary
+              });
+              console.log('User Details:', response.data);
+              return response.data; 
+            } catch (error) {
+              console.error('Error fetching user details:', error);
+            }
           // router.push('/dashboard');
         } else {
           alert(data.message || 'Login failed. Please try again.');
@@ -70,6 +88,10 @@ export default function SignIn({ setIsLogin }) {
       }
     }
   };
+
+  useEffect(()=>{
+    
+  },[])
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen ">
