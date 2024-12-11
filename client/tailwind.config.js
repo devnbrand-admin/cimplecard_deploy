@@ -14,7 +14,7 @@ module.exports = {
         background: '#121212',
       },
       fontFamily: {
-        sans: ['Poppins', 'Arial', 'sans-serif'],
+        sans: ['Poppins', 'Arial', 'Montserrat'],
       },
     },
   },
@@ -22,6 +22,7 @@ module.exports = {
   variants: {
     extend: {
       backdropBlur: ["responsive"],
+
     },
   },
 };
