@@ -133,19 +133,19 @@ export default function ModalForm() {
       <div className="bg-white rounded-lg w-full max-w-7xl h-[80%] flex">
         <Sidebar activeStep={activeStep} handleStepClick={handleStepClick} steps={steps} />
 
-        <div className="w-full px-6 overflow-scroll">
+        <div className="w-full px-6 overflow-scroll text-sm ">
             <div className="mb-4 relative">
               <div
                   className="text-white text-center text-4xl font-semibold py-6 px-6"
                   style={{
-                      backgroundImage: `url('../../ModalHeader.svg')`,
+                      backgroundImage: `url('../../ModalHeader2.png')`,
                       backgroundSize: 'contain',
                       backgroundPosition: 'top',
                       backgroundRepeat: 'no-repeat',
                       top: 0,
                       left: 0,
                       width: '100%',
-                      height: '100px',
+                      height: 'fit',
                   }}
               >
                   {steps.find((step) => step.id === activeStep)?.label}
@@ -161,7 +161,7 @@ export default function ModalForm() {
                       backgroundColor: '#eef0ff',
                       backgroundSize: 'cover',
                       backgroundPosition: 'top',
-                      height: '10rem',
+                      height: '12vh',
                       position: 'absolute',
                       top: '0',
                       left: '0',
@@ -175,8 +175,8 @@ export default function ModalForm() {
                         right: '0',
                         marginRight: '4rem',
                         transform: 'translate(0%, 50%)',
-                        width: '2.5rem',
-                        height: '2.5rem',
+                        width: '5rem',
+                        height: '5vh',
                         background: 'none',
                         border: 'none',
                         padding: '0',
@@ -219,7 +219,7 @@ export default function ModalForm() {
                         <img
                           src="../../ProfileAvatar.svg"
                           alt="Upload Icon"
-                          className="w-100 h-100"
+                          className="w-32 h-32"
                         />
                         <input
                           type="file"
@@ -232,7 +232,7 @@ export default function ModalForm() {
                     </div>
                   </div>
 
-                  <div className="space-y-4 mt-52">
+                  <div className="space-y-4 mt-40 text-sm">
                     <div className="flex gap-4">
                       <div className="flex-1">
                         <input
@@ -263,7 +263,7 @@ export default function ModalForm() {
                       </div>
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 text-sm">
                       <div className="flex-1">
                         <input
                           type="text"
@@ -329,7 +329,7 @@ export default function ModalForm() {
                         />
                       </div>
                     </div>
-                    <div className="py-6 flex justify-end space-x-2">
+                    <div className=" flex justify-end space-x-2">
                       <div className="text-white text-center text-4xl font-semibold py-6 px-6"
                         style={{
                             backgroundImage: `url('../../Underline.svg')`,
