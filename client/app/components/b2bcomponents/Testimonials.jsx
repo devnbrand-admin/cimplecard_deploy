@@ -8,7 +8,7 @@ const testimonials = [
     name: "Alice Johnson",
     designation: "CEO, Innovate Corp",
     testimonial:
-      "Tech Solutions Inc. has been instrumental in helping us scale our operations. Their team is highly skilled and professional.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis repudiandae",
     profileImg:
       "https://www.gannett-cdn.com/presto/2019/01/24/USAT/e7b1a151-1fde-4bfa-b494-43395bd61330-USP_News__Alice_Marie_Johnson.JPG?crop=2870,1614,x93,y205&width=3200&height=1680&fit=bounds",
   },
@@ -16,7 +16,7 @@ const testimonials = [
     name: "Bob Smith",
     designation: "CTO, Future Ventures",
     testimonial:
-      "We've partnered with Tech Solutions for over 3 years, and their commitment to excellence is unmatched.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis repudiandae",
     profileImg:
       "https://th.bing.com/th/id/OIP.xyasthEsflgnCTam0w3H1AHaE7?rs=1&pid=ImgDetMain",
   },
@@ -24,7 +24,7 @@ const testimonials = [
     name: "Carla Peterson",
     designation: "Product Manager, DreamTech",
     testimonial:
-      "The expertise of Tech Solutions has been invaluable in launching our new platform on time and within budget.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis repudiandae",
     profileImg:
       "https://th.bing.com/th/id/OIP.IGdJMTbPoAeZcjav9pu66QHaE8?rs=1&pid=ImgDetMain",
   },
@@ -32,7 +32,7 @@ const testimonials = [
     name: "David Brown",
     designation: "Founder, NextWave AI",
     testimonial:
-      "Tech Solutions delivers outstanding results. Their innovative approach to solving challenges is truly impressive.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis repudiandae",
     profileImg: "https://i.ytimg.com/vi/M_y9yUjdPT4/maxresdefault.jpg",
   },
 ];
@@ -87,7 +87,7 @@ function TestimonialCarousel() {
   <div className="absolute inset-0 bg-blue-400 bg-opacity-50"></div>
 
   <div className="relative w-full max-w-6xl">
-    <h2 className="text-center text-5xl font-bold mb-10 tracking-wide text-white z-10">
+    <h2 className="text-center text-4xl md:text-5xl font-bold mb-10 tracking-wide text-white z-10">
       What Our Client Says
     </h2>
 
@@ -116,12 +116,14 @@ function TestimonialCarousel() {
         {testimonials.map((testimonial, index) => (
           <div
             key={index}
-            className="min-w-full flex-shrink-0 flex justify-center"
+            className="w-full flex-shrink-0 flex justify-center"
           >
-            <div className="bg-white rounded-lg shadow-xl p-12 mx-8 flex items-center space-x-10 max-w-4xl relative h-80">
+            <div className="bg-white rounded-lg shadow-xl p-12 mx-8 flex items-center space-x-10 w-[480px] md:w-[896px] relative h-96">
+            <div className="h-44 w-44 md:h-52 md:w-52 bg-[#CFEFFC] absolute top-0 left-28 md:left-10 rounded-full">{" "}</div>
+            <div className="h-40 w-40 md:h-64 md:w-64 bg-[#CFEFFC] absolute top-8 left-[120px] md:top-7 md:left-10 rounded-full">{" "}</div>
               {/* Circular Image */}
-              <div className="flex-shrink-0 relative">
-                <div className="w-40 h-40 rounded-full border-4 border-blue-400 overflow-hidden">
+              <div className="flex-shrink-0 relative bottom-20 left-20 md:bottom-8 md:left-0">
+                <div className="h-36 w-36 md:w-60 md:h-60 rounded-full overflow-hidden ">
                   <img
                     src={testimonial.profileImg}
                     alt={testimonial.name}
@@ -131,18 +133,18 @@ function TestimonialCarousel() {
               </div>
 
               {/* Testimonial Content */}
-              <div className="flex flex-col space-y-4">
-                <p className="text-xl italic text-gray-700">
-                  "{testimonial.testimonial}"
-                </p>
-                <div>
-                  <p className="text-2xl font-bold text-blue-600">
+              <div className="flex flex-col space-y-4 font-Mons relative right-56 top-14  w-[400px] md:w-[500px] md:right-14 md:top-14">
+                <div className="w-[400px] md:w-[500px]">
+                  <p className="text-2xl md:text-3xl  text-[#578EB6] font-semibold">
                     {testimonial.name}
                   </p>
-                  <p className="text-gray-500 font-medium">
+                  <p className="text-gray-800 text-xl md:text-2xl font-semibold">
                     {testimonial.designation}
                   </p>
                 </div>
+                <p className="text-base md:text-lg overflow-clip">
+                  {testimonial.testimonial}
+                </p>
               </div>
             </div>
           </div>

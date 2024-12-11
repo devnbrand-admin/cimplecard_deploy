@@ -1,23 +1,23 @@
 import React from "react";
 import Image from "next/image";
 import { FaLinkedin, FaTwitter, FaFacebook, FaBuilding } from "react-icons/fa";
+import ProfileImage from "@/app/assets/Profile.jpg";
+import SecondaryImage from "@/app/assets/Hero_SecondaryImage.png";
 
 function HeroSection() {
   return (
     <div className="min-h-screen">
       {/* Header Section */}
       <div className="bg-[#37729D] flex justify-center items-center px-6 py-4">
-        <div className="relative ml-[200px]">
+        <div className="relative ml-[70px] md:ml-[200px]">
           <input
             type="text"
             placeholder="Search"
-            className="w-[700px] py-2 px-4 rounded-md bg-white text-gray-800 placeholder-gray-500 focus:outline-none"
+            className="w-[400px] md:w-[700px] py-2 px-4 rounded-md bg-white text-gray-800 placeholder-gray-500 focus:outline-none"
           />
-          {/* <span className="absolute top-2 right-3 text-gray-500 material-icons">
-            search
-          </span> */}
+          
         </div>
-        <button className="text-white text-lg font-medium ml-[200px]">
+        <button className="text-white text-lg font-medium md:ml-[200px] ml-4">
           Home
         </button>
       </div>
@@ -29,23 +29,25 @@ function HeroSection() {
         <div className="bg-[#37729D] h-[333px] py-10 px-6 md:px-16 flex justify-center items-end">
           <div className="">
             {/* Profile Image */}
-            <div className="absolute w-40 h-40 md:w-96 md:h-96 left-24 top-36 rounded-full overflow-hidden border-4 border-white ">
-              <Image
-                src="/Profile.jpg" // Replace with the actual path of the profile image
-                alt="Profile Picture"
-                layout="responsive"
-                width={192}
-                height={192}
-              />
+            <div className="absolute w-40 h-40 md:w-[380px] md:h-[380px] left-44 top-0 md:left-24 md:top-36 rounded-full overflow-hidden border-[12px] border-[#CFEFFC] ">
+              <div className="w-[148px] h-[148px] md:w-[364px] md:h-[364px] rounded-full overflow-hidden border-[10px] border-[#37729D] ">
+                <Image
+                  src={ProfileImage} // Replace with the actual path of the profile image
+                  alt="Profile Picture"
+                  layout="responsive"
+                  width={192}
+                  height={192}
+                />
+              </div>
             </div>
 
             {/* Profile Information */}
             <div className="mt-4 md:ml-80 text-center md:text-left">
-              <h1 className="text-7xl font-bold text-white font-mono ">
+              <h1 className="text-5xl md:text-7xl font-bold text-white font-mono ">
                 John Doe
               </h1>
 
-              <p className="text-3xl text-white mt-2 tracking-wider">
+              <p className="text-xl  md:text-3xl text-white md:mt-2 tracking-wider">
                 Chief Technology Officer at{" "}
                 <span className="font-semibold">Tech Solutions Inc.</span>
               </p>
@@ -61,9 +63,7 @@ function HeroSection() {
           <div className="font-mono ml-8 font-extrabold flex flex-col gap-6">
             {/* Personal Socials */}
             <div className="w-[500px]">
-              <h3 className="text-3xl text-gray-800">
-                Personal Socials
-              </h3>
+              <h3 className="text-3xl text-gray-800">Personal Socials</h3>
               <div className="flex gap-4 mt-4 text-lg">
                 <a
                   href="https://linkedin.com/in/johndoe"
@@ -97,9 +97,7 @@ function HeroSection() {
 
             {/* Company Socials */}
             <div className="mt-8">
-              <h3 className="text-3xl text-gray-800">
-                Company Socials
-              </h3>
+              <h3 className="text-3xl text-gray-800">Company Socials</h3>
               <div className="flex gap-4 mt-4 text-lg">
                 <a
                   href="https://linkedin.com/company/techsolutions"
@@ -113,6 +111,15 @@ function HeroSection() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="absolute bottom-0 right-0">
+          <Image
+            src={SecondaryImage}
+            alt="sfe"
+            layout="responsive"
+            width={192}
+            height={192}
+          />
         </div>
       </div>
     </div>
