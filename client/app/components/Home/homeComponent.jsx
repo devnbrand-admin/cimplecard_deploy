@@ -47,12 +47,12 @@ const HomeComponent = () => {
             </>)
     }
     return (
-        <div className="flex flex-col h-screen ">
+        <div className="flex flex-col h-100vh ">
             {/* Top Section */}
             <div className="relative  text-white h-screen flex justify-center items-center">
                 {/* Semi-Circle Container */}
                 <div
-                    className="w-[100%] h-[300px] bottom-[150px] md:w-[500px] md:h-[450px] md:bottom-[30px] sm:w-[550px] flex flex-col justify-start items-center absolute"
+                    className="w-[100%] h-[300px] bottom-[150px] md:w-[600px] md:h-[500px] md:bottom-[30px] sm:w-[550px] flex flex-col justify-start items-center absolute"
                     style={{
                         backgroundImage: `url(${people.src})`,
                         backgroundRepeat: "no-repeat",
@@ -64,7 +64,7 @@ const HomeComponent = () => {
                 >
                     {/* Logo */}
                     <div
-                        className="-mt-[120px] sm:-mt-[39px] z-10 w-[100px] h-[100px]  flex justify-center items-center  mb-3"
+                        className="-mt-[150px] sm:-mt-[39px] z-20 w-[130px] h-[130px]  flex justify-center items-center  mb-3"
                         style={{
                             borderRadius: "50%",
                         }}
@@ -82,8 +82,12 @@ const HomeComponent = () => {
             <div
                 className="absolute bottom-0 w-[100%] flex-grow bg-[#3342a2] text-white flex flex-col justify-center items-center"
                 style={{
-                    clipPath: "polygon(0 27%, 50% 60%, 100% 27%, 100% 100%, 50% 100%, 0 100%)",
-                }}
+                    clipPath: window.innerWidth >= 1024 
+                    
+                      ? "polygon(0 27%, 50% 60%, 100% 27%, 100% 100%, 50% 100%, 0 100%)"
+                      : "polygon(100% 100%, 50% 100%, 0 100%, 0 43%, 50% 55%, 100% 43%)",
+                      
+                  }}
             >
                 <div className="relative w-full h-[400px]">
                     {windowWidth > 600 ? <Image

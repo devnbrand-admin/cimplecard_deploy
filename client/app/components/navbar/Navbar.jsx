@@ -3,7 +3,7 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-gradient-to-r from-[#28389a] to-[#2a3a9d] text-white px-4 py-3 shadow-md rounded-tl-lg rounded-tr-lg">
+    <nav className="w-full bg-gradient-to-r from-[#28389a] to-[#2a3a9d] text-white px-4 py-3 shadow-md ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Brand */}
         <div className="font-bold text-lg">
