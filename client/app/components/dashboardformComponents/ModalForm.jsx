@@ -180,8 +180,8 @@ export default function ModalForm() {
 
             {activeStep === 1 && (
               <div>
-                <div className="space-y-4 mt-4">
-                  <div className="grid grid-cols-2 gap-2 mt-10">
+                <div className="space-y-4 mt-4 h-full">
+                  <div className="grid grid-cols-2 gap-2 mt-10 ">
                     
                     {/* Card 1 */}
                     <div className="w-full sm:w-80 mx-auto aspect-w-1 aspect-h-1">
@@ -244,7 +244,7 @@ export default function ModalForm() {
                           />
                           <div className="p-4">
                             <h4 className="font-bold text-lg">B2B Business</h4>
-                            <p className="text-gray-500 italic">"Build Connections That Matter – Your Business Card, Your Gateway to Partnerships!"</p>
+                            <p className="text-gray-500 italic ">"Build Connections That Matter – Your Business Card, Your Gateway to Partnerships!"</p>
                           </div>
                         </div>
                       </a>
