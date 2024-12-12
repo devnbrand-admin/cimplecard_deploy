@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'people-pattern': "url('/assets/home/people.png')",
+      },
       colors: {
         primary: '#6200EE',
         secondary: '#03DAC5',
@@ -15,6 +18,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Poppins', 'Arial', 'Montserrat'],
+        Mons:['Montserrat'],
+        Cormorant:["Cormorant"],
+        Figtree:["Figtree"]
       },
     },
   },

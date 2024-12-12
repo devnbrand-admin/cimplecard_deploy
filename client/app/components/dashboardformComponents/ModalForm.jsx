@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { setStepData } from '../../../store/cardSlice';
 import { createCard } from '../../utils/cardCreationApi';
