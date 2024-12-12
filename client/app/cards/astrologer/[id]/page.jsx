@@ -1,24 +1,21 @@
-'use client'
 import React from "react";
-
 import Bg from "../../../assets/astrologerTemplate/BgImage.png"
-import ProfileCard from "../../../components/astrocomponents/Header";
+import ProfileCard from "../../../components/astrocomponents/ProfileCard";
+import HeroSection from "../../../components/astrocomponents/HeroSection";
 
 const App = () => {
-  // console.log(Bg,"dfg")
 
   return (
     <div
       style={{
-        backgroundImage: `url(${Bg.src})`, // Access the `src` property
-        backgroundSize: 'contain',
+        backgroundImage: `url(${Bg.src})`,
+        backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
-      className="h-screen w-full"
+      className="w-full"
     >
-      {/* Header */}
       <ProfileCard/>
-     
+      <HeroSection/>
       
     </div>
   );
