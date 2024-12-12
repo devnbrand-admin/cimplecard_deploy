@@ -105,6 +105,166 @@ const DashboardPage = () => {
         updatedAt: "2024-12-06T15:41:18.950Z",
         userId: 1,
       },
+      {
+        id: 1,
+        title: "John Doe",
+        bio: "A free, open content online encyclopedia created through the collaborative efforts",
+        phoneNumbers: ["+1234567890", "+0987654321"],
+        emails: ["john.doe@example.com", "contact@johndoe.dev"],
+        addresses: [
+          "123 Main Street, Springfield",
+          "456 Elm Street, Shelbyville",
+        ],
+        jobTitle: "Senior Developer",
+        companyName: "Tech Innovators Inc.",
+        dateOfBirth: "1990-05-15T00:00:00.000Z",
+        personalSocialMediaLinks: {
+          create: [
+            {
+              url: "https://linkedin.com/in/johndoe",
+              iconUrl: "https://example.com/icons/linkedin.png",
+              platform: "LINKEDIN",
+            },
+            {
+              url: "https://twitter.com/johndoe",
+              iconUrl: "https://example.com/icons/twitter.png",
+              platform: "TWITTER",
+            },
+          ],
+        },
+        companySocialMediaLink: "https://facebook.com/techinnovators",
+        profileImageUrl: "https://example.com/images/johndoe.jpg",
+        templateType: "professional",
+        uniqueUrl: "https://www.wikipedia.org/",
+        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+        aboutUs:
+          "We deliver top-notch software solutions tailored to your needs.",
+        instagramVideoLink: "https://instagram.com/reel/xyz123",
+        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+        createdAt: "2024-12-06T14:41:55.517Z",
+        updatedAt: "2024-12-06T14:41:55.517Z",
+        userId: 1,
+      },
+      {
+        id: 2,
+        title: "John Doe",
+        bio: "Software Engineer with a passion for solving complex problems.",
+        phoneNumbers: ["+1234567890", "+0987654321"],
+        emails: ["john.doe@example.com", "contact@johndoe.dev"],
+        addresses: [
+          "123 Main Street, Springfield",
+          "456 Elm Street, Shelbyville",
+        ],
+        jobTitle: "Senior Developer",
+        companyName: "Tech Innovators Inc.",
+        dateOfBirth: "1990-05-15T00:00:00.000Z",
+        personalSocialMediaLinks: {
+          create: [
+            {
+              url: "https://linkedin.com/in/johndoe",
+              iconUrl: "https://example.com/icons/linkedin.png",
+              platform: "LINKEDIN",
+            },
+            {
+              url: "https://twitter.com/johndoe",
+              iconUrl: "https://example.com/icons/twitter.png",
+              platform: "TWITTER",
+            },
+          ],
+        },
+        companySocialMediaLink: "https://facebook.com/techinnovators",
+        profileImageUrl: "https://example.com/images/johndoe.jpg",
+        templateType: "professional",
+        uniqueUrl: "https://munirsiddiqui.vercel.app/",
+        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+        aboutUs:
+          "We deliver top-notch software solutions tailored to your needs.",
+        instagramVideoLink: "https://instagram.com/reel/xyz123",
+        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+        createdAt: "2024-12-06T15:41:18.950Z",
+        updatedAt: "2024-12-06T15:41:18.950Z",
+        userId: 1,
+      },
+      {
+        id: 1,
+        title: "John Doe",
+        bio: "A free, open content online encyclopedia created through the collaborative efforts",
+        phoneNumbers: ["+1234567890", "+0987654321"],
+        emails: ["john.doe@example.com", "contact@johndoe.dev"],
+        addresses: [
+          "123 Main Street, Springfield",
+          "456 Elm Street, Shelbyville",
+        ],
+        jobTitle: "Senior Developer",
+        companyName: "Tech Innovators Inc.",
+        dateOfBirth: "1990-05-15T00:00:00.000Z",
+        personalSocialMediaLinks: {
+          create: [
+            {
+              url: "https://linkedin.com/in/johndoe",
+              iconUrl: "https://example.com/icons/linkedin.png",
+              platform: "LINKEDIN",
+            },
+            {
+              url: "https://twitter.com/johndoe",
+              iconUrl: "https://example.com/icons/twitter.png",
+              platform: "TWITTER",
+            },
+          ],
+        },
+        companySocialMediaLink: "https://facebook.com/techinnovators",
+        profileImageUrl: "https://example.com/images/johndoe.jpg",
+        templateType: "professional",
+        uniqueUrl: "https://www.wikipedia.org/",
+        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+        aboutUs:
+          "We deliver top-notch software solutions tailored to your needs.",
+        instagramVideoLink: "https://instagram.com/reel/xyz123",
+        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+        createdAt: "2024-12-06T14:41:55.517Z",
+        updatedAt: "2024-12-06T14:41:55.517Z",
+        userId: 1,
+      },
+      {
+        id: 2,
+        title: "John Doe",
+        bio: "Software Engineer with a passion for solving complex problems.",
+        phoneNumbers: ["+1234567890", "+0987654321"],
+        emails: ["john.doe@example.com", "contact@johndoe.dev"],
+        addresses: [
+          "123 Main Street, Springfield",
+          "456 Elm Street, Shelbyville",
+        ],
+        jobTitle: "Senior Developer",
+        companyName: "Tech Innovators Inc.",
+        dateOfBirth: "1990-05-15T00:00:00.000Z",
+        personalSocialMediaLinks: {
+          create: [
+            {
+              url: "https://linkedin.com/in/johndoe",
+              iconUrl: "https://example.com/icons/linkedin.png",
+              platform: "LINKEDIN",
+            },
+            {
+              url: "https://twitter.com/johndoe",
+              iconUrl: "https://example.com/icons/twitter.png",
+              platform: "TWITTER",
+            },
+          ],
+        },
+        companySocialMediaLink: "https://facebook.com/techinnovators",
+        profileImageUrl: "https://example.com/images/johndoe.jpg",
+        templateType: "professional",
+        uniqueUrl: "https://munirsiddiqui.vercel.app/",
+        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+        aboutUs:
+          "We deliver top-notch software solutions tailored to your needs.",
+        instagramVideoLink: "https://instagram.com/reel/xyz123",
+        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+        createdAt: "2024-12-06T15:41:18.950Z",
+        updatedAt: "2024-12-06T15:41:18.950Z",
+        userId: 1,
+      },
     ],
   });
 
@@ -120,7 +280,6 @@ const DashboardPage = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            credentials: "include",
             body: JSON.stringify({
               email: "amanu0181@gmail.com",
               password: "12345",
@@ -132,7 +291,11 @@ const DashboardPage = () => {
           throw new Error("Failed to login");
         }
 
-        // User details API call
+        const loginData = await loginResponse.json();
+        const token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbWFudTAxODFAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MzM4MTA4MTEsImV4cCI6MTczMzgxNDQxMX0.feexQOatcFSdMlJgcRZt0HL7JIf9DwlNIko1DzZz9y8"; // Assuming the token is returned in the login response
+
+        // User details API call with Bearer token
         const userDetailsResponse = await fetch(
           `https://cimple-card.onrender.com/api/user/getdetails`,
           {
@@ -152,8 +315,7 @@ const DashboardPage = () => {
         const userData = await userDetailsResponse.json();
         setUserDetails(userData);
       } catch (err) {
-        setError(err.message);
-        console.error(err.message);
+        console.log(err.message);
       }
     };
 
@@ -172,10 +334,10 @@ const DashboardPage = () => {
       {isMobile ? (
         <MobileComponent />
       ) : (
-        <div className="flex w-full">
+        <div className="flex w-full" style={{ height: "100vh" }}>
           <div
-            className="m-5 rounded-3xl"
-            style={{ width: "20%", backgroundColor: "#9D4AD1" }}
+            className="m-5 mb-0 rounded-3xl"
+            style={{ width: "20%", backgroundColor: "#9D4AD1", height: "92vh" }}
           >
             <Navbar />
           </div>
@@ -219,7 +381,13 @@ const DashboardPage = () => {
             </div>
             <div
               className="w-full rounded-2xl p-4"
-              style={{ backgroundColor: "#EADAF4" }}
+              style={{
+                backgroundColor: "#EADAF4",
+                height: "80vh",
+                overflowY: "scroll",
+                overflowX: "hidden",
+                scrollbarWidth: "none",
+              }}
             >
               <h3 className="font-semibold mb-5" style={{ color: "#AB6BD4" }}>
                 My Cards

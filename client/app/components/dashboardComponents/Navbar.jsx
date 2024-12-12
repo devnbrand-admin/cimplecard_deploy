@@ -4,11 +4,9 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <div
+      className="rounded-3xl h-full mt-0 w-full"
       style={{
         backgroundColor: "#9D4AD1",
-        padding: "auto",
-        width: "max-content",
-        height: "100vh",
       }}
     >
       <h2

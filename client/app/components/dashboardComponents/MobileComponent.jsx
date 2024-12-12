@@ -3,7 +3,9 @@ import Card from "./Card";
 import Navbar from "./Navbar";
 
 const MobileComponent = () => {
-  const [isOpen, setIsMobile] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   //Temporarily initialised 2 cards
   const [userDetails, setUserDetails] = useState({
     id: 1,
@@ -97,6 +99,166 @@ const MobileComponent = () => {
         updatedAt: "2024-12-06T15:41:18.950Z",
         userId: 1,
       },
+      {
+        id: 1,
+        title: "John Doe",
+        bio: "A free, open content online encyclopedia created through the collaborative efforts",
+        phoneNumbers: ["+1234567890", "+0987654321"],
+        emails: ["john.doe@example.com", "contact@johndoe.dev"],
+        addresses: [
+          "123 Main Street, Springfield",
+          "456 Elm Street, Shelbyville",
+        ],
+        jobTitle: "Senior Developer",
+        companyName: "Tech Innovators Inc.",
+        dateOfBirth: "1990-05-15T00:00:00.000Z",
+        personalSocialMediaLinks: {
+          create: [
+            {
+              url: "https://linkedin.com/in/johndoe",
+              iconUrl: "https://example.com/icons/linkedin.png",
+              platform: "LINKEDIN",
+            },
+            {
+              url: "https://twitter.com/johndoe",
+              iconUrl: "https://example.com/icons/twitter.png",
+              platform: "TWITTER",
+            },
+          ],
+        },
+        companySocialMediaLink: "https://facebook.com/techinnovators",
+        profileImageUrl: "https://example.com/images/johndoe.jpg",
+        templateType: "professional",
+        uniqueUrl: "https://www.wikipedia.org/",
+        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+        aboutUs:
+          "We deliver top-notch software solutions tailored to your needs.",
+        instagramVideoLink: "https://instagram.com/reel/xyz123",
+        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+        createdAt: "2024-12-06T14:41:55.517Z",
+        updatedAt: "2024-12-06T14:41:55.517Z",
+        userId: 1,
+      },
+      {
+        id: 2,
+        title: "John Doe",
+        bio: "Software Engineer with a passion for solving complex problems.",
+        phoneNumbers: ["+1234567890", "+0987654321"],
+        emails: ["john.doe@example.com", "contact@johndoe.dev"],
+        addresses: [
+          "123 Main Street, Springfield",
+          "456 Elm Street, Shelbyville",
+        ],
+        jobTitle: "Senior Developer",
+        companyName: "Tech Innovators Inc.",
+        dateOfBirth: "1990-05-15T00:00:00.000Z",
+        personalSocialMediaLinks: {
+          create: [
+            {
+              url: "https://linkedin.com/in/johndoe",
+              iconUrl: "https://example.com/icons/linkedin.png",
+              platform: "LINKEDIN",
+            },
+            {
+              url: "https://twitter.com/johndoe",
+              iconUrl: "https://example.com/icons/twitter.png",
+              platform: "TWITTER",
+            },
+          ],
+        },
+        companySocialMediaLink: "https://facebook.com/techinnovators",
+        profileImageUrl: "https://example.com/images/johndoe.jpg",
+        templateType: "professional",
+        uniqueUrl: "https://munirsiddiqui.vercel.app/",
+        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+        aboutUs:
+          "We deliver top-notch software solutions tailored to your needs.",
+        instagramVideoLink: "https://instagram.com/reel/xyz123",
+        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+        createdAt: "2024-12-06T15:41:18.950Z",
+        updatedAt: "2024-12-06T15:41:18.950Z",
+        userId: 1,
+      },
+      {
+        id: 1,
+        title: "John Doe",
+        bio: "A free, open content online encyclopedia created through the collaborative efforts",
+        phoneNumbers: ["+1234567890", "+0987654321"],
+        emails: ["john.doe@example.com", "contact@johndoe.dev"],
+        addresses: [
+          "123 Main Street, Springfield",
+          "456 Elm Street, Shelbyville",
+        ],
+        jobTitle: "Senior Developer",
+        companyName: "Tech Innovators Inc.",
+        dateOfBirth: "1990-05-15T00:00:00.000Z",
+        personalSocialMediaLinks: {
+          create: [
+            {
+              url: "https://linkedin.com/in/johndoe",
+              iconUrl: "https://example.com/icons/linkedin.png",
+              platform: "LINKEDIN",
+            },
+            {
+              url: "https://twitter.com/johndoe",
+              iconUrl: "https://example.com/icons/twitter.png",
+              platform: "TWITTER",
+            },
+          ],
+        },
+        companySocialMediaLink: "https://facebook.com/techinnovators",
+        profileImageUrl: "https://example.com/images/johndoe.jpg",
+        templateType: "professional",
+        uniqueUrl: "https://www.wikipedia.org/",
+        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+        aboutUs:
+          "We deliver top-notch software solutions tailored to your needs.",
+        instagramVideoLink: "https://instagram.com/reel/xyz123",
+        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+        createdAt: "2024-12-06T14:41:55.517Z",
+        updatedAt: "2024-12-06T14:41:55.517Z",
+        userId: 1,
+      },
+      {
+        id: 2,
+        title: "John Doe",
+        bio: "Software Engineer with a passion for solving complex problems.",
+        phoneNumbers: ["+1234567890", "+0987654321"],
+        emails: ["john.doe@example.com", "contact@johndoe.dev"],
+        addresses: [
+          "123 Main Street, Springfield",
+          "456 Elm Street, Shelbyville",
+        ],
+        jobTitle: "Senior Developer",
+        companyName: "Tech Innovators Inc.",
+        dateOfBirth: "1990-05-15T00:00:00.000Z",
+        personalSocialMediaLinks: {
+          create: [
+            {
+              url: "https://linkedin.com/in/johndoe",
+              iconUrl: "https://example.com/icons/linkedin.png",
+              platform: "LINKEDIN",
+            },
+            {
+              url: "https://twitter.com/johndoe",
+              iconUrl: "https://example.com/icons/twitter.png",
+              platform: "TWITTER",
+            },
+          ],
+        },
+        companySocialMediaLink: "https://facebook.com/techinnovators",
+        profileImageUrl: "https://example.com/images/johndoe.jpg",
+        templateType: "professional",
+        uniqueUrl: "https://munirsiddiqui.vercel.app/",
+        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+        aboutUs:
+          "We deliver top-notch software solutions tailored to your needs.",
+        instagramVideoLink: "https://instagram.com/reel/xyz123",
+        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+        createdAt: "2024-12-06T15:41:18.950Z",
+        updatedAt: "2024-12-06T15:41:18.950Z",
+        userId: 1,
+      },
     ],
   });
   return (
@@ -106,12 +268,12 @@ const MobileComponent = () => {
     >
       <div className="bg-gradient-to-b from-purple-500 to-purple-300 p-2 pb-5 rounded-b-3xl h-60">
         <div className="flex items-center justify-between ">
-          <button className="text-white" onClick={() => setIsOpen(true)}>
+          <button className="text-white" onClick={() => setIsNavOpen(true)}>
             <img src="/Assets/options.png" alt="Menu" className="w-6 h-6" />
           </button>
           <div className="w-10 h-10  border-2 rounded-lg">
             <img
-              src="/Assets/Profile Picture.jpg" // Replace with the correct image path
+              src="/Assets/Profile Picture.jpg"
               alt="Profile"
               className="w-full h-full object-cover rounded-lg"
             />
@@ -126,6 +288,7 @@ const MobileComponent = () => {
         </div>
         <div
           style={{ top: 10 }}
+          onClick={() => setIsOpen(true)}
           className="absolute justify-items-center content-center w-80 flex-col relative m-auto border border-gray-300 h-56 rounded-xl bg-white"
         >
           <img
@@ -138,7 +301,10 @@ const MobileComponent = () => {
       </div>
 
       <div className="h-40"></div>
-      <div className="flex flex-col p-3" style={{ backgroundColor: "#EADAF4" }}>
+      <div
+        className="flex flex-col p-3 items-center"
+        style={{ backgroundColor: "#EADAF4" }}
+      >
         <h3 className="font-semibold text-lg m-5" style={{ color: "#AB6BD4" }}>
           My Cards
         </h3>
@@ -150,17 +316,18 @@ const MobileComponent = () => {
         <div className="h-40"></div>
       </div>
 
-      {isOpen ? (
+      {isNavOpen ? (
         <div
-          className="fixed left-0 top-0 w-3/4"
+          className="fixed left-0 top-0 w-3/4 m-2 rounded-xl pb-3"
           style={{ zIndex: 99, backgroundColor: "#9D4AD1" }}
         >
           <button
             className="fixed p-4 text-xl text-white"
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsNavOpen(false)}
           >
             x
           </button>
+
           <Navbar />
         </div>
       ) : (
@@ -194,6 +361,22 @@ const MobileComponent = () => {
           <span className="text-sm">Alerts</span>
         </button>
       </div>
+      {isOpen && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg w-80">
+            <h2 className="text-xl font-bold mb-4">Card Creation</h2>
+            <div className="w-90 h-80"></div>
+            <div className="flex justify-end">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-sm text-red-500"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

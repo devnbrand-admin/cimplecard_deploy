@@ -1,23 +1,36 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const page = () => {
+  const router = useRouter();
+
   return (
-    <div className="p-5" style={{ backgroundColor: "#B07ED1" }}>
-      <div className="flex p-5">
+    <div style={{ backgroundColor: "#B07ED1", height: "100vh" }}>
+      <div className="flex p-3">
         <img
           src="/Assets/back.png"
           alt="Card Image"
           className="w-8 h-8 rounded-xl"
+          onClick={() => router.back()}
         />
         <h2 className="font-semibold text-white text-xl ms-4">My Profile</h2>
       </div>
-      <div className="mx-5 mb-5 grid grid-cols-[1fr,2fr] gap-4">
-        <div className="bg-white rounded-xl p-6 shadow-md">
+      <div
+        className="mx-5 mb-5 grid grid-cols-[1fr,2fr] gap-4"
+        style={{ height: "23vh" }}
+      >
+        <div
+          className="bg-white rounded-xl p-4 shadow-md mb-3"
+          style={{
+            boxShadow: "0px 10px 5px 0px #00000040",
+          }}
+        >
           <div className="flex items-center gap-4">
             <img
               src="/Assets/Profile Picture.jpg"
               alt="Profile"
-              className="w-20 h-20 rounded-full"
+              className="w-20 h-20 rounded-full object-cover"
             />
             <div>
               <h1 className="text-xl font-bold text-purple-700">
@@ -64,7 +77,12 @@ const page = () => {
         </div>
 
         {/* Bio Section */}
-        <div className="bg-white rounded-xl p-6 shadow-md">
+        <div
+          className="bg-white rounded-xl p-6 mb-3 shadow-md"
+          style={{
+            boxShadow: "0px 10px 5px 0px #00000040",
+          }}
+        >
           <h2 className="text-xl font-bold text-purple-700">BIO</h2>
           <p className="text-gray-500 text-sm mt-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -79,12 +97,22 @@ const page = () => {
 
       <div className="grid grid-cols-[1fr,2fr] gap-4 m-5">
         {/* Detailed Information */}
-        <div className="bg-white rounded-xl p-6 shadow-md">
+        <div
+          className="rounded-xl p-4 shadow-md"
+          style={{
+            height: "62vh",
+            overflowY: "scroll",
+            scrollbarWidth: "none",
+
+            boxShadow: "0px 10px 5px 0px #00000040",
+            backgroundColor: "#EADAF4",
+          }}
+        >
           <h2 className="text-xl font-bold text-purple-700">
             Detailed Information
           </h2>
-          <div className="mt-4 space-y-4">
-            <div className="rounded-xl p-3 border border-gray-400 flex items-center justify-start">
+          <div className="mt-2 space-y-3">
+            <div className="rounded-xl p-2 border border-gray-400 flex items-center justify-start">
               <img
                 src="/Assets/Ellipse 101.png"
                 alt="Profile"
@@ -96,7 +124,7 @@ const page = () => {
               </div>
               <p className="text-green-500 ml-auto">Online</p>
             </div>
-            <div className="rounded-xl p-3 border border-gray-400 flex items-center justify-start">
+            <div className="rounded-xl p-2 border border-gray-400 flex items-center justify-start">
               <img
                 src="/Assets/Ellipse 101.png"
                 alt="Profile"
@@ -114,7 +142,7 @@ const page = () => {
                 />
               </button>
             </div>
-            <div className="rounded-xl p-3 border border-gray-400 flex items-center justify-start">
+            <div className="rounded-xl p-2 border border-gray-400 flex items-center justify-start">
               <img
                 src="/Assets/Ellipse 101.png"
                 alt="Profile"
@@ -132,7 +160,7 @@ const page = () => {
                 />
               </button>
             </div>
-            <div className="rounded-xl p-3 border border-gray-400 flex items-center justify-start">
+            <div className="rounded-xl p-2 border border-gray-400 flex items-center justify-start">
               <img
                 src="/Assets/Ellipse 101.png"
                 alt="Profile"
@@ -150,7 +178,7 @@ const page = () => {
                 />
               </button>
             </div>
-            <div className="rounded-xl p-3 border border-gray-400 flex items-center justify-start">
+            <div className="rounded-xl p-2 border border-gray-400 flex items-center justify-start">
               <img
                 src="/Assets/Ellipse 101.png"
                 alt="Profile"
@@ -172,10 +200,28 @@ const page = () => {
         </div>
 
         {/* Inbox Section */}
-        <div className="bg-white rounded-xl p-6 shadow-md">
-          <h2 className="text-xl font-bold text-purple-700">Inbox</h2>
+        <div
+          className="bg-white rounded-xl p-6 shadow-md"
+          style={{
+            height: "62vh",
+            overflowY: "scroll",
+            scrollbarWidth: "none",
+            boxShadow: "0px 10px 5px 0px #00000040",
+            backgroundColor: "#EADAF4",
+          }}
+        >
+          <div className="flex">
+            <h2 className="text-2xl font-bold text-purple-700">Inbox</h2>
+            <div className="border mx-3 border-gray-500 rounded-full">
+              <img
+                src="/Assets/Chat Bubble.png"
+                alt="Profile"
+                className="w-4 h-4 m-2"
+              />
+            </div>
+          </div>
           <div className="mt-4 space-y-4">
-            {[1, 2, 3].map((item, index) => (
+            {[1, 2, 3, 4, 5].map((item, index) => (
               <div
                 key={index}
                 className="flex items-center gap-4 p-3 border rounded-lg"
