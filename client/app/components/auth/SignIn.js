@@ -76,7 +76,7 @@ export default function SignIn({ setIsLogin }) {
             } catch (error) {
               console.error('Error fetching user details:', error);
             }
-          // router.push('/dashboard');
+          router.push(`/dashboard/${response.data.user.id}`);
         } else {
           alert(data.message || 'Login failed. Please try again.');
         }
