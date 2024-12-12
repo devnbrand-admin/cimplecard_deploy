@@ -380,7 +380,7 @@ export default function ModalForm() {
                           width: "128px",
                           height: "128px",
                           borderRadius: "50%",
-                          overflow: "hidden",
+                          // overflow: "hidden",
                           backgroundImage: profileImage
                             ? `url(${profileImage})`
                             : "none",
