@@ -1,12 +1,12 @@
 import React from "react";
 import Bg from "../../../assets/astrologerTemplate/BgImage.png"
-import ProfileCard from "../../../components/astrocomponents/ProfileCard";
-import HeroSection from "../../../components/astrocomponents/HeroSection";
-import ServicesSection from "../../../components/astrocomponents/ServicesSection";
-import Testimonial from "../../../components/astrocomponents/Testimonials";
-import BookingForm from "../../../components/astrocomponents/BookingForm";
-import SocialMediaHandlers from "../../../components/astrocomponents/SocialMediaHandlers";
-import ContactSection from "../../../components/astrocomponents/ContactSection";
+import ProfileCard from "../../../components/Astrocomponents/ProfileCard";
+import HeroSection from "../../../components/Astrocomponents/HeroSection";
+import ServicesSection from "../../../components/Astrocomponents/ServicesSection";
+import Testimonial from "../../../components/Astrocomponents/Testimonials";
+import BookingForm from "../../../components/Astrocomponents/BookingForm";
+import SocialMediaHandlers from "../../../components/Astrocomponents/SocialMediaHandlers";
+import ContactSection from "../../../components/Astrocomponents/ContactSection";
 
 const App = () => {
 
