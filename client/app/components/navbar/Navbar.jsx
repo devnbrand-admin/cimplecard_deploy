@@ -16,8 +16,8 @@ const Navbar = () => {
         
 
         <Link href={`/`}  className="text-gray-200 hover:text-white cursor-pointer">Home</Link>
-        <Link href={`/about`} className="text-gray-200 hover:text-white cursor-pointer">About</Link>
-        <Link href={`/contact`}  className="text-gray-200 hover:text-white cursor-pointer">Contact</Link>
+        {/* <Link href={`/about`} className="text-gray-200 hover:text-white cursor-pointer">About</Link>
+        <Link href={`/contact`}  className="text-gray-200 hover:text-white cursor-pointer">Contact</Link> */}
         </ul>
       </div>
     </nav>
