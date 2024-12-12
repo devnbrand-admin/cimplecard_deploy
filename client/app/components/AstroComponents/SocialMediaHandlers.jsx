@@ -12,7 +12,7 @@ const SocialMediaSection = () => {
 
       {/* YouTube Section */}
       <div className="mb-16">
-        <h3 className="text-center text-2xl md:text-3xl font-Mons mb-8">Our YouTube Channel</h3>
+        <h3 className="text-center text-lg md:text-xl font-Mons mb-8">Our YouTube Channel</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12 lg:px-24 font-Figtree">
           {/* YouTube Video Cards */}
           <div className="bg-white text-black rounded-lg shadow-lg overflow-hidden p-4">

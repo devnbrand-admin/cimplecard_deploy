@@ -55,7 +55,7 @@ const ServicesSection = () => {
         <h2 className="font-Cormorant italic text-4xl md:text-5xl lg:text-6xl">
           Illuminating Paths,<span className="not-italic"> One Star at a Time</span> 
         </h2>
-        <p className="font-Mons text-lg md:text-xl lg:text-2xl font-light mt-4 px-4 md:px-10 lg:px-32 xl:px-72">
+        <p className="font-Mons text-lg md:text-xl lg:text-xl font-light mt-4 px-4 md:px-10 lg:px-32 xl:px-72">
           Unlock the mysteries of your life with expert astrological insights.
           Our services are designed to provide clarity, guidance, and solutions
           tailored to your unique journey.

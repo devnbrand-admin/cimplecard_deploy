@@ -11,7 +11,7 @@ function HeroSection() {
       </p>
 
       {/* Subtitle */}
-      <p className="font-Mons text-white text-lg md:text-xl lg:text-3xl font-light leading-relaxed">
+      <p className="font-Mons text-white text-lg md:text-xl lg:text-xl font-light leading-relaxed">
         Guided by the wisdom of the cosmos, Dr. Meera Sharma, a Ph.D. in Vedic Astrology, helps individuals unlock their true potential. With years of experience and a personalized approach, she empowers lives through insightful astrological guidance.
       </p>
     </div>

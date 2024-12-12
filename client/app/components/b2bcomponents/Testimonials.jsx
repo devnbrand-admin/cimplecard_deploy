@@ -85,63 +85,6 @@ function TestimonialCarousel() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-blue-400 bg-opacity-50"></div>
 
-<<<<<<< HEAD
-  <div className="relative w-full max-w-6xl">
-    <h2 className="text-center text-4xl md:text-5xl font-bold mb-10 tracking-wide text-white z-10">
-      What Our Client Says
-    </h2>
-
-    {/* Testimonial Card */}
-    <div className="relative w-full overflow-hidden">
-      <button
-        onClick={handlePrev}
-        className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:bg-gray-200 z-20"
-      >
-        <MdArrowBack size={25} />
-      </button>
-
-      <div
-        className="flex transition-transform duration-300 ease-in-out"
-        style={{
-          transform: `translateX(calc(-${currentIndex * 100}% + ${dragDistance}px))`,
-        }}
-        onMouseDown={handleDragStart}
-        onMouseMove={handleDragMove}
-        onMouseUp={handleDragEnd}
-        onMouseLeave={handleDragEnd}
-        onTouchStart={handleDragStart}
-        onTouchMove={handleDragMove}
-        onTouchEnd={handleDragEnd}
-      >
-        {testimonials.map((testimonial, index) => (
-          <div
-            key={index}
-            className="w-full flex-shrink-0 flex justify-center"
-          >
-            <div className="bg-white rounded-lg shadow-xl p-12 mx-8 flex items-center space-x-10 w-[480px] md:w-[896px] relative h-96">
-            <div className="h-44 w-44 md:h-52 md:w-52 bg-[#CFEFFC] absolute top-0 left-28 md:left-10 rounded-full">{" "}</div>
-            <div className="h-40 w-40 md:h-64 md:w-64 bg-[#CFEFFC] absolute top-8 left-[120px] md:top-7 md:left-10 rounded-full">{" "}</div>
-              {/* Circular Image */}
-              <div className="flex-shrink-0 relative bottom-20 left-20 md:bottom-8 md:left-0">
-                <div className="h-36 w-36 md:w-60 md:h-60 rounded-full overflow-hidden ">
-                  <img
-                    src={testimonial.profileImg}
-                    alt={testimonial.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-
-              {/* Testimonial Content */}
-              <div className="flex flex-col space-y-4 font-Mons relative right-56 top-14  w-[400px] md:w-[500px] md:right-14 md:top-14">
-                <div className="w-[400px] md:w-[500px]">
-                  <p className="text-2xl md:text-3xl  text-[#578EB6] font-semibold">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-gray-800 text-xl md:text-2xl font-semibold">
-                    {testimonial.designation}
-                  </p>
-=======
       <div className="relative w-full max-w-6xl">
         <h2 className="text-center text-5xl font-bold mb-10 tracking-wide text-white z-10">
           What Our Client Says
@@ -202,7 +145,6 @@ function TestimonialCarousel() {
                       </p>
                     </div>
                   </div>
->>>>>>> c26951fbca4d76a3a39eb791dd0aabbac41d4c4c
                 </div>
                 <p className="text-base md:text-lg overflow-clip">
                   {testimonial.testimonial}

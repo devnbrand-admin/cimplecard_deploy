@@ -10,7 +10,7 @@ function SocialMediaEmbeds() {
         </h2>
 
         {/* YouTube Section */}
-          <h3 className="text-3xl font-semibold text-[#578EB6] p-4 border-b text-center">
+          <h3 className="text-xl font-semibold text-[#578EB6] p-4 border-b text-center">
             Our YouTube Channel
           </h3>
         <div className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300 border mb-8 bg-gradient-to-b from-[#578EB6] to-[#FFFFFF]">
