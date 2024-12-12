@@ -302,6 +302,7 @@ const DashboardPage = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `${token}`,
             },
             credentials: "include",
           }
@@ -313,6 +314,7 @@ const DashboardPage = () => {
         }
 
         const userData = await userDetailsResponse.json();
+        console.log(userData);
         setUserDetails(userData);
       } catch (err) {
         console.log(err.message);
