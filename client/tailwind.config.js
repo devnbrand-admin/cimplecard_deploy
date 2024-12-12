@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'people-pattern': "url('/assets/home/people.png')",
+      },
       colors: {
         primary: '#6200EE',
         secondary: '#03DAC5',
