@@ -4,7 +4,7 @@ function HeroSection() {
   
 
   return (
-    <div className="w-full h-[480px] flex flex-col items-center justify-center text-center px-4 md:px-12 lg:px-64 space-y-6 ">
+    <div className="w-full h-[480px] flex flex-col items-center justify-center text-center px-20 lg:px-32 xl:px-64 space-y-6 ">
       {/* Title */}
       <p className="font-Cormorant text-white text-4xl md:text-5xl lg:text-6xl font-medium leading-snug">
         Discover Your <span className="italic">Celestial Path</span>

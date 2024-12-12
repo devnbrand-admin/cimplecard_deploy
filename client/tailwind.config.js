@@ -16,7 +16,8 @@ module.exports = {
       fontFamily: {
         sans: ['Poppins', 'Arial', 'Montserrat'],
         Mons:['Montserrat'],
-        Cormorant:["Cormorant"]
+        Cormorant:["Cormorant"],
+        Figtree:["Figtree"]
       },
     },
   },
