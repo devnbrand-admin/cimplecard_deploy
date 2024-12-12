@@ -9,14 +9,14 @@ function AboutUs() {
       style={{ backgroundImage: `url(${OfficeImage.src})` }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-blue-400 bg-opacity-70"></div>
+      <div className="absolute inset-0 bg-[#578EB6] bg-opacity-75"></div>
 
       {/* Content */}
       <div className="relative h-full flex flex-col items-center justify-center text-center px-8 md:px-16 lg:px-24">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
           About Us
         </h2>
-        <p className="text-lg md:text-xl text-white text-start leading-relaxed tracking-wide font-medium max-w-4xl mb-6">
+        <p className="text-lg md:text-[14px] text-white text-start leading-relaxed tracking-wide font-medium max-w-4xl mb-6">
           We provide{" "}
           <span className="font-semibold text-blue-300">
             innovative technology solutions
@@ -26,7 +26,7 @@ function AboutUs() {
           success. By fostering innovation and collaboration, we help businesses
           navigate the ever-evolving technological landscape.
         </p>
-        <p className="text-lg md:text-xl text-white text-start leading-relaxed tracking-wide font-medium max-w-4xl">
+        <p className="text-lg md:text-[14px] text-white text-start leading-relaxed tracking-wide font-medium max-w-4xl">
           With a dedicated team of professionals, we prioritize delivering
           quality, reliability, and value to our clients, ensuring their journey
           to success is seamless and impactful.
