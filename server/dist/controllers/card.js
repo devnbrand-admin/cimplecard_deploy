@@ -3,7 +3,18 @@ import prisma from "../DB/dbconfig.js";
 export const createCard = async (req, res) => {
     try {
         const userId = req.user.id;
-        const { title, bio, phoneNumbers, emails, addresses, jobTitle, companyName, dateOfBirth, personalSocialMediaLinks, companySocialMediaLink, profileImageUrl, templateType, uniqueUrl, qrCodeUrl, aboutUs, instagramVideoLink, youtubeVideoLink, } = req.body;
+        const { title, bio, phoneNumbers, emails, addresses, jobTitle, companyName, dateOfBirth, personalSocialMediaLinks, companySocialMediaLink, profileImageUrl, templateType, uniqueUrl, qrCodeUrl, aboutUs, instagramVideoLink, youtubeVideoLink, services, testimonials, SocialMediaLink, } = req.body;
+        // Make sure personalSocialMediaLinks and SocialMediaLink have the expected structure
+        const formattedPersonalSocialMediaLinks = personalSocialMediaLinks?.map((link) => ({
+            platform: link.platform,
+            url: link.url,
+            iconUrl: link.iconUrl,
+        }));
+        const formattedSocialMediaLink = SocialMediaLink?.map((link) => ({
+            platform: link.platform,
+            url: link.url,
+            iconUrl: link.iconUrl,
+        }));
         const newCard = await prisma.card.create({
             data: {
                 title,
@@ -14,7 +25,9 @@ export const createCard = async (req, res) => {
                 jobTitle,
                 companyName,
                 dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
-                personalSocialMediaLinks,
+                personalSocialMediaLinks: {
+                    create: formattedPersonalSocialMediaLinks,
+                },
                 companySocialMediaLink,
                 profileImageUrl,
                 templateType,
@@ -23,6 +36,23 @@ export const createCard = async (req, res) => {
                 aboutUs,
                 instagramVideoLink,
                 youtubeVideoLink,
+                services: {
+                    create: services?.map((service) => ({
+                        name: service.name,
+                        imageUrl: service.imageUrl,
+                        serviceUrl: service.serviceUrl,
+                    })),
+                },
+                testimonials: {
+                    create: testimonials?.map((testimonial) => ({
+                        authorName: testimonial.authorName,
+                        content: testimonial.content,
+                        designation: testimonial.designation,
+                    })),
+                },
+                SocialMediaLink: {
+                    create: formattedSocialMediaLink,
+                },
                 userId,
             },
         });

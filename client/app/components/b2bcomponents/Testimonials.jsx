@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import PeopleImage from "@/app/assets/people.png";
+import PeopleImage from "../../assets/people.png";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const testimonials = [
@@ -49,8 +49,7 @@ function TestimonialCarousel() {
 
   const handlePrev = () => {
     setCurrentIndex(
-      (prevIndex) =>
-        (prevIndex - 1 + testimonials.length) % testimonials.length
+      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
     );
   };
 
@@ -80,12 +79,13 @@ function TestimonialCarousel() {
 
   return (
     <div
-  className="w-full h-screen bg-cover bg-center relative flex justify-center items-center"
-  style={{ backgroundImage: `url(${PeopleImage.src})` }}
->
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-blue-400 bg-opacity-50"></div>
+      className="w-full h-screen bg-cover bg-center relative flex justify-center items-center"
+      style={{ backgroundImage: `url(${PeopleImage.src})` }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-blue-400 bg-opacity-50"></div>
 
+<<<<<<< HEAD
   <div className="relative w-full max-w-6xl">
     <h2 className="text-center text-4xl md:text-5xl font-bold mb-10 tracking-wide text-white z-10">
       What Our Client Says
@@ -141,26 +141,85 @@ function TestimonialCarousel() {
                   <p className="text-gray-800 text-xl md:text-2xl font-semibold">
                     {testimonial.designation}
                   </p>
+=======
+      <div className="relative w-full max-w-6xl">
+        <h2 className="text-center text-5xl font-bold mb-10 tracking-wide text-white z-10">
+          What Our Client Says
+        </h2>
+
+        {/* Testimonial Card */}
+        <div className="relative w-full overflow-hidden">
+          <button
+            onClick={handlePrev}
+            className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:bg-gray-200 z-20"
+          >
+            <MdArrowBack size={25} />
+          </button>
+
+          <div
+            className="flex transition-transform duration-300 ease-in-out"
+            style={{
+              transform: `translateX(calc(-${
+                currentIndex * 100
+              }% + ${dragDistance}px))`,
+            }}
+            onMouseDown={handleDragStart}
+            onMouseMove={handleDragMove}
+            onMouseUp={handleDragEnd}
+            onMouseLeave={handleDragEnd}
+            onTouchStart={handleDragStart}
+            onTouchMove={handleDragMove}
+            onTouchEnd={handleDragEnd}
+          >
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="min-w-full flex-shrink-0 flex justify-center"
+              >
+                <div className="bg-white rounded-lg shadow-xl p-12 mx-8 flex items-center space-x-10 max-w-4xl relative h-80">
+                  {/* Circular Image */}
+                  <div className="flex-shrink-0 relative">
+                    <div className="w-40 h-40 rounded-full border-4 border-blue-400 overflow-hidden">
+                      <img
+                        src={testimonial.profileImg}
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Testimonial Content */}
+                  <div className="flex flex-col space-y-4">
+                    <p className="text-xl italic text-gray-700">
+                      "{testimonial.testimonial}"
+                    </p>
+                    <div>
+                      <p className="text-2xl font-bold text-blue-600">
+                        {testimonial.name}
+                      </p>
+                      <p className="text-gray-500 font-medium">
+                        {testimonial.designation}
+                      </p>
+                    </div>
+                  </div>
+>>>>>>> c26951fbca4d76a3a39eb791dd0aabbac41d4c4c
                 </div>
                 <p className="text-base md:text-lg overflow-clip">
                   {testimonial.testimonial}
                 </p>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+
+          <button
+            onClick={handleNext}
+            className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:bg-gray-200 z-20"
+          >
+            <MdArrowForward size={25} />
+          </button>
+        </div>
       </div>
-
-      <button
-        onClick={handleNext}
-        className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg hover:bg-gray-200 z-20"
-      >
-        <MdArrowForward size={25} />
-      </button>
     </div>
-  </div>
-</div>
-
   );
 }
 
