@@ -1,11 +1,18 @@
 'use client';
 import React, { useState } from 'react';
-import ModalForm from '../../../components/dashboardformComponents/ModalForm';
+import dynamic from 'next/dynamic';
+import { useMediaQuery } from 'react-responsive';
 import { Provider } from 'react-redux';
-import { store } from '../../../../store/store'; 
+import { store } from '../../../../store/store';
+
+
+const ModalForm = dynamic(() => import('../../../components/dashboardformComponents/ModalForm'));
+const ModalFormMobile = dynamic(() => import('../../../components/dashboardformComponents/ModalFormMobile'));
 
 export default function DashboardPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -24,7 +31,7 @@ export default function DashboardPage() {
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-6 rounded shadow-md">
-              <ModalForm />
+              {isMobile ? <ModalFormMobile /> : <ModalForm />}
             </div>
           </div>
         )}
