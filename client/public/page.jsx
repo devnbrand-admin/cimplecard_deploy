@@ -1,51 +1,49 @@
-'use client'
+"use client";
 import React from "react";
-import Footer from "@/app/components/astrocomponents/Footer";
-import GuidanceSection from "@/app/components/astrocomponents/GuidanceSection";
-import Header from "@/app/components/astrocomponents/Header";
-import HeroSection from "@/app/components/astrocomponents/HeroSection";
-import PsychicReadings from "@/app/components/astrocomponents/PsychicReadings";
-import StayUpdated from "@/app/components/astrocomponents/StayUpdated";
-import Testimonials from "@/app/components/astrocomponents/Testimonials";
+import Footer from "../../../components/astrocomponents/Footer";
+import GuidanceSection from "../../../components/astrocomponents/GuidanceSection";
+import Header from "../../../components/astrocomponents/Header";
+import HeroSection from "../../../components/astrocomponents/HeroSection";
+import PsychicReadings from "../../../components/astrocomponents/PsychicReadings";
+import StayUpdated from "../../../components/astrocomponents/StayUpdated";
+import Testimonials from "../../../components/astrocomponents/Testimonials";
 import "./style.css";
-import SocialMediaEmbeds from "@/app/components/astrocomponents/SocialMediaHandlers";
-import ContactInfo from "@/app/components/astrocomponents/ContactUs";
-import WhatsAppButton from "@/app/components/astrocomponents/WhatsappContact";
-import ContactCardButton from "@/app/components/astrocomponents/ContactCardButton";
+import SocialMediaEmbeds from "../../../components/astrocomponents/SocialMediaHandlers";
+import ContactInfo from "../../../components/astrocomponents/ContactUs";
+import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
+import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
 
 const App = () => {
-  
-
   return (
     <div>
       {/* Header */}
-      <Header/>
-     
+      <Header />
+
       {/* Hero Section */}
       {/* <HeroSection/> */}
 
       {/* guidance Section */}
-      <GuidanceSection/>
-      
+      <GuidanceSection />
+
       {/* Reading Section */}
-      <PsychicReadings/>
+      <PsychicReadings />
 
       {/* SocialMediaEmbeds Section */}
-      <SocialMediaEmbeds/>
+      <SocialMediaEmbeds />
 
       {/* Testimonial Carousel Section */}
-      <Testimonials/>
+      <Testimonials />
 
-      <ContactInfo/>
-      <ContactCardButton/>
+      <ContactInfo />
+      <ContactCardButton />
 
-      <WhatsAppButton/>
-      
+      <WhatsAppButton />
+
       {/* Subscribe Section */}
-      <StayUpdated/>
-      
+      <StayUpdated />
+
       {/* Footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 };

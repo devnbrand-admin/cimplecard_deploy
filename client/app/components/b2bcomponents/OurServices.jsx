@@ -1,14 +1,14 @@
 "use client";
-import React from "react";
 
 const OurServices = () => {
   const cards = [
     {
       id: 1,
       serviceImage:
-        "https://th.bing.com/th/id/OIP.tWJBwTsb8Sc3s_1ZMzihvgHaHa?w=159&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+        "https://miro.medium.com/v2/resize:fit:875/0*M4bxiCIjcTK-2Xr6.jpeg",
       serviceName: "Web Development",
-      description: " adipisci possimus et dolores asperiores sint, a aut, quis laborum perspiciatis facere beatae.Building scalable web applications.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum id assumenda totam minus recusandae accusantium ipsam aliquid sed esse. Minima ut nesciunt ab dolorem magni eius! Temporibus voluptas nostrum adipisci?",
       url: "https://example.com/1",
     },
     {
@@ -16,7 +16,8 @@ const OurServices = () => {
       serviceImage:
         "https://d30o293m18t25t.cloudfront.net/wp-content/uploads/2022/04/mobile-app-development.png",
       serviceName: "Mobile App Development",
-      description: " adipisci possimus et dolores asperiores sint, a aut, quis laborum perspiciatis facere beatae.Creating intuitive mobile experiences.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum id assumenda totam minus recusandae accusantium ipsam aliquid sed esse. Minima ut nesciunt ab dolorem magni eius! Temporibus voluptas nostrum adipisci?",
       url: "https://example.com/2",
     },
     {
@@ -24,15 +25,17 @@ const OurServices = () => {
       serviceImage:
         "https://www.stratospherenetworks.com/blog/wp-content/uploads/2019/06/cloud-computing-concept-with-folders.jpg",
       serviceName: "Cloud Solutions",
-      description: " adipisci possimus et dolores asperiores sint, a aut, quis laborum perspiciatis facere beatae.Innovative cloud-based solutions.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum id assumenda totam minus recusandae accusantium ipsam aliquid sed esse. Minima ut nesciunt ab dolorem magni eius! Temporibus voluptas nostrum adipisci?",
       url: "https://example.com/3",
     },
     {
       id: 4,
       serviceImage:
-        "https://www.mouser.co.uk/images/AI-and-Machine-Learning-infographic.jpg",
+        "https://media.licdn.com/dms/image/v2/D4D12AQEd4MuaQy52QQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1714152970752?e=2147483647&v=beta&t=oZ7VWkungS9GA_6d2T4XeatC9jjdsdgbE1642Bwz9rc",
       serviceName: "AI & Machine Learning",
-      description: " adipisci possimus et dolores asperiores sint, a aut, quis laborum perspiciatis facere beatae.Advanced AI and ML technologies.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum id assumenda totam minus recusandae accusantium ipsam aliquid sed esse. Minima ut nesciunt ab dolorem magni eius! Temporibus voluptas nostrum adipisci?",
       url: "https://example.com/4",
     },
     {
@@ -40,7 +43,8 @@ const OurServices = () => {
       serviceImage:
         "https://th.bing.com/th/id/OIP.Ywd0YoHovYABnOWsmS6yygHaEc?rs=1&pid=ImgDetMain",
       serviceName: "Blockchain Development",
-      description: " adipisci possimus et dolores asperiores sint, a aut, quis laborum perspiciatis facere beatae.Decentralized and secure solutions.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum id assumenda totam minus recusandae accusantium ipsam aliquid sed esse. Minima ut nesciunt ab dolorem magni eius! Temporibus voluptas nostrum adipisci?",
       url: "https://example.com/5",
     },
     {
@@ -48,41 +52,40 @@ const OurServices = () => {
       serviceImage:
         "https://www.cm-alliance.com/hubfs/60776739_l%20(1).jpg#keepProtocol",
       serviceName: "Cybersecurity Services",
-      description: " adipisci possimus et dolores asperiores sint, a aut, quis laborum perspiciatis facere beatae.Ensuring digital safety and privacy.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum id assumenda totam minus recusandae accusantium ipsam aliquid sed esse. Minima ut nesciunt ab dolorem magni eius! Temporibus voluptas nostrum adipisci?",
       url: "https://example.com/6",
     },
   ];
 
   return (
-    <div className="py-12 px-6">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-        Our Services
-      </h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {cards.map((card) => (
-          <div
-            key={card.id}
-            onClick={() => window.open(card.url, "_blank")}
-            className="relative cursor-pointer overflow-hidden rounded-lg border border-gray-300 bg-white shadow-md transition-all duration-300 hover:bg-orange-50 hover:border-orange-400"
-          >
-            <div className="flex justify-center items-center py-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto py-16 px-6">
+      {cards.map((card) => (
+        <div
+          key={card.id}
+          onClick={() => window.open(card.url, "_blank")}
+          className="cursor-pointer rounded-xl overflow-hidden border-2 shadow-md bg-white  border-[#578EB6] transition-all hover:shadow-lg hover:scale-105"
+        >
+          {/* Top Half: Image Section */}
+          <div className="flex items-center justify-center py-8 bg-white relative">
+            <div className="w-24 h-24 md:w-40 md:h-40 rounded-full bg-blue-100 flex items-center justify-center border-4 border-white p-2">
               <img
                 src={card.serviceImage}
                 alt={card.serviceName}
-                className="w-16 h-16 object-contain"
+                className="object-contain w-16 h-16 md:w-28 md:h-28"
               />
             </div>
-
-            <div className="text-center px-4 pb-4">
-              <h3 className="text-lg font-semibold text-gray-800 transition-colors duration-300 hover:text-orange-500">
-                {card.serviceName}
-              </h3>
-              <p className="text-sm text-gray-600 text-center mt-2">{card.description}</p>
-            </div>
           </div>
-        ))}
-      </div>
+
+          {/* Bottom Half: Text Section */}
+          <div className="p-6 text-center bg-[#578EB6]">
+            <h3 className="text-lg font-semibold text-white mb-2">
+              {card.serviceName}
+            </h3>
+            <p className="text-sm text-[#dcf0ff]">{card.description}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,0 +1,34 @@
+{
+  "personalSocials": [
+    {
+      "id": 1,
+      "title": "LinkedIn",
+      "url": "https://linkedin.com/in/johndoe",
+      "icon": "FaLinkedin",
+      "color": "text-blue-600"
+    },
+    {
+      "id": 2,
+      "title": "Twitter",
+      "url": "https://twitter.com/johndoe",
+      "icon": "FaTwitter",
+      "color": "text-blue-400"
+    },
+    {
+      "id": 3,
+      "title": "Facebook",
+      "url": "https://facebook.com/johndoe",
+      "icon": "FaFacebook",
+      "color": "text-blue-700"
+    }
+  ],
+  "companySocials": [
+    {
+      "id": 4,
+      "title": "Company LinkedIn",
+      "url": "https://linkedin.com/company/techsolutions",
+      "icon": "FaBuilding",
+      "color": "text-gray-600"
+    }
+  ]
+}

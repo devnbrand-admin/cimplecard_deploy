@@ -1,27 +1,25 @@
-import Header from "@/app/components/MedicalCardComponents/Header/Header";
-import Socials from "@/app/components/MedicalCardComponents/Socials/Socials"; 
-import Contact from "@/app/components/MedicalCardComponents/Contact/Contact";
-import About from "@/app/components/MedicalCardComponents/About/About";
-import Services from "@/app/components/MedicalCardComponents/Services/Services";
-import Testimonial from "@/app/components/MedicalCardComponents/Testimonial/Testimonial";
-import Youtube from "@/app/components/MedicalCardComponents/Youtube/Youtube";
-import Instagram from "@/app/components/MedicalCardComponents/Instagram/Instgram";
+import Header from "../../../components/MedicalCardComponents/Header/Header";
+import Socials from "../../../components/MedicalCardComponents/Socials/Socials";
+import Contact from "../../../components/MedicalCardComponents/Contact/Contact";
+import About from "../../../components/MedicalCardComponents/About/About";
+import Services from "../../../components/MedicalCardComponents/Services/Services";
+import Testimonial from "../../../components/MedicalCardComponents/Testimonial/Testimonial";
+import Youtube from "../../../components/MedicalCardComponents/Youtube/Youtube";
+import Instagram from "../../../components/MedicalCardComponents/Instagram/Instgram";
 
-import '@/app/style/MedicalCard.css'
+import "../../../style/MedicalCard.css";
 
-export default function MedicalCard () {
-
+export default function MedicalCard() {
   return (
     <>
-    <Header></Header>
-    <Socials></Socials>
-    <Contact></Contact>
-    <About></About>
-    <Services></Services>
-    <Testimonial></Testimonial>
-    <Youtube></Youtube>
-    <Instagram></Instagram>
+      <Header></Header>
+      <Socials></Socials>
+      <Contact></Contact>
+      <About></About>
+      <Services></Services>
+      <Testimonial></Testimonial>
+      <Youtube></Youtube>
+      <Instagram></Instagram>
     </>
   );
 }
-
