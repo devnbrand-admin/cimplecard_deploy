@@ -319,7 +319,7 @@ const MobileComponent = () => {
       {isNavOpen ? (
         <div
           className="fixed left-0 top-0 w-3/4 m-2 rounded-xl pb-3"
-          style={{ zIndex: 99, backgroundColor: "#9D4AD1" }}
+          style={{ zIndex: 99, height: "98vh", backgroundColor: "#9D4AD1" }}
         >
           <button
             className="fixed p-4 text-xl text-white"
@@ -327,7 +327,6 @@ const MobileComponent = () => {
           >
             x
           </button>
-
           <Navbar />
         </div>
       ) : (
