@@ -269,51 +269,136 @@ const DashboardPage = () => {
   });
 
   // API call using fetch - will update it later using axios
+
+  const BASE_URL = "https://cimple-card.onrender.com/api/user";
+
+  const testAPI = async (token) => {
+    const data = {
+      title: "John Doe",
+      phoneNumbers: ["+1234567890", "+0987654321"],
+      emails: ["john.doe@example.com", "contact@johndoe.dev"],
+      addresses: [
+        "123 Main Street, Springfield",
+        "456 Elm Street, Shelbyville",
+      ],
+      jobTitle: "Senior Developer",
+      companyName: "Tech Innovators Inc.",
+      dateOfBirth: "1990-05-15T00:00:00.000Z",
+      personalSocialMediaLinks: [
+        {
+          platform: "LINKEDIN",
+          url: "https://linkedin.com/in/johndoe",
+          iconUrl: "https://example.com/icons/linkedin.png",
+        },
+        {
+          platform: "TWITTER",
+          url: "https://twitter.com/johndoe",
+          iconUrl: "https://example.com/icons/twitter.png",
+        },
+      ],
+      companySocialMediaLink: "https://facebook.com/techinnovators",
+      profileImageUrl: "https://example.com/images/johndoe.jpg",
+      templateType: "professional",
+      uniqueUrl: "https://cards.example.com/johndoe",
+      qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+      aboutUs:
+        "We deliver top-notch software solutions tailored to your needs.",
+      instagramVideoLink: "https://instagram.com/reel/xyz123",
+      youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+      services: [
+        {
+          name: "Web Development",
+          imageUrl: "https://example.com/service1.jpg",
+          serviceUrl: "https://example.com/web-development",
+        },
+        {
+          name: "Mobile App Development",
+          imageUrl: "https://example.com/service2.jpg",
+          serviceUrl: "https://example.com/mobile-app-development",
+        },
+      ],
+      testimonials: [
+        {
+          authorName: "Jane Smith",
+          content: "Amazing work!",
+          designation: "CEO, StartUp Inc.",
+        },
+        {
+          authorName: "Bob Johnson",
+          content: "Highly recommend.",
+          designation: "CTO, Innovative Labs",
+        },
+      ],
+      SocialMediaLink: [
+        {
+          platform: "INSTAGRAM",
+          url: "https://instagram.com/johndoe",
+          iconUrl: "https://example.com/icons/instagram.png",
+        },
+        {
+          platform: "YOUTUBE",
+          url: "https://youtube.com/johndoe",
+          iconUrl: "https://example.com/icons/youtube.png",
+        },
+      ],
+    };
+
+    try {
+      const response = await axios.post(
+        "https://cimple-card.onrender.com/api/card/create",
+        data,
+        {
+          headers: {
+            Authorization: `${token}`, // Pass the token in the Authorization header
+          },
+        }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error making API request:", error);
+      throw error;
+    }
+  };
+
+  const loginUser = async (email, password) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/login`,
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return response.data.user.token; // Return token
+    } catch (error) {
+      throw new Error(error.response?.data?.message || "Login failed");
+    }
+  };
+
+  const getUserDetails = async (token) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/getdetails`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        withCredentials: true,
+      });
+      return response.data.user; // Return user details
+    } catch (error) {
+      throw new Error(
+        error.response?.data?.message || "Failed to fetch user details"
+      );
+    }
+  };
+
+  // Usage in useEffect
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        // Login API call
-        const loginResponse = await fetch(
-          `https://cimple-card.onrender.com/api/user/login`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: "amanu0181@gmail.com",
-              password: "12345",
-            }),
-          }
-        );
-
-        if (!loginResponse.ok) {
-          throw new Error("Failed to login");
-        }
-
-        const loginData = await loginResponse.json();
-        const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbWFudTAxODFAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MzM4MTA4MTEsImV4cCI6MTczMzgxNDQxMX0.feexQOatcFSdMlJgcRZt0HL7JIf9DwlNIko1DzZz9y8"; // Assuming the token is returned in the login response
-
-        // User details API call with Bearer token
-        const userDetailsResponse = await fetch(
-          `https://cimple-card.onrender.com/api/user/getdetails`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
-
-        if (!userDetailsResponse.ok) {
-          const errorData = await userDetailsResponse.json();
-          throw new Error(errorData.message || "Failed to fetch user details");
-        }
-
-        const userData = await userDetailsResponse.json();
-        setUserDetails(userData);
+        const token = await loginUser("amanu0181@gmail.com", "12345");
+        const userDetails = await getUserDetails(token);
+        setUserDetails(userDetails);
+        testAPI(token);
       } catch (err) {
         console.log(err.message);
       }
