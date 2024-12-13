@@ -1,16 +1,34 @@
 "use client";
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Navbar from "../../components/dashboardComponents/Navbar";
 import Card from "../../components/dashboardComponents/Card";
 import axios from "axios";
 import MobileComponent from "../../components/dashboardComponents/MobileComponent";
+import dynamic from "next/dynamic";
+import { useMediaQuery } from "react-responsive";
+import { Provider } from "react-redux";
+import { store } from "../../../store/store";
+
+const ModalForm = dynamic(() =>
+  import("../../components/dashboardformComponents/ModalForm")
+);
+const ModalFormMobile = dynamic(() =>
+  import("../../components/dashboardformComponents/ModalFormMobile")
+);
 
 const DashboardPage = () => {
   const params = useParams();
   const id = params.id;
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isMobileSize = useMediaQuery({ maxWidth: 768 });
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
   //Temporarily initialised 2 cards
   const [userDetails, setUserDetails] = useState({
@@ -268,6 +286,8 @@ const DashboardPage = () => {
     ],
   });
 
+
+
   // API call using fetch - will update it later using axios
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -302,7 +322,7 @@ const DashboardPage = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `${token}`,
+              Authorization: `${token}`,
             },
             credentials: "include",
           }
@@ -396,7 +416,7 @@ const DashboardPage = () => {
               </h3>
               <div className="flex w-full flex-wrap gap-7">
                 <div
-                  onClick={() => setIsOpen(true)}
+                  onClick={handleOpenModal}
                   className="relative group justify-items-center content-center w-80 flex-col relative m-3 rounded-xl bg-white"
                 >
                   <img
@@ -417,7 +437,7 @@ const DashboardPage = () => {
           </div>
 
           {/* Card Creation Modal */}
-          {isOpen && (
+          {/* {isOpen && (
             <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
               <div className="bg-white p-6 rounded-lg w-80">
                 <h2 className="text-xl font-bold mb-4">Card Creation</h2>
@@ -432,6 +452,15 @@ const DashboardPage = () => {
                 </div>
               </div>
             </div>
+          )} */}
+          {isModalOpen && (
+            <Provider store={store}>
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                <div className="bg-white p-6 rounded shadow-md" >
+                  {isMobileSize ? <ModalFormMobile  /> : <ModalForm />}
+                </div>
+              </div>
+            </Provider>
           )}
         </div>
       )}
