@@ -8,7 +8,7 @@ const testimonials = [
     name: "Alice Johnson",
     designation: "CEO, Innovate Corp",
     testimonial:
-      "Tech Solutions Inc. has been instrumental in helping us scale our operations. Their team is highly skilled and professional.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis repudiandae",
     profileImg:
       "https://www.gannett-cdn.com/presto/2019/01/24/USAT/e7b1a151-1fde-4bfa-b494-43395bd61330-USP_News__Alice_Marie_Johnson.JPG?crop=2870,1614,x93,y205&width=3200&height=1680&fit=bounds",
   },
@@ -16,7 +16,7 @@ const testimonials = [
     name: "Bob Smith",
     designation: "CTO, Future Ventures",
     testimonial:
-      "We've partnered with Tech Solutions for over 3 years, and their commitment to excellence is unmatched.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis repudiandae",
     profileImg:
       "https://th.bing.com/th/id/OIP.xyasthEsflgnCTam0w3H1AHaE7?rs=1&pid=ImgDetMain",
   },
@@ -24,7 +24,7 @@ const testimonials = [
     name: "Carla Peterson",
     designation: "Product Manager, DreamTech",
     testimonial:
-      "The expertise of Tech Solutions has been invaluable in launching our new platform on time and within budget.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis repudiandae",
     profileImg:
       "https://th.bing.com/th/id/OIP.IGdJMTbPoAeZcjav9pu66QHaE8?rs=1&pid=ImgDetMain",
   },
@@ -32,7 +32,7 @@ const testimonials = [
     name: "David Brown",
     designation: "Founder, NextWave AI",
     testimonial:
-      "Tech Solutions delivers outstanding results. Their innovative approach to solving challenges is truly impressive.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis repudiandae",
     profileImg: "https://i.ytimg.com/vi/M_y9yUjdPT4/maxresdefault.jpg",
   },
 ];
@@ -146,6 +146,9 @@ function TestimonialCarousel() {
                     </div>
                   </div>
                 </div>
+                <p className="text-base md:text-lg overflow-clip">
+                  {testimonial.testimonial}
+                </p>
               </div>
             ))}
           </div>

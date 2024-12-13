@@ -6,9 +6,10 @@ import HeroSection from '../../../components/b2bcomponents/HeroSection'
 import OurServices from '../../../components/b2bcomponents/OurServices'
 import SocialMediaEmbeds from '../../../components/b2bcomponents/SocialMediaFeeds'
 import TestimonialCarousel from '../../../components/b2bcomponents/Testimonials'
-import "../../../style/b2btemplate.css"
 import AppointmentForm from '../../../components/b2bcomponents/AppointmentForm'
-
+import "../../../style/b2btemplate.css"
+import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
+import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
 const page = () => {
   return (
     <>
@@ -19,7 +20,10 @@ const page = () => {
     <TestimonialCarousel/>
     <AppointmentForm/>
     <SocialMediaEmbeds/>
+    
+    <WhatsAppButton/>
     <ContactForm/>
+    <ContactCardButton/>
     </>
   )
 }
