@@ -7,7 +7,8 @@ import Testimonial from "../../../components/AstroComponents/Testimonials";
 import BookingForm from "../../../components/AstroComponents/BookingForm";
 import SocialMediaHandlers from "../../../components/AstroComponents/SocialMediaHandlers";
 import ContactSection from "../../../components/AstroComponents/ContactSection";
-
+import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
+import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
 const page = () => {
 
   return (
@@ -24,7 +25,9 @@ const page = () => {
       <ServicesSection/>
       <Testimonial/>
       <BookingForm/>
+      <WhatsAppButton/>
       <SocialMediaHandlers/>
+      <ContactCardButton/>
       <ContactSection/>
     </div>
   );

@@ -8,7 +8,8 @@ import SocialMediaEmbeds from '../../../components/b2bcomponents/SocialMediaFeed
 import TestimonialCarousel from '../../../components/b2bcomponents/Testimonials'
 import AppointmentForm from '../../../components/b2bcomponents/AppointmentForm'
 import "../../../style/b2btemplate.css"
-
+import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
+import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
 const page = () => {
   return (
     <>
@@ -19,7 +20,10 @@ const page = () => {
     <TestimonialCarousel/>
     <AppointmentForm/>
     <SocialMediaEmbeds/>
+    
+    <WhatsAppButton/>
     <ContactForm/>
+    <ContactCardButton/>
     </>
   )
 }
