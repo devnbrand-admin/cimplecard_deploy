@@ -457,7 +457,7 @@ const DashboardPage = () => {
             <Provider store={store}>
               <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                 <div className="bg-white p-6 rounded shadow-md" >
-                  {isMobile ? <ModalFormMobile  /> : <ModalForm />}
+                  {isMobileSize ? <ModalFormMobile  /> : <ModalForm />}
                 </div>
               </div>
             </Provider>
