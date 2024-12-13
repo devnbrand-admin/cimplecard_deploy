@@ -42,16 +42,18 @@ const Hero = ({ card }) => {
               src="/Assets/MedicalAssets/linkedin.png"
               alt="doctor img"
               className="w-5 ms-2 h-5"
+              onClick={() => window.open(card.companySocialMediaLink)}
             />
             <img
               src="/Assets/MedicalAssets/instagram.png"
               alt="doctor img"
               className="w-5 ms-2 h-5"
+              onClick={() => window.open(card.instagramVideoLink)}
             />
           </div>
           <img
             src="/Assets/MedicalAssets/line.png"
-            alt="doctor img"
+            alt="line img"
             className="w-28 mx-3"
           />
           <div className="flex my-1">
@@ -63,11 +65,13 @@ const Hero = ({ card }) => {
               src="/Assets/MedicalAssets/linkedin.png"
               alt="doctor img"
               className="w-5 h-5 ms-2 "
+              onClick={() => window.open(card.companySocialMediaLink)}
             />
 
             <img
               src="/Assets/MedicalAssets/instagram.png"
-              alt="doctor img"
+              alt="instagram"
+              onClick={() => window.open(card.instagramVideoLink)}
               className="w-5 h-5 ms-2"
             />
           </div>
@@ -97,8 +101,8 @@ const Hero = ({ card }) => {
       <img
         src={card.profileImageUrl}
         alt="profile img"
-        className="w-1/3 absolute rounded-full"
-        style={{ bottom: 20, right: 100 }}
+        className="absolute rounded-full"
+        style={{ bottom: 20, right: 100, width: "70vh", height: "70vh" }}
       />
     </div>
   );

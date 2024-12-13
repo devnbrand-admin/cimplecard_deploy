@@ -14,12 +14,12 @@ const ContactInfo = ({ card }) => {
     <div className="absolute top-0 text-center  p-5 rounded-lg w-full">
       <div className="text-white flex flex-col items-center">
         <h2 className="text-md">Phone Number</h2>
-        <p className="font-bold text-lg">{card.phoneNumbers[0]}</p>
-        <p className="font-bold">{card.phoneNumbers[1]}</p>
+        <p className="font-bold text-lg">{card.phoneNumbers}</p>
+        {/* <p className="font-bold">{card.phoneNumbers}</p> */}
 
         <h2 className="text-xl font-bold mt-1">Email</h2>
-        <p>samuel.dr.carl@gmail.com</p>
-        <p>samuel.dr.carl@gmail.com</p>
+        <p>{card.emails}</p>
+        <p>{card.otherEmails}</p>
 
         <h2 className="text-xl font-bold mt-2">Working Days & Hours</h2>
         <div className="flex space-x-2 text-lg">
@@ -45,7 +45,7 @@ const ContactInfo = ({ card }) => {
         <p>Sat-Sun: 7:00 PM - 8:00 AM</p>
 
         <h2 className="text-xl font-bold mt-2">Address</h2>
-        <p>1234 Elm Street, Springfield, IL, 62345</p>
+        <p>{card.companyAddress}</p>
 
         <h2 className="text-xl font-bold mt-2">Date of Birth</h2>
         <p>29th January 2024</p>

@@ -27,12 +27,7 @@ const About = ({ card }) => {
           <h1 className="text-4xl font-bold my-3">About Me</h1>
           <span className="mt-4 text-lg">
             {card.aboutUs}
-            <p className="font-semibold">
-              Dr. Owusu's excellent clinical skills and judgment enable him to
-              accurately diagnose and treat a wide range of medical conditions.
-              His technical expertise is complemented by his exceptional bedside
-              manner, which puts even the most anxious patients at ease.
-            </p>
+            <p className="font-semibold">{card.bio} </p>
             As a strong communicator and team player, Dr. Owusu works seamlessly
             with other healthcare professionals to ensure comprehensive and
             coordinated care. He regularly attends conferences and workshops to

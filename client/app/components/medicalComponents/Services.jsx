@@ -1,7 +1,7 @@
 import { Widgets } from "@mui/icons-material";
 import React from "react";
 
-const Services = () => {
+const Services = ({ card }) => {
   const services = [
     { name: "Medical Examinations", icon: "search-icon.png" },
     { name: "Diagnosis and Treatment", icon: "diagnosis-icon.png" },
@@ -47,14 +47,19 @@ const Services = () => {
           </button>
         </div>
         <div
-          className="bg-white w-1/3 absolute rounded-full p-3"
+          className="bg-white w-1/3 absolute h-fit w-fit rounded-full p-3"
           style={{ bottom: 20, left: 100 }}
         >
           <div
             className="rounded-full p-3"
             style={{ backgroundColor: "#F1F2FC" }}
           >
-            <img src="/Assets/MedicalAssets/doctor2.png" alt="doctor img" />
+            <img
+              src={card.profileImageUrl}
+              alt="doctor img"
+              className="rounded-full"
+              style={{ height: "70vh", width: "70vh" }}
+            />
           </div>
         </div>
       </div>
