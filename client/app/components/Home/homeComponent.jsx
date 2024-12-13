@@ -82,7 +82,7 @@ const HomeComponent = () => {
             <div
                 className="absolute bottom-0 w-[100%] flex-grow bg-[#3342a2] text-white flex flex-col justify-center items-center"
                 style={{
-                    clipPath: window.innerWidth >= 1024 
+                    clipPath: window?.innerWidth  && window?.innerWidth >= 1024 
                     
                       ? "polygon(0 27%, 50% 60%, 100% 27%, 100% 100%, 50% 100%, 0 100%)"
                       : "polygon(100% 100%, 50% 100%, 0 100%, 0 43%, 50% 55%, 100% 43%)",
