@@ -26,7 +26,7 @@ const HomeComponent = () => {
     updateClipPath();
     window.addEventListener("resize", updateClipPath);
 
-    return () => window.removeEventListener("resize", updateClipPath); 
+    return () => window.removeEventListener("resize", updateClipPath);
   }, []);
 
   const handlesemicircleDataDis = () => {
@@ -43,12 +43,18 @@ const HomeComponent = () => {
 
         {/* Buttons */}
         <div>
-          <button className="m-3 bg-[#707ed3] text-white py-2 px-6 rounded-full font-medium hover:bg-[#3342a2]">
-            <Link href={`/auth`}>Sign Up</Link>
-          </button>
-          <button className="m-3 bg-white border border-[#707ed3] text-[#707ed3] py-2 px-6 rounded-full font-medium hover:bg-[#5266cb] hover:text-white">
-            <Link href={`/auth`}>Log In</Link>
-          </button>
+          <Link href={`/auth`}>
+            {" "}
+            <button className="m-3 bg-[#707ed3] text-white py-2 px-6 rounded-full font-medium hover:bg-[#3342a2]">
+              Sign Up
+            </button>
+          </Link>
+          <Link href={`/auth`}>
+            {" "}
+            <button className="m-3 bg-white border border-[#707ed3] text-[#707ed3] py-2 px-6 rounded-full font-medium hover:bg-[#5266cb] hover:text-white">
+              Log In
+            </button>
+          </Link>
         </div>
       </>
     );
@@ -64,10 +70,9 @@ const HomeComponent = () => {
             backgroundImage: `url(${people.src})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            backgroundColor:"transparent",
+            backgroundColor: "transparent",
             backgroundPosition: "center",
             borderRadius: "50% 50% 0 0",
-            
           }}
         >
           {/* Logo */}
@@ -77,7 +82,7 @@ const HomeComponent = () => {
               borderRadius: "50%",
             }}
           >
-            <Image src={logoicon} alt="Logo" width={200} height={200}/>
+            <Image src={logoicon} alt="Logo" width={200} height={200} />
           </div>
 
           {/* Text Content */}

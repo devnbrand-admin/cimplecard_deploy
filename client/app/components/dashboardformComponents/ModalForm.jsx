@@ -1,10 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { setStepData } from '../../../store/cardSlice';
 import { createCard } from '../../utils/cardCreationApi';
 import Sidebar from './Sidebar';
-import { BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsCamera, BsEnvelopeAt, BsImages} from "react-icons/bs";
+import {BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsEnvelopeAt, BsImages} from "react-icons/bs";
 
 export default function ModalForm() {
   const dispatch = useDispatch();
@@ -13,6 +13,7 @@ export default function ModalForm() {
   const [coverImage, setCoverImage] = useState(null);
 
   const [formData, setFormData] = useState({
+    templateType: '',
     firstName: '',
     middleName: '',
     lastName: '',
@@ -34,7 +35,12 @@ export default function ModalForm() {
     uniqueUrl: '',
     companySocialMediaLink: '',
     instagramLink: '',
-    personalSocialMediaLinks: '',
+    personalSocialMediaLinks: {
+        "facebook": "https://facebook.com/dummyprofile",
+        "twitter": "https://twitter.com/dummyprofile",
+        "linkedin": "https://linkedin.com/in/dummyprofile",
+        "instagram": "https://instagram.com/dummyprofile"
+      },
     githubLink: '',
     additionalLink: '',
     productDesc: '',
@@ -45,20 +51,34 @@ export default function ModalForm() {
     businesshoursFrom: '',
     businesshoursTo: '',
     businessType: '',
+    profileImageUrl: '',
+    qrCodeUrl: 'Dummy data for field 2',
+    aboutUs: 'Dummy data for field 3',
+    instagramVideoLink: '',
+    youtubeVideoLink: '',
   });
 
   const steps = [
-    { id: 1, label: 'Profile', icon: <BsPerson /> },
-    { id: 2, label: 'Contact Details', icon: <BsTelephone /> },
-    { id: 3, label: 'Social Media Links', icon: <BsLinkedin /> },
-    { id: 4, label: 'Product / Services', icon: <BsCartCheckFill /> },
-    { id: 5, label: 'Testimonials', icon: <BsPersonVideo /> },
-    { id: 6, label: 'Business Hours', icon: <BsClockHistory /> },
-    { id: 7, label: 'Help', icon: <BsChat /> },
+    { id: 1, label: 'Choose Template', icon: <BsTriangle /> },
+    { id: 2, label: 'Profile', icon: <BsPerson /> },
+    { id: 3, label: 'Contact Details', icon: <BsTelephone /> },
+    { id: 4, label: 'Social Media Links', icon: <BsLinkedin /> },
+    { id: 5, label: 'Product / Services', icon: <BsCartCheckFill /> },
+    { id: 6, label: 'Testimonials', icon: <BsPersonVideo /> },
+    { id: 7, label: 'Post Links', icon: <BsUpload /> },
+    { id: 8, label: 'Business Hours', icon: <BsClockHistory /> },
+    { id: 9, label: 'Help', icon: <BsChat /> },
   ];
 
   const handleStepClick = (stepId) => {
     setActiveStep(stepId);
+  };
+
+  const handleTemplateSelection = (template) => {
+    setFormData((prev) => ({
+      ...prev,
+      templateType: template,
+    }));
   };
 
   const handleProfileUpload = (event) => {
@@ -66,7 +86,12 @@ export default function ModalForm() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfileImage(reader.result);
+        const imageUrl = reader.result;
+        setProfileImage(imageUrl);
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          profileImageUrl: imageUrl,
+        }));
       };
       reader.readAsDataURL(file);
     }
@@ -109,7 +134,7 @@ export default function ModalForm() {
   
     // Move to the next step
     if (activeStep < steps.length) {
-      if (activeStep === 6) {
+      if (activeStep === 8) {
         return;
       }
       setActiveStep(activeStep + 1);
@@ -152,54 +177,187 @@ export default function ModalForm() {
               </div>
             </div>
 
+
             {activeStep === 1 && (
+              <div>
+                <div className="space-y-4 mt-4 h-full">
+                  <div className="grid grid-cols-2 gap-2 mt-10 ">
+                    
+                    {/* Card 1 */}
+                    <div className="w-full sm:w-80 mx-auto aspect-w-1 aspect-h-1">
+                      <a href="/cards/medical_card/1" target="_blank" rel="noopener noreferrer">
+                        <div className="bg-white shadow-lg rounded-xl">
+                          <img
+                            alt="Cover"
+                            className="object-cover rounded-xl w-full h-48"
+                            src="../../template1cover.png"
+                          />
+                          <div className="p-4">
+                            <h4 className="font-bold text-lg">Medical</h4>
+                            <p className="text-gray-500 text-sm italic">“Leave a Lasting Impression – Your Medical Card, Your Professional Identity!"</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="py-2 px-4 flex space-x-2 mt-2">
+                        <button
+                          onClick={() => handleTemplateSelection('Medical')}
+                          className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === 'Medical' ? 'bg-[#707FDD] text-white' : 'bg-transparent border-2 border-[#707FDD] text-[#707FDD]'}`}
+                        >
+                          {formData.templateType === 'Medical' ? 'Selected' : 'Select'}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Card 2 */}
+                    <div className="w-80 mx-auto">
+                      <a href="/cards/astrologer/2" target="_blank" rel="noopener noreferrer">
+                        <div className="bg-white shadow-lg rounded-xl">
+                          <img
+                            alt="Cover"
+                            className="object-cover rounded-xl w-full h-48"
+                            src="../../template2cover.png"
+                          />
+                          <div className="p-4">
+                            <h4 className="font-bold text-lg">Astrologer</h4>
+                            <p className="text-gray-500 text-sm italic">“Chart Your Path to Success – Your Astrological Card, Your Cosmic Identity!“</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="py-2 px-4 flex space-x-2 mt-2">
+                        <button
+                          onClick={() => handleTemplateSelection('Astrologer')}
+                          className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === 'Astrologer' ? 'bg-[#707FDD] text-white' : 'bg-transparent border-2 border-[#707FDD] text-[#707FDD]'}`}
+                        >
+                          {formData.templateType === 'Astrologer' ? 'Selected' : 'Select'}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Card 3 */}
+                    <div className="w-80 mx-auto">
+                      <a href="/cards/b2b/3" target="_blank" rel="noopener noreferrer">
+                        <div className="bg-white shadow-lg rounded-xl">
+                          <img
+                            alt="Cover"
+                            className="object-cover rounded-xl w-full h-48"
+                            src="../../template3cover.png"
+                          />
+                          <div className="p-4">
+                            <h4 className="font-bold text-lg">B2B Business</h4>
+                            <p className="text-gray-500 italic ">"Build Connections That Matter – Your Business Card, Your Gateway to Partnerships!"</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="py-2 px-4 flex space-x-2 mt-2">
+                        <button
+                          onClick={() => handleTemplateSelection('B2B Business')}
+                          className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === 'B2B Business' ? 'bg-[#707FDD] text-white' : 'bg-transparent border-2 border-[#707FDD] text-[#707FDD]'}`}
+                        >
+                          {formData.templateType === 'B2B Business' ? 'Selected' : 'Select'}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Card 4 */}
+                    <div className="w-80 mx-auto">
+                      <a href="https://example.com/Lawyer" target="_blank" rel="noopener noreferrer">
+                        <div className="bg-white shadow-lg rounded-xl">
+                          <img
+                            alt="Cover"
+                            className="object-cover rounded-xl w-full h-48"
+                            src="../../template4cover.png"
+                          />
+                          <div className="p-4">
+                            <h4 className="font-bold text-lg">Lawyer</h4>
+                            <p className="text-gray-500 italic">"Make Your Mark in Justice – Your Legal Card, Your Professional Statement!"</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="py-2 px-4 flex space-x-2 mt-2">
+                        <button
+                          onClick={() => handleTemplateSelection('Lawyer')}
+                          className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === 'Lawyer' ? 'bg-[#707FDD] text-white' : 'bg-transparent border-2 border-[#707FDD] text-[#707FDD]'}`}
+                        >
+                          {formData.templateType === 'Lawyer' ? 'Selected' : 'Select'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="py-6 pb-10 flex justify-end space-x-2">
+                    <div
+                      className="text-white text-center text-4xl font-semibold py-6 px-6"
+                      style={{
+                        backgroundImage: `url('../../Underline.svg')`,
+                        backgroundSize: 'contain',
+                        backgroundPosition: 'left',
+                        backgroundRepeat: 'no-repeat',
+                        top: 0,
+                        left: 0,
+                        width: '70%',
+                        height: '10px',
+                      }}
+                    />
+                    <button
+                      onClick={handleSave}
+                      className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeStep === 2 && (
               <div>
                 <div className="relative py-2">
                   <div
                     className="w-full"
                     style={{
-                      backgroundColor: '#eef0ff',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'top',
-                      height: '12vh',
-                      position: 'absolute',
-                      top: '0',
-                      left: '0',
-                      right: '0',
+                      backgroundColor: "#eef0ff",
+                      backgroundSize: "cover",
+                      backgroundPosition: "top",
+                      height: "15vh",
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                      right: "0",
+                      backgroundImage: coverImage ? `url(${coverImage})` : "none",
                     }}
                   >
                     <button
                       style={{
-                        position: 'absolute',
-                        bottom: '0',
-                        right: '0',
-                        marginRight: '4rem',
-                        transform: 'translate(0%, 50%)',
-                        width: '5rem',
-                        height: '5vh',
-                        background: 'none',
-                        border: 'none',
-                        padding: '0',
-                        cursor: 'pointer',
+                        position: "absolute",
+                        bottom: "0",
+                        right: "0",
+                        marginRight: "4rem",
+                        transform: "translate(0%, 50%)",
+                        width: "5rem",
+                        height: "5vh",
+                        background: "none",
+                        border: "none",
+                        padding: "0",
+                        cursor: "pointer",
                       }}
                       aria-label="Upload Cover"
                     >
-                      <label 
-                       htmlFor="cover-upload"
-                       className="w-full h-full flex items-center justify-center"
-                       style={{
-                         cursor: 'pointer',
-                         display: 'inline-flex',
-                         width: '100%',
-                         height: '100%',
-                       }}
+                      <label
+                        htmlFor="cover-upload"
+                        className="w-full h-full flex items-center justify-center"
+                        style={{
+                          cursor: "pointer",
+                          display: "inline-flex",
+                          width: "100%",
+                          height: "100%",
+                        }}
                       >
                         <img
                           src="../../BannerUpload.svg"
                           alt="Upload Cover Icon"
                           style={{
-                            width: '100%',
-                            height: '100%',
+                            width: "100%",
+                            height: "100%",
                           }}
                         />
                         <input
@@ -215,12 +373,28 @@ export default function ModalForm() {
                       className="mt-10 rounded-full bg-[#707FDD] bg-opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-visible cursor-pointer"
                       style={{ zIndex: 60 }}
                     >
-                      <label htmlFor="profile-upload" className="w-full h-full flex items-center justify-center">
-                        <img
-                          src="../../ProfileAvatar.svg"
-                          alt="Upload Icon"
-                          className="w-32 h-32"
-                        />
+                      <label
+                        htmlFor="profile-upload"
+                        className="w-full h-full flex items-center justify-center"
+                        style={{
+                          width: "128px",
+                          height: "128px",
+                          borderRadius: "50%",
+                          // overflow: "hidden",
+                          backgroundImage: profileImage
+                            ? `url(${profileImage})`
+                            : "none",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      >
+                        {!profileImage && (
+                          <img
+                            src="../../ProfileAvatar.svg"
+                            alt="Upload Icon"
+                            className="w-32 h-32"
+                          />
+                        )}
                         <input
                           type="file"
                           accept="image/*"
@@ -232,7 +406,7 @@ export default function ModalForm() {
                     </div>
                   </div>
 
-                  <div className="space-y-4 mt-40 text-sm">
+                  <div className="space-y-4 mt-48    text-sm">
                     <div className="flex gap-4">
                       <div className="flex-1">
                         <input
@@ -314,9 +488,9 @@ export default function ModalForm() {
                             Language Spoken
                           </option>
                           <option value="English">English</option>
-                          <option value="Spanish">Hindi</option>
-                          <option value="French">Bengali</option>
-                          <option value="German">Marathi</option>
+                          <option value="Hindi">Hindi</option>
+                          <option value="Bengali">Bengali</option>
+                          <option value="Marathi">Marathi</option>
                         </select>
                       </div>
                       <div className="flex-1">
@@ -329,7 +503,7 @@ export default function ModalForm() {
                         />
                       </div>
                     </div>
-                    <div className=" flex justify-end space-x-2">
+                    <div className="py-6 flex justify-end space-x-2">
                       <div className="text-white text-center text-4xl font-semibold py-6 px-6"
                         style={{
                             backgroundImage: `url('../../Underline.svg')`,
@@ -356,7 +530,7 @@ export default function ModalForm() {
               </div>
             )}
 
-            {activeStep === 2 && (
+            {activeStep === 3 && (
               <div>
                 <div
                   className="py-2"
@@ -488,7 +662,7 @@ export default function ModalForm() {
               </div>
             )}
 
-            {activeStep === 3 && (
+            {activeStep === 4 && (
               <div>
                 <div
                   className="py-2"
@@ -539,8 +713,8 @@ export default function ModalForm() {
                       <input
                         type="text"
                         placeholder="Twitter (Optional)"
-                        value={formData.personalSocialMediaLinks}
-                        onChange={(e) => setFormData({ ...formData, personalSocialMediaLinks: e.target.value })}
+                        // value={formData.personalSocialMediaLinks}
+                        // onChange={(e) => setFormData({ ...formData, personalSocialMediaLinks: e.target.value })}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                     </div>
@@ -587,8 +761,9 @@ export default function ModalForm() {
                 </div>
               </div>
             )}
+            
 
-            {activeStep === 4 && (
+            {activeStep === 5 && (
               <div>
                 <div
                   className="py-2"
@@ -721,7 +896,7 @@ export default function ModalForm() {
               </div>
             )}
 
-            {activeStep === 5 && (
+            {activeStep === 6 && (
               <div>
                 <div
                   className="flex mt-6 items-center justify-center"
@@ -858,7 +1033,162 @@ export default function ModalForm() {
               </div>
             )}
 
-            {activeStep === 6 && (
+            {activeStep === 7 && (
+              <div>
+                <div className="space-y-4 mt-4">
+                  
+                  <div className="flex justify-center gap-4">
+                    <h1 className='text-2xl font-semibold text-[#707FDD]'>Add Public Instagram Link</h1>
+                  </div>
+                  <div
+                    className="flex items-center justify-center"
+                    style={{
+                      backgroundColor: '#F1F2FC',
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: '120px',
+                      padding: '20px',
+                      borderRadius: '8px',
+                    }}
+                  >
+                    <div className="flex gap-4 w-full">
+                      <div className="flex-1">
+                        <input
+                          type="text"
+                          placeholder="Instagram Link"
+                          value={formData.instagramVideoLink}
+                          onChange={(e) => setFormData({ ...formData, instagramVideoLink: e.target.value })}
+                          className="w-[80%] p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md mx-auto block"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center gap-4">
+                  <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                    Add Instagram
+                  </button>
+                  </div>
+                </div>
+
+
+                <div
+                  className="flex mt-6 items-center justify-center"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    width: '100%',
+                    height: '8rem', 
+                    overflowY: 'scroll',
+                    padding: '20px',
+                  }}
+                >
+                  <div className="flex flex-col gap-2" style={{ width: '100%', maxWidth: '1080px' }}>
+                    {[...Array(5)].map((_, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-center"
+                        style={{
+                          backgroundColor: '#F1F2FC',
+                          backgroundSize: 'contain',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          width: '100%',
+                          height: '120px',
+                          padding: '20px',
+                          borderRadius: '8px',
+                        }}
+                      >
+                        <div className="flex-1" style={{ maxWidth: '80%' }}>
+                          <h1
+                            className="text-[#787F89] text-sm mb-1"
+                            style={{
+                              fontSize: '14px',
+                              textAlign: 'left',
+                            }}
+                          >
+                            Youtube Video Title
+                          </h1>
+                          <input
+                            type="text"
+                            placeholder="YouTube Video Link"
+                            className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                            style={{
+                              width: '100%',
+                              maxWidth: '1080px',
+                              display: 'block',
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+
+
+
+                <div className="space-y-4 mt-4">
+                <div className="flex justify-center gap-4">
+                    <h1 className='text-2xl font-semibold text-[#707FDD]'>Add YouTube Videos</h1>
+                  </div>
+                  <div
+                    className="flex items-center justify-center"
+                    style={{
+                      backgroundColor: '#F1F2FC',
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: '120px',
+                      padding: '20px',
+                      borderRadius: '8px',
+                    }}
+                  >
+                    <div className="flex gap-4 w-full">
+                      <div className="flex-1">
+                        <input
+                          type="text"
+                          placeholder="YouTube Video Link"
+                          value={formData.youtubeVideoLink}
+                          onChange={(e) => setFormData({ ...formData, youtubeVideoLink: e.target.value })}
+                          className="w-[80%] p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md mx-auto block"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center gap-4">
+                  <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                    Add YouTube Video
+                  </button>
+                  </div>
+                    <div className="py-6 flex justify-end space-x-2">
+                      <div className="text-white text-center text-4xl font-semibold py-6 px-6"
+                        style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'left',
+                            backgroundRepeat: 'no-repeat',
+                            top: 0,
+                            left: 0,
+                            width: '70%',
+                            height: '10px',
+                        }}>
+                      </div>
+                      {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                        Preview Card
+                      </button> */}
+                      <button 
+                        onClick={handleSave}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                        Save Changes
+                      </button>
+                    </div>
+                </div>
+              </div>
+            )}
+
+            {activeStep === 8 && (
               <div>
                 <div
                   className="py-2"
@@ -935,7 +1265,7 @@ export default function ModalForm() {
               </div>
             )}
 
-            {activeStep === 7 && (
+            {activeStep === 9 && (
               <div>
                 <div
                   className="py-2"
