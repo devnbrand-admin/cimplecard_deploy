@@ -45,7 +45,7 @@ const Card = ({ card }) => {
             src={card.uniqueUrl}
             title="Scaled Iframe"
             style={{
-              width: `${window.innerWidth <= 768 ? "300vw" : "80vw"}`, // Makes the iframe as wide as the viewport
+              width: `${window?.innerWidth <= 768 ? "300vw" : "80vw"}`, // Makes the iframe as wide as the viewport
               height: "100vh", // Makes the iframe as tall as the viewport
               transform: "scale(0.20)", // Scales down to fit the 250px box
               transformOrigin: "0 0", // Ensures scaling starts from the top-left corner
