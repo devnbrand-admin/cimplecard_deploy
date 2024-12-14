@@ -8,6 +8,7 @@ const Hero = ({ card }) => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         height: "100vh",
+        width: "100vw",
       }}
       id="Profile"
     >

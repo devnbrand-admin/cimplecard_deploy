@@ -11,8 +11,8 @@ const ContactInfo = ({ card }) => {
     { day: "S", status: "active" }, // Saturday
   ];
   return (
-    <div className="absolute top-0 text-center  p-5 rounded-lg w-full">
-      <div className="text-white flex flex-col items-center">
+    <div className="absolute top-0 text-center  p-4 rounded-lg w-full">
+      <div className="flex flex-col items-center">
         <h2 className="text-md">Phone Number</h2>
         <p className="font-bold text-lg">{card.phoneNumbers}</p>
         {/* <p className="font-bold">{card.phoneNumbers}</p> */}
