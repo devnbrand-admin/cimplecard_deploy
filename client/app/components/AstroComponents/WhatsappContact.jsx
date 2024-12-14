@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
-function WhatsAppButton() {
+function WhatsAppButton({bg}) {
   const [isInputOpen, setIsInputOpen] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [currentUrl, setCurrentUrl] = useState("");
@@ -41,7 +41,7 @@ function WhatsAppButton() {
       <div className="fixed bottom-6 right-6 z-10">
         {!isInputOpen ? (
           <button
-            className="p-4 rounded-full shadow-lg bg-teal-600 text-white hover:scale-105 transform transition-transform flex items-center gap-2"
+            className={`p-4 rounded-full shadow-lg ${bg ? bg : "bg-teal-600"}  text-white hover:scale-105 transform transition-transform flex items-center gap-2`}
             onClick={() => setIsInputOpen(true)}
           >
             <FaWhatsapp size={24} />
@@ -59,7 +59,7 @@ function WhatsAppButton() {
             />
             <div className="flex justify-between gap-2">
               <button
-                className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform"
+                className={`${bg ? bg : "bg-teal-600"} text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform`}
                 onClick={handleSend}
               >
                 Send

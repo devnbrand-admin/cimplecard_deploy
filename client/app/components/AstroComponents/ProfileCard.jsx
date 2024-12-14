@@ -56,7 +56,7 @@ const ProfileCard = () => {
       </div>
 
       {/* Bottom Section: Contact Information Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-5xl mx-auto">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-5xl mx-auto mt-10">
         <div className="bg-[#020013] border border-violet-950 pt-8 pb-8 text-center rounded-lg flex flex-col items-center space-x-4">
           <div className="flex flex-col items-center gap-4">
           <FaEnvelope size={28} />

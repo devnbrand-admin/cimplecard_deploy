@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import Bg from "../../../assets/astrologerTemplate/BgImage.png"
 import ProfileCard from "../../../components/astrocomponents/ProfileCard";
@@ -7,6 +8,8 @@ import Testimonial from "../../../components/astrocomponents/Testimonials";
 import BookingForm from "../../../components/astrocomponents/BookingForm";
 import SocialMediaHandlers from "../../../components/astrocomponents/SocialMediaHandlers";
 import ContactSection from "../../../components/astrocomponents/ContactSection";
+import WhatsappContact from "../../../components/AstroComponents/WhatsappContact"
+import ContactCardButton from "../../../components/AstroComponents/ContactCardButton"
 
 const App = () => {
 
@@ -19,13 +22,15 @@ const App = () => {
       }}
       className="w-full"
     >
-      <ProfileCard/>
-      <HeroSection/>
-      <ServicesSection/>
-      <Testimonial/>
-      <BookingForm/>
-      <SocialMediaHandlers/>
-      <ContactSection/>
+      <ProfileCard />
+      <HeroSection />
+      <ServicesSection />
+      <Testimonial />
+      <BookingForm />
+      <SocialMediaHandlers />
+      <ContactSection />
+      <WhatsappContact bg={'bg-[#2d0959]'}/>
+      <ContactCardButton bg={'bg-[#2d0959]'}/>
     </div>
   );
 };
