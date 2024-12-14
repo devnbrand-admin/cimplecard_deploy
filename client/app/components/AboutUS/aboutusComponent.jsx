@@ -28,7 +28,7 @@ const AboutUSComponent = () => {
   };
 
   return (
-    <div className="bg-gray-100 relative text-gray-800 font-sans">
+    <div className="bg-gray-100 relative text-gray-800 font-sans ">
       
       <div
         className="hidden clip-path1 md:block absolute top-[30px] z-10 bg-[#707ed3] w-[700px] h-[1000px] shadow-lg shadow-black"
@@ -79,9 +79,15 @@ const AboutUSComponent = () => {
           About <span className="text-blue-500">CimpleCard</span>
         </h1>
         <div className="grid grid-cols-1 lg:flex gap-8 items-center justify-end md:ml-[150px]">
-          <p className="text-gray-700 text-center text-lg leading-relaxed">
+          <p className="text-[#3a4ab3] text-left text-lg leading-relaxed">
             At CimpleCard, we believe in redefining the way professionals
             connect and share their identities in the digital world. Our
+            platform enables seamless networking and engagement. Powered by
+            cutting-edge design and technology, CimpleCard bridges the gap
+            between traditional networking and the demands of today’s digital
+            landscape. Join us in transforming how the world connects, one card
+            at a time.
+            share their identities in the digital world. Our
             platform enables seamless networking and engagement. Powered by
             cutting-edge design and technology, CimpleCard bridges the gap
             between traditional networking and the demands of today’s digital
