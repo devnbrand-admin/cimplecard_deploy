@@ -5,17 +5,15 @@ import logoicon from "../../assets/home/logoicon.png";
 import useWindowWidth from "../../hooks/useWindowwidth";
 import Link from "next/link";
 import Navbar from "../navbar/Navbar";
-
+import BrowseCard from "../Home/browseCard"
+import HowItOperates from "./howItOperates";
+import {handleJoinSignLoignfn} from "../AboutUS/aboutusComponent"
 const HomeComponent = () => {
 
 
     const windowWidth = useWindowWidth();
 
-
-
-
-
-    const handlesemicircleDataDis = () => {
+ const handlesemicircleDataDis = () => {
         return (
             <>
 
@@ -47,12 +45,13 @@ const HomeComponent = () => {
             </>)
     }
     return (
+        <>
         <div className="flex flex-col h-100vh ">
             {/* Top Section */}
             <div className="relative  text-white h-screen flex justify-center items-center">
                 {/* Semi-Circle Container */}
                 <div
-                    className="w-[100%] h-[300px] bottom-[150px] md:w-[600px] md:h-[500px] md:bottom-[30px] sm:w-[550px] flex flex-col justify-start items-center absolute"
+                    className="w-[100%] h-[300px] bottom-[150px] md:w-[600px] md:h-[450px] md:bottom-[68px] sm:w-[550px] flex flex-col justify-start items-center absolute"
                     style={{
                         backgroundImage: `url(${people.src})`,
                         backgroundRepeat: "no-repeat",
@@ -116,7 +115,27 @@ const HomeComponent = () => {
 
                 </div>
             </div>
+            <div
+        className="hidden clip-path1 md:block absolute top-[240px] z-10 bg-[#e9eafa] w-full h-[700px] shadow-lg shadow-black"
+        style={{
+          clipPath: "polygon(0 46%, 100% 54%, 100% 40%)",
+        }}
+      >
+        <div
+          className="absolute inset-0 shadow-lg shadow-black"
+          style={{
+            clipPath: "polygon(0 46%, 100% 54%, 100% 40%)",
+          }}
+        />
+      </div>
         </div>
+        <HowItOperates/>
+        <div className="w-1/2 mx-auto">
+        
+        {handleJoinSignLoignfn()}
+        </div>
+        <BrowseCard/>
+        </>
     );
 };
 

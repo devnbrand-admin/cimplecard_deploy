@@ -81,7 +81,7 @@ const OtpVerification = ({
           <Image src={img} alt="OTP" className="mx-auto w-[130px] mb-4" />
           <h1 className="text-4xl font-semibold mb-2">OTP Verification</h1>
           <p className="text-gray-600 mb-6 flex flex-col">
-           <> Enter the verification code sent to</> <span className="font-medium">something@gmail.com</span>
+           <> Enter the verification code sent to</> <span className="font-medium">{formData?.email && formData?.email }</span>
           </p>
         </div>
 
