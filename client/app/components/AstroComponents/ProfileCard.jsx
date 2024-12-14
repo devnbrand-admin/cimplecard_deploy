@@ -23,13 +23,13 @@ const ProfileCard = () => {
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 lg:space-y-16 px-0 py-0 lg:px-14 lg:py-16">
           {/* Name and Details */}
           <div className="font-Cormorant space-y-4">
-            <h1 className="lg:text-7xl text-4xl font-bold">Dr. Meera Sharma</h1>
-            <p className="lg:text-5xl text-3xl mt-2 font-medium">Ph.D. in Vedic Astrology, Gold Medalist</p>
-            <p className="lg:text-5xl text-3xl">Bengaluru, India</p>
+            <h1 className="lg:text-5xl text-3xl font-bold">Dr. Meera Sharma</h1>
+            <p className="lg:text-3xl text-xl mt-2 font-medium">Ph.D. in Vedic Astrology, Gold Medalist</p>
+            <p className="lg:text-xl text-3xl">Bengaluru, India</p>
           </div>
 
           {/* Social Media Icons */}
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 px-4 md:px-0 flex-wrap w-full md:w-fit items-center justify-center gap-4">
             <a
               href="#"
               className="bg-white text-blue-600 py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2"
