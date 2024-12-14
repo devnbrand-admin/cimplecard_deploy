@@ -272,95 +272,6 @@ const DashboardPage = () => {
 
   const BASE_URL = "https://cimple-card.onrender.com/api/user";
 
-  const testAPI = async (token) => {
-    const data = {
-      title: "John Doe",
-      phoneNumbers: ["+1234567890", "+0987654321"],
-      emails: ["john.doe@example.com", "contact@johndoe.dev"],
-      addresses: [
-        "123 Main Street, Springfield",
-        "456 Elm Street, Shelbyville",
-      ],
-      jobTitle: "Senior Developer",
-      companyName: "Tech Innovators Inc.",
-      dateOfBirth: "1990-05-15T00:00:00.000Z",
-      personalSocialMediaLinks: [
-        {
-          platform: "LINKEDIN",
-          url: "https://linkedin.com/in/johndoe",
-          iconUrl: "https://example.com/icons/linkedin.png",
-        },
-        {
-          platform: "TWITTER",
-          url: "https://twitter.com/johndoe",
-          iconUrl: "https://example.com/icons/twitter.png",
-        },
-      ],
-      companySocialMediaLink: "https://facebook.com/techinnovators",
-      profileImageUrl: "https://example.com/images/johndoe.jpg",
-      templateType: "professional",
-      uniqueUrl: "https://cards.example.com/johndoe",
-      qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
-      aboutUs:
-        "We deliver top-notch software solutions tailored to your needs.",
-      instagramVideoLink: "https://instagram.com/reel/xyz123",
-      youtubeVideoLink: "https://youtube.com/watch?v=abc123",
-      services: [
-        {
-          name: "Web Development",
-          imageUrl: "https://example.com/service1.jpg",
-          serviceUrl: "https://example.com/web-development",
-        },
-        {
-          name: "Mobile App Development",
-          imageUrl: "https://example.com/service2.jpg",
-          serviceUrl: "https://example.com/mobile-app-development",
-        },
-      ],
-      testimonials: [
-        {
-          authorName: "Jane Smith",
-          content: "Amazing work!",
-          designation: "CEO, StartUp Inc.",
-        },
-        {
-          authorName: "Bob Johnson",
-          content: "Highly recommend.",
-          designation: "CTO, Innovative Labs",
-        },
-      ],
-      SocialMediaLink: [
-        {
-          platform: "INSTAGRAM",
-          url: "https://instagram.com/johndoe",
-          iconUrl: "https://example.com/icons/instagram.png",
-        },
-        {
-          platform: "YOUTUBE",
-          url: "https://youtube.com/johndoe",
-          iconUrl: "https://example.com/icons/youtube.png",
-        },
-      ],
-    };
-
-    try {
-      const response = await axios.post(
-        "https://cimple-card.onrender.com/api/card/create",
-        data,
-        {
-          headers: {
-            Authorization: `${token}`, // Pass the token in the Authorization header
-          },
-        }
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.error("Error making API request:", error);
-      throw error;
-    }
-  };
-
   const loginUser = async (email, password) => {
     try {
       const response = await axios.post(
@@ -398,7 +309,6 @@ const DashboardPage = () => {
         const token = await loginUser("amanu0181@gmail.com", "12345");
         const userDetails = await getUserDetails(token);
         setUserDetails(userDetails);
-        testAPI(token);
       } catch (err) {
         console.log(err.message);
       }
@@ -417,7 +327,7 @@ const DashboardPage = () => {
   return (
     <>
       {isMobile ? (
-        <MobileComponent />
+        userDetails && <MobileComponent userDetails={userDetails} />
       ) : (
         <div className="flex w-full" style={{ height: "100vh" }}>
           <div
