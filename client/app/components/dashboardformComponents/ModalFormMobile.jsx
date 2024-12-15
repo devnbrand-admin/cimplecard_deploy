@@ -35,12 +35,12 @@ export default function ModalForm() {
     uniqueUrl: '',
     companySocialMediaLink: '',
     instagramLink: '',
-    personalSocialMediaLinks: {
-        "facebook": "https://facebook.com/dummyprofile",
-        "twitter": "https://twitter.com/dummyprofile",
-        "linkedin": "https://linkedin.com/in/dummyprofile",
-        "instagram": "https://instagram.com/dummyprofile"
-      },
+    // personalSocialMediaLinks: {
+    //     "facebook": "https://facebook.com/dummyprofile",
+    //     "twitter": "https://twitter.com/dummyprofile",
+    //     "linkedin": "https://linkedin.com/in/dummyprofile",
+    //     "instagram": "https://instagram.com/dummyprofile"
+    //   },
     githubLink: '',
     additionalLink: '',
     productDesc: '',
