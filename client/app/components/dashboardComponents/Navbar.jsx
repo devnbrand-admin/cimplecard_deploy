@@ -6,11 +6,11 @@ const Navbar = () => {
     <div
       className="rounded-3xl h-full mt-0 w-full"
       style={{
-        backgroundColor: "#9D4AD1",
+        background: "linear-gradient(179.17deg, #7987DF 0.72%, #004AAD 93.96%)",
       }}
     >
       <h2
-        className="py-5 my-4 text-center font-bold"
+        className="py-5 mb-4 text-center font-bold"
         style={{ color: "white" }}
       >
         LOGO

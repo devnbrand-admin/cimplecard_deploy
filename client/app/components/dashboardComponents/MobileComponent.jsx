@@ -10,7 +10,10 @@ const MobileComponent = ({ userDetails }) => {
       style={{ backgroundColor: "#EADAF4" }}
       className="flex flex-col m-0 relative"
     >
-      <div className="bg-gradient-to-b from-purple-500 to-purple-300 p-2 pb-5 rounded-b-3xl h-60">
+      <div
+        className="p-2 pb-5 rounded-b-3xl h-60"
+        style={{ backgroundColor: "#5A6ACF" }}
+      >
         <div className="flex items-center justify-between ">
           <button className="text-white" onClick={() => setIsNavOpen(true)}>
             <img src="/Assets/options.png" alt="Menu" className="w-6 h-6" />
@@ -40,7 +43,7 @@ const MobileComponent = ({ userDetails }) => {
             alt="Icon 3"
             className="w-20 h-20 mb-3"
           />
-          <h2 style={{ fontSize: 20, color: "#AB6BD4" }}>Add New Card </h2>
+          <h2 style={{ fontSize: 20, color: "#5A6ACF" }}>Add New Card </h2>
         </div>
       </div>
 
@@ -49,21 +52,23 @@ const MobileComponent = ({ userDetails }) => {
         className="flex flex-col p-3 items-center"
         style={{ backgroundColor: "#EADAF4" }}
       >
-        <h3 className="font-semibold text-lg m-5" style={{ color: "#AB6BD4" }}>
+        <h3 className="font-semibold text-lg m-5" style={{ color: "#5A6ACF" }}>
           My Cards
         </h3>
-        {userDetails?.cards.map((card, index) => (
-          <div className="my-5" key={index}>
-            <Card card={card} />
-          </div>
-        ))}
+        {userDetails
+          ? userDetails.cards.map((card, index) => (
+              <div className="my-5" key={index}>
+                <Card card={card} />
+              </div>
+            ))
+          : "no cards"}
         <div className="h-40"></div>
       </div>
 
       {isNavOpen ? (
         <div
           className="fixed left-0 top-0 w-3/4 m-2 rounded-xl pb-3"
-          style={{ zIndex: 99, height: "98vh", backgroundColor: "#9D4AD1" }}
+          style={{ zIndex: 29, height: "100vh" }}
         >
           <button
             className="fixed p-4 text-xl text-white"
@@ -78,7 +83,10 @@ const MobileComponent = ({ userDetails }) => {
       )}
 
       <div className="flex justify-between items-center p-4 bg-white rounded-t-lg shadow-md fixed bottom-0 left-0 w-full">
-        <button className="flex flex-col items-center text-purple-500">
+        <button
+          className="flex flex-col items-center"
+          style={{ color: "#5A6ACF" }}
+        >
           <img
             style={{ color: "black" }}
             src="/Assets/Home-col.png" // Replace with your home icon path

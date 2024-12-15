@@ -107,7 +107,8 @@ const Card = ({ card }) => {
           />
           <button
             style={{
-              backgroundColor: "#AB6BD4",
+              background:
+                "linear-gradient(92.84deg, #707FDD 0.39%, #004AAD 93.99%)",
             }}
             className="flex items-center justify-center px-3 text-white rounded-full focus:outline-none"
             onClick={openModal} // Open modal on click

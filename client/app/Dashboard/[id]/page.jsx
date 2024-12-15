@@ -58,12 +58,12 @@ const DashboardPage = () => {
   return (
     <>
       {isMobile ? (
-        userDetails && <MobileComponent userDetails={userDetails} />
+        <MobileComponent userDetails={userDetails} />
       ) : (
         <div className="flex w-full" style={{ height: "100vh" }}>
           <div
             className="m-5 mb-0 rounded-3xl"
-            style={{ width: "20%", backgroundColor: "#9D4AD1", height: "92vh" }}
+            style={{ width: "20%", height: "92vh" }}
           >
             <Navbar />
           </div>
@@ -108,14 +108,14 @@ const DashboardPage = () => {
             <div
               className="w-full rounded-2xl p-4"
               style={{
-                backgroundColor: "#EADAF4",
+                background: "#A4CEFF30",
                 height: "80vh",
                 overflowY: "scroll",
                 overflowX: "hidden",
                 scrollbarWidth: "none",
               }}
             >
-              <h3 className="font-semibold mb-5" style={{ color: "#AB6BD4" }}>
+              <h3 className="font-semibold mb-5" style={{ color: "#5A6ACF" }}>
                 My Cards
               </h3>
               <div className="flex w-full flex-wrap gap-7">
@@ -128,14 +128,16 @@ const DashboardPage = () => {
                     alt="Icon 3"
                     className="w-20 h-20 mb-3"
                   />
-                  <h2 style={{ fontSize: 20, color: "#AB6BD4" }}>
+                  <h2 style={{ fontSize: 20, color: "#5A6ACF" }}>
                     Add New Card{" "}
                   </h2>
                   <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center rounded-xl justify-center text-xl opacity-0 group-hover:opacity-100 transition"></div>
                 </div>
-                {userDetails?.cards.map((card, index) => (
-                  <Card key={index} card={card} />
-                ))}
+                {userDetails
+                  ? userDetails.cards.map((card, index) => (
+                      <Card key={index} card={card} />
+                    ))
+                  : "no cards"}
               </div>
             </div>
           </div>
