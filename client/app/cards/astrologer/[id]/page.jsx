@@ -8,6 +8,7 @@ import Testimonial from "../../../components/astrocomponents/Testimonials";
 import BookingForm from "../../../components/astrocomponents/BookingForm";
 import SocialMediaHandlers from "../../../components/astrocomponents/SocialMediaHandlers";
 import ContactSection from "../../../components/astrocomponents/ContactSection";
+import Gallery from "../../../components/astrocomponents/Gallery";
 import WhatsappContact from "../../../components/AstroComponents/WhatsappContact"
 import ContactCardButton from "../../../components/AstroComponents/ContactCardButton"
 
@@ -29,10 +30,12 @@ const App = () => {
       <BookingForm />
       <SocialMediaHandlers />
       <ContactSection />
+      <Gallery/>
       <WhatsappContact bg={'bg-[#2d0959]'}/>
       <ContactCardButton bg={'bg-[#2d0959]'}/>
+
     </div>
   );
 };
 
-export default page;
+export default App;
