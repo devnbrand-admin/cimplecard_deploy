@@ -12,6 +12,7 @@ export default function ModalForm() {
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
   // const [testimonials, setTestimonials] = useState([]);
+  const [images, setImages] = useState([]);
 
   const [formData, setFormData] = useState({
     templateType: '',
@@ -145,6 +146,12 @@ export default function ModalForm() {
   //     testimonialMessage: '',
   //   });
   // };
+
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    const newImages = files.map((file) => URL.createObjectURL(file));
+    setImages((prev) => [...prev, ...newImages]);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -1367,6 +1374,87 @@ export default function ModalForm() {
                 </div>
               </div>
             )}
+
+            {activeStep === 8 && (
+              <div className="relative p-6 w-full flex flex-col items-center">
+                <div className="flex gap-4 flex-nowrap justify-start w-full overflow-x-auto p-4 scrollbar-thin scrollbar-thumb-[#707FDD] hover:scrollbar-thumb-[#5C6CCF]">
+                  {images.map((image, index) => (
+                    <div
+                      key={index}
+                      className="w-40 h-56 rounded-lg flex-shrink-0"
+                      style={{
+                        backgroundImage: `url(${image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    ></div>
+                  ))}
+
+                  {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
+                    <div
+                      key={`empty-${index}`}
+                      className="w-40 h-56 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"
+                    >
+                      <label
+                        htmlFor={`image-upload-${index}`}
+                        className="cursor-pointer w-full h-full flex items-center justify-center"
+                      >
+                        <BsImages className="text-white text-2xl" />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          onChange={handleImageUpload}
+                          id={`image-upload-${index}`}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-20">
+                  <label
+                    htmlFor="gallery-upload"
+                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]"
+                  >
+                    Add Images
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleImageUpload}
+                      id="gallery-upload"
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+
+                <div className="mt-20 py-6 flex justify-end space-x-2 w-full">
+                  <div
+                    className="text-white text-center text-4xl font-semibold py-6 px-6"
+                    style={{
+                      backgroundImage: `url('../../Underline.svg')`,
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'left',
+                      backgroundRepeat: 'no-repeat',
+                      top: 0,
+                      left: 0,
+                      width: '70%',
+                      height: '10px',
+                    }}
+                  >
+                  </div>
+                  <button
+                    onClick={handleSave}
+                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            )}
+
 
             {activeStep === 9 && (
               <div>

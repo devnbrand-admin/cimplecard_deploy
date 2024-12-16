@@ -5,8 +5,8 @@ const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/card/create`;
 
 export const loginUser = async () => {
   try {
-    const email = "amanu0181@gmail.com";
-    const password = "12345";
+    const email = "";
+    const password = "";
 
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,
