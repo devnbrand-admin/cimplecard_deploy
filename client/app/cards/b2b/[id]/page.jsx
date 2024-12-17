@@ -8,8 +8,9 @@ import OurServices from "../../../components/b2bcomponents/OurServices";
 import SocialMediaEmbeds from "../../../components/b2bcomponents/SocialMediaFeeds";
 import TestimonialCarousel from "../../../components/b2bcomponents/Testimonials";
 import AppointmentForm from "../../../components/b2bcomponents/AppointmentForm";
-import WhatsappContact from "../../../components/AstroComponents/WhatsappContact"
-import ContactCardButton from "../../../components/AstroComponents/ContactCardButton"
+import WhatsappContact from "../../../components/b2bcomponents/WhatsappContact"
+import ContactCardButton from "../../../components/b2bcomponents/ContactCardButton"
+import Gallery from "../../../components/b2bcomponents/Gallery"
 import "../../../style/b2btemplate.css";
 
 const Page = () => {
@@ -24,8 +25,9 @@ const Page = () => {
       <AppointmentForm />
       <SocialMediaEmbeds />
       <ContactForm />
-      <WhatsappContact bg={'bg-[#37729D]'}/>
-      <ContactCardButton bg={'bg-[#37729D]'}/>
+      <WhatsappContact/>
+      <ContactCardButton/>
+      <Gallery/>
     </>
   );
 };

@@ -146,9 +146,7 @@ function TestimonialCarousel() {
                     </div>
                   </div>
                 </div>
-                <p className="text-base md:text-lg overflow-clip">
-                  {testimonial.testimonial}
-                </p>
+                
               </div>
             ))}
           </div>
