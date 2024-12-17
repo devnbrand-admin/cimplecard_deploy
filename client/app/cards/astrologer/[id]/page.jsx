@@ -1,14 +1,14 @@
 'use client'
 import React from "react";
 import Bg from "../../../assets/astrologerTemplate/BgImage.png"
-import ProfileCard from "../../../components/astrocomponents/ProfileCard";
-import HeroSection from "../../../components/astrocomponents/HeroSection";
-import ServicesSection from "../../../components/astrocomponents/ServicesSection";
-import Testimonial from "../../../components/astrocomponents/Testimonials";
-import BookingForm from "../../../components/astrocomponents/BookingForm";
-import SocialMediaHandlers from "../../../components/astrocomponents/SocialMediaHandlers";
-import ContactSection from "../../../components/astrocomponents/ContactSection";
-import Gallery from "../../../components/AstroComponents";
+import ProfileCard from "../../../components/AstroComponents/ProfileCard";
+import HeroSection from "../../../components/AstroComponents/HeroSection";
+import ServicesSection from "../../../components/AstroComponents/ServicesSection";
+import Testimonial from "../../../components/AstroComponents/Testimonials";
+import BookingForm from "../../../components/AstroComponents/BookingForm";
+import SocialMediaHandlers from "../../../components/AstroComponents/SocialMediaHandlers";
+import ContactSection from "../../../components/AstroComponents/ContactSection";
+import Gallery from "../../../components/AstroComponents/Gallery";
 import WhatsappContact from "../../../components/AstroComponents/WhatsappContact"
 import ContactCardButton from "../../../components/AstroComponents/ContactCardButton"
 
@@ -31,8 +31,8 @@ const App = () => {
       <SocialMediaHandlers />
       <ContactSection />
       <Gallery/>
-      <WhatsappContact bg={'bg-[#2d0959]'}/>
-      <ContactCardButton bg={'bg-[#2d0959]'}/>
+      <WhatsappContact/>
+      <ContactCardButton/>
 
     </div>
   );

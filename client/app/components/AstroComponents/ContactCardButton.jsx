@@ -37,10 +37,9 @@ END:VCARD`;
     <div>
       <div className="fixed bottom-20 right-6 mb-4 z-10">
         <button
-          className={`flex items-center justify-center p-[14px] rounded-full shadow-lg ${
-            bg ? bg : "bg-teal-600"
-          } 
-            text-white hover:scale-105 transform transition-transform duration-300`}
+          className="flex items-center justify-center p-[14px] rounded-full shadow-lg ${
+            bg-[#2d0959]
+            text-white hover:scale-105 transform transition-transform duration-300"
           onClick={downloadVCF}
         >
           <FaAddressCard size={28} className="text-white" />
