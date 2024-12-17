@@ -26,29 +26,29 @@ const Hero = ({ card }) => {
         </div>
         <div className="m-7">
           <div className="flex my-2">
-            <p className="text-lg font-light mx-3" style={{ color: "#0B8823" }}>
+            <p className="text-xl font-light mx-3" style={{ color: "#0B8823" }}>
               Personal Socials
             </p>
             <img
               src="/Assets/MedicalAssets/link.png"
               alt="doctor img"
-              className="w-5 ms-2 h-5"
+              className="w-8 ms-2 h-8"
             />
             <img
               src="/Assets/MedicalAssets/twitter.png"
               alt="doctor img"
-              className="w-5 ms-2 h-5"
+              className="w-8 ms-2 h-8"
             />
             <img
               src="/Assets/MedicalAssets/linkedin.png"
               alt="doctor img"
-              className="w-5 ms-2 h-5"
+              className="w-8 ms-2 h-8"
               onClick={() => window.open(card.companySocialMediaLink)}
             />
             <img
               src="/Assets/MedicalAssets/instagram.png"
               alt="doctor img"
-              className="w-5 ms-2 h-5"
+              className="w-8 ms-2 h-8"
               onClick={() => window.open(card.instagramVideoLink)}
             />
           </div>
@@ -58,14 +58,14 @@ const Hero = ({ card }) => {
             className="w-28 mx-3"
           />
           <div className="flex my-1">
-            <p className="text-lg font-light mx-3" style={{ color: "#0B8823" }}>
+            <p className="text-xl font-light mx-3" style={{ color: "#0B8823" }}>
               Company Socials
             </p>
 
             <img
               src="/Assets/MedicalAssets/linkedin.png"
               alt="doctor img"
-              className="w-5 h-5 ms-2 "
+              className="w-8 ms-2 h-8"
               onClick={() => window.open(card.companySocialMediaLink)}
             />
 
@@ -73,11 +73,11 @@ const Hero = ({ card }) => {
               src="/Assets/MedicalAssets/instagram.png"
               alt="instagram"
               onClick={() => window.open(card.instagramVideoLink)}
-              className="w-5 h-5 ms-2"
+              className="w-8 ms-2 h-8"
             />
           </div>
         </div>
-        <div className="w-72 border my-7 h-[500px] relative">
+        <div className="w-72 border text-white my-7 h-[500px] relative">
           <img
             src="/Assets/MedicalAssets/Rectangleup.png"
             alt="img"

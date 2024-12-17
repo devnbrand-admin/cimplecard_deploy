@@ -9,6 +9,7 @@ const HeroMobile = ({ card }) => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         width: "100vw",
+        height: "max-content",
         padding: "20px",
         display: "flex",
         flexDirection: "column",
@@ -89,27 +90,23 @@ const HeroMobile = ({ card }) => {
       {/* Contact Section */}
       <div className="w-full flex justify-center mt-4">
         <div
-          className="relative w-full text-green"
+          className="relative w-full h-96 my-3 text-green-700"
           style={{
             maxWidth: "300px",
-            border: "1px solid #ccc",
             padding: "10px",
           }}
         >
           <img
             src="/Assets/MedicalAssets/Rectangleup.png"
             alt="decorative"
-            className="absolute top-0 left-0 w-full h-10"
+            style={{ top: -25, right: -25 }}
+            className="absolute z-10 top-0 right-0 w-full h-96"
           />
-          {/* <img
-            src="/Assets/MedicalAssets/Rectanglemid.png"
-            alt="decorative"
-            className="w-full"
-          /> */}
           <img
             src="/Assets/MedicalAssets/Rectangledown.png"
             alt="decorative"
-            className="absolute bottom-0 left-0 w-full h-10"
+            style={{ bottom: -25, left: -15 }}
+            className="absolute w-full h-96"
           />
           <ContactDiv card={card} />
         </div>

@@ -3,8 +3,8 @@ import React from "react";
 const Social = () => {
   return (
     <div
-      style={{ height: "80vh" }}
-      className="flex justify-center align-center"
+      // style={{ height: "80vh" }}
+      className="flex justify-center h-fit md:h-[80vh] flex-col md:flex-row align-center"
     >
       <img src="/Assets/MedicalAssets/social.png" className="h-full" />
       <div className="flex flex-col h-full justify-center items-center">
