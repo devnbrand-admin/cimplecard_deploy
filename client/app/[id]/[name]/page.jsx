@@ -67,19 +67,26 @@ const Page = () => {
     b2b: B2bCard,
   };
   
-  
   return (
     <>
-      {card ? (
-        TEMPLATE_MAP[card?.card.templateType.toLowerCase()] ? (
-          React.createElement(TEMPLATE_MAP[card?.card.templateType.toLowerCase()], { card, setCard })
+      {/* {card ? (
+        card.card?.templateType ? (
+          TEMPLATE_MAP[card.card.templateType.toLowerCase()] ? (
+            React.createElement(
+              TEMPLATE_MAP[card.card.templateType.toLowerCase()],
+              { card }
+            )
+          ) : (
+            <div>Card type "{card.card.templateType}" is not supported</div>
+          )
         ) : (
-          <div>Card type not supported</div>
+          <div>Card template type is missing</div>
         )
       ) : (
         <div>Loading...</div>
-      )}
+      )} */}
     </>
   );
-}
-export default Page;  
+}  
+
+export default Page;

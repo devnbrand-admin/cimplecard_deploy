@@ -13,7 +13,7 @@ import WhatsAppButton from "../../../components/b2bcomponents/WhatsappContact";
 import ContactCardButton from "../../../components/b2bcomponents/ContactCardButton";
 import { useParams } from "next/navigation";
 
-const page = ({ card, setCard }) => {
+const page = ({ card}) => {
   const params = useParams();
   const id = params.id;
 
