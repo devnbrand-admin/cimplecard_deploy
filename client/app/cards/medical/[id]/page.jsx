@@ -10,7 +10,7 @@ import Social from "../../../components/medicalComponents/Social";
 import Footer from "../../../components/medicalComponents/Footer";
 import axios from "axios";
 import WhatsAppButton from "../../../components/b2bcomponents/WhatsappContact";
-import ContactCardButton from "@/app/components/b2bcomponents/ContactCardButton";
+import ContactCardButton from "../../../components/b2bcomponents/ContactCardButton";
 import { useParams } from "next/navigation";
 
 const page = (
