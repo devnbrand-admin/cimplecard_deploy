@@ -10,6 +10,7 @@ import ContactForm from "../../../components/lawyerComponents/ContactForm"
 import Gallery from "../../../components/lawyerComponents/Gallery"
 import ContactCardButton from "../../../components/lawyerComponents/ContactCardButton"
 import WhatsappContact from "../../../components/lawyerComponents/WhatsappContact"
+import "../../../style/lawyer.css"
 
 function page() {
   return (
