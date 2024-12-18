@@ -80,7 +80,7 @@ function Profile() {
       {/* Four Cards Section */}
       <section className="bg-white text-black px-6 py-8 grid grid-cols-2 lg:grid-cols-4 gap-6 font-serif">
         {/* Card 1: Email */}
-        <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-4 text-center bg-gray-100 hover:shadow-lg transition">
+        <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-4 text-center bg-gray-100 hover:shadow-lg transition overflow-auto">
           <FaEnvelope className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Email</h3>
           <p className="text-base">johndoe@techsolutions.com</p>
