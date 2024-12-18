@@ -41,7 +41,7 @@ function WhatsAppButton() {
       <div className="fixed bottom-6 right-6 z-10">
         {!isInputOpen ? (
           <button
-            className="p-4 rounded-full shadow-lg bg-teal-600 text-white hover:scale-105 transform transition-transform flex items-center gap-2"
+            className="p-4 rounded-full shadow-lg bg-[#2d0959]  text-white hover:scale-105 transform transition-transform flex items-center gap-2"
             onClick={() => setIsInputOpen(true)}
           >
             <FaWhatsapp size={24} />
@@ -52,14 +52,14 @@ function WhatsAppButton() {
             <input
               type="tel"
               placeholder="Enter phone number"
-              className="border text-gray-700 border-teal-400 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-teal-300"
+              className="border text-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               maxLength="15"  // Limit to prevent longer inputs
             />
             <div className="flex justify-between gap-2">
               <button
-                className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform"
+                className="bg-[#2d0959] text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform"
                 onClick={handleSend}
               >
                 Send

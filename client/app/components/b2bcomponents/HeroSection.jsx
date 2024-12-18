@@ -1,9 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { FaLinkedin, FaTwitter, FaFacebook, FaBuilding } from "react-icons/fa";
-import ProfileImage from "../../assets/Profile.jpg";
+import ProfileImage from "../../assets/Profile.jpg"
 import SecondaryImage from "../../assets/Hero_SecondaryImage.png";
-
 
 function HeroSection() {
   return (

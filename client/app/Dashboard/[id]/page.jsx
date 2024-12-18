@@ -417,7 +417,7 @@ const DashboardPage = () => {
               <div className="flex w-full flex-wrap gap-7">
                 <div
                   onClick={handleOpenModal}
-                  className="relative group justify-items-center content-center w-80 flex-col relative m-3 rounded-xl bg-white"
+                  className=" group justify-items-center content-center w-80 flex-col relative m-3 rounded-xl bg-white"
                 >
                   <img
                     src="/Assets/add a new project.png"

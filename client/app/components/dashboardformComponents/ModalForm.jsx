@@ -218,7 +218,7 @@ export default function ModalForm() {
                     
                     {/* Card 1 */}
                     <div className="w-full sm:w-80 mx-auto aspect-w-1 aspect-h-1">
-                      <a href="https://example.com/template1" target="_blank" rel="noopener noreferrer">
+                      <a href="/cards/medical/bbefccdf-99f1-4c76-a64f-7944faff30dc" target="_blank" rel="noopener noreferrer">
                         <div className="bg-white shadow-lg rounded-xl">
                           <img
                             alt="Cover"
@@ -243,7 +243,7 @@ export default function ModalForm() {
 
                     {/* Card 2 */}
                     <div className="w-80 mx-auto">
-                      <a href="https://example.com/Astrologer" target="_blank" rel="noopener noreferrer">
+                      <a href="/cards/astrologer/2" target="_blank" rel="noopener noreferrer">
                         <div className="bg-white shadow-lg rounded-xl">
                           <img
                             alt="Cover"
@@ -268,7 +268,7 @@ export default function ModalForm() {
 
                     {/* Card 3 */}
                     <div className="w-80 mx-auto">
-                      <a href="https://example.com/B2B Business" target="_blank" rel="noopener noreferrer">
+                      <a href="/cards/b2b/3" target="_blank" rel="noopener noreferrer">
                         <div className="bg-white shadow-lg rounded-xl">
                           <img
                             alt="Cover"
