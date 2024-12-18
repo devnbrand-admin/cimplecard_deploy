@@ -8,15 +8,15 @@ export const handleJoinSignLoignfn = () => {
 
   return (
     <div className="text-center w-full text-lg md:text-xs flex flex-col md:flex-row items-center justify-around text-[#28389a] mt-8 md:bg-[#f7f7fb] rounded-full py-2">
-      <p>
+      <p className="py-2 md:py-0">
         Join the world’s leading digital business card family.{" "}
-        <span className="font-semibold">Don't be left out</span>
+        <span className="font-semibold text-nowrap md:text-wrap">Don't be left out</span>
       </p>
       <div className="w-full md:w-auto mt-2 md:mt-0 flex justify-between  md:gap-x-3">
-      <button className="bg-white text-nowrap text-[#3342a2] py-1 md:py-2 px-3 md:px-6 rounded-full font-bold">
+      <button className=" bg-[#3342a2] text-nowrap text-white  py-1 md:py-2 px-3 md:px-6 rounded-full font-bold">
         Sign Up
       </button>
-      <button className="bg-[#3342a2] text-nowrap text-white border-[1px] py-1 md:py-2 px-3 md:px-6 rounded-full font-bold">
+      <button className="bg-white text-nowrap  text-[#3342a2] border-[1px] py-1 md:py-2 px-3 md:px-6 rounded-full font-bold">
         Log In
       </button>
       </div>

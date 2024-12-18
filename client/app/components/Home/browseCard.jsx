@@ -33,14 +33,14 @@ const BrowseCard = () => {
   );
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-6xl font-bold mb-4 my-5 text-center text-[#161973]">Browse our <span className=" text-6xl text-[#161973]">CimpleCards</span></h1>
+    <div className="container  mx-auto py-4 px-7 md:px-4 ">
+      <h1 className="hidden md:block text-6xl font-bold mb-4 my-5 text-center text-[#161973]">Browse our <span className=" text-6xl text-[#161973]">CimpleCards</span></h1>
       <SearchBar onSearch={handleSearch} />
       <div className="flex">
-        <div className="w-1/4">
+        <div className="hidden md:block w-1/4">
           <Filter filters={filters} onFilterChange={handleFilterChange} />
         </div>
-        <div className="w-3/4">
+        <div className="w-full px-2 md:px-0 md:w-3/4">
           <CardList cards={filteredCards} />
         </div>
       </div>

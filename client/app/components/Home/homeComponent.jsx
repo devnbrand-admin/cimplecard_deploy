@@ -51,7 +51,7 @@ const HomeComponent = () => {
             <div className="relative  text-white h-screen flex justify-center items-center">
                 {/* Semi-Circle Container */}
                 <div
-                    className="w-[100%] h-[300px] bottom-[150px] md:w-[600px] md:h-[450px] md:bottom-[68px] sm:w-[550px] flex flex-col justify-start items-center absolute"
+                    className="w-[100%] h-[300px] bottom-[150px] md:w-[600px] md:h-[450px] md:bottom-[40px] sm:w-[550px] flex flex-col justify-start items-center absolute"
                     style={{
                         backgroundImage: `url(${people.src})`,
                         backgroundRepeat: "no-repeat",
@@ -63,7 +63,7 @@ const HomeComponent = () => {
                 >
                     {/* Logo */}
                     <div
-                        className="-mt-[150px] sm:-mt-[39px] z-20 w-[130px] h-[130px]  flex justify-center items-center  mb-3"
+                        className="-mt-[150px] sm:-mt-[70px] z-20 w-[130px] h-[130px]  flex justify-center items-center  mb-3"
                         style={{
                             borderRadius: "50%",
                         }}
@@ -116,21 +116,21 @@ const HomeComponent = () => {
                 </div>
             </div>
             <div
-        className="hidden clip-path1 md:block absolute top-[240px] z-10 bg-[#e9eafa] w-full h-[700px] shadow-lg shadow-black"
+        className="top-[450px] md:block absolute md:top-[233px] z-10 bg-[#e9eafa] w-full md:h-[880px] h-[480px] shadow-lg shadow-black"
         style={{
-          clipPath: "polygon(0 46%, 100% 54%, 100% 40%)",
+          clipPath: "polygon(0 36%, 100% 49%, 100% 36%)",
         }}
       >
         <div
           className="absolute inset-0 shadow-lg shadow-black"
           style={{
-            clipPath: "polygon(0 46%, 100% 54%, 100% 40%)",
+            clipPath: "polygon(0 36%, 100% 49%, 100% 36%)",
           }}
         />
       </div>
         </div>
         <HowItOperates/>
-        <div className="w-1/2 mx-auto">
+        <div className="w-2/3 md:-mt-[100px] md:w-1/2 mx-auto">
         
         {handleJoinSignLoignfn()}
         </div>
