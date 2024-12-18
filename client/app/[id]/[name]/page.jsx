@@ -1,24 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Hero from "../../../components/medicalComponents/Hero";
-import Services from "../../../components/medicalComponents/Services";
-import Header from "../../../components/medicalComponents/Header";
-import About from "../../../components/medicalComponents/About";
-import Testimonal from "../../../components/medicalComponents/Testimonal";
-import Contact from "../../../components/medicalComponents/Contact";
-import Social from "../../../components/medicalComponents/Social";
-import Footer from "../../../components/medicalComponents/Footer";
-import axios from "axios";
-import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
-import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
+import React from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-
-const page = ({card,setCard}
-) => {
-  const [card, setCard] = useState(null);
+import MedicalCard from "../../cards/medical_card/[id]/page";
+import LawyerCard from "../../cards/b2b/[id]/page";
+import AstrologerCard from "../../cards/astrologer/[id]/page";
+import B2bCard from "../../cards/b2b/[id]/page";
+import axios from "axios";
+const Page = () => {
   const params = useParams();
   const id = params.id;
-
+  const [card, setCard] = useState();
   const getCardDetails = async (token) => {
     try {
       const response = await axios.get(
@@ -68,32 +60,26 @@ const page = ({card,setCard}
 
     fetchCardDetails();
   }, []);
-
+  const TEMPLATE_MAP = {
+    modern: MedicalCard,
+    lawyer: LawyerCard,
+    astrologer: AstrologerCard,
+    b2b: B2bCard,
+  };
+  
+  
   return (
-    <div
-      style={{
-        overflowX: "hidden",
-      }}
-    >
+    <>
       {card ? (
-        <>
-          <Header />
-          <Hero card={card.card} />
-          <Services card={card.card} />
-          <About card={card.card} />
-          <Testimonal card={card.card} />
-          <Contact card={card.card} />
-
-          <WhatsAppButton />
-          <ContactCardButton />
-          <Social card={card.card} />
-          <Footer card={card.card} />
-        </>
+        TEMPLATE_MAP[card?.card.templateType.toLowerCase()] ? (
+          React.createElement(TEMPLATE_MAP[card?.card.templateType.toLowerCase()], { card, setCard })
+        ) : (
+          <div>Card type not supported</div>
+        )
       ) : (
-        "LOADING"
+        <div>Loading...</div>
       )}
-    </div>
+    </>
   );
-};
-
-export default page;
+}
+export default Page;  
