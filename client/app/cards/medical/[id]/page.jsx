@@ -9,9 +9,12 @@ import Contact from "../../../components/medicalComponents/Contact";
 import Social from "../../../components/medicalComponents/Social";
 import Footer from "../../../components/medicalComponents/Footer";
 import axios from "axios";
+import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
+import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
 import { useParams } from "next/navigation";
 
-const page = () => {
+const page = ({card,setCard}
+) => {
   const [card, setCard] = useState(null);
   const params = useParams();
   const id = params.id;
@@ -80,6 +83,9 @@ const page = () => {
           <About card={card.card} />
           <Testimonal card={card.card} />
           <Contact card={card.card} />
+
+          <WhatsAppButton />
+          <ContactCardButton />
           <Social card={card.card} />
           <Footer card={card.card} />
         </>

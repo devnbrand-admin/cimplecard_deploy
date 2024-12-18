@@ -62,7 +62,7 @@ export default function MedicalCard() {
       twitter: "https://twitter.com/johndoe",
       linkedin: "https://www.linkedin.com/in/johndoe"
     }
-  };)
+  })
   return (
     <>
       <Header></Header>

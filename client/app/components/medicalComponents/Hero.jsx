@@ -99,10 +99,11 @@ const Hero = ({ card }) => {
       </div>
 
       <img
-        src={card.profileImageUrl}
+        // src={card.profileImageUrl}
+        src="https://static.vecteezy.com/system/resources/thumbnails/028/287/555/small_2x/an-indian-young-female-doctor-isolated-on-green-ai-generated-photo.jpg"
         alt="profile img"
-        className="absolute rounded-full"
         style={{ bottom: 20, right: 100, width: "70vh", height: "70vh" }}
+        className="absolute rounded-full bg-center bg-cover"
       />
     </div>
   );
