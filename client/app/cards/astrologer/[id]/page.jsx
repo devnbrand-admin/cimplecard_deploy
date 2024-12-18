@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import Bg from "../../../assets/astrologerTemplate/BgImage.png"
 import ProfileCard from "../../../components/AstroComponents/ProfileCard";
@@ -7,9 +8,11 @@ import Testimonial from "../../../components/AstroComponents/Testimonials";
 import BookingForm from "../../../components/AstroComponents/BookingForm";
 import SocialMediaHandlers from "../../../components/AstroComponents/SocialMediaHandlers";
 import ContactSection from "../../../components/AstroComponents/ContactSection";
-import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
-import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
-const page = () => {
+import Gallery from "../../../components/AstroComponents/Gallery";
+import WhatsappContact from "../../../components/AstroComponents/WhatsappContact"
+import ContactCardButton from "../../../components/AstroComponents/ContactCardButton"
+
+const App = () => {
 
   return (
     <div
@@ -20,17 +23,19 @@ const page = () => {
       }}
       className="w-full"
     >
-      <ProfileCard/>
-      <HeroSection/>
-      <ServicesSection/>
-      <Testimonial/>
-      <BookingForm/>
-      <WhatsAppButton/>
-      <SocialMediaHandlers/>
+      <ProfileCard />
+      <HeroSection />
+      <ServicesSection />
+      <Testimonial />
+      <BookingForm />
+      <SocialMediaHandlers />
+      <ContactSection />
+      <Gallery/>
+      <WhatsappContact/>
       <ContactCardButton/>
-      <ContactSection/>
+
     </div>
   );
 };
 
-export default page;
+export default App;
