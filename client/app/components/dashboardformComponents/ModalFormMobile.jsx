@@ -35,12 +35,12 @@ export default function ModalForm() {
     uniqueUrl: '',
     companySocialMediaLink: '',
     instagramLink: '',
-    personalSocialMediaLinks: {
-        "facebook": "https://facebook.com/dummyprofile",
-        "twitter": "https://twitter.com/dummyprofile",
-        "linkedin": "https://linkedin.com/in/dummyprofile",
-        "instagram": "https://instagram.com/dummyprofile"
-      },
+    // personalSocialMediaLinks: {
+    //     "facebook": "https://facebook.com/dummyprofile",
+    //     "twitter": "https://twitter.com/dummyprofile",
+    //     "linkedin": "https://linkedin.com/in/dummyprofile",
+    //     "instagram": "https://instagram.com/dummyprofile"
+    //   },
     githubLink: '',
     additionalLink: '',
     productDesc: '',
@@ -66,8 +66,9 @@ export default function ModalForm() {
     { id: 5, label: 'Product / Services', icon: <BsCartCheckFill /> },
     { id: 6, label: 'Testimonials', icon: <BsPersonVideo /> },
     { id: 7, label: 'Post Links', icon: <BsUpload /> },
-    { id: 8, label: 'Business Hours', icon: <BsClockHistory /> },
-    { id: 9, label: 'Help', icon: <BsChat /> },
+    { id: 8, label: 'Gallery', icon: <BsImages /> },
+    { id: 9, label: 'Business Hours', icon: <BsClockHistory /> },
+    { id: 10, label: 'Help', icon: <BsChat /> },
   ];
 
   const handleStepClick = (stepId) => {
@@ -140,7 +141,7 @@ export default function ModalForm() {
   
     // Move to the next step
     if (activeStep < steps.length) {
-      if (activeStep === 8) {
+      if (activeStep === 9) {
         return;
       }
       setActiveStep(activeStep + 1);
@@ -176,12 +177,12 @@ export default function ModalForm() {
             </div>
 
             {/* Step SVG and Header Text Container */}
-            <div className="absolute top-0 left-0 right-0 z-30 flex flex-col items-center justify-center">
+            <div className="absolute top-8 left-0 right-0 z-30 flex flex-col items-center justify-center">
               {/* Step SVG (new SVG) */}
               <img 
-                src="../../ContactDetails.svg" 
+                src="../../CimpleCardLogo.svg" 
                 alt="Step SVG" 
-                className="w-[56%] h-auto" 
+                className="w-[45%] h-auto" 
               />
               {/* Header Text */}
               <h1 className="text-xl font-semibold text-[#707FDD]">
@@ -198,65 +199,111 @@ export default function ModalForm() {
               {/* Form Container */}
               <div className="relative flex-1 mx-auto max-w-[60%] flex items-start justify-center overflow-scroll h-[90%] z-10">
                 <div className="w-full space-y-6 px-4 py-10 mt-[12rem]">
-                  {/* First Row of Input Fields */}
-                  <div className="flex gap-4">
-                    <div className="flex-1">
-                      <input
-                        type="text"
-                        placeholder="Phone Number"
-                        className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
-                      />
+                <div className="grid grid-cols-1 gap-2 mt-4">
+                    
+                    {/* Card 1 */}
+                    <div className="w-full sm:w-80 mx-auto aspect-w-1 aspect-h-1">
+                      <a href="https://example.com/template1" target="_blank" rel="noopener noreferrer">
+                        <div className="bg-white shadow-lg rounded-xl">
+                          <img
+                            alt="Cover"
+                            className="object-cover rounded-xl w-full h-32"
+                            src="../../template1cover.png"
+                          />
+                          <div className="p-4">
+                            <h4 className="font-semibold text-md">Medical</h4>
+                            <p className="text-gray-500 text-xs italic">“Leave a Lasting Impression – Your Medical Card, Your Professional Identity!"</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="py-2 px-4 flex space-x-2 mt-2">
+                        <button
+                          onClick={() => handleTemplateSelection('Medical')}
+                          className={`py-2 px-4 rounded-full text-xs text-[#707FDD] ${formData.templateType === 'Medical' ? 'bg-[#707FDD] text-white' : 'bg-transparent border-2 border-[#707FDD] text-[#707FDD]'}`}
+                        >
+                          {formData.templateType === 'Medical' ? 'Selected' : 'Select'}
+                        </button>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Second Row of Input Fields */}
-                  <div className="flex gap-4">
-                    <div className="flex-1">
-                      <input
-                        type="text"
-                        placeholder="Email"
-                        className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
-                      />
+                    {/* Card 2 */}
+                    <div className="w-full sm:w-80 mx-auto aspect-w-1 aspect-h-1">
+                      <a href="https://example.com/Astrologer" target="_blank" rel="noopener noreferrer">
+                        <div className="bg-white shadow-lg rounded-xl">
+                          <img
+                            alt="Cover"
+                            className="object-cover rounded-xl w-full h-32"
+                            src="../../template2cover.png"
+                          />
+                          <div className="p-4">
+                            <h4 className="font-bold text-md">Astrologer</h4>
+                            <p className="text-gray-500 text-xs italic">“Chart Your Path to Success – Your Astrological Card, Your Cosmic Identity!“</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="py-2 px-4 flex space-x-2 mt-2">
+                        <button
+                          onClick={() => handleTemplateSelection('Astrologer')}
+                          className={`py-2 px-4 rounded-full text-xs text-[#707FDD] ${formData.templateType === 'Astrologer' ? 'bg-[#707FDD] text-white' : 'bg-transparent border-2 border-[#707FDD] text-[#707FDD]'}`}
+                        >
+                          {formData.templateType === 'Astrologer' ? 'Selected' : 'Select'}
+                        </button>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex flex-col justify-center items-center gap-1">
-                    <h1 className="text-l font-semibold text-[#707FDD]">Emergency Contact</h1>
-                    <h2 className="text-xs font-semithin text-[#707FDD] text-center px-4">
-                      Add your contact information and Emergency Contact
-                    </h2>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="flex-1">
-                      <input
-                        type="text"
-                        placeholder="Phone Number"
-                        className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
-                      />
+                    {/* Card 3 */}
+                    <div className="w-full sm:w-80 mx-auto aspect-w-1 aspect-h-1">
+                      <a href="https://example.com/B2B Business" target="_blank" rel="noopener noreferrer">
+                        <div className="bg-white shadow-lg rounded-xl">
+                          <img
+                            alt="Cover"
+                            className="object-cover rounded-xl w-full h-32"
+                            src="../../template3cover.png"
+                          />
+                          <div className="p-4">
+                            <h4 className="font-bold text-md">B2B Business</h4>
+                            <p className="text-gray-500 italic text-xs">"Build Connections That Matter – Your Business Card, Your Gateway to Partnerships!"</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="py-2 px-4 flex space-x-2 mt-2">
+                        <button
+                          onClick={() => handleTemplateSelection('B2B Business')}
+                          className={`py-2 px-4 rounded-full text-xs text-[#707FDD] ${formData.templateType === 'B2B Business' ? 'bg-[#707FDD] text-white' : 'bg-transparent border-2 border-[#707FDD] text-[#707FDD]'}`}
+                        >
+                          {formData.templateType === 'B2B Business' ? 'Selected' : 'Select'}
+                        </button>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Second Row of Input Fields */}
-                  <div className="flex gap-4">
-                    <div className="flex-1">
-                      <input
-                        type="text"
-                        placeholder="Email"
-                        className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
-                      />
+                    {/* Card 4 */}
+                    <div className="w-full sm:w-80 mx-auto aspect-w-1 aspect-h-1">
+                      <a href="https://example.com/Lawyer" target="_blank" rel="noopener noreferrer">
+                        <div className="bg-white shadow-lg rounded-xl">
+                          <img
+                            alt="Cover"
+                            className="object-cover rounded-xl w-full h-32"
+                            src="../../template4cover.png"
+                          />
+                          <div className="p-4">
+                            <h4 className="font-bold text-md">Lawyer</h4>
+                            <p className="text-gray-500 text-xs italic">"Make Your Mark in Justice – Your Legal Card, Your Professional Statement!"</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="py-2 px-4 flex space-x-2 mt-2">
+                        <button
+                          onClick={() => handleTemplateSelection('Lawyer')}
+                          className={`py-2 px-4 rounded-full text-xs text-[#707FDD] ${formData.templateType === 'Lawyer' ? 'bg-[#707FDD] text-white' : 'bg-transparent border-2 border-[#707FDD] text-[#707FDD]'}`}
+                        >
+                          {formData.templateType === 'Lawyer' ? 'Selected' : 'Select'}
+                        </button>
+                      </div>
                     </div>
                   </div>
 
                   {/* Save Button */}
-                  <div className="py-6 flex justify-between space-x-2">
-                    {/* Go Back Button */}
-                    <button
-                      onClick={handleGoBack}
-                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD]"
-                    >
-                      Go Back
-                    </button>
+                  <div className="py-6 flex justify-end space-x-2">
 
                     {/* Save Button */}
                     <button 
@@ -354,7 +401,7 @@ export default function ModalForm() {
                   <div className="py-6 flex justify-between space-x-2">
                     <button
                       onClick={handleGoBack}
-                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD]"
+                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
                     >
                       Go Back
                     </button>
@@ -454,7 +501,7 @@ export default function ModalForm() {
                   <div className="py-6 flex justify-between space-x-2">
                     <button
                       onClick={handleGoBack}
-                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD]"
+                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
                     >
                       Go Back
                     </button>
@@ -568,7 +615,7 @@ export default function ModalForm() {
                   <div className="py-6 flex justify-between space-x-2">
                     <button
                       onClick={handleGoBack}
-                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD]"
+                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
                     >
                       Go Back
                     </button>
@@ -714,7 +761,7 @@ export default function ModalForm() {
                   <div className="py-6 flex justify-between space-x-2">
                     <button
                       onClick={handleGoBack}
-                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD]"
+                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
                     >
                       Go Back
                     </button>
@@ -880,6 +927,104 @@ export default function ModalForm() {
                     <button
                       onClick={handleGoBack}
                       className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD]"
+                    >
+                      Go Back
+                    </button>
+
+                    <button 
+                      onClick={handleSave}
+                      className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute right-0 top-0 bottom-0 flex items-center justify-center w-[6rem]">
+                <img src="../../ModalMobileRight.svg" alt="Right SVG" className="h-[56%] w-full transform scale-x-[-1] transform scale-y-[-1]" />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeStep === 7 && (
+          <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
+              <img 
+                src="../../ModalMobileTop.svg" 
+                alt="Top SVG" 
+                className="w-full h-auto translate-y-[calc(-25%+1rem)]" 
+              />
+            </div>
+
+            <div className="absolute top-5 left-0 right-0 z-30 flex flex-col items-center justify-center">
+              <img 
+                src="../../BusinessHours.svg" 
+                alt="Step SVG" 
+                className="w-[56%] h-auto" 
+              />
+              <h1 className="text-xl font-semibold text-[#707FDD]">
+                {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
+              </h1>
+            </div>
+
+            <div className="mt-20 bg-white top-10 w-full h-full flex relative overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 flex items-center justify-center w-[6rem]">
+                <img src="../../ModalMobileLeft.svg" alt="Left SVG" className="h-[56%] w-full" />
+              </div>
+
+              <div className="relative flex-1 mx-auto max-w-[60%] flex items-start justify-center overflow-scroll h-[90%] z-10">
+                <div className="w-full space-y-6 px-4 py-10 mt-[12rem]">
+
+                  <div className="flex flex-col justify-center items-center gap-1">
+                    <h2 className="text-sm font-semibold text-[#707FDD] text-center px-4">
+                      Add your Working Hours during Weekdays
+                    </h2>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-1">
+                    <label className="block text-sm text-[#787F89] mb-1">From</label>
+                      <input
+                        type="time"
+                        placeholder="From"
+                        className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-1">
+                    <label className="block text-sm text-[#787F89] mb-1">To</label>
+                      <input
+                        type="time"
+                        placeholder="To"
+                        className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-1">
+                      <input
+                        type="text"
+                        placeholder="Type"
+                        className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center gap-4 pt-4 pb-10">
+                  <button 
+                    // onClick={handleSave}
+                    className="py-2 px-4 rounded-full text-xs text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                    Save Timings
+                  </button>
+                  </div>
+
+                  <div className="py-6 flex justify-between space-x-2">
+                    <button
+                      onClick={handleGoBack}
+                      className="bg-transparent text-[#707FDD] py-2 px-4 rounded-md border-2 border-[#707FDD] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
                     >
                       Go Back
                     </button>

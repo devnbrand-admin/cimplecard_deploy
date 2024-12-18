@@ -11,6 +11,8 @@ export default function ModalForm() {
   const [activeStep, setActiveStep] = useState(1);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
+  // const [testimonials, setTestimonials] = useState([]);
+  const [images, setImages] = useState([]);
 
   const [formData, setFormData] = useState({
     templateType: '',
@@ -35,12 +37,12 @@ export default function ModalForm() {
     uniqueUrl: '',
     companySocialMediaLink: '',
     instagramLink: '',
-    personalSocialMediaLinks: {
-        "facebook": "https://facebook.com/dummyprofile",
-        "twitter": "https://twitter.com/dummyprofile",
-        "linkedin": "https://linkedin.com/in/dummyprofile",
-        "instagram": "https://instagram.com/dummyprofile"
-      },
+    // personalSocialMediaLinks: {
+    //     "facebook": "https://facebook.com/dummyprofile",
+    //     "twitter": "https://twitter.com/dummyprofile",
+    //     "linkedin": "https://linkedin.com/in/dummyprofile",
+    //     "instagram": "https://instagram.com/dummyprofile"
+    //   },
     githubLink: '',
     additionalLink: '',
     productDesc: '',
@@ -66,8 +68,9 @@ export default function ModalForm() {
     { id: 5, label: 'Product / Services', icon: <BsCartCheckFill /> },
     { id: 6, label: 'Testimonials', icon: <BsPersonVideo /> },
     { id: 7, label: 'Post Links', icon: <BsUpload /> },
-    { id: 8, label: 'Business Hours', icon: <BsClockHistory /> },
-    { id: 9, label: 'Help', icon: <BsChat /> },
+    { id: 8, label: 'Gallery', icon: <BsImages /> },
+    { id: 9, label: 'Business Hours', icon: <BsClockHistory /> },
+    { id: 10, label: 'Help', icon: <BsChat /> },
   ];
 
   const handleStepClick = (stepId) => {
@@ -118,7 +121,37 @@ export default function ModalForm() {
       reader.readAsDataURL(file);
     }
   };
+  
+  // const handleAddTestimonial = () => {
+  //   const { testimonialName, testimonialRole, testimonialIndustry, testimonialMessage } = formData;
 
+  //   if (!testimonialName || !testimonialMessage || !testimonialRole || !testimonialIndustry) {
+  //     alert('Please fill out all fields before adding a testimonial.');
+  //     return;
+  //   }
+
+  //   const newTestimonial = {
+  //     name: testimonialName,
+  //     role: testimonialRole,
+  //     industry: testimonialIndustry,
+  //     message: testimonialMessage,
+  //   };
+
+  //   setTestimonials([...testimonials, newTestimonial]);
+
+  //   setFormData({
+  //     testimonialName: '',
+  //     testimonialRole: '',
+  //     testimonialIndustry: '',
+  //     testimonialMessage: '',
+  //   });
+  // };
+
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    const newImages = files.map((file) => URL.createObjectURL(file));
+    setImages((prev) => [...prev, ...newImages]);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -134,7 +167,7 @@ export default function ModalForm() {
   
     // Move to the next step
     if (activeStep < steps.length) {
-      if (activeStep === 8) {
+      if (activeStep === 9) {
         return;
       }
       setActiveStep(activeStep + 1);
@@ -896,6 +929,160 @@ export default function ModalForm() {
               </div>
             )}
 
+            {/* {activeStep === 6 && (
+              <div>
+              <div
+                className="flex mt-6 items-center justify-center"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  width: '100%',
+                  height: '8rem',
+                  overflowY: 'scroll',
+                  padding: '20px',
+                }}
+              >
+                <div className="flex flex-col gap-2" style={{ width: '100%', maxWidth: '1080px' }}>
+                  {testimonials.length > 0 ? (
+                    testimonials.map((testimonial, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-center"
+                        style={{
+                          backgroundColor: '#F1F2FC',
+                          backgroundSize: 'contain',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          width: '100%',
+                          height: '120px',
+                          padding: '20px',
+                          borderRadius: '8px',
+                        }}
+                      >
+                        <div className="flex-1" style={{ maxWidth: '80%' }}>
+                          <h1
+                            className="text-[#787F89] text-sm mb-1"
+                            style={{
+                              fontSize: '14px',
+                              textAlign: 'left',
+                            }}
+                          >
+                            {testimonial.name} | {testimonial.role} | {testimonial.industry}
+                          </h1>
+                          <p
+                            className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                            style={{
+                              width: '100%',
+                              maxWidth: '1080px',
+                              display: 'block',
+                            }}
+                          >
+                            {testimonial.message}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    [...Array(3)].map((_, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-center"
+                        style={{
+                          backgroundColor: '#F1F2FC',
+                          backgroundSize: 'contain',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          width: '100%',
+                          height: '120px',
+                          padding: '20px',
+                          borderRadius: '8px',
+                        }}
+                      >
+                        <p className="text-[#787F89] text-sm">Your Testimonials will appear Here</p>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+        
+              <div className="space-y-4 mt-4">
+                <div className="flex justify-center gap-4">
+                  <h1 className="text-2xl font-semibold text-[#707FDD]">Add Testimonial</h1>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      value={formData.testimonialName}
+                      onChange={(e) => setFormData({ ...formData, testimonialName: e.target.value })}
+                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      placeholder="Job Role"
+                      value={formData.testimonialRole}
+                      onChange={(e) => setFormData({ ...formData, testimonialRole: e.target.value })}
+                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <select
+                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                      value={formData.testimonialIndustry}
+                      onChange={(e) => setFormData({ ...formData, testimonialIndustry: e.target.value })}
+                    >
+                      <option value="" disabled>
+                        Industry
+                      </option>
+                      <option value="Medical">Medical</option>
+                      <option value="Astrology">Astrology</option>
+                      <option value="Business">Business</option>
+                      <option value="Sports">Sports</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <textarea
+                      placeholder="Testimonial Message"
+                      value={formData.testimonialMessage}
+                      onChange={(e) => setFormData({ ...formData, testimonialMessage: e.target.value })}
+                      className="w-full h-[120px] p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-center gap-4">
+                  <button
+                    onClick={handleAddTestimonial}
+                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]"
+                  >
+                    Add Testimonial
+                  </button>
+                </div>
+                    <div className="py-6 flex justify-end space-x-2">
+                      <div className="text-white text-center text-4xl font-semibold py-6 px-6"
+                        style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'left',
+                            backgroundRepeat: 'no-repeat',
+                            top: 0,
+                            left: 0,
+                            width: '70%',
+                            height: '10px',
+                        }}>
+                      </div>
+                      <button 
+                        onClick={handleSave}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                        Save Changes
+                      </button>
+                    </div>
+              </div>
+            </div>
+            )} */}
+
             {activeStep === 6 && (
               <div>
                 <div
@@ -1189,6 +1376,87 @@ export default function ModalForm() {
             )}
 
             {activeStep === 8 && (
+              <div className="relative p-6 w-full flex flex-col items-center">
+                <div className="flex gap-4 flex-nowrap justify-start w-full overflow-x-auto p-4 scrollbar-thin scrollbar-thumb-[#707FDD] hover:scrollbar-thumb-[#5C6CCF]">
+                  {images.map((image, index) => (
+                    <div
+                      key={index}
+                      className="w-40 h-56 rounded-lg flex-shrink-0"
+                      style={{
+                        backgroundImage: `url(${image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    ></div>
+                  ))}
+
+                  {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
+                    <div
+                      key={`empty-${index}`}
+                      className="w-40 h-56 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"
+                    >
+                      <label
+                        htmlFor={`image-upload-${index}`}
+                        className="cursor-pointer w-full h-full flex items-center justify-center"
+                      >
+                        <BsImages className="text-white text-2xl" />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          onChange={handleImageUpload}
+                          id={`image-upload-${index}`}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-20">
+                  <label
+                    htmlFor="gallery-upload"
+                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]"
+                  >
+                    Add Images
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleImageUpload}
+                      id="gallery-upload"
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+
+                <div className="mt-20 py-6 flex justify-end space-x-2 w-full">
+                  <div
+                    className="text-white text-center text-4xl font-semibold py-6 px-6"
+                    style={{
+                      backgroundImage: `url('../../Underline.svg')`,
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'left',
+                      backgroundRepeat: 'no-repeat',
+                      top: 0,
+                      left: 0,
+                      width: '70%',
+                      height: '10px',
+                    }}
+                  >
+                  </div>
+                  <button
+                    onClick={handleSave}
+                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            )}
+
+
+            {activeStep === 9 && (
               <div>
                 <div
                   className="py-2"
@@ -1265,7 +1533,7 @@ export default function ModalForm() {
               </div>
             )}
 
-            {activeStep === 9 && (
+            {activeStep === 10 && (
               <div>
                 <div
                   className="py-2"
