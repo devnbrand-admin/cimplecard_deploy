@@ -10,13 +10,14 @@ import Social from "../../../components/medicalComponents/Social";
 import Footer from "../../../components/medicalComponents/Footer";
 import axios from "axios";
 import WhatsAppButton from "../../../components/b2bcomponents/WhatsappContact";
-import ContactCardButton from "../../../components/b2bcomponents/ContactCardButton";
+import ContactCardButton from "@/app/components/b2bcomponents/ContactCardButton";
 import { useParams } from "next/navigation";
 
-const page = ({ card}) => {
+const page = (
+) => {
   const params = useParams();
   const id = params.id;
-
+  const [card, setCard] = useState();
   const getCardDetails = async (token) => {
     try {
       const response = await axios.get(
