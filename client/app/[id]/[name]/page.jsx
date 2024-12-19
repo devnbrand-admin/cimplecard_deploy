@@ -15,7 +15,8 @@ const Page = () => {
   const getCardDetails = async (token) => {
     try {
       const response = await axios.get(
-        `https://cimple-card.onrender.com/api/card/get/${id}`,
+        // `https://cimple-card.onrender.com/api/card/get/${id}`,
+        `https://cimple-card.onrender.com/api/card/get/bbefccdf-99f1-4c76-a64f-7944faff30dc`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +38,6 @@ const Page = () => {
   useEffect(() => {
     const fetchCardDetails = async () => {
       try {
-        const token = await loginUser("amanu0181@gmail.com", "12345");
         const res = await getCardDetails(sessionStorage.getItem("authToken"));
         console.log(res);
         setCard(res);
