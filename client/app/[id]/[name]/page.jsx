@@ -15,15 +15,9 @@ const Page = () => {
   const getCardDetails = async (token) => {
     try {
       const response = await axios.get(
-        // `https://cimple-card.onrender.com/api/card/get/${id}`,
-        `https://cimple-card.onrender.com/api/card/get/bbefccdf-99f1-4c76-a64f-7944faff30dc`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
-          withCredentials: true,
-        }
+        `https://cimple-card.onrender.com/api/card/get/${id}`,
+        // `https://cimple-card.onrender.com/api/card/get/bbefccdf-99f1-4c76-a64f-7944faff30dc`,
+        {}
       );
       console.log("respos: ", response.data);
       return response.data;
@@ -38,7 +32,7 @@ const Page = () => {
   useEffect(() => {
     const fetchCardDetails = async () => {
       try {
-        const res = await getCardDetails(sessionStorage.getItem("authToken"));
+        const res = await getCardDetails();
         console.log(res);
         setCard(res);
       } catch (err) {
