@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import ModalFormMobile from "../dashboardformComponents/ModalFormMobile";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
-const MobileComponent = () => {
+const MobileComponent = ({userDetails}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   return (
@@ -120,6 +120,7 @@ const MobileComponent = () => {
         </Provider>
       )}
     </div>
+  
   );
 };
 
