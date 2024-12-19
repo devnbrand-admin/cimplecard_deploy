@@ -34,24 +34,11 @@ const Page = () => {
     }
   };
 
-  const loginUser = async (email, password) => {
-    try {
-      const response = await axios.post(
-        `https://cimple-card.onrender.com/api/user/login`,
-        { email, password },
-        { headers: { "Content-Type": "application/json" } }
-      );
-      return response.data.user.token; // Return token
-    } catch (error) {
-      throw new Error(error.response?.data?.message || "Login failed");
-    }
-  };
-  // Usage in useEffect
   useEffect(() => {
     const fetchCardDetails = async () => {
       try {
         const token = await loginUser("amanu0181@gmail.com", "12345");
-        const res = await getCardDetails(token);
+        const res = await getCardDetails(sessionStorage.getItem("authToken"));
         console.log(res);
         setCard(res);
       } catch (err) {
@@ -81,7 +68,7 @@ const Page = () => {
         )
       ) : (
         <div>Loading...</div>
-      )} 
+      )}
     </>
   );
 };
