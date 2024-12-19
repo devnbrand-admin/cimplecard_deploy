@@ -16,7 +16,6 @@ const Page = () => {
     try {
       const response = await axios.get(
         `https://cimple-card.onrender.com/api/card/get/${id}`,
-        // `https://cimple-card.onrender.com/api/card/get/bbefccdf-99f1-4c76-a64f-7944faff30dc`,
         {}
       );
       console.log("respos: ", response.data);
