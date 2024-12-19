@@ -14,59 +14,13 @@ import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact"
 import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
 import { useParams } from "next/navigation";
 
-const page = ({card,setCard}
-) => {
-  const [card, setCard] = useState(null);
+const page = ({ card, setCard }) => {
+  // const [cardi, setCard] = useState(null);
   const [isMobile, setIsMobile] = useState(false); // State to track layout
   const params = useParams();
   const id = params.id;
 
-  const getCardDetails = async (token) => {
-    try {
-      const response = await axios.get(
-        `https://cimple-card.onrender.com/api/card/get/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
-          withCredentials: true,
-        }
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error(
-        error.response?.data?.message || "Failed to fetch user details"
-      );
-    }
-  };
-
-  const loginUser = async (email, password) => {
-    try {
-      const response = await axios.post(
-        `https://cimple-card.onrender.com/api/user/login`,
-        { email, password },
-        { headers: { "Content-Type": "application/json" } }
-      );
-      return response.data.user.token;
-    } catch (error) {
-      throw new Error(error.response?.data?.message || "Login failed");
-    }
-  };
-
   useEffect(() => {
-    const fetchCardDetails = async () => {
-      try {
-        const token = await loginUser("amanu0181@gmail.com", "12345");
-        const res = await getCardDetails(token);
-        setCard(res);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-
-    fetchCardDetails();
-
     // Listener for window resize to detect mobile layout
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768); // Adjust breakpoint as needed

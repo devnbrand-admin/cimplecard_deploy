@@ -12,7 +12,7 @@ import {
 import profileImage from "../../assets/lawyerTemplate/ProfileImage.png";
 import bgImage from "../../assets/lawyerTemplate/BackgroundImage.png";
 
-function Profile() {
+function Profile({ card }) {
   return (
     <div className="relative bg-[#121F2E] text-white">
       {/* Background Image */}
@@ -27,7 +27,6 @@ function Profile() {
       </div>
 
       {/* Navbar */}
-      
 
       {/* Hero Section */}
       <section className="flex flex-col md:flex-row items-center justify-center px-6 md:px-16 py-6">
@@ -35,7 +34,7 @@ function Profile() {
         <div className="flex justify-center w-full md:w-1/2 mb-6 md:mb-0 mt-16">
           <div className="relative w-[250px] h-[250px] md:w-[350px] md:h-[350px] border-[10px] md:border-[14px] border-[#CB935D] rounded-full overflow-hidden">
             <Image
-              src={profileImage}
+              src={card.profileImageUrl}
               alt="Profile"
               layout="fill"
               objectFit="cover"
@@ -46,7 +45,7 @@ function Profile() {
         {/* Content Section */}
         <div className="w-full md:w-1/2 text-center md:text-left">
           <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-8 font-serif">
-            Arjun Mehra
+            {card.title}
           </h1>
           <h2 className="text-lg md:text-2xl md:mb-2">
             Expert in Corporate Law & Civil Litigation
