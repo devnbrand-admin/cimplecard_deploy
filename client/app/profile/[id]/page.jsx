@@ -6,7 +6,7 @@ const page = () => {
   const router = useRouter();
 
   return (
-    <div style={{ backgroundColor: "#B07ED1", height: "100vh" }}>
+    <div style={{ backgroundColor: "#5A6ACF", height: "100vh" }}>
       <div className="flex p-3">
         <img
           src="/Assets/back.png"
@@ -33,7 +33,7 @@ const page = () => {
               className="w-20 h-20 rounded-full object-cover"
             />
             <div>
-              <h1 className="text-xl font-bold text-purple-700">
+              <h1 className="text-xl font-bold" style={{ color: "#5A6ACF" }}>
                 Name Surname
               </h1>
               <p className="text-gray-500">Designation</p>
@@ -83,7 +83,9 @@ const page = () => {
             boxShadow: "0px 10px 5px 0px #00000040",
           }}
         >
-          <h2 className="text-xl font-bold text-purple-700">BIO</h2>
+          <h2 className="text-xl font-bold" style={{ color: "#5A6ACF" }}>
+            BIO
+          </h2>
           <p className="text-gray-500 text-sm mt-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Lorem
@@ -105,10 +107,10 @@ const page = () => {
             scrollbarWidth: "none",
 
             boxShadow: "0px 10px 5px 0px #00000040",
-            backgroundColor: "#EADAF4",
+            backgroundColor: "#D3EFFF",
           }}
         >
-          <h2 className="text-xl font-bold text-purple-700">
+          <h2 className="text-xl font-bold" style={{ color: "#5A6ACF" }}>
             Detailed Information
           </h2>
           <div className="mt-2 space-y-3">
@@ -207,11 +209,13 @@ const page = () => {
             overflowY: "scroll",
             scrollbarWidth: "none",
             boxShadow: "0px 10px 5px 0px #00000040",
-            backgroundColor: "#EADAF4",
+            backgroundColor: "#D3EFFF",
           }}
         >
           <div className="flex">
-            <h2 className="text-2xl font-bold text-purple-700">Inbox</h2>
+            <h2 className="text-2xl font-bold" style={{ color: "#5A6ACF" }}>
+              Inbox
+            </h2>
             <div className="border mx-3 border-gray-500 rounded-full">
               <img
                 src="/Assets/Chat Bubble.png"

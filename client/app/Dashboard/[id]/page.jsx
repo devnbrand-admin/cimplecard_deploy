@@ -30,312 +30,36 @@ const DashboardPage = () => {
     setIsModalOpen(true);
   };
 
-  //Temporarily initialised 2 cards
-  const [userDetails, setUserDetails] = useState({
-    id: 1,
-    email: "amanu0181@gmail.com",
-    password: "$2b$10$FZNMx/I2K2x.ygZAY9XyvezRxmsU8ku0P49XyouICDnh49gGaZwIe",
-    username: "new",
-    resetToken: null,
-    resetPasswordExpires: null,
-    profilePictureUrl: null,
-    createdAt: "2024-12-06T13:08:00.333Z",
-    updatedAt: "2024-12-06T13:08:00.333Z",
-    role: "User",
-    cards: [
-      {
-        id: 1,
-        title: "John Doe",
-        bio: "A free, open content online encyclopedia created through the collaborative efforts",
-        phoneNumbers: ["+1234567890", "+0987654321"],
-        emails: ["john.doe@example.com", "contact@johndoe.dev"],
-        addresses: [
-          "123 Main Street, Springfield",
-          "456 Elm Street, Shelbyville",
-        ],
-        jobTitle: "Senior Developer",
-        companyName: "Tech Innovators Inc.",
-        dateOfBirth: "1990-05-15T00:00:00.000Z",
-        personalSocialMediaLinks: {
-          create: [
-            {
-              url: "https://linkedin.com/in/johndoe",
-              iconUrl: "https://example.com/icons/linkedin.png",
-              platform: "LINKEDIN",
-            },
-            {
-              url: "https://twitter.com/johndoe",
-              iconUrl: "https://example.com/icons/twitter.png",
-              platform: "TWITTER",
-            },
-          ],
-        },
-        companySocialMediaLink: "https://facebook.com/techinnovators",
-        profileImageUrl: "https://example.com/images/johndoe.jpg",
-        templateType: "professional",
-        uniqueUrl: "https://www.wikipedia.org/",
-        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
-        aboutUs:
-          "We deliver top-notch software solutions tailored to your needs.",
-        instagramVideoLink: "https://instagram.com/reel/xyz123",
-        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
-        createdAt: "2024-12-06T14:41:55.517Z",
-        updatedAt: "2024-12-06T14:41:55.517Z",
-        userId: 1,
-      },
-      {
-        id: 2,
-        title: "John Doe",
-        bio: "Software Engineer with a passion for solving complex problems.",
-        phoneNumbers: ["+1234567890", "+0987654321"],
-        emails: ["john.doe@example.com", "contact@johndoe.dev"],
-        addresses: [
-          "123 Main Street, Springfield",
-          "456 Elm Street, Shelbyville",
-        ],
-        jobTitle: "Senior Developer",
-        companyName: "Tech Innovators Inc.",
-        dateOfBirth: "1990-05-15T00:00:00.000Z",
-        personalSocialMediaLinks: {
-          create: [
-            {
-              url: "https://linkedin.com/in/johndoe",
-              iconUrl: "https://example.com/icons/linkedin.png",
-              platform: "LINKEDIN",
-            },
-            {
-              url: "https://twitter.com/johndoe",
-              iconUrl: "https://example.com/icons/twitter.png",
-              platform: "TWITTER",
-            },
-          ],
-        },
-        companySocialMediaLink: "https://facebook.com/techinnovators",
-        profileImageUrl: "https://example.com/images/johndoe.jpg",
-        templateType: "professional",
-        uniqueUrl: "https://munirsiddiqui.vercel.app/",
-        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
-        aboutUs:
-          "We deliver top-notch software solutions tailored to your needs.",
-        instagramVideoLink: "https://instagram.com/reel/xyz123",
-        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
-        createdAt: "2024-12-06T15:41:18.950Z",
-        updatedAt: "2024-12-06T15:41:18.950Z",
-        userId: 1,
-      },
-      {
-        id: 1,
-        title: "John Doe",
-        bio: "A free, open content online encyclopedia created through the collaborative efforts",
-        phoneNumbers: ["+1234567890", "+0987654321"],
-        emails: ["john.doe@example.com", "contact@johndoe.dev"],
-        addresses: [
-          "123 Main Street, Springfield",
-          "456 Elm Street, Shelbyville",
-        ],
-        jobTitle: "Senior Developer",
-        companyName: "Tech Innovators Inc.",
-        dateOfBirth: "1990-05-15T00:00:00.000Z",
-        personalSocialMediaLinks: {
-          create: [
-            {
-              url: "https://linkedin.com/in/johndoe",
-              iconUrl: "https://example.com/icons/linkedin.png",
-              platform: "LINKEDIN",
-            },
-            {
-              url: "https://twitter.com/johndoe",
-              iconUrl: "https://example.com/icons/twitter.png",
-              platform: "TWITTER",
-            },
-          ],
-        },
-        companySocialMediaLink: "https://facebook.com/techinnovators",
-        profileImageUrl: "https://example.com/images/johndoe.jpg",
-        templateType: "professional",
-        uniqueUrl: "https://www.wikipedia.org/",
-        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
-        aboutUs:
-          "We deliver top-notch software solutions tailored to your needs.",
-        instagramVideoLink: "https://instagram.com/reel/xyz123",
-        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
-        createdAt: "2024-12-06T14:41:55.517Z",
-        updatedAt: "2024-12-06T14:41:55.517Z",
-        userId: 1,
-      },
-      {
-        id: 2,
-        title: "John Doe",
-        bio: "Software Engineer with a passion for solving complex problems.",
-        phoneNumbers: ["+1234567890", "+0987654321"],
-        emails: ["john.doe@example.com", "contact@johndoe.dev"],
-        addresses: [
-          "123 Main Street, Springfield",
-          "456 Elm Street, Shelbyville",
-        ],
-        jobTitle: "Senior Developer",
-        companyName: "Tech Innovators Inc.",
-        dateOfBirth: "1990-05-15T00:00:00.000Z",
-        personalSocialMediaLinks: {
-          create: [
-            {
-              url: "https://linkedin.com/in/johndoe",
-              iconUrl: "https://example.com/icons/linkedin.png",
-              platform: "LINKEDIN",
-            },
-            {
-              url: "https://twitter.com/johndoe",
-              iconUrl: "https://example.com/icons/twitter.png",
-              platform: "TWITTER",
-            },
-          ],
-        },
-        companySocialMediaLink: "https://facebook.com/techinnovators",
-        profileImageUrl: "https://example.com/images/johndoe.jpg",
-        templateType: "professional",
-        uniqueUrl: "https://munirsiddiqui.vercel.app/",
-        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
-        aboutUs:
-          "We deliver top-notch software solutions tailored to your needs.",
-        instagramVideoLink: "https://instagram.com/reel/xyz123",
-        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
-        createdAt: "2024-12-06T15:41:18.950Z",
-        updatedAt: "2024-12-06T15:41:18.950Z",
-        userId: 1,
-      },
-      {
-        id: 1,
-        title: "John Doe",
-        bio: "A free, open content online encyclopedia created through the collaborative efforts",
-        phoneNumbers: ["+1234567890", "+0987654321"],
-        emails: ["john.doe@example.com", "contact@johndoe.dev"],
-        addresses: [
-          "123 Main Street, Springfield",
-          "456 Elm Street, Shelbyville",
-        ],
-        jobTitle: "Senior Developer",
-        companyName: "Tech Innovators Inc.",
-        dateOfBirth: "1990-05-15T00:00:00.000Z",
-        personalSocialMediaLinks: {
-          create: [
-            {
-              url: "https://linkedin.com/in/johndoe",
-              iconUrl: "https://example.com/icons/linkedin.png",
-              platform: "LINKEDIN",
-            },
-            {
-              url: "https://twitter.com/johndoe",
-              iconUrl: "https://example.com/icons/twitter.png",
-              platform: "TWITTER",
-            },
-          ],
-        },
-        companySocialMediaLink: "https://facebook.com/techinnovators",
-        profileImageUrl: "https://example.com/images/johndoe.jpg",
-        templateType: "professional",
-        uniqueUrl: "https://www.wikipedia.org/",
-        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
-        aboutUs:
-          "We deliver top-notch software solutions tailored to your needs.",
-        instagramVideoLink: "https://instagram.com/reel/xyz123",
-        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
-        createdAt: "2024-12-06T14:41:55.517Z",
-        updatedAt: "2024-12-06T14:41:55.517Z",
-        userId: 1,
-      },
-      {
-        id: 2,
-        title: "John Doe",
-        bio: "Software Engineer with a passion for solving complex problems.",
-        phoneNumbers: ["+1234567890", "+0987654321"],
-        emails: ["john.doe@example.com", "contact@johndoe.dev"],
-        addresses: [
-          "123 Main Street, Springfield",
-          "456 Elm Street, Shelbyville",
-        ],
-        jobTitle: "Senior Developer",
-        companyName: "Tech Innovators Inc.",
-        dateOfBirth: "1990-05-15T00:00:00.000Z",
-        personalSocialMediaLinks: {
-          create: [
-            {
-              url: "https://linkedin.com/in/johndoe",
-              iconUrl: "https://example.com/icons/linkedin.png",
-              platform: "LINKEDIN",
-            },
-            {
-              url: "https://twitter.com/johndoe",
-              iconUrl: "https://example.com/icons/twitter.png",
-              platform: "TWITTER",
-            },
-          ],
-        },
-        companySocialMediaLink: "https://facebook.com/techinnovators",
-        profileImageUrl: "https://example.com/images/johndoe.jpg",
-        templateType: "professional",
-        uniqueUrl: "https://munirsiddiqui.vercel.app/",
-        qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
-        aboutUs:
-          "We deliver top-notch software solutions tailored to your needs.",
-        instagramVideoLink: "https://instagram.com/reel/xyz123",
-        youtubeVideoLink: "https://youtube.com/watch?v=abc123",
-        createdAt: "2024-12-06T15:41:18.950Z",
-        updatedAt: "2024-12-06T15:41:18.950Z",
-        userId: 1,
-      },
-    ],
-  });
-
-
-
   // API call using fetch - will update it later using axios
+  const [userDetails, setUserDetails] = useState();
+
+  const BASE_URL = "https://cimple-card.onrender.com/api/user";
+
+  const getUserDetails = async (token) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/getdetails`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        withCredentials: true,
+      });
+      return response.data.user; // Return user details
+    } catch (error) {
+      throw new Error(
+        error.response?.data?.message || "Failed to fetch user details"
+      );
+    }
+  };
+
+  // Usage in useEffect
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        // Login API call
-        const loginResponse = await fetch(
-          `https://cimple-card.onrender.com/api/user/login`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: "amanu0181@gmail.com",
-              password: "12345",
-            }),
-          }
+        const userDetails = await getUserDetails(
+          sessionStorage.getItem("authToken")
         );
-
-        if (!loginResponse.ok) {
-          throw new Error("Failed to login");
-        }
-
-        const loginData = await loginResponse.json();
-        const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbWFudTAxODFAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MzM4MTA4MTEsImV4cCI6MTczMzgxNDQxMX0.feexQOatcFSdMlJgcRZt0HL7JIf9DwlNIko1DzZz9y8"; // Assuming the token is returned in the login response
-
-        // User details API call with Bearer token
-        const userDetailsResponse = await fetch(
-          `https://cimple-card.onrender.com/api/user/getdetails`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `${token}`,
-            },
-            credentials: "include",
-          }
-        );
-
-        if (!userDetailsResponse.ok) {
-          const errorData = await userDetailsResponse.json();
-          throw new Error(errorData.message || "Failed to fetch user details");
-        }
-
-        const userData = await userDetailsResponse.json();
-        console.log(userData);
-        setUserDetails(userData);
+        setUserDetails(userDetails);
       } catch (err) {
         console.log(err.message);
       }
@@ -354,12 +78,12 @@ const DashboardPage = () => {
   return (
     <>
       {isMobile ? (
-        <MobileComponent />
+        <MobileComponent userDetails={userDetails} />
       ) : (
         <div className="flex w-full" style={{ height: "100vh" }}>
           <div
             className="m-5 mb-0 rounded-3xl"
-            style={{ width: "20%", backgroundColor: "#9D4AD1", height: "92vh" }}
+            style={{ width: "20%", height: "92vh" }}
           >
             <Navbar />
           </div>
@@ -404,60 +128,50 @@ const DashboardPage = () => {
             <div
               className="w-full rounded-2xl p-4"
               style={{
-                backgroundColor: "#EADAF4",
+                background: "#A4CEFF30",
                 height: "80vh",
                 overflowY: "scroll",
                 overflowX: "hidden",
                 scrollbarWidth: "none",
               }}
             >
-              <h3 className="font-semibold mb-5" style={{ color: "#AB6BD4" }}>
+              <h3 className="font-semibold mb-5" style={{ color: "#5A6ACF" }}>
                 My Cards
               </h3>
               <div className="flex w-full flex-wrap gap-7">
                 <div
                   onClick={handleOpenModal}
-                  className=" group justify-items-center content-center w-80 flex-col relative m-3 rounded-xl bg-white"
+                  className=" group justify-items-center h-80 content-center w-80 flex-col relative m-3 rounded-xl bg-white"
                 >
                   <img
                     src="/Assets/add a new project.png"
                     alt="Icon 3"
                     className="w-20 h-20 mb-3"
                   />
-                  <h2 style={{ fontSize: 20, color: "#AB6BD4" }}>
+                  <h2 style={{ fontSize: 20, color: "#5A6ACF" }}>
                     Add New Card{" "}
                   </h2>
                   <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center rounded-xl justify-center text-xl opacity-0 group-hover:opacity-100 transition"></div>
                 </div>
-                {userDetails?.cards.map((card, index) => (
-                  <Card key={index} card={card} />
-                ))}
+                {userDetails
+                  ? userDetails.cards.map((card, index) => (
+                      <Card key={index} card={card} />
+                    ))
+                  : "no cards"}
               </div>
             </div>
           </div>
-
-          {/* Card Creation Modal */}
-          {/* {isOpen && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-              <div className="bg-white p-6 rounded-lg w-80">
-                <h2 className="text-xl font-bold mb-4">Card Creation</h2>
-                <div className="w-90 h-80"></div>
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="text-sm text-red-500"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          )} */}
           {isModalOpen && (
             <Provider store={store}>
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                <div className="bg-white p-6 rounded shadow-md" >
-                  {isMobileSize ? <ModalFormMobile  /> : <ModalForm />}
+              <div
+                className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+                onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
+              >
+                <div
+                  className="bg-white p-6 rounded shadow-md"
+                  // Prevent backdrop click from closing the modal
+                >
+                  {isMobileSize ? <ModalFormMobile /> : <ModalForm />}
                 </div>
               </div>
             </Provider>
