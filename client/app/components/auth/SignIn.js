@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import img from "../../assets/auth/signin/img.png"
@@ -57,8 +57,10 @@ export default function SignIn({ setIsLogin }) {
 
         if (response.status===200) {
           
-          console.log("logged in",response)
-          // router.push('/dashboard');
+          console.log("logged in",response.data.user.token)
+          console.log("cookie",document.cookie)
+      
+          router.push(`/dashboard/${response.data.user.id}`);
         } else {
           alert(data.message || 'Login failed. Please try again.');
         }
@@ -70,6 +72,10 @@ export default function SignIn({ setIsLogin }) {
       }
     }
   };
+
+  useEffect(()=>{
+    
+  },[])
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen ">

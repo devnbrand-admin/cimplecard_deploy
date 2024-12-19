@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Card from "./Card";
 import Navbar from "./Navbar";
-
-const MobileComponent = ({ userDetails }) => {
+import ModalFormMobile from "../dashboardformComponents/ModalFormMobile";
+import { Provider } from "react-redux";
+import { store } from "../../../store/store";
+const MobileComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   return (
@@ -113,20 +115,9 @@ const MobileComponent = ({ userDetails }) => {
         </button>
       </div>
       {isOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg w-80">
-            <h2 className="text-xl font-bold mb-4">Card Creation</h2>
-            <div className="w-90 h-80"></div>
-            <div className="flex justify-end">
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-sm text-red-500"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
+        <Provider store={store}>
+          <ModalFormMobile />
+        </Provider>
       )}
     </div>
   );

@@ -1,16 +1,36 @@
 "use client";
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Navbar from "../../components/dashboardComponents/Navbar";
 import Card from "../../components/dashboardComponents/Card";
 import axios from "axios";
 import MobileComponent from "../../components/dashboardComponents/MobileComponent";
+import dynamic from "next/dynamic";
+import { useMediaQuery } from "react-responsive";
+import { Provider } from "react-redux";
+import { store } from "../../../store/store";
+
+const ModalForm = dynamic(() =>
+  import("../../components/dashboardformComponents/ModalForm")
+);
+const ModalFormMobile = dynamic(() =>
+  import("../../components/dashboardformComponents/ModalFormMobile")
+);
 
 const DashboardPage = () => {
   const params = useParams();
   const id = params.id;
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isMobileSize = useMediaQuery({ maxWidth: 768 });
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // API call using fetch - will update it later using axios
   const [userDetails, setUserDetails] = useState();
 
   const BASE_URL = "https://cimple-card.onrender.com/api/user";
@@ -120,8 +140,8 @@ const DashboardPage = () => {
               </h3>
               <div className="flex w-full flex-wrap gap-7">
                 <div
-                  onClick={() => setIsOpen(true)}
-                  className="relative group justify-items-center content-center w-80 h-80 flex-col relative m-3 rounded-xl bg-white"
+                  onClick={handleOpenModal}
+                  className=" group justify-items-center h-80 content-center w-80 flex-col relative m-3 rounded-xl bg-white"
                 >
                   <img
                     src="/Assets/add a new project.png"
@@ -141,23 +161,20 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
-
-          {/* Card Creation Modal */}
-          {isOpen && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-              <div className="bg-white p-6 rounded-lg w-80">
-                <h2 className="text-xl font-bold mb-4">Card Creation</h2>
-                <div className="w-90 h-80"></div>
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="text-sm text-red-500"
-                  >
-                    Close
-                  </button>
+          {isModalOpen && (
+            <Provider store={store}>
+              <div
+                className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+                onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
+              >
+                <div
+                  className="bg-white p-6 rounded shadow-md"
+                  // Prevent backdrop click from closing the modal
+                >
+                  {isMobileSize ? <ModalFormMobile /> : <ModalForm />}
                 </div>
               </div>
-            </div>
+            </Provider>
           )}
         </div>
       )}
