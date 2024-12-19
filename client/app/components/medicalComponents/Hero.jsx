@@ -33,23 +33,25 @@ const Hero = ({ card }) => {
               src="/Assets/MedicalAssets/link.png"
               alt="doctor img"
               className="w-8 ms-2 h-8"
+              onClick={() => window.open(card.personalSocialMediaLink || "#")}
             />
             <img
               src="/Assets/MedicalAssets/twitter.png"
               alt="doctor img"
               className="w-8 ms-2 h-8"
+              onClick={() => window.open(card.twitterLink || "#")}
             />
             <img
               src="/Assets/MedicalAssets/linkedin.png"
               alt="doctor img"
               className="w-8 ms-2 h-8"
-              onClick={() => window.open(card.companySocialMediaLink)}
+              onClick={() => window.open(card.linkedinLink || "#")}
             />
             <img
               src="/Assets/MedicalAssets/instagram.png"
               alt="doctor img"
               className="w-8 ms-2 h-8"
-              onClick={() => window.open(card.instagramVideoLink)}
+              onClick={() => window.open(card.instagramLink || "#")}
             />
           </div>
           <img
@@ -66,13 +68,13 @@ const Hero = ({ card }) => {
               src="/Assets/MedicalAssets/linkedin.png"
               alt="doctor img"
               className="w-8 ms-2 h-8"
-              onClick={() => window.open(card.companySocialMediaLink)}
+              onClick={() => window.open(card.companyLinkedinLink || "#")}
             />
 
             <img
               src="/Assets/MedicalAssets/instagram.png"
               alt="instagram"
-              onClick={() => window.open(card.instagramVideoLink)}
+              onClick={() => window.open(card.companyInstagramLink || "#")}
               className="w-8 ms-2 h-8"
             />
           </div>
@@ -100,11 +102,10 @@ const Hero = ({ card }) => {
       </div>
 
       <img
-        // src={card.profileImageUrl}
-        src="https://static.vecteezy.com/system/resources/thumbnails/028/287/555/small_2x/an-indian-young-female-doctor-isolated-on-green-ai-generated-photo.jpg"
-        alt="profile img"
+        src={card.profileImageUrl}
         style={{ bottom: 20, right: 100, width: "70vh", height: "70vh" }}
         className="absolute rounded-full bg-center bg-cover"
+        alt="profile img"
       />
     </div>
   );
