@@ -12,7 +12,7 @@ const NavbarComponent = () => {
         </div>
 
         {/* Navigation Links */}
-        <ul className="flex space-x-6 ">
+        <ul className="md:flex space-x-6 hidden">
         <Link href={`/`}  className="text-gray-200 hover:text-white cursor-pointer">Home</Link>
         <Link href={`/about`} className="text-gray-200 hover:text-white cursor-pointer">About</Link>
         <Link href={`/contact`}  className="text-gray-200 hover:text-white cursor-pointer">Contact</Link>
