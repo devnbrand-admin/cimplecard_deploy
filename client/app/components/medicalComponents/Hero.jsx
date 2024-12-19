@@ -8,6 +8,7 @@ const Hero = ({ card }) => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         height: "100vh",
+        width: "100vw",
       }}
       id="Profile"
     >
@@ -25,30 +26,32 @@ const Hero = ({ card }) => {
         </div>
         <div className="m-7">
           <div className="flex my-2">
-            <p className="text-lg font-light mx-3" style={{ color: "#0B8823" }}>
+            <p className="text-xl font-light mx-3" style={{ color: "#0B8823" }}>
               Personal Socials
             </p>
             <img
               src="/Assets/MedicalAssets/link.png"
               alt="doctor img"
-              className="w-5 ms-2 h-5"
+              className="w-8 ms-2 h-8"
+              onClick={() => window.open(card.personalSocialMediaLink || "#")}
             />
             <img
               src="/Assets/MedicalAssets/twitter.png"
               alt="doctor img"
-              className="w-5 ms-2 h-5"
+              className="w-8 ms-2 h-8"
+              onClick={() => window.open(card.twitterLink || "#")}
             />
             <img
               src="/Assets/MedicalAssets/linkedin.png"
               alt="doctor img"
-              className="w-5 ms-2 h-5"
-              onClick={() => window.open(card.companySocialMediaLink)}
+              className="w-8 ms-2 h-8"
+              onClick={() => window.open(card.linkedinLink || "#")}
             />
             <img
               src="/Assets/MedicalAssets/instagram.png"
               alt="doctor img"
-              className="w-5 ms-2 h-5"
-              onClick={() => window.open(card.instagramVideoLink)}
+              className="w-8 ms-2 h-8"
+              onClick={() => window.open(card.instagramLink || "#")}
             />
           </div>
           <img
@@ -57,26 +60,26 @@ const Hero = ({ card }) => {
             className="w-28 mx-3"
           />
           <div className="flex my-1">
-            <p className="text-lg font-light mx-3" style={{ color: "#0B8823" }}>
+            <p className="text-xl font-light mx-3" style={{ color: "#0B8823" }}>
               Company Socials
             </p>
 
             <img
               src="/Assets/MedicalAssets/linkedin.png"
               alt="doctor img"
-              className="w-5 h-5 ms-2 "
-              onClick={() => window.open(card.companySocialMediaLink)}
+              className="w-8 ms-2 h-8"
+              onClick={() => window.open(card.companyLinkedinLink || "#")}
             />
 
             <img
               src="/Assets/MedicalAssets/instagram.png"
               alt="instagram"
-              onClick={() => window.open(card.instagramVideoLink)}
-              className="w-5 h-5 ms-2"
+              onClick={() => window.open(card.companyInstagramLink || "#")}
+              className="w-8 ms-2 h-8"
             />
           </div>
         </div>
-        <div className="w-72 border my-7 h-[500px] relative">
+        <div className="w-72 border text-white my-7 h-[500px] relative">
           <img
             src="/Assets/MedicalAssets/Rectangleup.png"
             alt="img"
@@ -99,11 +102,10 @@ const Hero = ({ card }) => {
       </div>
 
       <img
-        // src={card.profileImageUrl}
-        src="https://static.vecteezy.com/system/resources/thumbnails/028/287/555/small_2x/an-indian-young-female-doctor-isolated-on-green-ai-generated-photo.jpg"
-        alt="profile img"
+        src={card.profileImageUrl}
         style={{ bottom: 20, right: 100, width: "70vh", height: "70vh" }}
         className="absolute rounded-full bg-center bg-cover"
+        alt="profile img"
       />
     </div>
   );

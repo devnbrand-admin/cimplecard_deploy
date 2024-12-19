@@ -1,8 +1,6 @@
 import React from "react";
 
-function HeroSection() {
-  
-
+function HeroSection({ card }) {
   return (
     <div className="w-full h-[480px] flex flex-col items-center justify-center text-center px-20 lg:px-32 xl:px-64 space-y-6 ">
       {/* Title */}
@@ -12,7 +10,10 @@ function HeroSection() {
 
       {/* Subtitle */}
       <p className="font-Mons text-white text-lg md:text-xl lg:text-xl font-light leading-relaxed">
-        Guided by the wisdom of the cosmos, Dr. Meera Sharma, a Ph.D. in Vedic Astrology, helps individuals unlock their true potential. With years of experience and a personalized approach, she empowers lives through insightful astrological guidance.
+        Guided by the wisdom of the cosmos, Dr. Meera Sharma, a Ph.D. in Vedic
+        Astrology, helps individuals unlock their true potential. With years of
+        experience and a personalized approach, she empowers lives through
+        insightful astrological guidance.
       </p>
     </div>
   );
