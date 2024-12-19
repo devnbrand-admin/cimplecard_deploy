@@ -95,7 +95,7 @@ const AppointmentForm = () => {
         </form>
       </div>
 
-      {/* Decorative Background Element */}
+
       <div className="absolute top-10 left-0 w-32 h-48 md:w-48 md:h-96 rounded-r-full bg-[#CB935D] hidden md:block"></div>
     </div>
   );

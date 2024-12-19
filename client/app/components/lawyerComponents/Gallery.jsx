@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
-import image1 from "../../assets/lawyerTemplate/Gallery1.png"; // Replace with your actual image paths
+import image1 from "../../assets/lawyerTemplate/Gallery1.png";
 import image2 from "../../assets/lawyerTemplate/Gallery2.png";
 import image3 from "../../assets/lawyerTemplate/Gallery3.png";
 
@@ -24,7 +24,7 @@ const galleryImages = [
 function Gallery() {
   const swiperRef = useRef(null);
 
-  // Custom Navigation Handlers
+  
   const handlePrev = () => {
     if (swiperRef.current) swiperRef.current.slidePrev();
   };
@@ -35,12 +35,12 @@ function Gallery() {
 
   return (
     <div className="w-full px-4 sm:px-8 md:px-12 mt-20 lg:mt-0 ">
-      {/* Title */}
+
       <h1 className="font-Cormorant not-italic text-4xl md:text-5xl lg:text-6xl text-center text-black my-8">
         Gallery
       </h1>
 
-      {/* Custom Navigation Buttons */}
+   
       <div className="flex justify-between items-center max-w-5xl mx-auto mb-4">
         <button
           onClick={handlePrev}

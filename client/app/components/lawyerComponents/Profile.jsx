@@ -15,7 +15,7 @@ import bgImage from "../../assets/lawyerTemplate/BackgroundImage.png";
 function Profile() {
   return (
     <div className="relative bg-[#121F2E] text-white">
-      {/* Background Image */}
+     
       <div className="absolute inset-0 z-[-1]">
         <Image
           src={bgImage}
@@ -26,10 +26,9 @@ function Profile() {
         />
       </div>
 
-      {/* Navbar */}
+     
       
 
-      {/* Hero Section */}
       <section className="flex flex-col md:flex-row items-center justify-center px-6 md:px-16 py-6">
         {/* Profile Image */}
         <div className="flex justify-center w-full md:w-1/2 mb-6 md:mb-0 mt-16">
@@ -77,9 +76,9 @@ function Profile() {
         </div>
       </section>
 
-      {/* Four Cards Section */}
+      
       <section className="bg-white text-black px-6 py-8 grid grid-cols-2 lg:grid-cols-4 gap-6 font-serif">
-        {/* Card 1: Email */}
+  
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-4 text-center bg-gray-100 hover:shadow-lg transition overflow-auto">
           <FaEnvelope className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Email</h3>
@@ -87,7 +86,7 @@ function Profile() {
           <p className="text-base">contact@techsolutions.com</p>
         </div>
 
-        {/* Card 2: Mobile */}
+   
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaPhone className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Mobile</h3>
@@ -95,14 +94,14 @@ function Profile() {
           <p className="text-base">+999-234-87960</p>
         </div>
 
-        {/* Card 3: Date of Birth */}
+      
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaCalendarAlt className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Date of Birth</h3>
           <p className="text-base">1985-06-18</p>
         </div>
 
-        {/* Card 4: Address */}
+     
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaMapMarkerAlt className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Address</h3>
