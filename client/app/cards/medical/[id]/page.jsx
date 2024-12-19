@@ -10,9 +10,12 @@ import Social from "../../../components/medicalComponents/Social";
 import Footer from "../../../components/medicalComponents/Footer";
 import Mobile from "../../../components/medicalComponents/Mobile"; // Import Mobile Component
 import axios from "axios";
+import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
+import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
 import { useParams } from "next/navigation";
 
-const page = () => {
+const page = ({card,setCard}
+) => {
   const [card, setCard] = useState(null);
   const [isMobile, setIsMobile] = useState(false); // State to track layout
   const params = useParams();
@@ -93,6 +96,9 @@ const page = () => {
           <About card={card.card} />
           <Testimonal card={card.card} />
           <Contact card={card.card} />
+
+          <WhatsAppButton />
+          <ContactCardButton />
           <Social card={card.card} />
           <Footer card={card.card} />
         </>

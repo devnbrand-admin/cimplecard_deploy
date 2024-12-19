@@ -1,49 +1,39 @@
-"use client";
+'use client'
 import React from "react";
-import Footer from "../../../components/astrocomponents/Footer";
-import GuidanceSection from "../../../components/astrocomponents/GuidanceSection";
-import Header from "../../../components/astrocomponents/Header";
-import HeroSection from "../../../components/astrocomponents/HeroSection";
-import PsychicReadings from "../../../components/astrocomponents/PsychicReadings";
-import StayUpdated from "../../../components/astrocomponents/StayUpdated";
-import Testimonials from "../../../components/astrocomponents/Testimonials";
-import "../../../style/astrologer.css";
-import SocialMediaEmbeds from "../../../components/astrocomponents/SocialMediaHandlers";
-import ContactInfo from "../../../components/astrocomponents/ContactUs";
-import WhatsAppButton from "../../../components/astrocomponents/WhatsappContact";
-import ContactCardButton from "../../../components/astrocomponents/ContactCardButton";
+import Bg from "../../../assets/astrologerTemplate/BgImage.png"
+import ProfileCard from "../../../components/AstroComponents/ProfileCard";
+import HeroSection from "../../../components/AstroComponents/HeroSection";
+import ServicesSection from "../../../components/AstroComponents/ServicesSection";
+import Testimonial from "../../../components/AstroComponents/Testimonials";
+import BookingForm from "../../../components/AstroComponents/BookingForm";
+import SocialMediaHandlers from "../../../components/AstroComponents/SocialMediaHandlers";
+import ContactSection from "../../../components/AstroComponents/ContactSection";
+import Gallery from "../../../components/AstroComponents/Gallery";
+import WhatsappContact from "../../../components/AstroComponents/WhatsappContact"
+import ContactCardButton from "../../../components/AstroComponents/ContactCardButton"
 
 const App = () => {
+
   return (
-    <div>
-      {/* Header */}
-      <Header />
-
-      {/* Hero Section */}
+    <div
+      style={{
+        backgroundImage: `url(${Bg.src})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+      className="w-full"
+    >
+      <ProfileCard />
       <HeroSection />
+      <ServicesSection />
+      <Testimonial />
+      <BookingForm />
+      <SocialMediaHandlers />
+      <ContactSection />
+      <Gallery/>
+      <WhatsappContact/>
+      <ContactCardButton/>
 
-      {/* guidance Section */}
-      <GuidanceSection />
-
-      {/* Reading Section */}
-      <PsychicReadings />
-
-      {/* SocialMediaEmbeds Section */}
-      <SocialMediaEmbeds />
-
-      {/* Testimonial Carousel Section */}
-      <Testimonials />
-
-      <ContactInfo />
-      <ContactCardButton />
-
-      <WhatsAppButton />
-
-      {/* Subscribe Section */}
-      <StayUpdated />
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };
