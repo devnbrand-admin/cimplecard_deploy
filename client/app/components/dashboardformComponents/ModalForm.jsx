@@ -193,7 +193,7 @@ export default function ModalForm() {
                             src="../../template1cover.png"
                           />
                           <div className="p-4">
-                            <h4 className="font-bold text-lg">Medical</h4>
+                            <h4 className="font-bold text-lg">Medical </h4>
                             <p className="text-gray-500 text-sm italic">“Leave a Lasting Impression – Your Medical Card, Your Professional Identity!"</p>
                           </div>
                         </div>

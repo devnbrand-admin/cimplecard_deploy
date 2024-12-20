@@ -46,9 +46,9 @@ const HomeComponent = () => {
     }
     return (
         <>
-        <div className="flex flex-col h-100vh ">
+        <div className="flex flex-col h-100vh z-10">
             {/* Top Section */}
-            <div className="relative  text-white h-screen flex justify-center items-center">
+            <div className="relative text-white h-screen flex justify-center items-center">
                 {/* Semi-Circle Container */}
                 <div
                     className="w-[100%] h-[300px] bottom-[150px] md:w-[600px] md:h-[450px] md:bottom-[40px] sm:w-[550px] flex flex-col justify-start items-center absolute"
@@ -116,7 +116,7 @@ const HomeComponent = () => {
                 </div>
             </div>
             <div
-        className="top-[450px] md:block absolute md:top-[233px] z-10 bg-[#e9eafa] w-full md:h-[880px] h-[480px] shadow-lg shadow-black"
+        className="hidden md:block top-[450px]  absolute md:top-[233px] z-10 bg-[#e9eafa] w-full md:h-[880px] h-[480px] shadow-lg shadow-black"
         style={{
           clipPath: "polygon(0 36%, 100% 49%, 100% 36%)",
         }}
