@@ -1,16 +1,261 @@
 'use client';
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setStepData } from '../../../store/cardSlice';
 import { createCard } from '../../utils/cardCreationApi';
 import Sidebar from './Sidebar';
 import {BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsEnvelopeAt, BsImages} from "react-icons/bs";
+import axios from '../../components/api_resources/axios';
 
-export default function ModalForm() {
+const cards = [
+  {
+    id: 1,
+    title: "John Doe",
+    bio: "A free, open content online encyclopedia created through the collaborative efforts",
+    phoneNumbers: ["+1234567890", "+0987654321"],
+    emails: ["john.doe@example.com", "contact@johndoe.dev"],
+    addresses: [
+      "123 Main Street, Springfield",
+      "456 Elm Street, Shelbyville",
+    ],
+    jobTitle: "Senior Developer",
+    companyName: "Tech Innovators Inc.",
+    dateOfBirth: "1990-05-15T00:00:00.000Z",
+    personalSocialMediaLinks: {
+      create: [
+        {
+          url: "https://linkedin.com/in/johndoe",
+          iconUrl: "https://example.com/icons/linkedin.png",
+          platform: "LINKEDIN",
+        },
+        {
+          url: "https://twitter.com/johndoe",
+          iconUrl: "https://example.com/icons/twitter.png",
+          platform: "TWITTER",
+        },
+      ],
+    },
+    companySocialMediaLink: "https://facebook.com/techinnovators",
+    profileImageUrl: "https://example.com/images/johndoe.jpg",
+    templateType: "professional",
+    uniqueUrl: "https://www.wikipedia.org/",
+    qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+    aboutUs:
+      "We deliver top-notch software solutions tailored to your needs.",
+    instagramVideoLink: "https://instagram.com/reel/xyz123",
+    youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+    createdAt: "2024-12-06T14:41:55.517Z",
+    updatedAt: "2024-12-06T14:41:55.517Z",
+    userId: 1,
+  },
+  {
+    id: 2,
+    title: "John Doe",
+    bio: "Software Engineer with a passion for solving complex problems.",
+    phoneNumbers: ["+1234567890", "+0987654321"],
+    emails: ["john.doe@example.com", "contact@johndoe.dev"],
+    addresses: [
+      "123 Main Street, Springfield",
+      "456 Elm Street, Shelbyville",
+    ],
+    jobTitle: "Senior Developer",
+    companyName: "Tech Innovators Inc.",
+    dateOfBirth: "1990-05-15T00:00:00.000Z",
+    personalSocialMediaLinks: {
+      create: [
+        {
+          url: "https://linkedin.com/in/johndoe",
+          iconUrl: "https://example.com/icons/linkedin.png",
+          platform: "LINKEDIN",
+        },
+        {
+          url: "https://twitter.com/johndoe",
+          iconUrl: "https://example.com/icons/twitter.png",
+          platform: "TWITTER",
+        },
+      ],
+    },
+    companySocialMediaLink: "https://facebook.com/techinnovators",
+    profileImageUrl: "https://example.com/images/johndoe.jpg",
+    templateType: "professional",
+    uniqueUrl: "https://munirsiddiqui.vercel.app/",
+    qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+    aboutUs:
+      "We deliver top-notch software solutions tailored to your needs.",
+    instagramVideoLink: "https://instagram.com/reel/xyz123",
+    youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+    createdAt: "2024-12-06T15:41:18.950Z",
+    updatedAt: "2024-12-06T15:41:18.950Z",
+    userId: 1,
+  },
+  {
+    id: 3,
+    title: "John Doe",
+    bio: "A free, open content online encyclopedia created through the collaborative efforts",
+    phoneNumbers: ["+1234567890", "+0987654321"],
+    emails: ["john.doe@example.com", "contact@johndoe.dev"],
+    addresses: [
+      "123 Main Street, Springfield",
+      "456 Elm Street, Shelbyville",
+    ],
+    jobTitle: "Senior Developer",
+    companyName: "Tech Innovators Inc.",
+    dateOfBirth: "1990-05-15T00:00:00.000Z",
+    personalSocialMediaLinks: {
+      create: [
+        {
+          url: "https://linkedin.com/in/johndoe",
+          iconUrl: "https://example.com/icons/linkedin.png",
+          platform: "LINKEDIN",
+        },
+        {
+          url: "https://twitter.com/johndoe",
+          iconUrl: "https://example.com/icons/twitter.png",
+          platform: "TWITTER",
+        },
+      ],
+    },
+    companySocialMediaLink: "https://facebook.com/techinnovators",
+    profileImageUrl: "https://example.com/images/johndoe.jpg",
+    templateType: "professional",
+    uniqueUrl: "https://www.wikipedia.org/",
+    qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+    aboutUs:
+      "We deliver top-notch software solutions tailored to your needs.",
+    instagramVideoLink: "https://instagram.com/reel/xyz123",
+    youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+    createdAt: "2024-12-06T14:41:55.517Z",
+    updatedAt: "2024-12-06T14:41:55.517Z",
+    userId: 1,
+  },
+  {
+    id: 4,
+    title: "John Doe",
+    bio: "Software Engineer with a passion for solving complex problems.",
+    phoneNumbers: ["+1234567890", "+0987654321"],
+    emails: ["john.doe@example.com", "contact@johndoe.dev"],
+    addresses: [
+      "123 Main Street, Springfield",
+      "456 Elm Street, Shelbyville",
+    ],
+    jobTitle: "Senior Developer",
+    companyName: "Tech Innovators Inc.",
+    dateOfBirth: "1990-05-15T00:00:00.000Z",
+    personalSocialMediaLinks: {
+      create: [
+        {
+          url: "https://linkedin.com/in/johndoe",
+          iconUrl: "https://example.com/icons/linkedin.png",
+          platform: "LINKEDIN",
+        },
+        {
+          url: "https://twitter.com/johndoe",
+          iconUrl: "https://example.com/icons/twitter.png",
+          platform: "TWITTER",
+        },
+      ],
+    },
+    companySocialMediaLink: "https://facebook.com/techinnovators",
+    profileImageUrl: "https://example.com/images/johndoe.jpg",
+    templateType: "professional",
+    uniqueUrl: "https://munirsiddiqui.vercel.app/",
+    qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+    aboutUs:
+      "We deliver top-notch software solutions tailored to your needs.",
+    instagramVideoLink: "https://instagram.com/reel/xyz123",
+    youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+    createdAt: "2024-12-06T15:41:18.950Z",
+    updatedAt: "2024-12-06T15:41:18.950Z",
+    userId: 1,
+  },
+  {
+    id: 5,
+    title: "John Doe",
+    bio: "A free, open content online encyclopedia created through the collaborative efforts",
+    phoneNumbers: ["+1234567890", "+0987654321"],
+    emails: ["john.doe@example.com", "contact@johndoe.dev"],
+    addresses: [
+      "123 Main Street, Springfield",
+      "456 Elm Street, Shelbyville",
+    ],
+    jobTitle: "Senior Developer",
+    companyName: "Tech Innovators Inc.",
+    dateOfBirth: "1990-05-15T00:00:00.000Z",
+    personalSocialMediaLinks: {
+      create: [
+        {
+          url: "https://linkedin.com/in/johndoe",
+          iconUrl: "https://example.com/icons/linkedin.png",
+          platform: "LINKEDIN",
+        },
+        {
+          url: "https://twitter.com/johndoe",
+          iconUrl: "https://example.com/icons/twitter.png",
+          platform: "TWITTER",
+        },
+      ],
+    },
+    companySocialMediaLink: "https://facebook.com/techinnovators",
+    profileImageUrl: "https://example.com/images/johndoe.jpg",
+    templateType: "professional",
+    uniqueUrl: "https://www.wikipedia.org/",
+    qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+    aboutUs:
+      "We deliver top-notch software solutions tailored to your needs.",
+    instagramVideoLink: "https://instagram.com/reel/xyz123",
+    youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+    createdAt: "2024-12-06T14:41:55.517Z",
+    updatedAt: "2024-12-06T14:41:55.517Z",
+    userId: 1,
+  },
+  {
+    id: 6,
+    title: "John Doe",
+    bio: "Software Engineer with a passion for solving complex problems.",
+    phoneNumbers: ["+1234567890", "+0987654321"],
+    emails: ["john.doe@example.com", "contact@johndoe.dev"],
+    addresses: [
+      "123 Main Street, Springfield",
+      "456 Elm Street, Shelbyville",
+    ],
+    jobTitle: "Senior Developer",
+    companyName: "Tech Innovators Inc.",
+    dateOfBirth: "1990-05-15T00:00:00.000Z",
+    personalSocialMediaLinks: {
+      create: [
+        {
+          url: "https://linkedin.com/in/johndoe",
+          iconUrl: "https://example.com/icons/linkedin.png",
+          platform: "LINKEDIN",
+        },
+        {
+          url: "https://twitter.com/johndoe",
+          iconUrl: "https://example.com/icons/twitter.png",
+          platform: "TWITTER",
+        },
+      ],
+    },
+    companySocialMediaLink: "https://facebook.com/techinnovators",
+    profileImageUrl: "https://example.com/images/johndoe.jpg",
+    templateType: "professional",
+    uniqueUrl: "https://munirsiddiqui.vercel.app/",
+    qrCodeUrl: "https://example.com/qrcodes/johndoe.png",
+    aboutUs:
+      "We deliver top-notch software solutions tailored to your needs.",
+    instagramVideoLink: "https://instagram.com/reel/xyz123",
+    youtubeVideoLink: "https://youtube.com/watch?v=abc123",
+    createdAt: "2024-12-06T15:41:18.950Z",
+    updatedAt: "2024-12-06T15:41:18.950Z",
+    userId: 1,
+  }
+]
+
+export default function ModalForm({cardId}) {
   const dispatch = useDispatch();
   const [activeStep, setActiveStep] = useState(1);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
+  const [serverError,setServerError] = useState(null)
 
   const [formData, setFormData] = useState({
     templateType: '',
@@ -152,6 +397,98 @@ export default function ModalForm() {
       console.error('Failed to save card:', error);
     }
   };
+
+  const handleUpdate = async(cardId)=>{
+    try {
+      const response = await axios.put(`/api/card/update/${cardId}`,formData)
+      console.log(response,"updateResponse")
+    } catch (error) {
+      console.log(error,"error")
+      setServerError(error)
+      
+    }
+  }
+
+  const getCardDetails = async(cardId)=>{
+    try {
+      console.log("calling api")
+      const response = await cards.filter(card=>cardId===card?.id)
+      // const response = await axios.get(`/api/card/get/${cardId}`)
+      console.log(response,"response")
+      if(response.length>=0){
+
+      
+
+      setFormData({
+        templateType: response[0]?.templateType,
+        firstName: response[0]?.title?.split(' ')[0],
+        middleName: '',
+        lastName: response[0]?.title?.split(' ')[1],
+        companyName: response[0]?.companyName,
+        companyAddress: response[0]?.addresses[0],
+        jobTitle: response[0]?.jobTitle,
+        bio: response[0]?.bio,
+        languageSpoken: '',
+        dateOfBirth: response[0]?.dateOfBirth,
+        phoneNumber: '',
+        phoneNumbers: '',
+        otherPhoneNumber: '',
+        emails: response[0]?.emails[0],
+        otherEmails: '',
+        emergencyName: '',
+        emergencyRelationship: '',
+        emergencyNumber: "",
+        emergencyEmail: '',
+        uniqueUrl: '',
+        companySocialMediaLink: response[0]?.companySocialMediaLink
+,
+        instagramLink: '',
+        personalSocialMediaLinks: {
+            "facebook": "https://facebook.com/dummyprofile",
+            "twitter": "https://twitter.com/dummyprofile",
+            "linkedin": "https://linkedin.com/in/dummyprofile",
+            "instagram": "https://instagram.com/dummyprofile"
+          },
+        githubLink: '',
+        additionalLink: '',
+        productDesc: '',
+        testimonialName: '',
+        testimonialRole: '',
+        testimonialIndustry: '',
+        testimonialMessage: '',
+        businesshoursFrom: '',
+        businesshoursTo: '',
+        businessType: '',
+        profileImageUrl: '',
+        qrCodeUrl: response[0]?.qrCodeUrl,
+        aboutUs: response[0]?.aboutUs,
+        instagramVideoLink: response[0]?.instagramVideoLink,
+        youtubeVideoLink: '',
+      })
+    }
+    } catch (error) {
+      console.log(error,"error")
+      setServerError(error)
+      
+    }
+
+  }
+
+  useEffect(()=>{
+    if(cardId){
+      getCardDetails(cardId)
+
+    }
+  },[cardId])
+  useEffect(()=>{
+    if(cardId){
+      console.log(formData,"f")
+
+
+    }
+  },[formData])
+
+  
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
@@ -1257,8 +1594,9 @@ export default function ModalForm() {
                         Preview Card
                       </button> */}
                       <button 
-                        onClick={handleCreate}
-                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                        Create Card
+                        onClick={cardId ? handleUpdate : handleCreate}
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">  
+                        {cardId ? `Update Card` : `Create Card`}
                       </button>
                     </div>
                 </div>

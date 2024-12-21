@@ -20,8 +20,9 @@ const Card = ({ card }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal open state
   const [isMobile, setIsMobile] = useState(false);
+  const [editId,setEditId] = useState(null)
 
-
+  // console.log(card,"Card")
   const isMobileSize = useMediaQuery({ maxWidth: 768 });
 
   function timeAgo(updatedTime) {
@@ -31,6 +32,10 @@ const Card = ({ card }) => {
     const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
     return `${diffInHours} hour${diffInHours !== 1 ? "s" : ""} ago`;
   }
+
+  useEffect(()=>{
+    console.log(editId,"editId")
+  },[editId])
 
   // Function to open the modal
   const openModal = () => {
@@ -43,6 +48,7 @@ const Card = ({ card }) => {
   };
 
     useEffect(() => {
+      setEditId(null)
       const handleResize = () => setIsMobile(window.innerWidth <= 768);
       handleResize();
       window.addEventListener("resize", handleResize);
@@ -132,7 +138,13 @@ const Card = ({ card }) => {
               backgroundColor: "#AB6BD4",
             }}
             className="flex items-center justify-center px-3 text-white rounded-full focus:outline-none"
-            onClick={openModal} // Open modal on click
+            onClick={()=>{
+
+              openModal();
+              setEditId(card?.id)
+            }
+            
+            } // Open modal on click
           >
             <img
               src="/Assets/Edit.png"
@@ -152,7 +164,7 @@ const Card = ({ card }) => {
             <div className="w-3/4 h-fit"><Provider store={store}>
               <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                 <div className="bg-white p-6 rounded shadow-md" >
-                  {isMobileSize ? <ModalFormMobile  /> : <ModalForm />}
+                  {isMobileSize ? <ModalFormMobile cardId={editId ? editId :null}/> : <ModalForm cardId={editId ? editId :null}/>}
                 </div>
               </div>
             </Provider> </div>
