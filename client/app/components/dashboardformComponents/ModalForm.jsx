@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setStepData } from "../../../store/cardSlice";
 import { createCard } from "../../utils/cardCreationApi";
@@ -90,7 +90,7 @@ export default function ModalForm() {
     youtubeVideoLink: [],
 
     // Testimonials
-    testimonials: testimonials,
+    testimonials: [],
     // Services
     services: [],
 
@@ -176,11 +176,9 @@ export default function ModalForm() {
   };
 
   const handleAddTestimonial = () => {
-    const { name,designation,description,imageUrl } = formData;
-     
-   
-    console.log("Testimonial Data:", name,designation,description,imageUrl);
- 
+    const { name, designation, description, imageUrl } = formData;
+
+    console.log("Testimonial Data:", name, designation, description, imageUrl);
 
     const newTestimonial = {
       name,
@@ -193,7 +191,7 @@ export default function ModalForm() {
 
     setFormData({
       ...formData,
-      testimonials: testimonials
+      testimonials: testimonials,
     });
   };
 
@@ -229,7 +227,7 @@ export default function ModalForm() {
     setFormData((prev) => ({
       ...prev,
       services: productData,
-      testimonial: testimonials,
+      testimonials: testimonials,
       instagramPost: instagramPost,
       instagramReel: instagramReels,
       youtubeVideoLink: youtubeVideo,
@@ -245,8 +243,15 @@ export default function ModalForm() {
     // }
   };
 
+  useEffect(() => {
+    console.log("Updated Form Data:", formData);
+  }, [formData]);
+
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
+    <div
+      className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
+      suppressHydrationWarning
+    >
       <div className="bg-white rounded-lg w-full max-w-7xl h-[80%] flex">
         <Sidebar
           activeStep={activeStep}
@@ -469,7 +474,9 @@ export default function ModalForm() {
                     top: "0",
                     left: "0",
                     right: "0",
-                    backgroundImage: formData.headerImageUrl ? `url(${formData.headerImageUrl})` : "none",
+                    backgroundImage: formData.headerImageUrl
+                      ? `url(${formData.headerImageUrl})`
+                      : "none",
                   }}
                 >
                   <button
@@ -1590,7 +1597,10 @@ export default function ModalForm() {
           )}
 
           {activeStep === 7 && (
-          <TestimonialsSection testimonials={testimonials} setTestimonials={setTestimonials} />
+            <TestimonialsSection
+              testimonials={testimonials}
+              setTestimonials={setTestimonials}
+            />
           )}
 
           {/* {activeStep === 6 && (
