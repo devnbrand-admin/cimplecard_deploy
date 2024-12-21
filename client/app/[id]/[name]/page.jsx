@@ -6,7 +6,6 @@ import MedicalCard from "../../cards/medical/[id]/page";
 import LawyerCard from "../../cards/lawyer/[id]/page";
 import AstrologerCard from "../../cards/astrologer/[id]/page";
 import B2bCard from "../../cards/b2b/[id]/page";
-
 import axios from "axios";
 const Page = () => {
   const params = useParams();

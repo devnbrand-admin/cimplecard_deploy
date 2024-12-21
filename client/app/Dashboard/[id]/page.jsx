@@ -168,11 +168,12 @@ const DashboardPage = () => {
             <Provider store={store}>
               <div
                 className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-                onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
+                // onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
               >
                 <div
                   className="bg-white p-6 rounded shadow-md"
                   // Prevent backdrop click from closing the modal
+                  
                 >
                   {isMobileSize ? <ModalFormMobile /> : <ModalForm />}
                 </div>
