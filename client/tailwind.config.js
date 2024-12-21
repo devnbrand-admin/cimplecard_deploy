@@ -20,7 +20,9 @@ module.exports = {
         sans: ['Poppins', 'Arial', 'Montserrat'],
         Mons:['Montserrat'],
         Cormorant:["Cormorant"],
-        Figtree:["Figtree"]
+        Figtree:["Figtree"],
+        Garamond:["Garamond"],
+        Manrope:["Manrope"]
       },
     },
   },

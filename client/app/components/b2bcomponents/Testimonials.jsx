@@ -117,9 +117,9 @@ function TestimonialCarousel() {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="min-w-full flex-shrink-0 flex justify-center"
+                className="w-full flex-shrink-0 flex justify-center"
               >
-                <div className="bg-white rounded-lg shadow-xl p-12 mx-8 flex items-center space-x-10 max-w-4xl relative h-80">
+                <div className="bg-white rounded-lg shadow-xl p-8 gap-4 mx-8 flex flex-col md:flex-row items-center space-x-10 max-w-4xl relative md:h-72 h-full">
                   {/* Circular Image */}
                   <div className="flex-shrink-0 relative">
                     <div className="w-40 h-40 rounded-full border-4 border-blue-400 overflow-hidden">
@@ -146,9 +146,7 @@ function TestimonialCarousel() {
                     </div>
                   </div>
                 </div>
-                <p className="text-base md:text-lg overflow-clip">
-                  {testimonial.testimonial}
-                </p>
+                
               </div>
             ))}
           </div>

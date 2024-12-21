@@ -29,57 +29,52 @@ export const loginUser = async () => {
 
 export const createCard = async (formData) => {
   try {
-    let token = getTokenFromCookie();
-
-    if (!token) {
-      console.log('Token not found in cookies. Logging in...');
-      token = await loginUser();
-    }
-
+    const tokenString = sessionStorage.getItem("userToken");
+    const tokenObject = JSON.parse(tokenString);
+    const jwtToken = tokenObject.value;  
     
     const requestData = {
-      title: `${formData.firstName} ${formData.middleName} ${formData.lastName}'s Card`,  
-      companyName: [formData.companyName],
-      companyAddress: [formData.companyAddress],
-      jobTitle: [formData.jobTitle],
-      bio: [formData.bio],
-      languageSpoken: [formData.languageSpoken],
-      dateOfBirth: [formData.dateOfBirth],
-      phoneNumber: [formData.phoneNumber],
-      phoneNumbers: [formData.phoneNumbers],
-      otherPhoneNumber: [formData.otherPhoneNumber],
-      emails: [formData.emails],
-      otherEmails: [formData.otherEmails],
-      emergencyName: [formData.emergencyName],
-      emergencyRelationship: [formData.emergencyRelationship],
-      emergencyNumber: [formData.emergencyNumber],
-      emergencyEmail: [formData.emergencyEmail],
-      uniqueUrl: [formData.uniqueUrl],
-      companySocialMediaLink: [formData.companySocialMediaLink],
-      instagramLink: [formData.instagramLink],
-      personalSocialMediaLinks: [formData.personalSocialMediaLinks],
-      githubLink: [formData.githubLink],
-      additionalLink: [formData.additionalLink],
-      productDesc: [formData.productDesc],
-      testimonialName: [formData.testimonialName],
-      testimonialRole: [formData.testimonialRole],
-      testimonialIndustry: [formData.testimonialIndustry],
-      testimonialMessage: [formData.testimonialMessage],
-      businesshoursFrom: [formData.businesshoursFrom],
-      businesshoursTo: [formData.businesshoursTo],
-      businessType: [formData.businessType],
-      profileImageUrl: [formData.profileImageUrl],
-      templateType: [formData.templateType],
-      qrCodeUrl: [formData.qrCodeUrl],
-      aboutUs: [formData.aboutUs],
-      instagramVideoLink: [formData.instagramVideoLink],
-      youtubeVideoLink: [formData.youtubeVideoLink], 
+      title: `${formData.firstName} ${formData.middleName} ${formData.lastName}`,  
+      companyName: formData.companyName,
+      companyAddress: formData.companyAddress,
+      jobTitle: formData.jobTitle,
+      bio: formData.bio,
+      languageSpoken: formData.languageSpoken,
+      dateOfBirth: formData.dateOfBirth,
+      phoneNumber: formData.phoneNumber,
+      phoneNumbers: formData.phoneNumbers,
+      otherPhoneNumber: formData.otherPhoneNumber,
+      emails: formData.emails,
+      otherEmails: formData.otherEmails,
+      emergencyName: formData.emergencyName,
+      emergencyRelationship: formData.emergencyRelationship,
+      emergencyNumber: formData.emergencyNumber,
+      emergencyEmail: formData.emergencyEmail,
+      cardName: formData.title + formData.templateType,
+      companySocialMediaLink: formData.companySocialMediaLink,
+      instagramLink: formData.instagramLink,
+      githubLink: formData.githubLink,
+      additionalLink: formData.additionalLink,
+      productDesc: formData.productDesc,
+      testimonialName: formData.testimonialName,
+      testimonialRole: formData.testimonialRole,
+      testimonialIndustry: formData.testimonialIndustry,
+      testimonialMessage: formData.testimonialMessage,
+      businesshoursFrom: formData.businesshoursFrom,
+      businesshoursTo: formData.businesshoursTo,
+      businessType: formData.businessType,
+      profileImageUrl: formData.profileImageUrl,
+      templateType: formData.templateType,
+      qrCodeUrl: formData.card,
+      aboutUs: formData.aboutUs,
+      instagramVideoLink: formData.instagramVideoLink,
+      youtubeVideoLink: formData.youtubeVideoLink, 
     };
 
 
     const response = await axios.post(API_BASE_URL, requestData, {
       headers: {
-        Authorization: `${token}`,
+        Authorization: `${jwtToken}`,
       },
     });
 

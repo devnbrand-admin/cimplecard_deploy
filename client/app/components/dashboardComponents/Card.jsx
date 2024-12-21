@@ -73,7 +73,7 @@ const Card = ({ card }) => {
             src={card.uniqueUrl}
             title="Scaled Iframe"
             style={{
-              width: `${window.innerWidth <= 768 ? "300vw" : "80vw"}`, // Makes the iframe as wide as the viewport
+              width: `${window?.innerWidth <= 768 ? "300vw" : "80vw"}`, // Makes the iframe as wide as the viewport
               height: "100vh", // Makes the iframe as tall as the viewport
               transform: "scale(0.20)", // Scales down to fit the 250px box
               transformOrigin: "0 0", // Ensures scaling starts from the top-left corner
@@ -135,7 +135,8 @@ const Card = ({ card }) => {
           />
           <button
             style={{
-              backgroundColor: "#AB6BD4",
+              background:
+                "linear-gradient(92.84deg, #707FDD 0.39%, #004AAD 93.99%)",
             }}
             className="flex items-center justify-center px-3 text-white rounded-full focus:outline-none"
             onClick={()=>{

@@ -4,8 +4,7 @@ import { FaLinkedin, FaTwitter, FaFacebook, FaBuilding } from "react-icons/fa";
 import ProfileImage from "../../assets/Profile.jpg";
 import SecondaryImage from "../../assets/Hero_SecondaryImage.png";
 
-
-function HeroSection() {
+function HeroSection({ card }) {
   return (
     <div className="min-h-screen">
       {/* Header Section */}
@@ -16,7 +15,6 @@ function HeroSection() {
             placeholder="Search"
             className="w-[400px] md:w-[700px] py-2 px-4 rounded-md bg-white text-gray-800 placeholder-gray-500 focus:outline-none"
           />
-          
         </div>
         <button className="text-white text-lg font-medium md:ml-[200px] ml-4">
           Home
@@ -33,7 +31,7 @@ function HeroSection() {
             <div className="absolute w-40 h-40 md:w-[380px] md:h-[380px] left-44 top-0 md:left-24 md:top-36 rounded-full overflow-hidden border-[12px] border-[#CFEFFC] ">
               <div className="w-[148px] h-[148px] md:w-[364px] md:h-[364px] rounded-full overflow-hidden border-[10px] border-[#37729D] ">
                 <Image
-                  src={ProfileImage} // Replace with the actual path of the profile image
+                  src={card.profileImageUrl} // Replace with the actual path of the profile image
                   alt="Profile Picture"
                   layout="responsive"
                   width={192}
@@ -45,7 +43,7 @@ function HeroSection() {
             {/* Profile Information */}
             <div className="mt-4 md:ml-80 text-center md:text-left">
               <h1 className="text-5xl md:text-7xl font-bold text-white font-mono ">
-                John Doe
+                {card.title}
               </h1>
 
               <p className="text-xl  md:text-3xl text-white md:mt-2 tracking-wider">

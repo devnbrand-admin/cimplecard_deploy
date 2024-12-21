@@ -1,21 +1,23 @@
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* Tailwind styles for Swiper dots */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 ::-webkit-scrollbar {
     width: 6px; 
     height: fit-content;
+}
+.swiper-pagination-bullet {
+    @apply bg-gray-300 opacity-100 !important; /* Default dot color */
   }
   
-  ::-webkit-scrollbar-thumb {
-    background: #707FDD; 
-    border-radius: 10px; 
-    height: 10px;
+  .swiper-pagination-bullet-active {
+    @apply bg-blue-500 !important; /* Active dot color */
   }
   
   ::-webkit-scrollbar-thumb:hover {
@@ -31,3 +33,9 @@
   .html {
     scroll-behavior: smooth;
   }  
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+

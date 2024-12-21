@@ -2,7 +2,7 @@
 import React from "react";
 import { FaAddressCard } from "react-icons/fa";
 
-function ContactCardButton() {
+function ContactCardButton({ bg }) {
   const contactDetails = {
     fullName: "John Doe",
     role: "Chief Technology Officer",
@@ -12,7 +12,6 @@ function ContactCardButton() {
     address: "123 Tech Street, Silicon Valley, CA, USA",
     website: "https://www.techsolutions.com",
   };
-
 
   const downloadVCF = () => {
     const vcfContent = `BEGIN:VCARD
@@ -36,16 +35,14 @@ END:VCARD`;
 
   return (
     <div>
-
       <div className="fixed bottom-20 right-6 mb-4 z-10">
         <button
-          className="flex items-center justify-center p-5 rounded-full shadow-lg 
-            bg-gradient-to-r from-teal-600 via-teal-700 to-teal-800 
-            text-white hover:scale-110 transform transition-transform duration-300 
-            hover:ring-4 hover:ring-teal-500 hover:shadow-xl hover:shadow-teal-500/50"
+          className="flex items-center justify-center p-[14px] rounded-full shadow-lg ${
+            bg-[#2d0959]
+            text-white hover:scale-105 transform transition-transform duration-300"
           onClick={downloadVCF}
         >
-          <FaAddressCard size={28} className="text-teal-400" />
+          <FaAddressCard size={28} className="text-white" />
         </button>
       </div>
     </div>
