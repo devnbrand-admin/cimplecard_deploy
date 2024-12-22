@@ -5,6 +5,8 @@ import { setStepData } from "../../../store/cardSlice";
 import { createCard } from "../../utils/cardCreationApi";
 import { AddLinkSection } from "./AddLinkSection";
 import Sidebar from "./Sidebar";
+import { MdClose } from "react-icons/md";
+
 import {
   BsTriangle,
   BsPerson,
@@ -21,7 +23,7 @@ import {
 } from "react-icons/bs";
 import { TestimonialsSection } from "./TestimonialSection";
 
-export default function ModalForm() {
+export default function ModalForm({setIsModalOpen,cardId}) {
   const dispatch = useDispatch();
   const [activeStep, setActiveStep] = useState(1);
   const [profileImage, setProfileImage] = useState(null);
@@ -245,8 +247,8 @@ export default function ModalForm() {
       {
         id: 1,
         type: "Operating Hours",
-        from: "9:00 AM",
-        to: "5:00 PM",
+        from: "",
+        to: "",
         cardId: "card1-uuid"
 
       },
@@ -395,13 +397,27 @@ export default function ModalForm() {
   // useEffect(() => {
   //   console.log("Updated Form Data:", formData);
   // }, [formData]);
-
   return (
-    <div
-      className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
-      suppressHydrationWarning
+<div
+  className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
+  suppressHydrationWarning
+>
+  <div
+    className="bg-white relative rounded-lg w-full max-w-7xl h-[80%] flex"
+    onClick={(e) => e.stopPropagation()}
+  >
+    <button
+      className="absolute z-30 right-[5%] top-[5%]  text-black "
+      onClick={(e) => {
+        e.stopPropagation(); 
+        console.log("calling...");
+        setIsModalOpen(false);
+      }}
     >
-      <div className="bg-white rounded-lg w-full max-w-7xl h-[80%] flex">
+      <MdClose  className="text-4xl p-2 text-black" />
+    </button>
+
+
         <Sidebar
           activeStep={activeStep}
           handleStepClick={handleStepClick}

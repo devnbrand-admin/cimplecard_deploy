@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import dynamic from "next/dynamic";
 import { store } from "../../../store/store";
 import { useMediaQuery } from "react-responsive";
+import { MdClose } from "react-icons/md";
 
 const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
@@ -165,7 +166,8 @@ const Card = ({ card }) => {
             <div className="w-3/4 h-fit"><Provider store={store}>
               <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                 <div className="bg-white p-6 rounded shadow-md" >
-                  {isMobileSize ? <ModalFormMobile cardId={editId ? editId :null}/> : <ModalForm cardId={editId ? editId :null}/>}
+
+                  {isMobileSize ? <ModalFormMobile cardId={editId ? editId :null}/> : <ModalForm setIsModalOpen={setIsModalOpen} cardId={editId ? editId :null}/> }
                 </div>
               </div>
             </Provider> </div>
