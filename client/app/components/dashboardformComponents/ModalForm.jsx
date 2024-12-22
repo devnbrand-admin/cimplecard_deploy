@@ -26,83 +26,292 @@ export default function ModalForm() {
   const [activeStep, setActiveStep] = useState(1);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
-  const [testimonials, setTestimonials] = useState([
-    {
-      name: "",
-      designation: "",
-      description: "",
-      imageUrl: "",
-    },
-  ]);
-  const [instagramPost, setInstagramPost] = useState([""]);
-  const [instagramReels, setInstagramReels] = useState([""]);
-  const [youtubeVideo, setYoutubeVideo] = useState([""]);
-  const [images, setImages] = useState([]);
-  const [productData, setProductData] = useState([
-    {
-      name: "",
-      imageUrl: "",
-      serviceUrl: "",
-      description: "",
-    },
-  ]);
+  // const [testimonials, setTestimonials] = useState([
+  //   {
+  //     name: "",
+  //     designation: "",
+  //     description: "",
+  //     imageUrl: "",
+  //   },
+  // ]);
+  // const [instagramPost, setInstagramPost] = useState([""]);
+  // const [instagramReels, setInstagramReels] = useState([""]);
+  // const [youtubeVideo, setYoutubeVideo] = useState([""]);
+  // const [images, setImages] = useState([]);
+  // const [productData, setProductData] = useState([
+  //   {
+  //     name: "",
+  //     imageUrl: "",
+  //     serviceUrl: "",
+  //     description: "",
+  //   },
+  // ]);
 
+  // const [formData, setFormData] = useState({
+  //   // Personal information
+  //   firstName: "",
+  //   middleName: "",
+  //   lastName: "",
+  //   jobTitle: "",
+  //   companyName: "",
+  //   location: "",
+  //   profileImageUrl: "",
+  //   headerImageUrl: "",
+  //   templateType: "",
+  //   cardName: "",
+  //   qrCodeUrl: "",
+  //   aboutUs: "",
+  //   comanyAddress: "",
+  //   dateOfBirth: "",
+  //   bio: "",
+  //   gridType: "Product",
+  //   languageSpoken: "",
+  //   additionalLink: "",
+  //   emails: ["", ""],
+  //   phoneNumbers: ["", "", ""],
+  //   otherEmails: "",
+  //   otherPhoneNumber: "",
+  //   phoneNumber: "",
+
+  //   // Emergency contact information
+  //   emergencyName: "",
+  //   emergencyRelationship: "",
+  //   emergencyNumber: "",
+  //   emergencyEmail: "",
+
+  //   // Social media links
+  //   SocialMediaLink: [], // Array of SocialMediaLink model objects
+  //   companySocialMediaLink: [], // Array of companySocialMediaLink model objects
+
+  //   // Gallery and media
+  //   gallery: [],
+  //   instagramPost: [],
+  //   instagramReel: [],
+  //   youtubeVideoLink: [],
+
+  //   // Testimonials
+  //   testimonials: [],
+  //   // Services
+  //   services: [],
+
+  //   // Business hours
+  //   businessHours: [
+  //     {
+  //       type: "",
+  //       from: "",
+  //       to: "",
+  //     },
+  //   ],
+  // });
+
+// Card Details
+const [cardDetails, setCardDetails] = useState({
+  id: "card1-uuid",
+  title: "John's Business Card",
+  jobTitle: "Software Developer",
+  companyName: "Tech Innovators",
+  location: "San Francisco, CA",
+  profileImageUrl: "https://example.com/profile1.jpg",
+  headerImageUrl: "https://example.com/header1.jpg",
+  templateType: "Modern",
+  cardName: "johns-business-card2",
+  qrCodeUrl: "https://example.com/qrcode.jpg",
+  createdAt: "2024-12-01T10:00:00Z",
+  updatedAt: "2024-12-20T12:00:00Z",
+  userId: "user1-uuid",
+});
+
+// Personal Details
+const [personalDetails, setPersonalDetails] = useState({
+  aboutUs: "A software developer with a passion for coding.",
+  companyAddress: "123 Tech Avenue, San Francisco, CA",
+  dateOfBirth: "1990-05-15",
+  emails: ["john.doe@example.com"],
+  phoneNumbers: ["1234567890"],
+  otherEmails: "other.email@example.com",
+  otherPhoneNumber: "0987654321",
+  phoneNumber: "1234567890",
+  bio: "Specializing in web and mobile app development.",
+  languageSpoken: "English, Spanish",
+});
+
+// Emergency Contact Details
+const [emergencyDetails, setEmergencyDetails] = useState({
+  emergencyEmail: "emergency@example.com",
+  emergencyName: "John's Friend",
+  emergencyNumber: "0987654321",
+  emergencyRelationship: "Friend",
+});
+
+// Links
+const [links, setLinks] = useState({
+  additionalLink: "https://example.com/portfolio",
+  linkedinLink: "https://linkedin.com/in/johndoe",
+  twitterLink: "https://twitter.com/johndoe",
+  instagramLink: "https://instagram.com/johndoe",
+  facebookLink: "https://facebook.com/johndoe",
+  youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
+});
+
+// Gallery
+const [gallery, setGallery] = useState([
+  "https://example.com/photo1.jpg",
+  "https://example.com/photo2.jpg",
+]);
+
+// Services
+const [services, setServices] = useState([
+  {
+    id: 1,
+    name: "Web Development",
+    imageUrl: "https://example.com/service1.jpg",
+    serviceUrl: "https://example.com/webdev",
+    description: "Full-stack web development services.",
+    cardId: "card1-uuid",
+  },
+]);
+
+// Social Media Links
+const [socialMediaLinks, setSocialMediaLinks] = useState([
+  {
+    id: 1,
+    platform: "LinkedIn",
+    url: "https://linkedin.com/in/johndoe",
+    cardId: "card1-uuid",
+    iconUrl: "https://example.com/linkedin-icon.jpg",
+  },
+  {
+    id: 2,
+    platform: "Twitter",
+    url: "https://twitter.com/johndoe",
+    cardId: "card1-uuid",
+    iconUrl: "https://example.com/twitter-icon.jpg",
+  },
+]);
+
+// Company Social Media Links
+const [companySocialMediaLinks, setCompanySocialMediaLinks] = useState([
+  {
+    id: 1,
+    platform: "LinkedIn",
+    url: "https://linkedin.com/in/johndoe",
+    cardId: "card1-uuid",
+    iconUrl: "https://example.com/linkedin-icon.jpg",
+  },
+  {
+    id: 2,
+    platform: "Twitter",
+    url: "https://twitter.com/johndoe",
+    cardId: "card1-uuid",
+    iconUrl: "https://example.com/twitter-icon.jpg",
+  },
+]);
+
+// Testimonials
+const [testimonials, setTestimonials] = useState([
+  {
+    id: 1,
+    name: "Alice Johnson",
+    imageUrl: "https://example.com/testimonial1.jpg",
+    description: "John is a great developer, helped us with our project!",
+    designation: "CEO",
+    createdAt: "2024-12-10T10:00:00Z",
+    cardId: "card1-uuid",
+  },
+]);
+
+// Business Hours
+const [businessHours, setBusinessHours] = useState([
+  {
+    id: 1,
+    type: "Operating Hours",
+    from: "9:00 AM",
+    to: "5:00 PM",
+    cardId: "card1-uuid",
+  },
+]);
+
+  
   const [formData, setFormData] = useState({
     // Personal information
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    jobTitle: "",
-    companyName: "",
-    location: "",
-    profileImageUrl: "",
-    headerImageUrl: "",
-    templateType: "",
-    cardName: "",
-    qrCodeUrl: "",
-    aboutUs: "",
-    comanyAddress: "",
-    dateOfBirth: "",
-    bio: "",
+    firstName: "John",
+    middleName: "A.",
+    lastName: "Doe",
+    jobTitle: "Software Engineer",
+    companyName: "TechCorp",
+    location: "San Francisco, CA",
+    profileImageUrl: "https://via.placeholder.com/100",
+    headerImageUrl: "https://via.placeholder.com/500",
+    templateType: "Modern",
+    cardName: "JohnDoeCard",
+    qrCodeUrl: "https://example.com/qrcode",
+    aboutUs: "We build innovative software solutions.",
+    comanyAddress: "123 Tech Street, San Francisco, CA",
+    dateOfBirth: "1990-01-01",
+    bio: "Passionate about technology and solving problems.",
     gridType: "Product",
-    languageSpoken: "",
-    additionalLink: "",
-    emails: ["", ""],
-    phoneNumbers: ["", "", ""],
-    otherEmails: "",
-    otherPhoneNumber: "",
-    phoneNumber: "",
-
+    languageSpoken: "English, Spanish",
+    additionalLink: "https://example.com/portfolio",
+    emails: ["john.doe@example.com", "john.alt@example.com"],
+    phoneNumbers: ["123-456-7890", "098-765-4321", "555-555-5555"],
+    otherEmails: "john.other@example.com",
+    otherPhoneNumber: "777-777-7777",
+    phoneNumber: "123-456-7890",
+  
     // Emergency contact information
-    emergencyName: "",
-    emergencyRelationship: "",
-    emergencyNumber: "",
-    emergencyEmail: "",
-
+    emergencyName: "Jane Doe",
+    emergencyRelationship: "Spouse",
+    emergencyNumber: "999-999-9999",
+    emergencyEmail: "jane.doe@example.com",
+  
     // Social media links
-    SocialMediaLink: [], // Array of SocialMediaLink model objects
-    companySocialMediaLink: [], // Array of companySocialMediaLink model objects
-
+    SocialMediaLink: [
+      { platform: "LinkedIn", url: "https://linkedin.com/in/johndoe" },
+      { platform: "Twitter", url: "https://twitter.com/johndoe" },
+    ],
+    companySocialMediaLink: [
+      { platform: "Facebook", url: "https://facebook.com/techcorp" },
+      { platform: "Instagram", url: "https://instagram.com/techcorp" },
+    ],
+  
     // Gallery and media
-    gallery: [],
-    instagramPost: [],
-    instagramReel: [],
-    youtubeVideoLink: [],
-
+    gallery: ["https://via.placeholder.com/200", "https://via.placeholder.com/300"],
+    instagramPost: ["https://instagram.com/post1", "https://instagram.com/post2"],
+    instagramReel: ["https://instagram.com/reel1", "https://instagram.com/reel2"],
+    youtubeVideoLink: ["https://youtube.com/video1", "https://youtube.com/video2"],
+  
     // Testimonials
-    testimonials: [],
-    // Services
-    services: [],
-
-    // Business hours
-    businessHours: [
+    testimonials: [
       {
-        type: "",
-        from: "",
-        to: "",
+        name: "John Doe",
+        designation: "CEO",
+        description: "This platform has been a game-changer for our business.",
+        imageUrl: "https://via.placeholder.com/150",
       },
     ],
+  
+    // Services
+    services: [
+      {
+        name: "Web Development",
+        description: "Building responsive and modern websites.",
+        url: "https://example.com/web-development",
+      },
+      {
+        name: "App Development",
+        description: "Creating scalable mobile applications.",
+        url: "https://example.com/app-development",
+      },
+    ],
+  
+    // Business hours
+    businessHours: [
+      { type: "Monday", from: "09:00 AM", to: "05:00 PM" },
+      { type: "Tuesday", from: "09:00 AM", to: "05:00 PM" },
+    ],
   });
+  
+  
 
   const steps = [
     { id: 1, label: "Choose Template", icon: <BsTriangle /> },
@@ -234,13 +443,13 @@ export default function ModalForm() {
       gallery: images,
     }));
     console.log("Form Data:", formData);
-    // try {
-    //   const response = await createCard(formData);
-    //   console.log("Card saved successfully:", response);
-    //   dispatch(setCardData(formData)); // Update Redux store
-    // } catch (error) {
-    //   console.error("Failed to save card:", error);
-    // }
+    try {
+      const response = await createCard(formData);
+      console.log("Card saved successfully:", response);
+      dispatch(setCardData(formData)); 
+    } catch (error) {
+      console.error("Failed to save card:", error);
+    }
   };
 
   useEffect(() => {

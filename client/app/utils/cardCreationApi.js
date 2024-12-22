@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../components/api_resources/axios';
 
 const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/card/create`;
 
@@ -9,7 +9,7 @@ export const loginUser = async () => {
     const password = "";
 
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,
+      `/api/user/login`,
       { email, password },
       { headers: { "Content-Type": "application/json" } }
     );
@@ -72,7 +72,7 @@ export const createCard = async (formData) => {
     };
 
 
-    const response = await axios.post(API_BASE_URL, requestData, {
+    const response = await axios.post("/api/card/create", requestData, {
       headers: {
         Authorization: `${jwtToken}`,
       },

@@ -58,7 +58,7 @@ const DashboardPage = () => {
   useEffect(() => {
     const tokenString = sessionStorage.getItem("userToken");
     const tokenObject = JSON.parse(tokenString);
-    const jwtToken = tokenObject.value;
+    const jwtToken = tokenObject?.value;
     const fetchUserDetails = async () => {
       try {
         const userDetails = await getUserDetails(jwtToken);

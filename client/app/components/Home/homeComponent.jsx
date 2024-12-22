@@ -57,7 +57,7 @@ const HomeComponent = () => {
         >
           {/* Logo */}
           <div
-            className="-mt-[150px] sm:-mt-[70px] z-20 w-[130px] h-[130px] flex justify-center items-center mb-3"
+            className="-mt-[150px] sm:-mt-[70px] z-30 w-[130px] h-[130px] flex justify-center items-center mb-3"
             style={{ borderRadius: "50%" }}
           >
             <Image src={logoicon} alt="Logo" />
@@ -103,11 +103,17 @@ const HomeComponent = () => {
       </div>
 
       {/* Additional Sections */}
-      <div className="hidden md:block top-[450px] absolute md:top-[233px] z-10 bg-[#e9eafa] w-full md:h-[880px] h-[480px] shadow-lg shadow-black">
+
+      <div
+      className="hidden md:block top-[132px] absolute  z-20 bg-[#e9eafa]  w-full md:h-[880px] h-[480px] shadow-lg shadow-black"
+        style={{
+          clipPath: "polygon(0 48%, 100% 59%, 100% 45%)",
+        }}
+      >
         <div
           className="absolute inset-0 shadow-lg shadow-black"
           style={{
-            clipPath: "polygon(0 36%, 100% 49%, 100% 36%)",
+            clipPath: "polygon(0 48%, 100% 59%, 100% 45%)",
           }}
         />
       </div>

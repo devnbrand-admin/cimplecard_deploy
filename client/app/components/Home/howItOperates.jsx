@@ -10,10 +10,6 @@ import socailIcon from "../../assets/home/howit/socailIcon.png"
 import supportIcon from "../../assets/home/howit/supportIcon.png"
 
 
-
-
-
-
 const HowItOperates = () => {
   const features = [
     { title: 'CLICK TO CALL', description: 'Your customers will reach out to you by just clicking on your phone number.',icon:callIcon },

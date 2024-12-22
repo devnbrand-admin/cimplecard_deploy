@@ -67,7 +67,7 @@ const Card = ({ card }) => {
       >
         <div
           className="relative w-56 h-full group"
-          onClick={() => window.open(card.uniqueUrl, "_blank")}
+          onClick={() => window?.open(card.uniqueUrl, "_blank")}
         >
           <iframe
             src={card.uniqueUrl}
