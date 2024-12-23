@@ -6,7 +6,6 @@ import MedicalCard from "../../cards/medical/[id]/page";
 import LawyerCard from "../../cards/lawyer/[id]/page";
 import AstrologerCard from "../../cards/astrologer/[id]/page";
 import B2bCard from "../../cards/b2b/[id]/page";
-
 import axios from "axios";
 const Page = () => {
   const params = useParams();
@@ -16,13 +15,7 @@ const Page = () => {
     try {
       const response = await axios.get(
         `https://cimple-card.onrender.com/api/card/get/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
-          withCredentials: true,
-        }
+        {}
       );
       console.log("respos: ", response.data);
       return response.data;
@@ -34,24 +27,10 @@ const Page = () => {
     }
   };
 
-  const loginUser = async (email, password) => {
-    try {
-      const response = await axios.post(
-        `https://cimple-card.onrender.com/api/user/login`,
-        { email, password },
-        { headers: { "Content-Type": "application/json" } }
-      );
-      return response.data.user.token; // Return token
-    } catch (error) {
-      throw new Error(error.response?.data?.message || "Login failed");
-    }
-  };
-  // Usage in useEffect
   useEffect(() => {
     const fetchCardDetails = async () => {
       try {
-        const token = await loginUser("amanu0181@gmail.com", "12345");
-        const res = await getCardDetails(token);
+        const res = await getCardDetails();
         console.log(res);
         setCard(res);
       } catch (err) {
@@ -81,7 +60,7 @@ const Page = () => {
         )
       ) : (
         <div>Loading...</div>
-      )} 
+      )}
     </>
   );
 };

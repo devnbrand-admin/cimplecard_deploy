@@ -3,6 +3,7 @@ import Image from "next/image";
 import teamImage from "../../assets/about/coupleImage.png";
 import logoIcon from "../../assets/about/coupleImage.png";
 import NavbarComponent from "../navbar/Navbar";
+import Link from "next/link";
 
 export const handleJoinSignLoignfn = () => {
 
@@ -13,12 +14,14 @@ export const handleJoinSignLoignfn = () => {
         <span className="font-semibold text-nowrap md:text-wrap">Don't be left out</span>
       </p>
       <div className="w-full md:w-auto mt-2 md:mt-0 flex justify-between  md:gap-x-3">
-      <button className=" bg-[#3342a2] text-nowrap text-white  py-1 md:py-2 px-3 md:px-6 rounded-full font-bold">
+<Link href="/auth">    <button className=" bg-[#3342a2] text-nowrap text-white  py-1 md:py-2 px-3 md:px-6 rounded-full font-bold">
         Sign Up
       </button>
-      <button className="bg-white text-nowrap  text-[#3342a2] border-[1px] py-1 md:py-2 px-3 md:px-6 rounded-full font-bold">
+      </Link>  
+      <Link href="/auth"> <button className="bg-white text-nowrap  text-[#3342a2] border-[1px] py-1 md:py-2 px-3 md:px-6 rounded-full font-bold">
         Log In
       </button>
+      </Link>  
       </div>
     </div>
   );

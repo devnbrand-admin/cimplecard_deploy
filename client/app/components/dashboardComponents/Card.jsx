@@ -1,13 +1,31 @@
 "use client";
 
-import { useState } from "react"; // For managing modal state
+import { useEffect, useState } from "react"; // For managing modal state
 import { useParams, useRouter } from "next/navigation"; // For handling dynamic params
+import { Provider } from "react-redux";
+import dynamic from "next/dynamic";
+import { store } from "../../../store/store";
+import { useMediaQuery } from "react-responsive";
+import { MdClose } from "react-icons/md";
+import axios from "../api_resources/axios";
+
+const ModalForm = dynamic(() =>
+  import("../../components/dashboardformComponents/ModalForm")
+);
+const ModalFormMobile = dynamic(() =>
+  import("../../components/dashboardformComponents/ModalFormMobile")
+);
 
 const Card = ({ card }) => {
   const { id } = useParams(); // Dynamically access the `id` parameter from the route
   const router = useRouter(); // For navigation in Next.js
 
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal open state
+  const [isMobile, setIsMobile] = useState(false);
+  const [editId,setEditId] = useState(null)
+
+  // console.log(card,"Card")
+  const isMobileSize = useMediaQuery({ maxWidth: 768 });
 
   function timeAgo(updatedTime) {
     const currentTime = new Date().getTime();
@@ -16,6 +34,8 @@ const Card = ({ card }) => {
     const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
     return `${diffInHours} hour${diffInHours !== 1 ? "s" : ""} ago`;
   }
+
+
 
   // Function to open the modal
   const openModal = () => {
@@ -26,6 +46,16 @@ const Card = ({ card }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+    useEffect(() => {
+      setEditId(null)
+      const handleResize = () => setIsMobile(window.innerWidth <= 768);
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
 
   return (
     <div className="w-80 flex-col relative m-3 rounded-xl bg-white">
@@ -39,13 +69,13 @@ const Card = ({ card }) => {
       >
         <div
           className="relative w-56 h-full group"
-          onClick={() => window.open(card.uniqueUrl, "_blank")}
+          onClick={() => window?.open(card.uniqueUrl, "_blank")}
         >
           <iframe
             src={card.uniqueUrl}
             title="Scaled Iframe"
             style={{
-              width: `${window.innerWidth <= 768 ? "300vw" : "80vw"}`, // Makes the iframe as wide as the viewport
+              width: `${window?.innerWidth <= 768 ? "300vw" : "80vw"}`, // Makes the iframe as wide as the viewport
               height: "100vh", // Makes the iframe as tall as the viewport
               transform: "scale(0.20)", // Scales down to fit the 250px box
               transformOrigin: "0 0", // Ensures scaling starts from the top-left corner
@@ -107,17 +137,24 @@ const Card = ({ card }) => {
           />
           <button
             style={{
-              backgroundColor: "#AB6BD4",
+              background:
+                "linear-gradient(92.84deg, #707FDD 0.39%, #004AAD 93.99%)",
             }}
             className="flex items-center justify-center px-3 text-white rounded-full focus:outline-none"
-            onClick={openModal} // Open modal on click
+            onClick={()=>{
+
+              openModal();
+              setEditId(card?.id)
+            }
+            
+            } // Open modal on click
           >
             <img
               src="/Assets/Edit.png"
               alt="Edit Icon"
               className="w-5 h-5 mr-4"
             />
-            <span>Edit this File</span>
+            <span>Edit this File</span> 
           </button>
         </div>
       </div>
@@ -126,8 +163,15 @@ const Card = ({ card }) => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white flex flex-col p-6 rounded-lg w-3/4 h-fit">
-            <h2 className="text-xl font-bold mb-4">Edit Card File</h2>
-            <div className="w-3/4 h-fit"> {JSON.stringify(card, null, 2)}</div>
+            <h2 className="text-xl font-bold mb-4">Edit Card File </h2>
+            <div className="w-3/4 h-fit"><Provider store={store}>
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                <div className="bg-white p-6 rounded shadow-md" >
+
+                  {isMobileSize ? <ModalFormMobile cardId={editId ? editId :null}/> : <ModalForm setIsModalOpen={setIsModalOpen} cardId={editId ? editId :null}/> }
+                </div>
+              </div>
+            </Provider> </div>
             <div className="flex justify-end">
               <button onClick={closeModal} className="text-sm text-red-500">
                 Close
