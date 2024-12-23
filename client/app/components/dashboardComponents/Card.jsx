@@ -72,7 +72,7 @@ const Card = ({ card }) => {
           onClick={() => window?.open(card.uniqueUrl, "_blank")}
         >
           <iframe
-            src={card.uniqueUrl}
+            src={card.qrCodeUrl}
             title="Scaled Iframe"
             style={{
               width: `${window?.innerWidth <= 768 ? "300vw" : "80vw"}`, // Makes the iframe as wide as the viewport
