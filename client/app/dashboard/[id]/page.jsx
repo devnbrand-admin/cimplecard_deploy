@@ -15,7 +15,7 @@ const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
 );
 const ModalFormMobile = dynamic(() =>
-  import("../../components/dashboardformComponents/ModalFormMobile")
+  import("../../components/dashboardformComponents/ModalFormMobile", { ssr: false })
 );
 
 const DashboardPage = () => {
