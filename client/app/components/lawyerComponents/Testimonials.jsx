@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import TestimonialImage from "../../assets/lawyerTemplate/Testimonial.png";
 import testimonials from "../../data/LawyerTemplate/testimonial.json";
 
-const Testimonials = () => {
+const Testimonials = ({card}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

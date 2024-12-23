@@ -2,10 +2,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import MedicalCard from "../../cards/medical_card/[id]/page";
-import LawyerCard from "../../cards/b2b/[id]/page";
+import MedicalCard from "../../cards/medical/[id]/page";
+import LawyerCard from "../../cards/lawyer/[id]/page";
 import AstrologerCard from "../../cards/astrologer/[id]/page";
 import B2bCard from "../../cards/b2b/[id]/page";
+
 import axios from "axios";
 const Page = () => {
   const params = useParams();
@@ -61,25 +62,27 @@ const Page = () => {
     fetchCardDetails();
   }, []);
   const TEMPLATE_MAP = {
-    modern: MedicalCard,
-    lawyer: LawyerCard,
+    lawyer: MedicalCard,
+    modern: LawyerCard,
     astrologer: AstrologerCard,
     b2b: B2bCard,
   };
-  
-  
+
   return (
     <>
       {card ? (
         TEMPLATE_MAP[card?.card.templateType.toLowerCase()] ? (
-          React.createElement(TEMPLATE_MAP[card?.card.templateType.toLowerCase()], { card, setCard })
+          React.createElement(
+            TEMPLATE_MAP[card?.card.templateType.toLowerCase()],
+            { card, setCard }
+          )
         ) : (
           <div>Card type not supported</div>
         )
       ) : (
         <div>Loading...</div>
-      )}
+      )} 
     </>
   );
-}
-export default Page;  
+};
+export default Page;

@@ -2,7 +2,7 @@ import React from "react";
 import About from "../../assets/lawyerTemplate/About.png"; // Replace with your correct image path
 import Image from "next/image";
 
-function AboutSection() {
+function AboutSection({card}) {
   return (
     <section className="relative bg-white text-[#121F2E] px-6 md:px-20 py-32">
       {/* Background Image */}
@@ -39,6 +39,8 @@ function AboutSection() {
           <br />
           Committed to protecting and empowering his clients, Arjun Mehra stands
           for integrity, precision, and results.
+          <br/>
+          {card.aboutUs}
         </p>
       </div>
     </section>

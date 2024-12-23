@@ -19,7 +19,7 @@ const servicesData = [
   { id: 4, title: "Real Estate Law", image: realEstateLawImg },
 ];
 
-const ServicesSection = () => {
+const ServicesSection = ({card}) => {
   return (
     <section className="py-10 px-4 bg-white relative">
       {/* Title */}

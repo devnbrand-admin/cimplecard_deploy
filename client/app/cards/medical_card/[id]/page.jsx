@@ -1,3 +1,4 @@
+"use client"
 import Header from "../../../components/MedicalCardComponents/Header/Header";
 import Socials from "../../../components/MedicalCardComponents/Socials/Socials";
 import Contact from "../../../components/MedicalCardComponents/Contact/Contact";

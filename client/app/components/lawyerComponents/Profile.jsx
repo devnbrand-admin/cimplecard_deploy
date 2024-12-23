@@ -12,7 +12,8 @@ import {
 import profileImage from "../../assets/lawyerTemplate/ProfileImage.png";
 import bgImage from "../../assets/lawyerTemplate/BackgroundImage.png";
 
-function Profile() {
+function Profile({ card }) {
+
   return (
     <div className="relative bg-[#121F2E] text-white">
      
@@ -26,15 +27,14 @@ function Profile() {
         />
       </div>
 
-     
-      
+      {/* Navbar */}
 
       <section className="flex flex-col md:flex-row items-center justify-center px-6 md:px-16 py-6">
         {/* Profile Image */}
         <div className="flex justify-center w-full md:w-1/2 mb-6 md:mb-0 mt-16">
           <div className="relative w-[250px] h-[250px] md:w-[350px] md:h-[350px] border-[10px] md:border-[14px] border-[#CB935D] rounded-full overflow-hidden">
             <Image
-              src={profileImage}
+              src={card.profileImageUrl}
               alt="Profile"
               layout="fill"
               objectFit="cover"
@@ -44,12 +44,13 @@ function Profile() {
 
         {/* Content Section */}
         <div className="w-full md:w-1/2 text-center md:text-left">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-8 font-serif">
-            Arjun Mehra
+          <h1 className="text-3xl md:text-6xl font-bold mb-4 md:mb-8 font-Garamond">
+            {card.title}
           </h1>
           <h2 className="text-lg md:text-2xl md:mb-2">
-            Expert in Corporate Law & Civil Litigation
+            {card.businessType} at {card.companyName}
           </h2>
+          {/* Location is not added in data */}
           <p className="text-base md:text-xl mb-6">New Delhi, India</p>
 
           {/* Social Media Links */}
@@ -82,31 +83,31 @@ function Profile() {
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-4 text-center bg-gray-100 hover:shadow-lg transition overflow-auto">
           <FaEnvelope className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Email</h3>
-          <p className="text-base">johndoe@techsolutions.com</p>
-          <p className="text-base">contact@techsolutions.com</p>
+          <p className="text-base">{card.emails}</p>
+          <p className="text-base">{card.otherEmails}</p>
+          
         </div>
 
    
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaPhone className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Mobile</h3>
-          <p className="text-base">+1-234-667-9876</p>
-          <p className="text-base">+999-234-87960</p>
+          <p className="text-base">{card.emergencyNumber}</p>
+          <p className="text-base">{card.otherPhoneNumber}</p>
         </div>
 
       
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaCalendarAlt className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Date of Birth</h3>
-          <p className="text-base">1985-06-18</p>
+          <p className="text-base">{card.dateOfBirth}</p>
         </div>
 
      
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaMapMarkerAlt className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Address</h3>
-          <p className="text-base">1234 Elm Street, Springfield, IL</p>
-          <p className="text-base">56744, Queenstreet, IL</p>
+          <p className="text-base">{card.companyAddress}</p>
         </div>
       </section>
     </div>

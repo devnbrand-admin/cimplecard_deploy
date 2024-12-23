@@ -28,16 +28,18 @@ const About = ({ card }) => {
           <span className="mt-4 text-lg">
             {card.aboutUs}
             <p className="font-semibold">{card.bio} </p>
-            As a strong communicator and team player, Dr. Owusu works seamlessly
-            with other healthcare professionals to ensure comprehensive and
-            coordinated care. He regularly attends conferences and workshops to
-            stay current with the latest developments in his field.
+            PLaceholder: As a strong communicator and team player, Dr. Owusu
+            works seamlessly with other healthcare professionals to ensure
+            comprehensive and coordinated care. He regularly attends conferences
+            and workshops to stay current with the latest developments in his
+            field.
             <p className="font-semibold">
-              In conclusion, Dr. Kwame Owusu is a highly experienced and skilled
-              medical professional who provides exceptional care to his
-              patients. His commitment to staying up-to-date with the latest
-              medical research and technologies ensures that his patients
-              receive the most effective and up-to-date treatments available.
+              Placeholder: In conclusion, Dr. Kwame Owusu is a highly
+              experienced and skilled medical professional who provides
+              exceptional care to his patients. His commitment to staying
+              up-to-date with the latest medical research and technologies
+              ensures that his patients receive the most effective and
+              up-to-date treatments available.
             </p>
           </span>
         </div>

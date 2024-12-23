@@ -6,7 +6,7 @@ import Navbar from "./components/navbar/Navbar";
 
 export default function Home() {
   return (
-    <div className="bg-center text-white h-screen flex flex-col overflow-hidden">
+    <div className="bg-center text-white h-auto flex flex-col overflow-hidden">
       {/* Navbar */}
       <div className="flex-shrink-0">
         <Navbar />
