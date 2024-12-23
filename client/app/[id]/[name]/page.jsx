@@ -40,6 +40,7 @@ const Page = () => {
 
     fetchCardDetails();
   }, []);
+  console.log(card)
   const TEMPLATE_MAP = {
     modern: MedicalCard,
     lawyer: LawyerCard,

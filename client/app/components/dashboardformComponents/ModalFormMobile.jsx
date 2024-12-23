@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setStepData } from '../../../store/cardSlice';
 import { createCard } from '../../utils/cardCreationApi';
 import "../../style/cardCreation.css"
-import {BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsEnvelopeAt, BsImages} from "react-icons/bs";
+import { BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsEnvelopeAt, BsImages } from "react-icons/bs";
 
 export default function ModalForm() {
   const dispatch = useDispatch();
@@ -138,7 +138,7 @@ export default function ModalForm() {
   const handleSave = () => {
     // Save current step data to Redux
     dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
-  
+
     // Move to the next step
     if (activeStep < steps.length) {
       if (activeStep === 9) {
@@ -150,7 +150,7 @@ export default function ModalForm() {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await createCard(formData);
       console.log('Card saved successfully:', response);
@@ -163,34 +163,37 @@ export default function ModalForm() {
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
-  
-          
+
+
         {activeStep === 1 && (
-          <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-              {/* Top SVG (fixed to the bottom edge, with a gap from other containers) */}
-              <img 
-                src="../../ModalMobileTop.svg" 
-                alt="Top SVG" 
-                className="w-full h-auto translate-y-[calc(-25%+1rem)]" 
-              />
+          <div className="bg-white w-full  relative overflow-hidden">
+            <div className='sticky z-20 !max-h-[220px] top-0'>
+              <div className="sticky  pointer-events-none">
+                {/* Top SVG (fixed to the bottom edge, with a gap from other containers) */}
+                <img
+                  src="../../ModalMobileTop.svg"
+                  alt="Top SVG"
+                  className="w-full h-auto translate-y-[-25%] md:translate-y-[-20%] lg:translate-y-[-15%] transition-transform duration-300"
+                />
+                {/* Step SVG and Header Text Container */}
+                <div className="absolute left-0 right-0 top-2  z-30 flex flex-col items-center justify-center">
+                  {/* Step SVG (new SVG) */}
+                  <img
+                    src="../../CimpleCardLogo.svg"
+                    alt="Step SVG"
+                    className="w-[45%] h-auto mb-4 md:w-[35%] lg:w-[30%] transition-all duration-300"
+                  />
+                  {/* Header Text */}
+                  <h1 className="text-xl font-semibold text-[#707FDD] text-center px-4">
+                    {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
+                  </h1>
+                </div>
+              </div>
+
             </div>
 
-            {/* Step SVG and Header Text Container */}
-            <div className="absolute top-8 left-0 right-0 z-30 flex flex-col items-center justify-center">
-              {/* Step SVG (new SVG) */}
-              <img 
-                src="../../CimpleCardLogo.svg" 
-                alt="Step SVG" 
-                className="w-[45%] h-auto" 
-              />
-              {/* Header Text */}
-              <h1 className="text-xl font-semibold text-[#707FDD]">
-                {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
-              </h1>
-            </div>
 
-            <div className="mt-20 bg-white top-10 w-full h-full flex relative overflow-hidden">
+            <div className="flex-[10] bg-white w-full h-full flex relative overflow-hidden">
               {/* Left SVG */}
               <div className="absolute left-0 top-0 bottom-0 flex items-center justify-center w-[6rem]">
                 <img src="../../ModalMobileLeft.svg" alt="Left SVG" className="h-[56%] w-full" />
@@ -198,9 +201,9 @@ export default function ModalForm() {
 
               {/* Form Container */}
               <div className="relative flex-1 mx-auto max-w-[60%] flex items-start justify-center overflow-scroll h-[90%] z-10">
-                <div className="w-full space-y-6 px-4 py-10 mt-[12rem]">
-                <div className="grid grid-cols-1 gap-2 mt-4">
-                    
+                <div className="w-full space-y-6 px-4">
+                  <div className="grid grid-cols-1 gap-2 mt-4">
+
                     {/* Card 1 */}
                     <div className="w-full sm:w-80 mx-auto aspect-w-1 aspect-h-1">
                       <a href="https://example.com/template1" target="_blank" rel="noopener noreferrer">
@@ -306,7 +309,7 @@ export default function ModalForm() {
                   <div className="py-6 flex justify-end space-x-2">
 
                     {/* Save Button */}
-                    <button 
+                    <button
                       onClick={handleSave}
                       className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
                       Save
@@ -326,18 +329,18 @@ export default function ModalForm() {
         {activeStep === 2 && (
           <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-              <img 
-                src="../../ModalMobileTop.svg" 
-                alt="Top SVG" 
-                className="w-full h-auto translate-y-[calc(-25%+1rem)]" 
+              <img
+                src="../../ModalMobileTop.svg"
+                alt="Top SVG"
+                className="w-full h-auto translate-y-[calc(-25%+1rem)]"
               />
             </div>
 
             <div className="absolute top-0 left-0 right-0 z-30 flex flex-col items-center justify-center">
-              <img 
-                src="../../ContactDetails.svg" 
-                alt="Step SVG" 
-                className="w-[56%] h-auto" 
+              <img
+                src="../../ContactDetails.svg"
+                alt="Step SVG"
+                className="w-[56%] h-auto"
               />
               <h1 className="text-xl font-semibold text-[#707FDD]">
                 {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
@@ -406,7 +409,7 @@ export default function ModalForm() {
                       Go Back
                     </button>
 
-                    <button 
+                    <button
                       onClick={handleSave}
                       className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
                       Save
@@ -426,18 +429,18 @@ export default function ModalForm() {
         {activeStep === 3 && (
           <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-              <img 
-                src="../../ModalMobileTop.svg" 
-                alt="Top SVG" 
-                className="w-full h-auto translate-y-[calc(-25%+1rem)]" 
+              <img
+                src="../../ModalMobileTop.svg"
+                alt="Top SVG"
+                className="w-full h-auto translate-y-[calc(-25%+1rem)]"
               />
             </div>
 
             <div className="absolute top-0 left-0 right-0 z-30 flex flex-col items-center justify-center">
-              <img 
-                src="../../ContactDetails.svg" 
-                alt="Step SVG" 
-                className="w-[56%] h-auto" 
+              <img
+                src="../../ContactDetails.svg"
+                alt="Step SVG"
+                className="w-[56%] h-auto"
               />
               <h1 className="text-xl font-semibold text-[#707FDD]">
                 {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
@@ -506,7 +509,7 @@ export default function ModalForm() {
                       Go Back
                     </button>
 
-                    <button 
+                    <button
                       onClick={handleSave}
                       className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
                       Save
@@ -526,18 +529,18 @@ export default function ModalForm() {
         {activeStep === 4 && (
           <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-              <img 
-                src="../../ModalMobileTop.svg" 
-                alt="Top SVG" 
-                className="w-full h-auto translate-y-[calc(-25%+1rem)]" 
+              <img
+                src="../../ModalMobileTop.svg"
+                alt="Top SVG"
+                className="w-full h-auto translate-y-[calc(-25%+1rem)]"
               />
             </div>
 
             <div className="absolute top-0 left-0 right-0 z-30 flex flex-col items-center justify-center">
-              <img 
-                src="../../SocialMediaLinks.svg" 
-                alt="Step SVG" 
-                className="w-[60%] h-auto" 
+              <img
+                src="../../SocialMediaLinks.svg"
+                alt="Step SVG"
+                className="w-[60%] h-auto"
               />
               <h1 className="text-xl font-semibold text-[#707FDD]">
                 {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
@@ -620,7 +623,7 @@ export default function ModalForm() {
                       Go Back
                     </button>
 
-                    <button 
+                    <button
                       onClick={handleSave}
                       className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
                       Save
@@ -635,22 +638,22 @@ export default function ModalForm() {
             </div>
           </div>
         )}
-        
+
         {activeStep === 5 && (
           <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-              <img 
-                src="../../ModalMobileTop.svg" 
-                alt="Top SVG" 
-                className="w-full h-auto translate-y-[calc(-25%+1rem)]" 
+              <img
+                src="../../ModalMobileTop.svg"
+                alt="Top SVG"
+                className="w-full h-auto translate-y-[calc(-25%+1rem)]"
               />
             </div>
 
             <div className="absolute top-4 left-0 right-0 z-30 flex flex-col items-center justify-center">
-              <img 
-                src="../../Product&Services.svg" 
-                alt="Step SVG" 
-                className="w-[50%] h-auto pb-4" 
+              <img
+                src="../../Product&Services.svg"
+                alt="Step SVG"
+                className="w-[50%] h-auto pb-4"
               />
               <h1 className="text-xl font-semibold text-[#707FDD]">
                 {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
@@ -681,7 +684,7 @@ export default function ModalForm() {
                     style={{
                       backgroundColor: '#FFFFFF',
                       width: '100%',
-                      height: '16rem', 
+                      height: '16rem',
                       overflowY: 'scroll',
                       // padding: '20px',
                     }}
@@ -702,7 +705,7 @@ export default function ModalForm() {
                             borderRadius: '8px',
                           }}
                         >
-                          <div className="flex-1" style={{ maxWidth: '80%',  paddingBottom: '6px' }}>
+                          <div className="flex-1" style={{ maxWidth: '80%', paddingBottom: '6px' }}>
                             <h1
                               className="text-[#787F89] text-sm mb-1"
                               style={{
@@ -766,7 +769,7 @@ export default function ModalForm() {
                       Go Back
                     </button>
 
-                    <button 
+                    <button
                       onClick={handleSave}
                       className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
                       Save
@@ -781,23 +784,23 @@ export default function ModalForm() {
             </div>
           </div>
         )}
-        
+
 
         {activeStep === 6 && (
           <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-              <img 
-                src="../../ModalMobileTop.svg" 
-                alt="Top SVG" 
-                className="w-full h-auto translate-y-[calc(-25%+1rem)]" 
+              <img
+                src="../../ModalMobileTop.svg"
+                alt="Top SVG"
+                className="w-full h-auto translate-y-[calc(-25%+1rem)]"
               />
             </div>
 
             <div className="absolute top-4 left-0 right-0 z-30 flex flex-col items-center justify-center">
-              <img 
-                src="../../Testimonials.svg" 
-                alt="Step SVG" 
-                className="w-[56%] h-auto" 
+              <img
+                src="../../Testimonials.svg"
+                alt="Step SVG"
+                className="w-[56%] h-auto"
               />
               <h1 className="text-xl font-semibold text-[#707FDD]">
                 {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
@@ -816,7 +819,7 @@ export default function ModalForm() {
                     style={{
                       backgroundColor: '#FFFFFF',
                       width: '100%',
-                      height: '16rem', 
+                      height: '16rem',
                       overflowY: 'scroll',
                       // padding: '20px',
                     }}
@@ -895,7 +898,7 @@ export default function ModalForm() {
                           onChange={(e) => setFormData({ ...formData, testimonialIndustry: e.target.value })}
                         >
                           <option value="" disabled>
-                          Industry
+                            Industry
                           </option>
                           <option value="Medical">Medical</option>
                           <option value="Astrology">Astrology</option>
@@ -916,9 +919,9 @@ export default function ModalForm() {
                       </div>
                     </div>
                     <div className="flex justify-center gap-4">
-                    <button className="py-2 px-4 rounded-full text-xs text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                      Add Testimonial
-                    </button>
+                      <button className="py-2 px-4 rounded-full text-xs text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                        Add Testimonial
+                      </button>
                     </div>
                   </div>
 
@@ -931,7 +934,7 @@ export default function ModalForm() {
                       Go Back
                     </button>
 
-                    <button 
+                    <button
                       onClick={handleSave}
                       className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
                       Save
@@ -950,18 +953,18 @@ export default function ModalForm() {
         {activeStep === 7 && (
           <div className="bg-white w-full h-full flex z-10 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-              <img 
-                src="../../ModalMobileTop.svg" 
-                alt="Top SVG" 
-                className="w-full h-auto translate-y-[calc(-25%+1rem)]" 
+              <img
+                src="../../ModalMobileTop.svg"
+                alt="Top SVG"
+                className="w-full h-auto translate-y-[calc(-25%+1rem)]"
               />
             </div>
 
             <div className="absolute top-5 left-0 right-0 z-30 flex flex-col items-center justify-center">
-              <img 
-                src="../../BusinessHours.svg" 
-                alt="Step SVG" 
-                className="w-[56%] h-auto" 
+              <img
+                src="../../BusinessHours.svg"
+                alt="Step SVG"
+                className="w-[56%] h-auto"
               />
               <h1 className="text-xl font-semibold text-[#707FDD]">
                 {steps.find((step) => step.id === activeStep)?.label || 'Default Header'}
@@ -984,7 +987,7 @@ export default function ModalForm() {
 
                   <div className="flex gap-4">
                     <div className="flex-1">
-                    <label className="block text-sm text-[#787F89] mb-1">From</label>
+                      <label className="block text-sm text-[#787F89] mb-1">From</label>
                       <input
                         type="time"
                         placeholder="From"
@@ -995,7 +998,7 @@ export default function ModalForm() {
 
                   <div className="flex gap-4">
                     <div className="flex-1">
-                    <label className="block text-sm text-[#787F89] mb-1">To</label>
+                      <label className="block text-sm text-[#787F89] mb-1">To</label>
                       <input
                         type="time"
                         placeholder="To"
@@ -1015,10 +1018,10 @@ export default function ModalForm() {
                   </div>
 
                   <div className="flex justify-center gap-4 pt-4 pb-10">
-                  <button 
-                    // onClick={handleSave}
-                    className="py-2 px-4 rounded-full text-xs text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                    Save Timings
-                  </button>
+                    <button
+                      // onClick={handleSave}
+                      className="py-2 px-4 rounded-full text-xs text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">                    Save Timings
+                    </button>
                   </div>
 
                   <div className="py-6 flex justify-between space-x-2">
@@ -1029,7 +1032,7 @@ export default function ModalForm() {
                       Go Back
                     </button>
 
-                    <button 
+                    <button
                       onClick={handleSave}
                       className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110">
                       Save
@@ -1044,7 +1047,7 @@ export default function ModalForm() {
             </div>
           </div>
         )}
-          
+
       </div>
     </div>
 
