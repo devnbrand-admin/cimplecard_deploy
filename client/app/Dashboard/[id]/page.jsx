@@ -158,7 +158,7 @@ const DashboardPage = () => {
                 </div>
                 {userDetails
                   ? userDetails.cards.map((card, index) => (
-                      <Card key={index} card={card} />
+                      <Card key={index} card={card}  />
                     ))
                   : ""}
               </div>

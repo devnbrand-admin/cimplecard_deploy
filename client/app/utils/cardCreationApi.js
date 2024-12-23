@@ -82,6 +82,7 @@ export const createCard = async (formData) => {
     });
 
     console.log(response.data);
+    
     return response.data;
   } catch (error) {
     console.error('Error creating card:', error.message || error.response?.data || error);

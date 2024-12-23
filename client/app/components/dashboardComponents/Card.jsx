@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { store } from "../../../store/store";
 import { useMediaQuery } from "react-responsive";
 import { MdClose } from "react-icons/md";
+import axios from "../api_resources/axios";
 
 const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
@@ -34,9 +35,7 @@ const Card = ({ card }) => {
     return `${diffInHours} hour${diffInHours !== 1 ? "s" : ""} ago`;
   }
 
-  useEffect(()=>{
-    console.log(editId,"editId")
-  },[editId])
+
 
   // Function to open the modal
   const openModal = () => {
@@ -55,6 +54,8 @@ const Card = ({ card }) => {
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+
 
   return (
     <div className="w-80 flex-col relative m-3 rounded-xl bg-white">

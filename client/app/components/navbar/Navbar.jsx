@@ -1,6 +1,9 @@
+"use client";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"; 
+
+
 
 const NavbarComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,14 +43,14 @@ const NavbarComponent = () => {
             </Link>
           </li>
           <li className="text-center w-2/3 mx-auto lg:hidden mt-2">
-            <button className="bg-white text-[#3342a2] px-4 py-2 rounded-full  w-1/2">Sign Up</button><br/>
-            <button className="border border-white px-4 py-2 rounded-full mt-2 mb-2 w-1/2">Login</button>
+          <Link href={`/auth`}> <button className="bg-white text-[#3342a2] px-4 py-2 rounded-full  w-1/2">Sign Up</button></Link><br/>
+          <Link href={`/auth`}>  <button className="border border-white px-4 py-2 rounded-full mt-2 mb-2 w-1/2">Login</button></Link>
           </li>
         </ul>
 
         <div className="hidden lg:block">
-          <button className="bg-white text-[#3342a2] px-4 py-2 rounded-full mx-2">Sign Up</button>
-          <button className="border border-white px-4 py-2 rounded-full">Login</button>
+        <Link href={`/auth`}> <button className="bg-white text-[#3342a2] px-4 py-2 rounded-full mx-2">Sign Up</button></Link>
+        <Link href={`/auth`}> <button className="border border-white px-4 py-2 rounded-full">Login</button></Link>
         </div>
       </div>
     </nav>
