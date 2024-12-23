@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../components/api_resources/axios';
 
 const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/card/create`;
 
@@ -9,14 +9,14 @@ export const loginUser = async () => {
     const password = "";
 
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,
+      `/api/user/login`,
       { email, password },
       { headers: { "Content-Type": "application/json" } }
     );
 
     const token = response.data.user.token;
 
-    
+
     document.cookie = `authToken=${token}; path=/; Secure`;
 
     return token;
@@ -31,10 +31,11 @@ export const createCard = async (formData) => {
   try {
     const tokenString = sessionStorage.getItem("userToken");
     const tokenObject = JSON.parse(tokenString);
-    const jwtToken = tokenObject.value;  
-    
+    const jwtToken = tokenObject.value;
+
+
     const requestData = {
-      title: `${formData.firstName} ${formData.middleName} ${formData.lastName}`,  
+      title: `${formData.firstName} ${formData.middleName} ${formData.lastName}`,
       companyName: formData.companyName,
       companyAddress: formData.companyAddress,
       jobTitle: formData.jobTitle,
@@ -50,35 +51,38 @@ export const createCard = async (formData) => {
       emergencyRelationship: formData.emergencyRelationship,
       emergencyNumber: formData.emergencyNumber,
       emergencyEmail: formData.emergencyEmail,
-      cardName: formData.title + formData.templateType,
+      cardName: formData.title + formData.templateType + Date.now(),
       companySocialMediaLink: formData.companySocialMediaLink,
-      instagramLink: formData.instagramLink,
-      githubLink: formData.githubLink,
+      instagramLink: formData?.instagramPost[0] && formData?.instagramPost[0],
+
+      githubLink: formData?.githubLink && formData?.githubLink,
       additionalLink: formData.additionalLink,
       productDesc: formData.productDesc,
-      testimonialName: formData.testimonialName,
-      testimonialRole: formData.testimonialRole,
-      testimonialIndustry: formData.testimonialIndustry,
-      testimonialMessage: formData.testimonialMessage,
-      businesshoursFrom: formData.businesshoursFrom,
-      businesshoursTo: formData.businesshoursTo,
-      businessType: formData.businessType,
+      testimonials: formData.testimonials,
+      businessHours: formData.businessHours,
       profileImageUrl: formData.profileImageUrl,
       templateType: formData.templateType,
-      qrCodeUrl: formData.card,
+      qrCodeUrl: formData.qrCodeUrl,
       aboutUs: formData.aboutUs,
-      instagramVideoLink: formData.instagramVideoLink,
-      youtubeVideoLink: formData.youtubeVideoLink, 
+      instagramVideoLink: formData?.instagramReel && formData?.instagramReel,
+      youtubeVideoLink: formData?.youtubeVideoLink && formData.youtubeVideoLink,
+      services: formData.services,
+      socialMediaLink: formData.SocialMediaLink,
+      gallery: formData?.gallery
     };
 
+    console.log(requestData, "res")
 
-    const response = await axios.post(API_BASE_URL, requestData, {
+
+
+    const response = await axios.post("/api/card/create", requestData, {
       headers: {
         Authorization: `${jwtToken}`,
       },
     });
 
     console.log(response.data);
+    
     return response.data;
   } catch (error) {
     console.error('Error creating card:', error.message || error.response?.data || error);
@@ -135,7 +139,7 @@ const getTokenFromCookie = () => {
 // export const createCard = async (formData) => {
 //   try {
 //     const requestData = {
-//       title: `${formData.firstName} ${formData.middleName} ${formData.lastName}'s Card`,  
+//       title: `${formData.firstName} ${formData.middleName} ${formData.lastName}'s Card`,
 //       companyName: [formData.companyName],
 //       companyAddress: [formData.companyAddress],
 //       jobTitle: [formData.jobTitle],
@@ -164,7 +168,7 @@ const getTokenFromCookie = () => {
 //       testimonialMessage: [formData.testimonialMessage],
 //       businesshoursFrom: [formData.businesshoursFrom],
 //       businesshoursTo: [formData.businesshoursTo],
-//       businessType: [formData.businessType] 
+//       businessType: [formData.businessType]
 //     };
 
 //     const response = await axios.post(API_BASE_URL, requestData, {

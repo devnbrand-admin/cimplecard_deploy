@@ -10,10 +10,6 @@ import socailIcon from "../../assets/home/howit/socailIcon.png"
 import supportIcon from "../../assets/home/howit/supportIcon.png"
 
 
-
-
-
-
 const HowItOperates = () => {
   const features = [
     { title: 'CLICK TO CALL', description: 'Your customers will reach out to you by just clicking on your phone number.',icon:callIcon },
@@ -44,10 +40,10 @@ const HowItOperates = () => {
       <div key={index} className="flex flex-col lg:flex-row items-center gap-4">
         <div className="text-[#161973]">
           <h4 className="text-lg font-bold">{feature.title}</h4>
-          <p className="font-base text-sm text-center mt-2 text-[#161973]">{feature.description}</p>
+          <p className="font-base text-sm -mt-1 text-center md:text-right md:leading-none text-[#161973]">{feature.description}</p>
         </div>
-        <div className="hidden w-[60px] h-[55px] border-[3px] border-gray-300 bg-[#d5d6e1] rounded-full md:flex items-center justify-center shadow-md">
-  <div className="w-[50px] h-[50px] bg-[#acb3e2] rounded-full flex items-center justify-center">
+        <div className="hidden w-[70px] h-[65px] border-[3px] border-gray-300 bg-[#d5d6e1] rounded-full md:flex items-center justify-center shadow-md">
+  <div className="w-[60px] h-[60px] bg-[#acb3e2] rounded-full flex items-center justify-center">
     <Image
       src={feature?.icon}
       alt="Phone Icon"
@@ -73,11 +69,11 @@ const HowItOperates = () => {
   </div>
 
   {/* Features Right */}
-<div className="space-y-8 px-14 md:px-0 -mt-[120px] text-center lg:text-left w-full lg:w-1/4 order-3">
+<div className="space-y-8 px-14 md:px-0 md:-mt-[120px] text-center lg:text-left w-full lg:w-1/4 order-3">
     {featuresRight.map((feature, index) => (
       <div key={index} className="flex flex-col lg:flex-row items-center gap-4">
-        <div className="hidden w-[60px] h-[55px] border-[3px] border-gray-300 bg-[#d5d6e1] rounded-full md:flex items-center justify-center shadow-md">
-  <div className="w-[50px] h-[50px] bg-[#acb3e2] rounded-full flex items-center justify-center">
+        <div className="hidden w-[70px] h-[65px] border-[3px] border-gray-300 bg-[#d5d6e1] rounded-full md:flex items-center justify-center shadow-md">
+  <div className="w-[60px] h-[60px] bg-[#acb3e2] rounded-full flex items-center justify-center">
     <Image
       src={feature?.icon}
       alt="Phone Icon"
@@ -88,7 +84,7 @@ const HowItOperates = () => {
 </div>
 <div className="text-[#161973]">
           <h4 className="text-lg font-bold">{feature.title}</h4>
-          <p className="font-base text-sm  mt-2 text-center text-[#161973]">{feature.description}</p>
+          <p className="font-base text-sm -mt-1 md:leading-none   text-center md:text-left text-[#161973]">{feature.description}</p>
         </div>
       </div>
     ))}

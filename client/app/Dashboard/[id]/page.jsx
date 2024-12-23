@@ -58,7 +58,7 @@ const DashboardPage = () => {
   useEffect(() => {
     const tokenString = sessionStorage.getItem("userToken");
     const tokenObject = JSON.parse(tokenString);
-    const jwtToken = tokenObject.value;
+    const jwtToken = tokenObject?.value;
     const fetchUserDetails = async () => {
       try {
         const userDetails = await getUserDetails(jwtToken);
@@ -158,7 +158,7 @@ const DashboardPage = () => {
                 </div>
                 {userDetails
                   ? userDetails.cards.map((card, index) => (
-                      <Card key={index} card={card} />
+                      <Card key={index} card={card}  />
                     ))
                   : ""}
               </div>
@@ -168,6 +168,7 @@ const DashboardPage = () => {
             <Provider store={store}>
               <div
                 className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+                
                 // onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
               >
                 <div
@@ -175,7 +176,7 @@ const DashboardPage = () => {
                   // Prevent backdrop click from closing the modal
                   
                 >
-                  {isMobileSize ? <ModalFormMobile /> : <ModalForm />}
+                  {isMobileSize ? <ModalFormMobile /> : <ModalForm setIsModalOpen={setIsModalOpen} />}
                 </div>
               </div>
             </Provider>
