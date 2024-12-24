@@ -2,7 +2,7 @@ import React from "react";
 import About from "../../assets/lawyerTemplate/About.png"; // Replace with your correct image path
 import Image from "next/image";
 
-function AboutSection({card}) {
+function AboutSection() {
   return (
     <section className="relative bg-white text-[#121F2E] px-6 md:px-20 py-32">
       {/* Background Image */}
@@ -18,12 +18,12 @@ function AboutSection({card}) {
 
       {/* Content Container */}
       <div className="relative max-w-4xl mx-auto text-center z-10">
-     
+        {/* Title */}
         <h1 className="text-3xl md:text-6xl font-Garamond font-bold leading-tight mb-6">
           Advocating with Precision, <br /> Integrity & Expertise!
         </h1>
 
-       
+        {/* Description */}
         <p className="text-lg md:text-xl leading-relaxed font-serif text-gray-800">
           Arjun Mehra is a seasoned legal professional specializing in corporate
           law and civil litigation. Currently a Senior Associate at Integrity
@@ -39,8 +39,6 @@ function AboutSection({card}) {
           <br />
           Committed to protecting and empowering his clients, Arjun Mehra stands
           for integrity, precision, and results.
-          <br/>
-          {card.aboutUs}
         </p>
       </div>
     </section>

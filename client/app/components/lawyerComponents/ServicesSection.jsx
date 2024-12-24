@@ -7,6 +7,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
+
+// Import images
 import criminalLawImg from "../../assets/lawyerTemplate/Service1.png";
 import familyLawImg from "../../assets/lawyerTemplate/Service2.png";
 import corporateLawImg from "../../assets/lawyerTemplate/Service3.png";
@@ -19,7 +21,7 @@ const servicesData = [
   { id: 4, title: "Real Estate Law", image: realEstateLawImg },
 ];
 
-const ServicesSection = ({card}) => {
+const ServicesSection = () => {
   return (
     <section className="py-10 px-4 bg-white relative">
       {/* Title */}
@@ -57,7 +59,7 @@ const ServicesSection = ({card}) => {
           {servicesData.map((service) => (
             <SwiperSlide key={service.id}>
               <div className="relative w-full h-96 overflow-hidden rounded-lg shadow-lg">
-              
+                {/* Full-Width and Full-Height Image */}
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -66,7 +68,7 @@ const ServicesSection = ({card}) => {
                   className="brightness-10"
                 />
 
-              
+                {/* Text Overlay */}
                 <div className="absolute inset-0 flex items-end mb-2 justify-center">
                   <h3 className="text-[#CB935D] text-3xl font-serif">
                     {service.title}
@@ -77,7 +79,7 @@ const ServicesSection = ({card}) => {
           ))}
         </Swiper>
 
-       
+        {/* Custom Navigation Buttons */}
         <div className="absolute -bottom-20 right-6 flex gap-2 z-10">
           <button className="custom-prev w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-yellow-600 transition border-[2px] border-yellow-400">
             <FaAngleLeft />

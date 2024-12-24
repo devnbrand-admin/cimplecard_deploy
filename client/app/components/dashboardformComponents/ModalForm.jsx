@@ -5,8 +5,6 @@ import { setStepData } from "../../../store/cardSlice";
 import { createCard } from "../../utils/cardCreationApi";
 import { AddLinkSection } from "./AddLinkSection";
 import Sidebar from "./Sidebar";
-import { MdClose } from "react-icons/md";
-
 import {
   BsTriangle,
   BsPerson,
@@ -22,302 +20,89 @@ import {
   BsBuilding,
 } from "react-icons/bs";
 import { TestimonialsSection } from "./TestimonialSection";
-import axios from "../api_resources/axios";
 
-export default function ModalForm({setIsModalOpen,cardId}) {
+export default function ModalForm() {
   const dispatch = useDispatch();
   const [activeStep, setActiveStep] = useState(1);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
-  // const [testimonials, setTestimonials] = useState([
-  //   {
-  //     name: "",
-  //     designation: "",
-  //     description: "",
-  //     imageUrl: "",
-  //   },
-  // ]);
-  // const [instagramPost, setInstagramPost] = useState([""]);
-  // const [instagramReels, setInstagramReels] = useState([""]);
-  // const [youtubeVideo, setYoutubeVideo] = useState([""]);
-  // const [images, setImages] = useState([]);
-  // const [productData, setProductData] = useState([
-  //   {
-  //     name: "",
-  //     imageUrl: "",
-  //     serviceUrl: "",
-  //     description: "",
-  //   },
-  // ]);
-
-  // const [formData, setFormData] = useState({
-  //   // Personal information
-  //   firstName: "",
-  //   middleName: "",
-  //   lastName: "",
-  //   jobTitle: "",
-  //   companyName: "",
-  //   location: "",
-  //   profileImageUrl: "",
-  //   headerImageUrl: "",
-  //   templateType: "",
-  //   cardName: "",
-  //   qrCodeUrl: "",
-  //   aboutUs: "",
-  //   comanyAddress: "",
-  //   dateOfBirth: "",
-  //   bio: "",
-  //   gridType: "Product",
-  //   languageSpoken: "",
-  //   additionalLink: "",
-  //   emails: ["", ""],
-  //   phoneNumbers: ["", "", ""],
-  //   otherEmails: "",
-  //   otherPhoneNumber: "",
-  //   phoneNumber: "",
-
-  //   // Emergency contact information
-  //   emergencyName: "",
-  //   emergencyRelationship: "",
-  //   emergencyNumber: "",
-  //   emergencyEmail: "",
-
-  //   // Social media links
-  //   SocialMediaLink: [], // Array of SocialMediaLink model objects
-  //   companySocialMediaLink: [], // Array of companySocialMediaLink model objects
-
-  //   // Gallery and media
-  //   gallery: [],
-  //   instagramPost: [],
-  //   instagramReel: [],
-  //   youtubeVideoLink: [],
-
-  //   // Testimonials
-  //   testimonials: [],
-  //   // Services
-  //   services: [],
-
-  //   // Business hours
-  //   businessHours: [
-  //     {
-  //       type: "",
-  //       from: "",
-  //       to: "",
-  //     },
-  //   ],
-  // });
-
   const [testimonials, setTestimonials] = useState([
     {
-      name: "Alice Johnson",
-      designation: "CEO",
-      description: "John is a great developer, helped us with our project!",
-      imageUrl: "https://example.com/testimonial1.jpg",
+      name: "",
+      designation: "",
+      description: "",
+      imageUrl: "",
     },
   ]);
-  
-  const [instagramPost, setInstagramPost] = useState([
-    "https://instagram.com/johndoe/post1",
-  ]);
-  
-  const [instagramReels, setInstagramReels] = useState([
-    "https://instagram.com/johndoe/reel1",
-  ]);
-  
-  const [youtubeVideo, setYoutubeVideo] = useState([
-    "https://youtube.com/watch?v=12345",
-  ]);
-  
-  const [images, setImages] = useState([
-    "https://example.com/photo1.jpg",
-    "https://example.com/photo2.jpg",
-  ]);
-  
+  const [instagramPost, setInstagramPost] = useState([""]);
+  const [instagramReels, setInstagramReels] = useState([""]);
+  const [youtubeVideo, setYoutubeVideo] = useState([""]);
+  const [images, setImages] = useState([]);
   const [productData, setProductData] = useState([
     {
-      name: "Web Development",
-      imageUrl: "https://example.com/service1.jpg",
-      serviceUrl: "https://example.com/webdev",
-      description: "Full-stack web development services.",
-      cardId:"sadfasdf"
+      name: "",
+      imageUrl: "",
+      serviceUrl: "",
+      description: "",
     },
   ]);
-  
-  // const [formData, setFormData] = useState({
-  //   // Personal information
-  //   firstName: "John",
-  //   middleName: "",
-  //   lastName: "Doe",
-  //   jobTitle: "Software Developer",
-  //   companyName: "Tech Innovators",
-  //   location: "San Francisco, CA",
-  //   profileImageUrl: "https://example.com/profile1.jpg",
-  //   headerImageUrl: "https://example.com/header1.jpg",
-  //   templateType: "Modern",
-  //   cardName: "johns-business-card2" + new Date(),
-  //   qrCodeUrl: "https://example.com/qrcode.jpg",
-  //   aboutUs: "A software developer with a passion for coding.",
-  //   companyAddress: "123 Tech Avenue, San Francisco, CA",
-  //   dateOfBirth: "1990-05-15",
-  //   bio: "Specializing in web and mobile app development.",
-  //   gridType: "products",
-  //   languageSpoken: "English, Spanish",
-  //   additionalLink: "https://example.com/portfolio",
-  //   emails: ["john.doe@example.com", "other.email@example.com"],
-  //   phoneNumbers: ["1234567890", "0987654321"],
-  //   otherEmails: "other.email@example.com",
-  //   otherPhoneNumber: "0987654321",
-  //   phoneNumber: "1234567890",
-  
-  //   // Emergency contact information
-  //   emergencyName: "John's Friend",
-  //   emergencyRelationship: "Friend",
-  //   emergencyNumber: "0987654321",
-  //   emergencyEmail: "emergency@example.com",
-  
-  //   // Social media links
-  //   SocialMediaLink: [
-  //     {
-  //       id: 1,
-  //       platform: "LinkedIn",
-  //       url: "https://linkedin.com/in/johndoe",
-  //       iconUrl: "https://example.com/linkedin-icon.jpg",
-  //       cardId: "card1-uuid",
-  //     },
-  //     {
-  //       id: 2,
-  //       cardId: "card2-uuid",
 
-  //       platform: "Twitter",
-  //       url: "https://twitter.com/johndoe",
-  //       iconUrl: "https://example.com/twitter-icon.jpg",
-  //     },
-  //   ],
-  //   companySocialMediaLink: [
-  //     {
-  //       id: 1,
-  //       platform: "LinkedIn",
-  //       url: "https://linkedin.com/in/johndoe",
-  //       iconUrl: "https://example.com/linkedin-icon.jpg",
-  //       cardId: "card1-uuid",
+  const [formData, setFormData] = useState({
+    // Personal information
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    jobTitle: "",
+    companyName: "",
+    location: "",
+    profileImageUrl: "",
+    headerImageUrl: "",
+    templateType: "",
+    cardName: "",
+    qrCodeUrl: "",
+    aboutUs: "",
+    comanyAddress: "",
+    dateOfBirth: "",
+    bio: "",
+    gridType: "Product",
+    languageSpoken: "",
+    additionalLink: "",
+    emails: ["", ""],
+    phoneNumbers: ["", "", ""],
+    otherEmails: "",
+    otherPhoneNumber: "",
+    phoneNumber: "",
 
-  //     },
-  //     {
-  //       id: 2,
-  //       platform: "Twitter",
-  //       url: "https://twitter.com/johndoe",
-  //       iconUrl: "https://example.com/twitter-icon.jpg",
-  //       cardId: "card1-uuid",
+    // Emergency contact information
+    emergencyName: "",
+    emergencyRelationship: "",
+    emergencyNumber: "",
+    emergencyEmail: "",
 
-  //     },
-  //   ],
-  
-  //   // Gallery and media
-  //   gallery: ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"],
-  //   instagramPost: ["https://instagram.com/johndoe/post1"],
-  //   instagramReel: ["https://instagram.com/johndoe/reel1"],
-  //   youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
-  
-  //   // Testimonials
-  //   testimonials: [
-  //     {
-  //       id: 1,
-  //       name: "Alice Johnson",
-  //       designation: "CEO",
-  //       description: "John is a great developer, helped us with our project!",
-  //       imageUrl: "https://example.com/testimonial1.jpg",
-  //       cardId: "card1-uuid"
+    // Social media links
+    SocialMediaLink: [], // Array of SocialMediaLink model objects
+    companySocialMediaLink: [], // Array of companySocialMediaLink model objects
 
-  //     },
-  //   ],
-  
-  //   // Services
-  //   services: [
-  //     {
-  //       id: 1,
-  //       name: "Web Development",
-  //       imageUrl: "https://example.com/service1.jpg",
-  //       serviceUrl: "https://example.com/webdev",
-  //       description: "Full-stack web development services.",
-  //       cardId:"asasfcardId"
-  //     },
-  //   ],
-  
-  //   // Business hours
-  //   businessHours: [
-  //     {
-  //       id: 1,
-  //       type: "",
-  //       from: "",
-  //       to: "",
-  //       cardId: "card1-uuid"
+    // Gallery and media
+    gallery: [],
+    instagramPost: [],
+    instagramReel: [],
+    youtubeVideoLink: [],
 
-  //     },
-  //   ],
-  // });
- 
-  
+    // Testimonials
+    testimonials: [],
+    // Services
+    services: [],
 
-const [formData, setFormData] = useState({
-  // Personal information
-  firstName: "",
-  middleName: "",
-  lastName: "",
-  jobTitle: "",
-  companyName: "",
-  location: "",
-  profileImageUrl: "",
-  headerImageUrl: "",
-  templateType: "",
-  cardName: "",
-  qrCodeUrl: "",
-  aboutUs: "",
-  companyAddress: "",
-  dateOfBirth: "",
-  bio: "",
-  gridType: "",
-  languageSpoken: "",
-  additionalLink: "",
-  emails: [],
-  phoneNumbers: [],
-  otherEmails: "",
-  otherPhoneNumber: "",
-  phoneNumber: "",
-
-  // Emergency contact information
-  emergencyName: "",
-  emergencyRelationship: "",
-  emergencyNumber: "",
-  emergencyEmail: "",
-
-  // Social media links
-  SocialMediaLink: [],
-  companySocialMediaLink: [],
-
-  // Gallery and media
-  gallery: [],
-  instagramPost: [],
-  instagramReel: [],
-  youtubeVideoLink: [],
-
-  // Testimonials
-  testimonials: [],
-
-  // Services
-  services: [],
-
-  // Business hours
-  businessHours: [
-    {
-      id: 1,
-      type: "",
-      from: "",
-      to: "",
-      cardId: "",
-    },
-  ],
-});
-
+    // Business hours
+    businessHours: [
+      {
+        type: "",
+        from: "",
+        to: "",
+      },
+    ],
+  });
 
   const steps = [
     { id: 1, label: "Choose Template", icon: <BsTriangle /> },
@@ -448,205 +233,27 @@ const [formData, setFormData] = useState({
       youtubeVideoLink: youtubeVideo,
       gallery: images,
     }));
-    // console.log("Form Data:", formData);
-    try {
-      const response = await createCard(formData);
-      // console.log("Card saved successfully:", response);
-      dispatch(setCardData(formData)); // Update Redux store
-    } catch (error) {
-      console.error("Failed to save card:", error);
-    }
+    console.log("Form Data:", formData);
+    // try {
+    //   const response = await createCard(formData);
+    //   console.log("Card saved successfully:", response);
+    //   dispatch(setCardData(formData)); // Update Redux store
+    // } catch (error) {
+    //   console.error("Failed to save card:", error);
+    // }
   };
 
-  useEffect(()=>{
-    setFormData({
-        // Personal information
-        firstName: "",
-        middleName: "",
-        lastName: "",
-        jobTitle: "",
-        companyName: "",
-        location: "",
-        profileImageUrl: "",
-        headerImageUrl: "",
-        templateType: "",
-        cardName: "",
-        qrCodeUrl: "",
-        aboutUs: "",
-        companyAddress: "",
-        dateOfBirth: "",
-        bio: "",
-        gridType: "",
-        languageSpoken: "",
-        additionalLink: "",
-        emails: [],
-        phoneNumbers: [],
-        otherEmails: "",
-        otherPhoneNumber: "",
-        phoneNumber: "",
-      
-        // Emergency contact information
-        emergencyName: "",
-        emergencyRelationship: "",
-        emergencyNumber: "",
-        emergencyEmail: "",
-      
-        // Social media links
-        SocialMediaLink: [],
-        companySocialMediaLink: [],
-      
-        // Gallery and media
-        gallery: [],
-        instagramPost: [],
-        instagramReel: [],
-        youtubeVideoLink: [],
-      
-        // Testimonials
-        testimonials: [],
-      
-        // Services
-        services: [],
-      
-        // Business hours
-        businessHours: [
-          {
-            id: 1,
-            type: "",
-            from: "",
-            to: "",
-            cardId: "",
-          },
-        ],
-      });
-      
-    
-    if(cardId) getSingleCardData(cardId)
-  },[cardId])
-
-
-  // Function to map backend data to the required format
-  const transformCardData = (data) => {
-    return {
-      // Personal information
-      firstName: data.title?.split(" ")[0] || "",
-      middleName: "",
-      lastName: data.title?.split(" ")[1] || "",
-      jobTitle: data.jobTitle || "",
-      companyName: data.companyName || "",
-      location: data.location || "N/A",
-      profileImageUrl: data.profileImageUrl || "",
-      headerImageUrl: data.headerImageUrl || "",
-      templateType: data.templateType || "",
-      cardName: data.cardName || `business-card-${new Date().getTime()}`,
-      qrCodeUrl: data.qrCodeUrl || "",
-      aboutUs: data.aboutUs || "",
-      companyAddress: data.companyAddress || "",
-      dateOfBirth: data.dateOfBirth || "",
-      bio: data.bio || "",
-      gridType: data.gridType || "",
-      languageSpoken: data.languageSpoken || "",
-      additionalLink: data.additionalLink || "",
-      emails: data.emails || [],
-      phoneNumbers: data.phoneNumbers || [],
-      otherEmails: data.otherEmails || "",
-      otherPhoneNumber: data.otherPhoneNumber || "",
-      phoneNumber: data.phoneNumber || "",
-  
-      // Emergency contact information
-      emergencyName: data.emergencyName || "",
-      emergencyRelationship: data.emergencyRelationship || "",
-      emergencyNumber: data.emergencyNumber || "",
-      emergencyEmail: data.emergencyEmail || "",
-  
-      // Social media links
-      SocialMediaLink: [
-        ...(data.linkedinLink
-          ? [
-              {
-                id: 1,
-                platform: "LinkedIn",
-                url: data.linkedinLink,
-                iconUrl: "",
-                cardId: data.id,
-              },
-            ]
-          : []),
-        ...(data.twitterLink
-          ? [
-              {
-                id: 2,
-                platform: "Twitter",
-                url: data.twitterLink,
-                iconUrl: "",
-                cardId: data.id,
-              },
-            ]
-          : []),
-      ],
-      companySocialMediaLink: [],
-  
-      // Gallery and media
-      gallery: data.gallery || [],
-      instagramPost: data.instagramPost || [],
-      instagramReel: data.instagramReel || [],
-      youtubeVideoLink: data.youtubeVideoLink || [],
-  
-      // Testimonials
-      testimonials: data.testimonials || [],
-  
-      // Services
-      services: data.services || [],
-  
-      // Business hours
-      businessHours: data.businessHours || [],
-    };
-  };
-  
-  // Fetch and process single card data
-  const getSingleCardData = async (cardId) => {
-    try {
-      if (!cardId) {
-        console.error("Card ID is required.");
-        return;
-      }
-      console.log(cardId, "cardId");
-  
-      const response = await axios.get(`/api/card/get/${cardId}`);
-      const backendData = response.data;
-  
-      console.log(backendData, "singleData");
-  
-      // Transform backend data to required format
-      const transformedData = transformCardData(backendData);
-      console.log(transformedData, "Transformed Data");
-    } catch (error) {
-      console.error("Error fetching single card data:", error);
-    }
-  };
-  
-
+  useEffect(() => {
+    console.log("Updated Form Data:", formData);
+  }, [formData]);
 
 
   return (
-<div
-  className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
-  suppressHydrationWarning
->
-  <div
-    className="bg-white relative rounded-lg w-full max-w-7xl h-[80%] flex"
-    onClick={(e) => e.stopPropagation()}
-  >
-    <button
-      className="absolute z-30 right-[5%] top-[5%]  text-black "
-      onClick={(e) => {
-        e.stopPropagation(); 
-        setIsModalOpen(false);
-      }}
+    <div
+      className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
+      suppressHydrationWarning
     >
-      <MdClose  className="text-4xl p-2 text-black" />
-    </button>
-
-
+      <div className="bg-white rounded-lg w-full max-w-7xl h-[80%] flex">
         <Sidebar
           activeStep={activeStep}
           handleStepClick={handleStepClick}

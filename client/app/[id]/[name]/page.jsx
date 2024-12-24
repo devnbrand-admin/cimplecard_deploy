@@ -42,8 +42,8 @@ const Page = () => {
   }, []);
   console.log(card)
   const TEMPLATE_MAP = {
-    lawyer: MedicalCard,
-    modern: LawyerCard,
+    modern: MedicalCard,
+    lawyer: LawyerCard,
     astrologer: AstrologerCard,
     b2b: B2bCard,
   };

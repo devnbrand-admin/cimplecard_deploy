@@ -3,7 +3,7 @@ import React from "react";
 const SocialMediaSection = () => {
   return (
     <div className="w-full bg-[#121F2E] text-white py-16 mt-10">
-     
+      {/* Section Heading */}
       <div className="text-center mb-10">
         <h2 className="font-Garamond not-italic text-4xl md:text-5xl lg:text-6xl">
           Blog Posts
