@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import people from "../../assets/home/people.png";
+
+import React from "react";
 import Image from "next/image";
-import logoicon from "../../assets/home/logoicon.png";
-import useWindowWidth from "../../hooks/useWindowwidth";
 import Link from "next/link";
-import peopleImg from "../../assets/home/peopleImg.png";
-import Navbar from "../navbar/Navbar";
+import useWindowWidth from "../../hooks/useWindowwidth";
+import people from "../../assets/home/people.png";
+import logoicon from "../../assets/home/logoicon.png";
+import HowItOperates from "./howItOperates";
 import BrowseCard from "../Home/browseCard";
 import HowItOperates from "./howItOperates";
 import { HandleJoinSignLoignfn } from "../AboutUS/aboutusComponent";
@@ -131,7 +131,7 @@ const HomeComponent = () => {
       <div className="w-2/3 lg:-mt-[100px] md:w-1/2 mx-auto mb-10">
         <HandleJoinSignLoignfn />
       </div>
-      {/* <BrowseCard /> */}
+      <BrowseCard />
     </>
   );
 };

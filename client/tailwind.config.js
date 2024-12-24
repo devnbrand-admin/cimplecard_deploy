@@ -22,7 +22,8 @@ module.exports = {
         Cormorant:["Cormorant"],
         Figtree:["Figtree"],
         Garamond:["Garamond"],
-        Manrope:["Manrope"]
+        Manrope:["Manrope"],
+        Poppinst: ["Poppins", "sans-serif"],
       },
     },
   },
@@ -32,5 +33,7 @@ module.exports = {
       backdropBlur: ["responsive"],
 
     },
+    
   },
+  
 };

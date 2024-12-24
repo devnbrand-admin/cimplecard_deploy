@@ -10,7 +10,6 @@ import image1 from "../../assets/lawyerTemplate/Gallery1.png";
 import image2 from "../../assets/lawyerTemplate/Gallery2.png";
 import image3 from "../../assets/lawyerTemplate/Gallery3.png";
 
-
 // Image Data
 const galleryImages = [
   { id: 1, src: image1, alt: "Gallery Image 1" },
@@ -24,7 +23,6 @@ const galleryImages = [
 function Gallery() {
   const swiperRef = useRef(null);
 
-  
   const handlePrev = () => {
     if (swiperRef.current) swiperRef.current.slidePrev();
   };
@@ -67,19 +65,24 @@ function Gallery() {
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         pagination={{ el: ".custom-pagination", clickable: true }}
         loop={true}
-        className="max-w-5xl mx-auto rounded-lg"
+        className="max-w-5xl mx-auto"
       >
         {galleryImages.map((image) => (
           <SwiperSlide key={image.id}>
-            <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-white rounded-lg shadow-lg overflow-hidden group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
-              <div className="w-full h-full rounded-lg overflow-hidden">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-lg"
-                />
+            <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-white rounded-lg shadow-lg overflow-hidden relative group">
+              {/* Image */}
+              <Image
+                src={image.src}
+                alt={image.alt}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-lg"
+              />
+
+              {/* Popover Overlay */}
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                
+                <p className="text-white text-sm mt-2">click to view more</p>
               </div>
             </div>
           </SwiperSlide>

@@ -1,0 +1,7 @@
+.swiper-pagination-bullet {
+    @apply bg-black opacity-100  !important;
+  }
+  
+  .swiper-pagination-bullet-active {
+    @apply bg-[#CB935D] !important;
+  }

@@ -12,6 +12,7 @@ import ContactCardButton from "../../../components/lawyerComponents/ContactCardB
 import WhatsappContact from "../../../components/lawyerComponents/WhatsappContact";
 
 function page({ card }) {
+  // console.log(card , "cards")
   return (
     <>
       <Navbar />
