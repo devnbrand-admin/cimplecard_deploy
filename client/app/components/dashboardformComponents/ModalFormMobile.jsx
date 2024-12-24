@@ -327,23 +327,11 @@ export default function ModalForm() {
                   placeholder="Job Role"
                   className="w-full flex-1 p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
                 />
-                <select
-                  className=" border flex-1 text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                  // value={formData.languageSpoken}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      languageSpoken: e.target.value,
-                    })
-                  }
-                >
-                  <option value="" disabled>
-                    Hobbies
-                  </option>
-                  <option value="English">Dance</option>
-                  <option value="Hindi">Signing</option>
-                  <option value="Bengali">talking</option>
-                </select>
+                <input
+                  type="date"
+                  placeholder="Job Role"
+                  className="w-full flex-1 p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+                />
               </div>
             </div>
 
