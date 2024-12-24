@@ -1,11 +1,11 @@
 import React from "react";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
-import BackgroundImage from "../../assets/lawyerTemplate/Contact.png"; // Replace with your image path
+import BackgroundImage from "../../assets/lawyerTemplate/Contact.png";
 
 const ContactForm = () => {
   return (
     <div className="flex flex-col md:flex-row w-full min-h-screen font-sans">
-      {/* Left Section - Contact Information */}
+     
       <div className="bg-[#F7F7F7] flex items-center justify-center w-full md:w-1/2 p-8">
         <div className="bg-white py-16 px-10 shadow-lg rounded-md max-w-md w-full font-Manrope">
           <h2 className="text-3xl font-semibold mb-6 text-gray-800 font-Garamond">
@@ -28,14 +28,14 @@ const ContactForm = () => {
         </div>
       </div>
 
-      {/* Right Section - Form */}
+  
       <div
         className="relative w-full md:w-1/2 bg-cover bg-center"
         style={{
           backgroundImage: `url(${BackgroundImage.src})`,
         }}
       >
-        {/* Dark Overlay */}
+    
         <div className="absolute inset-0 bg-[#121F2E] bg-opacity-80"></div>
 
         {/* Form Content */}

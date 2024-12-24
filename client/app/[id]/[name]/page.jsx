@@ -41,8 +41,8 @@ const Page = () => {
     fetchCardDetails();
   }, []);
   const TEMPLATE_MAP = {
-    modern: MedicalCard,
-    lawyer: LawyerCard,
+    lawyer: MedicalCard,
+    modern: LawyerCard,
     astrologer: AstrologerCard,
     b2b: B2bCard,
   };
