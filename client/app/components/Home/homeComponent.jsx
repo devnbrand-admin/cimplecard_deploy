@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import useWindowWidth from "../../hooks/useWindowwidth";
 import people from "../../assets/home/people.png";
 import logoicon from "../../assets/home/logoicon.png";
-import HowItOperates from "./howItOperates";
 import BrowseCard from "../Home/browseCard";
 import HowItOperates from "./howItOperates";
 import { HandleJoinSignLoignfn } from "../AboutUS/aboutusComponent";
@@ -98,7 +97,7 @@ const HomeComponent = () => {
             <div className={`relative w-full h-[400px]`}>
               {windowWidth > 600 && (
                 <Image
-                  src={peopleImg}
+                  src={people}
                   alt="People"
                   fill
                   className={`object-cover`}
