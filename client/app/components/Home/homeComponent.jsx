@@ -130,7 +130,7 @@ const HomeComponent = () => {
       <div className="w-2/3 lg:-mt-[100px] md:w-1/2 mx-auto mb-10">
         <HandleJoinSignLoignfn />
       </div>
-      <BrowseCard />
+      {/* <BrowseCard /> */}
     </>
   );
 };
