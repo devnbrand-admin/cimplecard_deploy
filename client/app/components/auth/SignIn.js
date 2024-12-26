@@ -67,7 +67,7 @@ export default function SignIn({ setIsLogin }) {
           console.log("logged in",response.data.user.token)
           console.log("cookie",document.cookie)
       
-          router.push(`/Dashboard/${response.data.user.id}`);
+          router.push(`/dashboard/${response.data.user.id}`);
         } else {
           alert(data.message || 'Login failed. Please try again.');
         }

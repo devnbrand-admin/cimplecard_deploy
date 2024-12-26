@@ -15,7 +15,7 @@ const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
 );
 const ModalFormMobile = dynamic(() =>
-  import("../../components/dashboardformComponents/ModalFormMobile")
+  import("../../components/dashboardformComponents/ModalFormMobile", { ssr: false })
 );
 
 const DashboardPage = () => {
@@ -77,6 +77,10 @@ const DashboardPage = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -158,8 +162,8 @@ const DashboardPage = () => {
                 </div>
                 {userDetails
                   ? userDetails.cards.map((card, index) => (
-                      <Card key={index} card={card}  />
-                    ))
+                    <Card key={index} card={card}  />
+                  ))
                   : ""}
               </div>
             </div>
@@ -169,12 +173,12 @@ const DashboardPage = () => {
               <div
                 className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
                 
-                // onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
+              // onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
               >
                 <div
                   className="bg-white p-6 rounded shadow-md"
-                  // Prevent backdrop click from closing the modal
-                  
+                // Prevent backdrop click from closing the modal
+
                 >
                   {isMobileSize ? <ModalFormMobile /> : <ModalForm setIsModalOpen={setIsModalOpen} />}
                 </div>

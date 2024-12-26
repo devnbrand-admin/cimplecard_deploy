@@ -5,11 +5,11 @@ import logoIcon from "../../assets/about/coupleImage.png";
 import NavbarComponent from "../navbar/Navbar";
 import Link from "next/link";
 
-export const handleJoinSignLoignfn = () => {
+export const HandleJoinSignLoignfn = () => {
 
   return (
-    <div className="text-center w-full text-lg md:text-xs flex flex-col md:flex-row items-center justify-around text-[#28389a] mt-8 md:bg-[#f7f7fb] rounded-full py-2">
-      <p className="py-2 md:py-0">
+    <div className="text-center w-full text-lg md:text-xs flex flex-col md:flex-row items-center justify-around text-[#28389a] md:px-2 mt-8 md:bg-[#f7f7fb] rounded-full py-2">
+      <p className="py-2 px-2 text-center md:text-start flex-[2] md:py-0">
         Join the world’s leading digital business card family.{" "}
         <span className="font-semibold text-nowrap md:text-wrap">Don't be left out</span>
       </p>
@@ -32,9 +32,9 @@ const AboutUSComponent = () => {
 
   return (
     <div className="bg-gray-100 relative text-gray-800 font-sans ">
-      
+
       <div
-        className="hidden clip-path1 md:block absolute top-[30px] z-10 bg-[#707ed3] w-[700px] h-[1000px] shadow-lg shadow-black"
+        className="hidden clip-path1 md:block absolute top-[30px]  z-10 bg-[#707ed3] w-[700px] h-[1000px] shadow-lg shadow-black"
         style={{
           clipPath: "polygon(0 63%, 26% 46%, 0 100%)",
         }}
@@ -47,7 +47,7 @@ const AboutUSComponent = () => {
         />
       </div>
       <div
-        className="hidden clip-path2 md:block absolute top-[150px] right-0  z-10 bg-[#2f40af] w-[500px] h-[600px] shadow-lg shadow-black"
+        className="hidden clip-path2 -z-[1] lg:z-[1] md:block absolute top-[150px] right-0  bg-[#2f40af] w-[500px] h-[600px] shadow-lg shadow-black"
         style={{
           clipPath: "polygon(20% 36%, 100% 98%, 100% 59%)",
         }}
@@ -60,7 +60,7 @@ const AboutUSComponent = () => {
         />
       </div>
       <div
-        className="hidden clip-path3 md:block absolute bottom-[60px] right-0  z-10 bg-[#fbfbfd] w-[900px] h-[800px] shadow-lg shadow-black"
+        className="hidden clip-path3 md:block absolute bottom-[60px] right-0 bg-[#fbfbfd] w-[900px] h-[800px] shadow-lg shadow-black"
         style={{
           clipPath: "polygon(100% 50%, 100% 69%, 69% 92%)",
         }}
@@ -97,18 +97,18 @@ const AboutUSComponent = () => {
             landscape. Join us in transforming how the world connects, one card
             at a time.
           </p>
-          <div className="relative z-0 md:z-20 flex justify-end">
-  <div className="w-72 h-auto">
-    <Image src={teamImage} alt="Team" className="rounded-lg" />
-  </div>
-</div>
+          <div className="relative z-0 md:z-20 flex md:justify-end justify-center">
+            <div className="w-72 h-auto">
+              <Image src={teamImage} alt="Team" className="rounded-lg" />
+            </div>
+          </div>
 
         </div>
       </section>
 
       {/* Stats Section */}
       <section className="text-white py-16 w-1/2 mx-auto rounded-lg">
-        <div className="flex bg-[#3342a2] flex-wrap justify-center gap-8 p-8 rounded-3xl">
+        <div className="flex bg-[#3342a2] flex-1 flex-wrap justify-center gap-8 p-8 rounded-3xl">
           <div className="text-center">
             <h3 className="text-3xl font-bold">200m+</h3>
             <p>Users Worldwide</p>
@@ -123,26 +123,26 @@ const AboutUSComponent = () => {
           </div>
         </div>
 
-        {handleJoinSignLoignfn()}
+        <HandleJoinSignLoignfn />
       </section>
 
       {/* Team Section */}
-      <section className="py-8 px-4 md:px-12 lg:px-20 bg-gray-100">
-  <h2 className="text-3xl lg:text-5xl font-bold text-center text-[#3342a2] mb-6">
-    Meet Our Team
-  </h2>
-  <div className="grid grid-cols-2 md:flex justify-center gap-y-6 flex-wrap ">
-    {[...Array(5)].map((_, idx) => (
-      <div key={idx} className="text-center mx-7">
-        <div className="w-32 h-32  mx-auto">
-          <Image src={logoIcon} alt="Team Member" className="rounded-full" />
+      <section className="py-8 px-4 md:px-12 lg:px-20  bg-gray-100">
+        <h2 className="text-3xl lg:text-5xl font-bold text-center text-[#3342a2] mb-6">
+          Meet Our Team
+        </h2>
+        <div className="flex md:flex justify-center gap-y-6 flex-wrap ">
+          {[...Array(5)].map((_, idx) => (
+            <div key={idx} className="text-center z-[1] flex-1 basis-[150px] ">
+              <div className="w-32 h-32  mx-auto">
+                <Image src={logoIcon} alt="Team Member" className="rounded-full" />
+              </div>
+              <h3 className="text-sm md:text-base font-bold mt-2">Miles Morales</h3>
+              <p className="text-xs md:text-sm">Founder/CEO</p>
+            </div>
+          ))}
         </div>
-        <h3 className="text-sm md:text-base font-bold mt-2">Miles Morales</h3>
-        <p className="text-xs md:text-sm">Founder/CEO</p>
-      </div>
-    ))}
-  </div>
-</section>
+      </section>
 
 
 
@@ -150,7 +150,7 @@ const AboutUSComponent = () => {
       {/* Footer */}
       <footer className="flex-col text-white py-4 text-center flex justify-center items-center">
         <span className="w-1/2 h-[2px] bg-[#2e3ea2]"></span>
-        <div className="w-1/2">{handleJoinSignLoignfn()}</div>
+        <div className="w-1/2">{HandleJoinSignLoignfn()}</div>
       </footer>
     </div>
   );

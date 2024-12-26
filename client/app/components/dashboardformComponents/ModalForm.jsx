@@ -337,7 +337,7 @@ const [formData, setFormData] = useState({
     setActiveStep(stepId);
   };
 
-  const handleAdd = () => {};
+  const handleAdd = () => { };
   const handleTemplateSelection = (template) => {
     setFormData((prev) => ({
       ...prev,
@@ -626,6 +626,7 @@ const [formData, setFormData] = useState({
   
 
 
+
   return (
 <div
   className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
@@ -652,8 +653,8 @@ const [formData, setFormData] = useState({
           steps={steps}
         />
 
-        <div className="w-full px-6 overflow-scroll text-sm ">
-          <div className="mb-4 relative">
+        <div className="w-full px-6 relative overflow-scroll text-sm ">
+          <div className="mb-4 sticky top-0">
             <div
               className="text-white text-center text-4xl font-semibold py-6 px-6"
               style={{
@@ -700,11 +701,10 @@ const [formData, setFormData] = useState({
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Medical")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
-                          formData.templateType === "Medical"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Medical"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                        }`}
+                          }`}
                       >
                         {formData.templateType === "Medical"
                           ? "Selected"
@@ -738,11 +738,10 @@ const [formData, setFormData] = useState({
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Astrologer")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
-                          formData.templateType === "Astrologer"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Astrologer"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                        }`}
+                          }`}
                       >
                         {formData.templateType === "Astrologer"
                           ? "Selected"
@@ -776,11 +775,10 @@ const [formData, setFormData] = useState({
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("B2B Business")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
-                          formData.templateType === "B2B Business"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "B2B Business"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                        }`}
+                          }`}
                       >
                         {formData.templateType === "B2B Business"
                           ? "Selected"
@@ -814,11 +812,10 @@ const [formData, setFormData] = useState({
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Lawyer")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
-                          formData.templateType === "Lawyer"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Lawyer"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                        }`}
+                          }`}
                       >
                         {formData.templateType === "Lawyer"
                           ? "Selected"
@@ -855,7 +852,7 @@ const [formData, setFormData] = useState({
 
           {activeStep === 2 && (
             <div>
-              <div className="relative py-2">
+              <div className="relative flex flex-col gap-[4rem] py-2">
                 <div
                   className="w-full"
                   style={{
@@ -863,7 +860,7 @@ const [formData, setFormData] = useState({
                     backgroundSize: "cover",
                     backgroundPosition: "top",
                     height: "15vh",
-                    position: "absolute",
+                    position: "sticky",
                     top: "0",
                     left: "0",
                     right: "0",
@@ -952,8 +949,8 @@ const [formData, setFormData] = useState({
                   </div>
                 </div>
 
-                <div className="space-y-4 mt-48    text-sm">
-                  <div className="flex gap-4">
+                <div className="space-y-4 text-sm">
+                  <div className="flex flex-wrap gap-4">
                     <div className="flex-1">
                       <input
                         type="text"
@@ -1117,7 +1114,9 @@ const [formData, setFormData] = useState({
           )}
 
           {activeStep === 3 && (
-            <div>
+            <div
+              className="flex flex-col gap-5"
+            >
               <div
                 className="py-2"
                 style={{
@@ -1131,7 +1130,7 @@ const [formData, setFormData] = useState({
                 }}
               ></div>
 
-              <div className="space-y-4 mt-4">
+              <div className="space-y-4">
                 <div className="flex gap-4">
                   <div className="flex-1">
                     <input
@@ -1780,11 +1779,10 @@ const [formData, setFormData] = useState({
                 </div>
                 <div className="flex justify-center gap-4">
                   <button
-                    className={`py-2 px-4 rounded-full border-2 ${
-                      formData.gridType === "Product"
+                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Product"
                         ? "bg-[#707FDD] text-white border-[#707FDD]"
                         : "bg-transparent text-[#707FDD] border-[#707FDD]"
-                    }`}
+                      }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Product" })
                     }
@@ -1794,11 +1792,10 @@ const [formData, setFormData] = useState({
 
                   {/* Service Button */}
                   <button
-                    className={`py-2 px-4 rounded-full border-2 ${
-                      formData.gridType === "Service"
+                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Service"
                         ? "bg-[#707FDD] text-white border-[#707FDD]"
                         : "bg-transparent text-[#707FDD] border-[#707FDD]"
-                    }`}
+                      }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Service" })
                     }
