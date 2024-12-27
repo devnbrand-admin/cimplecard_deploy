@@ -11,11 +11,14 @@ import axios from "axios";
 const Page = () => {
   const params = useParams();
   const id = params.id;
+  const cardName = params.cardName;
   const [card, setCard] = useState();
   const getCardDetails = async (token) => {
     try {
+      console.log("id", id);
+      console.log(" name", cardName);
       const response = await axios.get(
-        `https://cimple-card.onrender.com/api/card/get/${id}`,
+        `https://cimple-card.onrender.com/api/card/getby/${id}/${cardName}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +40,7 @@ const Page = () => {
   useEffect(() => {
     const fetchCardDetails = async () => {
       try {
-        const token = await loginUser("amanu0181@gmail.com", "12345");
+        // const token = await loginUser("amanu0181@gmail.com", "12345");
         const res = await getCardDetails(sessionStorage.getItem("authToken"));
         console.log(res);
         setCard(res);

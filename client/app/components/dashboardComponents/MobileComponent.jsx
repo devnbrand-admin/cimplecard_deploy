@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import ModalFormMobile from "../dashboardformComponents/ModalFormMobile";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
-const MobileComponent = () => {
+const MobileComponent = ({ userDetails }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   return (
@@ -52,7 +52,7 @@ const MobileComponent = () => {
       <div className="h-40"></div>
       <div
         className="flex flex-col p-3 items-center"
-        style={{ backgroundColor: "#EADAF4" }}
+        style={{ backgroundColor: "#EADAF4", minHeight: "80vh" }}
       >
         <h3 className="font-semibold text-lg m-5" style={{ color: "#5A6ACF" }}>
           My Cards
