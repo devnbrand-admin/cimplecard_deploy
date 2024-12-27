@@ -10,12 +10,20 @@ import axios from "axios";
 const Page = () => {
   const params = useParams();
   const id = params.id;
+  const cardName = params.cardName;
   const [card, setCard] = useState();
-  const getCardDetails = async (token) => {
+  const getCardDetails = async () => {
     try {
+      console.log("id", id);
+      console.log(" name", cardName);
       const response = await axios.get(
-        `https://cimple-card.onrender.com/api/card/get/${id}`,
-        {}
+        `https://cimple-card.onrender.com/api/card/getby/${id}/${cardName}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
       );
       console.log("respos: ", response.data);
       return response.data;
@@ -40,7 +48,7 @@ const Page = () => {
 
     fetchCardDetails();
   }, []);
-  console.log(card)
+  console.log(card);
   const TEMPLATE_MAP = {
     lawyer: MedicalCard,
     modern: LawyerCard,
