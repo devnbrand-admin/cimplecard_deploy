@@ -1,12 +1,15 @@
+
 import React, { useState } from "react";
 import Card from "./Card";
 import Navbar from "./Navbar";
 import ModalFormMobile from "../dashboardformComponents/ModalFormMobile";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
-const MobileComponent = ({userDetails}) => {
+import ResponsiveModalForm from "../dashboardformComponents/Modal";
+const MobileComponent = ({ userDetails, setIsModalOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+
   return (
     <div
       style={{ backgroundColor: "#EADAF4" }}
@@ -59,10 +62,10 @@ const MobileComponent = ({userDetails}) => {
         </h3>
         {userDetails
           ? userDetails.cards.map((card, index) => (
-              <div className="my-5" key={index}>
-                <Card card={card} />
-              </div>
-            ))
+            <div className="my-5" key={index}>
+              <Card card={card} />
+            </div>
+          ))
           : "no cards"}
         <div className="h-40"></div>
       </div>
@@ -116,11 +119,12 @@ const MobileComponent = ({userDetails}) => {
       </div>
       {isOpen && (
         <Provider store={store}>
-          <ModalFormMobile />
+          {/* <ModalFormMobile /> */}
+          <ResponsiveModalForm setIsModalOpen={setIsModalOpen} />
         </Provider>
       )}
     </div>
-  
+
   );
 };
 

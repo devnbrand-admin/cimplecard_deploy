@@ -626,7 +626,6 @@ const [formData, setFormData] = useState({
   
 
 
-
   return (
 <div
   className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
@@ -654,12 +653,13 @@ const [formData, setFormData] = useState({
         />
 
         <div className="w-full px-6 relative overflow-scroll text-sm ">
-          <div className="mb-4 sticky top-0">
+          <div className="mb-4 sticky top-0 z-10">
             <div
               className="text-white text-center text-4xl font-semibold py-6 px-6"
               style={{
                 backgroundImage: `url('../../ModalHeader2.png')`,
                 backgroundSize: "contain",
+                // zIndex:10,
                 backgroundPosition: "top",
                 backgroundRepeat: "no-repeat",
                 top: 0,
