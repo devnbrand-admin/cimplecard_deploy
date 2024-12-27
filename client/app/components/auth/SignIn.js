@@ -8,6 +8,7 @@ import eye_cross from "../../assets/auth/eye_cross.png"
 import eye from "../../assets/auth/eye.png"
 import axios from '../api_resources/axios';
 import {signInWithGoogle} from "../../utils/auth-firebase-logic/signInWithGoogle"
+import { getSessionStorageWithExpiry, setSessionStorageWithExpiry } from '../../utils/session-storage/sessionStorage';
 
 export default function SignIn({ setIsLogin }) {
   const router = useRouter();
@@ -54,6 +55,12 @@ export default function SignIn({ setIsLogin }) {
         const response = await axios.post("/api/user/login",
           formData
         )
+        console.log(response,"res")
+        setSessionStorageWithExpiry("userToken", response.data.user.token, 24 * 60 * 60 * 1000);
+
+        //to get the token
+        const token = await getSessionStorageWithExpiry("userToken")
+
 
         if (response.status===200) {
           
@@ -65,7 +72,8 @@ export default function SignIn({ setIsLogin }) {
           alert(data.message || 'Login failed. Please try again.');
         }
       } catch (error) {
-        setServerError(error.response.data.message)
+        console.log(error,"error")
+        setServerError(error?.response?.data?.message)
         alert('An error occurred. Please try again.');
       } finally {
         setLoading(false);

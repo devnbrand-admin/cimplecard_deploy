@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
-import image1 from "../../assets/lawyerTemplate/Gallery1.png"; // Replace with your actual image paths
+import image1 from "../../assets/lawyerTemplate/Gallery1.png";
 import image2 from "../../assets/lawyerTemplate/Gallery2.png";
 import image3 from "../../assets/lawyerTemplate/Gallery3.png";
 
@@ -24,7 +24,7 @@ const galleryImages = [
 function Gallery() {
   const swiperRef = useRef(null);
 
-  // Custom Navigation Handlers
+  
   const handlePrev = () => {
     if (swiperRef.current) swiperRef.current.slidePrev();
   };
@@ -34,13 +34,11 @@ function Gallery() {
   };
 
   return (
-    <div className="w-full px-4 sm:px-8 md:px-12 mt-20 lg:mt-0 ">
-      {/* Title */}
+    <div className="w-full px-4 sm:px-8 md:px-12 mt-20 lg:mt-0">
       <h1 className="font-Cormorant not-italic text-4xl md:text-5xl lg:text-6xl text-center text-black my-8">
         Gallery
       </h1>
 
-      {/* Custom Navigation Buttons */}
       <div className="flex justify-between items-center max-w-5xl mx-auto mb-4">
         <button
           onClick={handlePrev}
@@ -69,24 +67,25 @@ function Gallery() {
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         pagination={{ el: ".custom-pagination", clickable: true }}
         loop={true}
-        className="max-w-5xl mx-auto"
+        className="max-w-5xl mx-auto rounded-lg"
       >
         {galleryImages.map((image) => (
           <SwiperSlide key={image.id}>
-            <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-white rounded-lg shadow-lg overflow-hidden">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-lg"
-              />
+            <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-white rounded-lg shadow-lg overflow-hidden group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
+              <div className="w-full h-full rounded-lg overflow-hidden">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-lg"
+                />
+              </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-    
       <div className="custom-pagination flex justify-center gap-2 mt-6 text-white pb-6"></div>
     </div>
   );

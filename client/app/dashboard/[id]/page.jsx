@@ -7,6 +7,7 @@ import axios from "axios";
 import MobileComponent from "../../components/dashboardComponents/MobileComponent";
 import dynamic from "next/dynamic";
 import { useMediaQuery } from "react-responsive";
+import profileIcon from "../../assets/profile_icon.png";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
 
@@ -14,7 +15,7 @@ const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
 );
 const ModalFormMobile = dynamic(() =>
-  import("../../components/dashboardformComponents/ModalFormMobile")
+  import("../../components/dashboardformComponents/ModalFormMobile", { ssr: false })
 );
 
 const DashboardPage = () => {
@@ -44,6 +45,7 @@ const DashboardPage = () => {
         },
         withCredentials: true,
       });
+      console.log(response.data.user);
       return response.data.user; // Return user details
     } catch (error) {
       throw new Error(
@@ -54,11 +56,12 @@ const DashboardPage = () => {
 
   // Usage in useEffect
   useEffect(() => {
+    const tokenString = sessionStorage.getItem("userToken");
+    const tokenObject = JSON.parse(tokenString);
+    const jwtToken = tokenObject?.value;
     const fetchUserDetails = async () => {
       try {
-        const userDetails = await getUserDetails(
-          sessionStorage.getItem("authToken")
-        );
+        const userDetails = await getUserDetails(jwtToken);
         setUserDetails(userDetails);
       } catch (err) {
         console.log(err.message);
@@ -74,6 +77,10 @@ const DashboardPage = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -91,8 +98,8 @@ const DashboardPage = () => {
             <div className="flex flex-row w-full items-center justify-between my-2 p-5">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center">
                 <img
-                  src="/Assets/Profile Picture.jpg" // Replace with your profile pic path
                   alt="Profile"
+                  src={userDetails?.profilePictureUrl || profileIcon.src}
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
@@ -116,13 +123,13 @@ const DashboardPage = () => {
                     className="w-6 h-6"
                   />
                 </div>
-                <div className="ml-2 p-2 rounded-full border border-gray-300">
+                {/* <div className="ml-2 p-2 rounded-full border border-gray-300">
                   <img
                     src="/Assets/Notification.png"
                     alt="Icon 3"
                     className="w-6 h-6"
                   />
-                </div>
+                </div> */}
               </div>
             </div>
             <div
@@ -155,9 +162,9 @@ const DashboardPage = () => {
                 </div>
                 {userDetails
                   ? userDetails.cards.map((card, index) => (
-                      <Card key={index} card={card} />
-                    ))
-                  : "no cards"}
+                    <Card key={index} card={card}  />
+                  ))
+                  : ""}
               </div>
             </div>
           </div>
@@ -165,13 +172,15 @@ const DashboardPage = () => {
             <Provider store={store}>
               <div
                 className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-                onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
+                
+              // onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
               >
                 <div
                   className="bg-white p-6 rounded shadow-md"
-                  // Prevent backdrop click from closing the modal
+                // Prevent backdrop click from closing the modal
+
                 >
-                  {isMobileSize ? <ModalFormMobile /> : <ModalForm />}
+                  {isMobileSize ? <ModalFormMobile /> : <ModalForm setIsModalOpen={setIsModalOpen} />}
                 </div>
               </div>
             </Provider>

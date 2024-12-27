@@ -6,7 +6,7 @@ export const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
     console.log("User signed in", user);
-    router.push(`/dashboard/2`);
+    router.push(`/Dashboard/2`);
   } catch (error) {
     console.log("Error during sign-in", error);
   }

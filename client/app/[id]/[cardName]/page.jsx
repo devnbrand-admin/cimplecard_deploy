@@ -6,14 +6,13 @@ import MedicalCard from "../../cards/medical/[id]/page";
 import LawyerCard from "../../cards/lawyer/[id]/page";
 import AstrologerCard from "../../cards/astrologer/[id]/page";
 import B2bCard from "../../cards/b2b/[id]/page";
-
 import axios from "axios";
 const Page = () => {
   const params = useParams();
   const id = params.id;
   const cardName = params.cardName;
   const [card, setCard] = useState();
-  const getCardDetails = async (token) => {
+  const getCardDetails = async () => {
     try {
       console.log("id", id);
       console.log(" name", cardName);
@@ -22,7 +21,6 @@ const Page = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `${token}`,
           },
           withCredentials: true,
         }
@@ -40,8 +38,7 @@ const Page = () => {
   useEffect(() => {
     const fetchCardDetails = async () => {
       try {
-        // const token = await loginUser("amanu0181@gmail.com", "12345");
-        const res = await getCardDetails(sessionStorage.getItem("authToken"));
+        const res = await getCardDetails();
         console.log(res);
         setCard(res);
       } catch (err) {
@@ -51,9 +48,10 @@ const Page = () => {
 
     fetchCardDetails();
   }, []);
+  console.log(card);
   const TEMPLATE_MAP = {
-    modern: MedicalCard,
-    lawyer: LawyerCard,
+    lawyer: MedicalCard,
+    modern: LawyerCard,
     astrologer: AstrologerCard,
     b2b: B2bCard,
   };
