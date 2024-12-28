@@ -6,21 +6,7 @@ import { createCard } from "../../utils/cardCreationApi";
 import { AddLinkSection } from "./AddLinkSection";
 import Sidebar from "./Sidebar";
 import { MdClose } from "react-icons/md";
-
-import {
-  BsTriangle,
-  BsPerson,
-  BsTelephone,
-  BsLinkedin,
-  BsPersonVideo,
-  BsClockHistory,
-  BsCartCheckFill,
-  BsChat,
-  BsUpload,
-  BsEnvelopeAt,
-  BsImages,
-  BsBuilding,
-} from "react-icons/bs";
+import {BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsEnvelopeAt, BsImages, BsBuilding} from "react-icons/bs";
 import { TestimonialsSection } from "./TestimonialSection";
 import axios from "../api_resources/axios";
 

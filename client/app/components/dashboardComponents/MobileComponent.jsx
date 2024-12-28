@@ -55,7 +55,7 @@ const MobileComponent = ({ userDetails, setIsModalOpen }) => {
       <div className="h-40"></div>
       <div
         className="flex flex-col p-3 items-center"
-        style={{ backgroundColor: "#EADAF4", minHeight: "80vh" }}
+        style={{ backgroundColor: "#EADAF4" }}
       >
         <h3 className="font-semibold text-lg m-5" style={{ color: "#5A6ACF" }}>
           My Cards
@@ -119,12 +119,12 @@ const MobileComponent = ({ userDetails, setIsModalOpen }) => {
       </div>
       {isOpen && (
         <Provider store={store}>
-          {/* <ModalFormMobile /> */}
-          <ResponsiveModalForm setIsModalOpen={setIsModalOpen} />
+          <ModalFormMobile />
+          {/* <ResponsiveModalForm setIsModalOpen={setIsModalOpen} /> */}
         </Provider>
       )}
     </div>
-  
+
   );
 };
 

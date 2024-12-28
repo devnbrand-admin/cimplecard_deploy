@@ -206,7 +206,7 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        console.log(formData)
+        // console.log(formData)
         setFormData((prevState) => ({
             ...prevState,
             [name]: value,
@@ -216,6 +216,7 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
     const handleSave = () => {
         // Save current step data to Redux
         dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
+        console.log(formData)
         const valid = validateFormData(cardForm[activeStep-1], setErrors, formData)
         if (!valid) return
         
