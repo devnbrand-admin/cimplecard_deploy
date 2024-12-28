@@ -26,6 +26,8 @@ const DashboardPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [navbarSearch, setNavBarSearch] = useState("")
+  const [newSearchedCards, setNewSearchedCards] = useState([])
 
   const isMobileSize = useMediaQuery({ maxWidth: 768 });
 
@@ -65,6 +67,7 @@ const DashboardPage = () => {
       try {
         const userDetails = await getUserDetails(jwtToken);
         setUserDetails(userDetails);
+        console.log(userDetails,"userDe")
       } catch (err) {
         console.log(err.message);
       }
@@ -80,9 +83,26 @@ const DashboardPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+
+  
+
+  useEffect(() => {
+    if (navbarSearch && userDetails?.cards?.length > 0) {
+      console.log(navbarSearch && userDetails?.cards?.length,"use")
+      const searchedCards = userDetails?.cards?.filter((card) => {
+        const isMatch = card?.templateType?.toLowerCase().includes(navbarSearch?.toString()?.toLowerCase());
+        console.log(card?.templateType, navbarSearch, "Match:", isMatch);
+        return isMatch;
+      });
+            console.log(searchedCards,"newCards")
+      if (searchedCards?.length > 0) setNewSearchedCards(searchedCards)
+    } else {
+      setNewSearchedCards([])
+    }
+
+  }, [navbarSearch])
+
+
 
   return (
     <>
@@ -115,6 +135,8 @@ const DashboardPage = () => {
                 <input
                   type="text"
                   placeholder="Search..."
+                  value={navbarSearch}
+                  onChange={(e) => setNavBarSearch(e.target.value)}
                   className="px-3 py-1 border border-gray-300 rounded-sm w-60 focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
 
@@ -163,10 +185,12 @@ const DashboardPage = () => {
                   <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center rounded-xl justify-center text-xl opacity-0 group-hover:opacity-100 transition"></div>
                 </div>
                 {userDetails
-                  ? userDetails.cards.map((card, index) => (
-                      <Card key={index} card={card} />
-                    ))
-                  : ""}
+
+                  ? (newSearchedCards.length > 0 || navbarSearch.trim()
+                    ? newSearchedCards
+                    : userDetails.cards
+                  ).map((card, index) => <Card key={index} card={card} />)
+                  : []}
               </div>
             </div>
           </div>
@@ -175,7 +199,6 @@ const DashboardPage = () => {
               <div
                 className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
 
-                // onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
               >
                 <div
                   className="bg-white p-6 rounded shadow-md"
