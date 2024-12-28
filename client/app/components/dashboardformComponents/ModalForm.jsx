@@ -6,15 +6,42 @@ import { createCard } from "../../utils/cardCreationApi";
 import { AddLinkSection } from "./AddLinkSection";
 import Sidebar from "./Sidebar";
 import { MdClose } from "react-icons/md";
-import {BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsEnvelopeAt, BsImages, BsBuilding} from "react-icons/bs";
+
+import {
+  BsTriangle,
+  BsPerson,
+  BsTelephone,
+  BsLinkedin,
+  BsPersonVideo,
+  BsClockHistory,
+  BsCartCheckFill,
+  BsChat,
+  BsUpload,
+  BsEnvelopeAt,
+  BsImages,
+  BsBuilding,
+} from "react-icons/bs";
 import { TestimonialsSection } from "./TestimonialSection";
 import axios from "../api_resources/axios";
+import {
+  activeStep1Val,
+  validateImagesStep9,
+  validateLinksStep8,
+  validateStep10,
+  validateStep3,
+  validateStep4,
+  validateStep5,
+  validateStep6,
+  validateTestimonialsStep7,
+} from "./cardFormValidation/cardValidation";
+import { uploadImages } from "./utils/imageUpload";
 
-export default function ModalForm({setIsModalOpen,cardId}) {
+export default function ModalForm({ setIsModalOpen, cardId }) {
   const dispatch = useDispatch();
   const [activeStep, setActiveStep] = useState(1);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
+  const [isCardCreate, setIsCardCreate] = useState(false);
   // const [testimonials, setTestimonials] = useState([
   //   {
   //     name: "",
@@ -92,43 +119,55 @@ export default function ModalForm({setIsModalOpen,cardId}) {
   //     },
   //   ],
   // });
+  const [clientErrors, setClientErrors] = useState({
+    errors: {
+      products: [],
+    },
+  });
 
   const [testimonials, setTestimonials] = useState([
     {
-      name: "Alice Johnson",
-      designation: "CEO",
-      description: "John is a great developer, helped us with our project!",
-      imageUrl: "https://example.com/testimonial1.jpg",
+      name: "",
+      designation: "",
+      description: "",
+      imageUrl: "",
     },
   ]);
-  
+
   const [instagramPost, setInstagramPost] = useState([
-    "https://instagram.com/johndoe/post1",
+    // "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
+    "",
   ]);
-  
+
   const [instagramReels, setInstagramReels] = useState([
-    "https://instagram.com/johndoe/reel1",
+    // "https://www.instagram.com/reel/DD7hegTgQ_G/",
+    "",
   ]);
-  
+
   const [youtubeVideo, setYoutubeVideo] = useState([
-    "https://youtube.com/watch?v=12345",
+    // "https://www.youtube.com/watch?v=u4smAxDtbGc&feature=youtu.be",
+    "",
   ]);
-  
-  const [images, setImages] = useState([
-    "https://example.com/photo1.jpg",
-    "https://example.com/photo2.jpg",
-  ]);
-  
+
+  const [images, setImages] = useState([]);
+
   const [productData, setProductData] = useState([
+    // {
+    //   name: "Product",
+    //   imageUrl: null ,
+    //   serviceUrl: "https://personal-portfolio-eosin-xi.vercel.app/",
+    //   description: "desc",
+    //   cardId: ""
+    // },
     {
-      name: "Web Development",
-      imageUrl: "https://example.com/service1.jpg",
-      serviceUrl: "https://example.com/webdev",
-      description: "Full-stack web development services.",
-      cardId:"sadfasdf"
+      name: "",
+      imageUrl: null,
+      serviceUrl: "",
+      description: "",
+      cardId: "",
     },
   ]);
-  
+
   // const [formData, setFormData] = useState({
   //   // Personal information
   //   firstName: "John",
@@ -137,8 +176,8 @@ export default function ModalForm({setIsModalOpen,cardId}) {
   //   jobTitle: "Software Developer",
   //   companyName: "Tech Innovators",
   //   location: "San Francisco, CA",
-  //   profileImageUrl: "https://example.com/profile1.jpg",
-  //   headerImageUrl: "https://example.com/header1.jpg",
+  //   profileImageUrl: null,
+  //   headerImageUrl: null,
   //   templateType: "Modern",
   //   cardName: "johns-business-card2" + new Date(),
   //   qrCodeUrl: "https://example.com/qrcode.jpg",
@@ -154,42 +193,42 @@ export default function ModalForm({setIsModalOpen,cardId}) {
   //   otherEmails: "other.email@example.com",
   //   otherPhoneNumber: "0987654321",
   //   phoneNumber: "1234567890",
-  
+
   //   // Emergency contact information
   //   emergencyName: "John's Friend",
   //   emergencyRelationship: "Friend",
   //   emergencyNumber: "0987654321",
   //   emergencyEmail: "emergency@example.com",
-  
+
   //   // Social media links
   //   SocialMediaLink: [
   //     {
-  //       id: 1,
+  //       // id: 1,
   //       platform: "LinkedIn",
   //       url: "https://linkedin.com/in/johndoe",
-  //       iconUrl: "https://example.com/linkedin-icon.jpg",
+  //       // iconUrl: "https://example.com/linkedin-icon.jpg",
   //       cardId: "card1-uuid",
   //     },
   //     {
-  //       id: 2,
+  //       // id: 2,
   //       cardId: "card2-uuid",
 
   //       platform: "Twitter",
   //       url: "https://twitter.com/johndoe",
-  //       iconUrl: "https://example.com/twitter-icon.jpg",
+  //       // iconUrl: "https://example.com/twitter-icon.jpg",
   //     },
   //   ],
   //   companySocialMediaLink: [
   //     {
-  //       id: 1,
+  //       // id: 1,
   //       platform: "LinkedIn",
   //       url: "https://linkedin.com/in/johndoe",
-  //       iconUrl: "https://example.com/linkedin-icon.jpg",
+  //       // iconUrl: "https://example.com/linkedin-icon.jpg",
   //       cardId: "card1-uuid",
 
   //     },
   //     {
-  //       id: 2,
+  //       // id: 2,
   //       platform: "Twitter",
   //       url: "https://twitter.com/johndoe",
   //       iconUrl: "https://example.com/twitter-icon.jpg",
@@ -197,13 +236,13 @@ export default function ModalForm({setIsModalOpen,cardId}) {
 
   //     },
   //   ],
-  
+
   //   // Gallery and media
-  //   gallery: ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"],
+  //   gallery: [],
   //   instagramPost: ["https://instagram.com/johndoe/post1"],
   //   instagramReel: ["https://instagram.com/johndoe/reel1"],
   //   youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
-  
+
   //   // Testimonials
   //   testimonials: [
   //     {
@@ -216,19 +255,19 @@ export default function ModalForm({setIsModalOpen,cardId}) {
 
   //     },
   //   ],
-  
+
   //   // Services
   //   services: [
   //     {
   //       id: 1,
   //       name: "Web Development",
-  //       imageUrl: "https://example.com/service1.jpg",
+  //       imageUrl: null,
   //       serviceUrl: "https://example.com/webdev",
   //       description: "Full-stack web development services.",
   //       cardId:"asasfcardId"
   //     },
   //   ],
-  
+
   //   // Business hours
   //   businessHours: [
   //     {
@@ -241,69 +280,66 @@ export default function ModalForm({setIsModalOpen,cardId}) {
   //     },
   //   ],
   // });
- 
-  
 
-const [formData, setFormData] = useState({
-  // Personal information
-  firstName: "",
-  middleName: "",
-  lastName: "",
-  jobTitle: "",
-  companyName: "",
-  location: "",
-  profileImageUrl: "",
-  headerImageUrl: "",
-  templateType: "",
-  cardName: "",
-  qrCodeUrl: "",
-  aboutUs: "",
-  companyAddress: "",
-  dateOfBirth: "",
-  bio: "",
-  gridType: "",
-  languageSpoken: "",
-  additionalLink: "",
-  emails: [],
-  phoneNumbers: [],
-  otherEmails: "",
-  otherPhoneNumber: "",
-  phoneNumber: "",
+  const [formData, setFormData] = useState({
+    // Personal information
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    jobTitle: "",
+    companyName: "",
+    location: "",
+    profileImageUrl: "",
+    headerImageUrl: "",
+    templateType: "",
+    cardName: "",
+    qrCodeUrl: "",
+    aboutUs: "",
+    companyAddress: "",
+    dateOfBirth: "",
+    bio: "",
+    gridType: "Product",
+    languageSpoken: "",
+    additionalLink: "",
+    emails: ["",""],
+    phoneNumbers: [""],
+    otherEmails: "",
+    otherPhoneNumber: "",
+    phoneNumber: "",
 
-  // Emergency contact information
-  emergencyName: "",
-  emergencyRelationship: "",
-  emergencyNumber: "",
-  emergencyEmail: "",
+    // Emergency contact information
+    emergencyName: "",
+    emergencyRelationship: "",
+    emergencyNumber: "",
+    emergencyEmail: "",
 
-  // Social media links
-  SocialMediaLink: [],
-  companySocialMediaLink: [],
+    // Social media links
+    SocialMediaLink: [],
+    companySocialMediaLink: [],
 
-  // Gallery and media
-  gallery: [],
-  instagramPost: [],
-  instagramReel: [],
-  youtubeVideoLink: [],
+    // Gallery and media
+    gallery: [],
+    instagramPost: [],
+    instagramReel: [],
+    youtubeVideoLink: [],
 
-  // Testimonials
-  testimonials: [],
+    // Testimonials
+    testimonials: [],
 
-  // Services
-  services: [],
+    // Services
+    services: [],
 
-  // Business hours
-  businessHours: [
-    {
-      id: 1,
-      type: "",
-      from: "",
-      to: "",
-      cardId: "",
-    },
-  ],
-});
-
+    // Business hours
+    businessHours: [
+      {
+        id: 1,
+        type: "",
+        from: "",
+        to: "",
+        cardId: "",
+      },
+    ],
+  });
 
   const steps = [
     { id: 1, label: "Choose Template", icon: <BsTriangle /> },
@@ -323,7 +359,8 @@ const [formData, setFormData] = useState({
     setActiveStep(stepId);
   };
 
-  const handleAdd = () => { };
+  const handleAdd = () => {};
+
   const handleTemplateSelection = (template) => {
     setFormData((prev) => ({
       ...prev,
@@ -331,48 +368,82 @@ const [formData, setFormData] = useState({
     }));
   };
 
+  // const handleProfileUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       const imageUrl = reader.result;
+  //       setProfileImage(imageUrl);
+  //       setFormData((prevFormData) => ({
+  //         ...prevFormData,
+  //         profileImageUrl: imageUrl,
+  //       }));
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
   const handleProfileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const imageUrl = reader.result;
-        setProfileImage(imageUrl);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          profileImageUrl: imageUrl,
-        }));
-      };
-      reader.readAsDataURL(file);
+      setProfileImage(file);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        profileImageUrl: file,
+      }));
     }
   };
 
+  // const handleCoverUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setFormData((prevFormData) => ({
+  //         ...prevFormData,
+  //         headerImageUrl: reader.result,
+  //       }));
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
   const handleCoverUpload = (event) => {
     const file = event.target.files[0];
+    // const fileURL = URL.createObjectURL(file);
+
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          headerImageUrl: reader.result,
-        }));
-      };
-      reader.readAsDataURL(file);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        headerImageUrl: file,
+      }));
     }
   };
+
+  // const handleProductUpload = (event, index) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setProductData((prevData) =>
+  //         prevData.map((item, i) =>
+  //           i === index ? { ...item, imageUrl: reader.result } : item
+  //         )
+  //       );
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const handleProductUpload = (event, index) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProductData((prevData) =>
-          prevData.map((item, i) =>
-            i === index ? { ...item, imageUrl: reader.result } : item
-          )
-        );
-      };
-      reader.readAsDataURL(file);
+      setProductData((prevData) =>
+        prevData.map((item, i) =>
+          i === index ? { ...item, imageUrl: file } : item
+        )
+      );
     }
   };
 
@@ -396,10 +467,15 @@ const [formData, setFormData] = useState({
     });
   };
 
+  // const handleImageUpload = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   const newImages = files.map((file) => URL.createObjectURL(file));
+  //   setImages((prev) => [...prev, ...newImages]);
+  // };
+
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
-    const newImages = files.map((file) => URL.createObjectURL(file));
-    setImages((prev) => [...prev, ...newImages]);
+    setImages((prev) => [...prev, ...files]);
   };
 
   const handleInputChange = (e) => {
@@ -410,105 +486,324 @@ const [formData, setFormData] = useState({
     }));
   };
 
-  const handleSave = () => {
-    // Save current step data to Redux
-    dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
+  // useEffect(()=>{
+  //   if(Object.entries(clientErrors).length===0 && Object.entries(formData.length)>=0){
+  //     setIsCardCreate(true)
+  //     console.log("btn-t",clientErrors,formData)
+  //   }else{
+  //     console.log("btn-f",clientErrors,formData)
 
-    // Move to the next step
+  //     setIsCardCreate(false)
+  //   }
+  // },[clientErrors,formData])
+
+  const handleSave = () => {
+    // dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
+    console.log(formData, "formdata");
+    console.log(activeStep, "activeStep");
+
+    // Move to the next step if conditions are met
     if (activeStep < steps.length) {
-      if (activeStep === 10) {
-        return;
+      // if (activeStep === 9) {
+      //   return;
+      // }
+
+      if (activeStep === 2) {
+        // Validate form data for step 2
+        const { valid, errors } = activeStep1Val(formData);
+
+        if (!valid) {
+          setClientErrors({ ...clientErrors, ...errors }); // Set errors
+          return; // Exit if validation fails
+        } else {
+          // If no errors, clear the errors state
+          setClientErrors({
+            errors: {
+              products: [],
+            },
+          });
+        }
       }
+      if (activeStep === 3) {
+        const { valid, errors } = validateStep3(formData);
+
+        if (!valid) {
+          setClientErrors({ ...clientErrors, errors });
+          return; // Exit if validation fails
+        } else {
+          setClientErrors({
+            errors: {
+              products: [],
+            },
+          });
+        }
+      }
+      if (activeStep === 4) {
+        // Validate form data for step 2
+        const { valid, errors } = validateStep4(formData);
+
+        if (!valid) {
+          setClientErrors({ ...clientErrors, errors }); // Set errors
+          return; // Exit if validation fails
+        } else {
+          // If no errors, clear the errors state
+          setClientErrors({
+            errors: {
+              products: [],
+            },
+          });
+        }
+      }
+      if (activeStep === 5) {
+        // Validate form data for step 5
+        const { valid, errors } = validateStep5(formData);
+
+        if (!valid) {
+          setClientErrors({ ...clientErrors, errors }); // Set errors
+          return; // Exit if validation fails
+        } else {
+          // If no errors, clear the errors state
+          setClientErrors({
+            errors: {
+              products: [],
+            },
+          });
+        }
+      }
+      if (activeStep === 6) {
+        // Validate form data for step 6
+        const { valid, errors } = validateStep6(formData, productData);
+
+        if (!valid) {
+          setClientErrors({ ...clientErrors, errors }); // Set errors
+          return; // Exit if validation fails
+        } else {
+          // If no errors, clear the errors state
+          setClientErrors({
+            errors: {
+              products: [],
+            },
+          });
+        }
+      }
+      if (activeStep === 7) {
+        // Validate form data for step 5
+        const { valid, errors } = validateTestimonialsStep7(testimonials);
+
+        if (!valid) {
+          setClientErrors({ ...clientErrors, errors }); // Set errors
+          return; // Exit if validation fails
+        } else {
+          // If no errors, clear the errors state
+          setClientErrors({
+            errors: {
+              products: [],
+            },
+          });
+        }
+      }
+      if (activeStep === 8) {
+        // Validate form data for step 8
+        const validInstagramPosts = validateLinksStep8(
+          instagramPost,
+          "instagramPost"
+        ).valid;
+        const validInstagramReels = validateLinksStep8(
+          instagramReels,
+          "instagramReel"
+        ).valid;
+        const validYouTubeVideos = validateLinksStep8(
+          youtubeVideo,
+          "youtubeVideoLink"
+        ).valid;
+
+        if (validInstagramPosts && validInstagramReels && validYouTubeVideos) {
+          setClientErrors({
+            errors: {
+              products: [],
+            },
+          });
+          // Proceed with saving
+        } else {
+          const instagramValidation = validateLinksStep8(
+            instagramPost,
+            "instagramPost"
+          );
+          const reelsValidation = validateLinksStep8(
+            instagramReels,
+            "instagramReel"
+          );
+          const youtubeValidation = validateLinksStep8(
+            youtubeVideo,
+            "youtubeVideoLink"
+          );
+
+          // const validInstagramPosts = instagramValidation.valid;
+          // const validInstagramReels = reelsValidation.valid;
+          // const validYouTubeVideos = youtubeValidation.valid;
+
+          // Access errors
+          const instagramErrors = instagramValidation.errors;
+          const reelsErrors = reelsValidation.errors;
+          const youtubeErrors = youtubeValidation.errors;
+
+          setClientErrors({
+            ...clientErrors, // Preserve existing error states
+            instagramPost: { errors: instagramErrors },
+            instagramReel: { errors: reelsErrors },
+            youtubeVideoLink: { errors: youtubeErrors },
+          });
+
+          return; // Exit if validation fails
+        }
+      }
+      if (activeStep === 9) {
+        const { valid, errors } = validateImagesStep9(images);
+
+        if (valid) {
+          setClientErrors({ ...clientErrors, ...errors });
+          return; // Exit if validation fails
+        } else {
+          setClientErrors({
+            errors: {
+              products: [],
+            },
+          });
+        }
+      }
+      if (activeStep === 10) {
+        // Validate form data for step 2
+        const { valid, errors } = validateStep10(formData);
+        if (!valid) {
+          setClientErrors({ ...clientErrors, errors }); // Set errors
+          return; // Exit if validation fails
+        } else {
+          // If no errors, clear the errors state
+          setClientErrors({});
+          return;
+        }
+      }
+
+      // Proceed to the next step
       setActiveStep(activeStep + 1);
     }
   };
 
   const handleCreate = async (e) => {
+    if (activeStep === 10) {
+      // Validate form data for step 2
+      const { valid, errors } = validateStep10(formData);
+
+      if (!valid) {
+        setClientErrors({ ...clientErrors, errors }); // Set errors
+        return; // Exit if validation fails
+      } else {
+        // If no errors, clear the errors state
+        setClientErrors({
+          errors: {
+            products: [],
+          },
+        });
+      }
+    }
+    const filesToUpload = productData
+      .map((product) => product.imageUrl)
+      .filter((file) => file instanceof File);
+
+    // Upload images and get URLs
+    const uploadedUrls = await uploadImages(filesToUpload);
+    // Map uploaded URLs back to productData
+    const updatedProductData = productData.map((product, index) => ({
+      ...product,
+      imageUrl: uploadedUrls[index] || product.imageUrl,
+    }));
+    console.log(updatedProductData, "updatedProductData");
+
     e.preventDefault();
     setFormData((prev) => ({
       ...prev,
-      services: productData,
+      services: updatedProductData,
       testimonials: testimonials,
       instagramPost: instagramPost,
       instagramReel: instagramReels,
       youtubeVideoLink: youtubeVideo,
       gallery: images,
     }));
-    // console.log("Form Data:", formData);
+    console.log("Form Data:ModalForm", formData);
     try {
       const response = await createCard(formData);
-      // console.log("Card saved successfully:", response);
-      dispatch(setCardData(formData)); // Update Redux store
+      console.log("Card saved successfully:", response);
+      setIsModalOpen(false);
+      // dispatch(setCardData(formData)); // Update Redux store
     } catch (error) {
-      console.error("Failed to save card:", error);
+      console.log("Failed to save card:", error);
     }
   };
 
-  useEffect(()=>{
-    setFormData({
-        // Personal information
-        firstName: "",
-        middleName: "",
-        lastName: "",
-        jobTitle: "",
-        companyName: "",
-        location: "",
-        profileImageUrl: "",
-        headerImageUrl: "",
-        templateType: "",
-        cardName: "",
-        qrCodeUrl: "",
-        aboutUs: "",
-        companyAddress: "",
-        dateOfBirth: "",
-        bio: "",
-        gridType: "",
-        languageSpoken: "",
-        additionalLink: "",
-        emails: [],
-        phoneNumbers: [],
-        otherEmails: "",
-        otherPhoneNumber: "",
-        phoneNumber: "",
-      
-        // Emergency contact information
-        emergencyName: "",
-        emergencyRelationship: "",
-        emergencyNumber: "",
-        emergencyEmail: "",
-      
-        // Social media links
-        SocialMediaLink: [],
-        companySocialMediaLink: [],
-      
-        // Gallery and media
-        gallery: [],
-        instagramPost: [],
-        instagramReel: [],
-        youtubeVideoLink: [],
-      
-        // Testimonials
-        testimonials: [],
-      
-        // Services
-        services: [],
-      
-        // Business hours
-        businessHours: [
-          {
-            id: 1,
-            type: "",
-            from: "",
-            to: "",
-            cardId: "",
-          },
-        ],
-      });
-      
-    
-    if(cardId) getSingleCardData(cardId)
-  },[cardId])
+  // useEffect(()=>{
 
+  //   setFormData({
+  //       // Personal information
+  //       firstName: "",
+  //       middleName: "",
+  //       lastName: "",
+  //       jobTitle: "",
+  //       companyName: "",
+  //       location: "",
+  //       profileImageUrl: "",
+  //       headerImageUrl: "",
+  //       templateType: "",
+  //       cardName: "",
+  //       qrCodeUrl: "",
+  //       aboutUs: "",
+  //       companyAddress: "",
+  //       dateOfBirth: "",
+  //       bio: "",
+  //       gridType: "",
+  //       languageSpoken: "",
+  //       additionalLink: "",
+  //       emails: [],
+  //       phoneNumbers: [],
+  //       otherEmails: "",
+  //       otherPhoneNumber: "",
+  //       phoneNumber: "",
+
+  //       // Emergency contact information
+  //       emergencyName: "",
+  //       emergencyRelationship: "",
+  //       emergencyNumber: "",
+  //       emergencyEmail: "",
+
+  //       // Social media links
+  //       SocialMediaLink: [],
+  //       companySocialMediaLink: [],
+
+  //       // Gallery and media
+  //       gallery: [],
+  //       instagramPost: [],
+  //       instagramReel: [],
+  //       youtubeVideoLink: [],
+
+  //       // Testimonials
+  //       testimonials: [],
+
+  //       // Services
+  //       services: [],
+
+  //       // Business hours
+  //       businessHours: [
+  //         {
+  //           id: 1,
+  //           type: "",
+  //           from: "",
+  //           to: "",
+  //           cardId: "",
+  //         },
+  //       ],
+  //     });
+
+  //   if(cardId) getSingleCardData(cardId)
+  // },[cardId])
 
   // Function to map backend data to the required format
   const transformCardData = (data) => {
@@ -537,13 +832,13 @@ const [formData, setFormData] = useState({
       otherEmails: data.otherEmails || "",
       otherPhoneNumber: data.otherPhoneNumber || "",
       phoneNumber: data.phoneNumber || "",
-  
+
       // Emergency contact information
       emergencyName: data.emergencyName || "",
       emergencyRelationship: data.emergencyRelationship || "",
       emergencyNumber: data.emergencyNumber || "",
       emergencyEmail: data.emergencyEmail || "",
-  
+
       // Social media links
       SocialMediaLink: [
         ...(data.linkedinLink
@@ -570,24 +865,24 @@ const [formData, setFormData] = useState({
           : []),
       ],
       companySocialMediaLink: [],
-  
+
       // Gallery and media
       gallery: data.gallery || [],
       instagramPost: data.instagramPost || [],
       instagramReel: data.instagramReel || [],
       youtubeVideoLink: data.youtubeVideoLink || [],
-  
+
       // Testimonials
       testimonials: data.testimonials || [],
-  
+
       // Services
       services: data.services || [],
-  
+
       // Business hours
       businessHours: data.businessHours || [],
     };
   };
-  
+
   // Fetch and process single card data
   const getSingleCardData = async (cardId) => {
     try {
@@ -596,12 +891,12 @@ const [formData, setFormData] = useState({
         return;
       }
       console.log(cardId, "cardId");
-  
+
       const response = await axios.get(`/api/card/get/${cardId}`);
       const backendData = response.data;
-  
+
       console.log(backendData, "singleData");
-  
+
       // Transform backend data to required format
       const transformedData = transformCardData(backendData);
       console.log(transformedData, "Transformed Data");
@@ -609,29 +904,25 @@ const [formData, setFormData] = useState({
       console.error("Error fetching single card data:", error);
     }
   };
-  
-
-
 
   return (
-<div
-  className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
-  suppressHydrationWarning
->
-  <div
-    className="bg-white relative rounded-lg w-full max-w-7xl h-[80%] flex"
-    onClick={(e) => e.stopPropagation()}
-  >
-    <button
-      className="absolute z-30 right-[5%] top-[5%]  text-black "
-      onClick={(e) => {
-        e.stopPropagation(); 
-        setIsModalOpen(false);
-      }}
+    <div
+      className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
+      suppressHydrationWarning
     >
-      <MdClose  className="text-4xl p-2 text-black" />
-    </button>
-
+      <div
+        className="bg-white relative rounded-lg w-full max-w-7xl h-[80%] flex"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          className="absolute z-30 right-[5%] top-[5%]  text-black "
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsModalOpen(false);
+          }}
+        >
+          <MdClose className="text-4xl p-2 text-black" />
+        </button>
 
         <Sidebar
           activeStep={activeStep}
@@ -687,10 +978,11 @@ const [formData, setFormData] = useState({
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Medical")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Medical"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
+                          formData.templateType === "Medical"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                          }`}
+                        }`}
                       >
                         {formData.templateType === "Medical"
                           ? "Selected"
@@ -724,10 +1016,11 @@ const [formData, setFormData] = useState({
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Astrologer")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Astrologer"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
+                          formData.templateType === "Astrologer"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                          }`}
+                        }`}
                       >
                         {formData.templateType === "Astrologer"
                           ? "Selected"
@@ -761,10 +1054,11 @@ const [formData, setFormData] = useState({
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("B2B Business")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "B2B Business"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
+                          formData.templateType === "B2B Business"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                          }`}
+                        }`}
                       >
                         {formData.templateType === "B2B Business"
                           ? "Selected"
@@ -798,10 +1092,11 @@ const [formData, setFormData] = useState({
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Lawyer")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Lawyer"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
+                          formData.templateType === "Lawyer"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                          }`}
+                        }`}
                       >
                         {formData.templateType === "Lawyer"
                           ? "Selected"
@@ -935,8 +1230,9 @@ const [formData, setFormData] = useState({
                   </div>
                 </div>
 
-                <div className="space-y-4 text-sm">
-                  <div className="flex flex-wrap gap-4">
+                <div className="space-y-4  text-sm">
+                  {/* Name Fields */}
+                  <div className="flex gap-4">
                     <div className="flex-1">
                       <input
                         type="text"
@@ -948,8 +1244,15 @@ const [formData, setFormData] = useState({
                             firstName: e.target.value,
                           })
                         }
-                        className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.firstName ? "border-red-500" : ""
+                        }`}
                       />
+                      {clientErrors.firstName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.firstName}
+                        </p>
+                      )}
                     </div>
                     <div className="flex-1">
                       <input
@@ -973,11 +1276,19 @@ const [formData, setFormData] = useState({
                         onChange={(e) =>
                           setFormData({ ...formData, lastName: e.target.value })
                         }
-                        className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.lastName ? "border-red-500" : ""
+                        }`}
                       />
+                      {clientErrors.lastName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.lastName}
+                        </p>
+                      )}
                     </div>
                   </div>
 
+                  {/* Company Name and Job Title */}
                   <div className="flex gap-4 text-sm">
                     <div className="flex-1">
                       <input
@@ -990,8 +1301,15 @@ const [formData, setFormData] = useState({
                             companyName: e.target.value,
                           })
                         }
-                        className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.companyName ? "border-red-500" : ""
+                        }`}
                       />
+                      {clientErrors.companyName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.companyName}
+                        </p>
+                      )}
                     </div>
                     <div className="flex-1">
                       <input
@@ -999,13 +1317,17 @@ const [formData, setFormData] = useState({
                         placeholder="Company's Address"
                         value={formData.location}
                         onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            location: e.target.value,
-                          })
+                          setFormData({ ...formData, location: e.target.value })
                         }
-                        className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.location ? "border-red-500" : ""
+                        }`}
                       />
+                      {clientErrors.location && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.location}
+                        </p>
+                      )}
                     </div>
                     <div className="flex-1">
                       <input
@@ -1015,10 +1337,19 @@ const [formData, setFormData] = useState({
                         onChange={(e) =>
                           setFormData({ ...formData, jobTitle: e.target.value })
                         }
-                        className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.jobTitle ? "border-red-500" : ""
+                        }`}
                       />
+                      {clientErrors.jobTitle && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.jobTitle}
+                        </p>
+                      )}
                     </div>
                   </div>
+
+                  {/* About Us */}
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <input
@@ -1028,14 +1359,25 @@ const [formData, setFormData] = useState({
                         onChange={(e) =>
                           setFormData({ ...formData, aboutUs: e.target.value })
                         }
-                        className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.aboutUs ? "border-red-500" : ""
+                        }`}
                       />
+                      {clientErrors.aboutUs && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.aboutUs}
+                        </p>
+                      )}
                     </div>
                   </div>
+
+                  {/* Language Spoken and Date of Birth */}
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <select
-                        className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.languageSpoken ? "border-red-500" : ""
+                        }`}
                         value={formData.languageSpoken}
                         onChange={(e) =>
                           setFormData({
@@ -1054,8 +1396,13 @@ const [formData, setFormData] = useState({
                         <option value="Tamil">Tamil</option>
                         <option value="Telegu">Telegu</option>
                       </select>
+                      {clientErrors.languageSpoken && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.languageSpoken}
+                        </p>
+                      )}
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 ">
                       <input
                         type="text"
                         placeholder="Date of Birth (yyyy-mm-dd)"
@@ -1066,33 +1413,37 @@ const [formData, setFormData] = useState({
                             dateOfBirth: e.target.value,
                           })
                         }
-                        className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.dateOfBirth ? "border-red-500" : ""
+                        }`}
                       />
+                      {clientErrors.dateOfBirth && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.dateOfBirth}
+                        </p>
+                      )}
+                      <div className="py-6  flex justify-end space-x-2">
+                        <div
+                          className="text-white text-center text-4xl font-semibold py-6 px-6"
+                          style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: "contain",
+                            backgroundPosition: "left",
+                            backgroundRepeat: "no-repeat",
+                            top: 0,
+                            left: 0,
+                            width: "70%",
+                            height: "10px",
+                          }}
+                        ></div>
+                        <button
+                          onClick={handleSave}
+                          className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
+                        >
+                          Save Changes
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="py-6 flex justify-end space-x-2">
-                    <div
-                      className="text-white text-center text-4xl font-semibold py-6 px-6"
-                      style={{
-                        backgroundImage: `url('../../Underline.svg')`,
-                        backgroundSize: "contain",
-                        backgroundPosition: "left",
-                        backgroundRepeat: "no-repeat",
-                        top: 0,
-                        left: 0,
-                        width: "70%",
-                        height: "10px",
-                      }}
-                    ></div>
-                    {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
-                        Preview Card
-                      </button> */}
-                    <button
-                      onClick={handleSave}
-                      className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
-                    >
-                      Save Changes
-                    </button>
                   </div>
                 </div>
               </div>
@@ -1100,9 +1451,7 @@ const [formData, setFormData] = useState({
           )}
 
           {activeStep === 3 && (
-            <div
-              className="flex flex-col gap-5"
-            >
+            <div className="flex flex-col gap-5">
               <div
                 className="py-2"
                 style={{
@@ -1134,6 +1483,11 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors.errors?.phoneNumber0 && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.phoneNumber0}
+                      </p>
+                    )}
                   </div>
                   <div className="flex-1">
                     <input
@@ -1150,12 +1504,17 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors.errors?.phoneNumber1 && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.phoneNumber1}
+                      </p>
+                    )}
                   </div>
                   <div className="flex-1">
                     <input
                       type="text"
                       placeholder="Other Number"
-                      value={formData.phoneNumbers[2]}
+                      value={formData.phoneNumbers2}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
@@ -1166,6 +1525,11 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors.errors?.phoneNumber2 && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.phoneNumber2}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -1185,6 +1549,11 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors.errors?.email0 && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.email0}
+                      </p>
+                    )}
                   </div>
                   <div className="flex-1">
                     <input
@@ -1201,8 +1570,14 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors.errors?.email1 && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.email1}
+                      </p>
+                    )}
                   </div>
                 </div>
+
                 <div className="flex justify-center gap-4">
                   <h1 className="text-2xl font-semibold text-[#707FDD]">
                     Emergency Contact Details
@@ -1222,6 +1597,11 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors.errors?.emergencyName && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.emergencyName}
+                      </p>
+                    )}
                   </div>
                   <div className="flex-1">
                     <input
@@ -1236,6 +1616,11 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors.errors?.emergencyRelationship && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.emergencyRelationship}
+                      </p>
+                    )}
                   </div>
                   <div className="flex-1">
                     <input
@@ -1250,6 +1635,11 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors?.errors?.emergencyNumber && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.emergencyNumber}
+                      </p>
+                    )}
                   </div>
                   <div className="flex-1">
                     <input
@@ -1264,6 +1654,11 @@ const [formData, setFormData] = useState({
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
+                    {clientErrors?.errors?.emergencyEmail && (
+                      <p className="text-red-500 text-sm">
+                        {clientErrors?.errors?.emergencyEmail}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="py-6 flex justify-end space-x-2">
@@ -1280,14 +1675,10 @@ const [formData, setFormData] = useState({
                       height: "10px",
                     }}
                   ></div>
-                  {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
-                        Preview Card
-                      </button> */}
                   <button
                     onClick={handleSave}
                     className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
                   >
-                    {" "}
                     Save Changes
                   </button>
                 </div>
@@ -1336,8 +1727,15 @@ const [formData, setFormData] = useState({
                           SocialMediaLink: updatedLinks,
                         });
                       }}
-                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                      className={`w-full p-3 border ${
+                        clientErrors?.errors?.Website ? "border-red-500" : ""
+                      } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
                     />
+                    {clientErrors?.errors?.Website && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {clientErrors?.errors?.Website}
+                      </p>
+                    )}
                   </div>
 
                   <div className="flex-1">
@@ -1557,8 +1955,17 @@ const [formData, setFormData] = useState({
                           companySocialMediaLink: updatedLinks,
                         });
                       }}
-                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                      className={`w-full p-3 border ${
+                        clientErrors?.errors?.companyWebsite
+                          ? "border-red-500"
+                          : ""
+                      } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
                     />
+                    {clientErrors?.errors?.companyWebsite && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {clientErrors?.errors?.companyWebsite}
+                      </p>
+                    )}
                   </div>
 
                   <div className="flex-1">
@@ -1765,10 +2172,11 @@ const [formData, setFormData] = useState({
                 </div>
                 <div className="flex justify-center gap-4">
                   <button
-                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Product"
+                    className={`py-2 px-4 rounded-full border-2 ${
+                      formData.gridType === "Product"
                         ? "bg-[#707FDD] text-white border-[#707FDD]"
                         : "bg-transparent text-[#707FDD] border-[#707FDD]"
-                      }`}
+                    }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Product" })
                     }
@@ -1778,10 +2186,11 @@ const [formData, setFormData] = useState({
 
                   {/* Service Button */}
                   <button
-                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Service"
+                    className={`py-2 px-4 rounded-full border-2 ${
+                      formData.gridType === "Service"
                         ? "bg-[#707FDD] text-white border-[#707FDD]"
                         : "bg-transparent text-[#707FDD] border-[#707FDD]"
-                      }`}
+                    }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Service" })
                     }
@@ -1789,6 +2198,12 @@ const [formData, setFormData] = useState({
                     Service
                   </button>
                 </div>
+                {clientErrors?.errors?.gridType && (
+                  <p className="text-red-500 text-sm mt-2">
+                    {clientErrors?.errors?.gridType}
+                  </p>
+                )}
+
                 <div className="space-y-4 mt-4">
                   {/* Scrollable Container */}
                   <div
@@ -1827,8 +2242,20 @@ const [formData, setFormData] = useState({
                                 )
                               )
                             }
-                            className="p-3 mb-2 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md w-full"
+                            className={`p-3 border w-full rounded-md ${
+                              clientErrors?.errors?.products?.length > 0 &&
+                              clientErrors?.errors?.products[index]?.name &&
+                              clientErrors?.errors?.products[index]?.name
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            }`}
                           />
+                          {clientErrors?.errors?.products?.length > 0 &&
+                            clientErrors?.errors?.products[index]?.name && (
+                              <p className="text-red-500 text-sm">
+                                {clientErrors?.errors?.products[index]?.name}
+                              </p>
+                            )}
                           <input
                             type="text"
                             placeholder="Description of the Product/Service"
@@ -1842,8 +2269,23 @@ const [formData, setFormData] = useState({
                                 )
                               )
                             }
-                            className="p-3 mb-2 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md w-full"
+                            className={`p-3 border w-full rounded-md ${
+                              clientErrors?.errors?.products?.length > 0 &&
+                              clientErrors?.errors?.products[index]?.description
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            }`}
                           />
+                          {clientErrors?.errors?.products?.length > 0 &&
+                            clientErrors?.errors?.products[index]
+                              ?.description && (
+                              <p className="text-red-500 text-sm">
+                                {clientErrors?.errors?.products?.length > 0 &&
+                                  clientErrors?.errors?.products[index]
+                                    ?.description}
+                              </p>
+                            )}
+
                           <input
                             type="text"
                             placeholder="External Link of the Product/Service"
@@ -1857,8 +2299,22 @@ const [formData, setFormData] = useState({
                                 )
                               )
                             }
-                            className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md w-full"
+                            className={`p-3 border w-full rounded-md ${
+                              clientErrors?.errors?.products?.length > 0 &&
+                              clientErrors?.errors?.products[index]?.serviceUrl
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            }`}
                           />
+                          {clientErrors?.errors?.products?.length > 0 &&
+                            clientErrors?.errors?.products[index]
+                              ?.serviceUrl && (
+                              <p className="text-red-500 text-sm">
+                                {clientErrors?.errors?.products?.length > 0 &&
+                                  clientErrors?.errors?.products[index]
+                                    ?.serviceUrl}
+                              </p>
+                            )}
                         </div>
 
                         {/* Image Upload */}
@@ -1904,6 +2360,14 @@ const [formData, setFormData] = useState({
                               id={`product-upload-${index}`}
                             />
                           </label>
+                          {clientErrors?.errors?.products?.length > 0 &&
+                            clientErrors?.errors?.products[index]?.imageUrl && (
+                              <p className="text-red-500 text-sm">
+                                {clientErrors?.errors?.products?.length > 0 &&
+                                  clientErrors?.errors?.products[index]
+                                    .imageUrl}
+                              </p>
+                            )}
                         </div>
 
                         {/* Delete Button */}
@@ -1976,10 +2440,176 @@ const [formData, setFormData] = useState({
             <TestimonialsSection
               testimonials={testimonials}
               setTestimonials={setTestimonials}
+              setClientErrors={setClientErrors}
+              clientErrors={clientErrors}
+              handleSave={handleSave}
             />
           )}
 
-          
+          <>
+            {/* {activeStep === 6 && (
+            <div>
+              <div
+                className="flex mt-6 items-center justify-center"
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  width: "100%",
+                  height: "8rem",
+                  overflowY: "scroll",
+                  padding: "20px",
+                }}
+              >
+                <div
+                  className="flex flex-col gap-2"
+                  style={{ width: "100%", maxWidth: "1080px" }}
+                >
+                  {[...Array(5)].map((_, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-center"
+                      style={{
+                        backgroundColor: "#F1F2FC",
+                        backgroundSize: "contain",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        width: "100%",
+                        height: "120px",
+                        padding: "20px",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <div className="flex-1" style={{ maxWidth: "80%" }}>
+                        <h1
+                          className="text-[#787F89] text-sm mb-1"
+                          style={{
+                            fontSize: "14px",
+                            textAlign: "left",
+                          }}
+                        >
+                          Name | Job Role | Industry
+                        </h1>
+                        <input
+                          type="text"
+                          placeholder="Testimonial Message"
+                          className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                          style={{
+                            width: "100%",
+                            maxWidth: "1080px",
+                            display: "block",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4 mt-4">
+                <div className="flex justify-center gap-4">
+                  <h1 className="text-2xl font-semibold text-[#707FDD]">
+                    Add Testimonial
+                  </h1>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      value={formData.testimonialName}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          testimonialName: e.target.value,
+                        })
+                      }
+                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      placeholder="Job Role"
+                      value={formData.testimonialRole}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          testimonialRole: e.target.value,
+                        })
+                      }
+                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <select
+                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                      value={formData.testimonialIndustry}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          testimonialIndustry: e.target.value,
+                        })
+                      }
+                    >
+                      <option value="" disabled>
+                        Industry
+                      </option>
+                      <option value="Medical">Medical</option>
+                      <option value="Astrology">Astrology</option>
+                      <option value="Business">Business</option>
+                      <option value="Sports">Sports</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      placeholder="Testimonial Message"
+                      value={formData.testimonialMessage}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          testimonialMessage: e.target.value,
+                        })
+                      }
+                      className="w-full h-[120px] p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-center gap-4">
+                  <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
+                    Add Testimonial
+                  </button>
+                </div>
+                <div className="py-6 flex justify-end space-x-2">
+                  <div
+                    className="text-white text-center text-4xl font-semibold py-6 px-6"
+                    style={{
+                      backgroundImage: `url('../../Underline.svg')`,
+                      backgroundSize: "contain",
+                      backgroundPosition: "left",
+                      backgroundRepeat: "no-repeat",
+                      top: 0,
+                      left: 0,
+                      width: "70%",
+                      height: "10px",
+                    }}
+                  ></div>
+                  {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
+                        Preview Card
+                      </button> *
+                  <button
+                    onClick={handleSave}
+                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
+                  >
+                    {" "}
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          )} */}
+          </>
 
           {activeStep === 8 && (
             <div>
@@ -1991,6 +2621,9 @@ const [formData, setFormData] = useState({
                     items={instagramPost}
                     setItems={setInstagramPost}
                     placeholder="Instagram Post Link"
+                    setClientErrors={setClientErrors}
+                    clientErrors={clientErrors}
+                    type="instagramPost"
                   />
 
                   {/* Instagram Reels */}
@@ -1999,6 +2632,9 @@ const [formData, setFormData] = useState({
                     items={instagramReels}
                     setItems={setInstagramReels}
                     placeholder="Instagram Reel Link"
+                    setClientErrors={setClientErrors}
+                    clientErrors={clientErrors}
+                    type="instagramReel"
                   />
 
                   {/* YouTube Videos */}
@@ -2007,18 +2643,28 @@ const [formData, setFormData] = useState({
                     items={youtubeVideo}
                     setItems={setYoutubeVideo}
                     placeholder="YouTube Video Link"
+                    setClientErrors={setClientErrors}
+                    clientErrors={clientErrors}
+                    type="youtubeVideoLink"
                   />
 
                   {/* Save Button */}
                   <div className="py-6 flex justify-end space-x-2">
+                    <div
+                      className="text-white text-center text-4xl font-semibold py-6 px-6"
+                      style={{
+                        backgroundImage: `url('../../Underline.svg')`,
+                        backgroundSize: "contain",
+                        backgroundPosition: "left",
+                        backgroundRepeat: "no-repeat",
+                        top: 0,
+                        left: 0,
+                        width: "70%",
+                        height: "10px",
+                      }}
+                    ></div>
                     <button
-                      onClick={() =>
-                        console.log({
-                          instagramPost,
-                          instagramReels,
-                          youtubeVideo,
-                        })
-                      }
+                      onClick={handleSave}
                       className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
                     >
                       Save Changes
@@ -2044,7 +2690,7 @@ const [formData, setFormData] = useState({
                   ></div>
                 ))}
 
-                {[...Array(Math.max(8 - images.length, 0))].map((_, index) => (
+                {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
                   <div
                     key={`empty-${index}`}
                     className="w-40 h-56 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"
@@ -2066,6 +2712,18 @@ const [formData, setFormData] = useState({
                   </div>
                 ))}
               </div>
+
+              {/* Error Messages */}
+              {clientErrors?.images?.length === 1 && (
+                <p className="text-red-500 text-xs mt-2">
+                  * {clientErrors?.images[0]}
+                </p>
+              )}
+              {clientErrors?.images?.length >= 1 && (
+                <p className="text-red-500 text-xs mt-2">
+                  * {clientErrors?.images[1]}
+                </p>
+              )}
 
               <div className="mt-20">
                 <label
@@ -2133,7 +2791,7 @@ const [formData, setFormData] = useState({
                     key={index}
                     className="flex gap-4 p-4 border rounded-md bg-[#F9FAFB] relative"
                     onContextMenu={(e) => {
-                      e.preventDefault(); // Prevent the default context menu from opening
+                      e.preventDefault();
                       const updatedBusinessHours =
                         formData.businessHours.filter((_, i) => i !== index);
                       setFormData({
@@ -2150,18 +2808,34 @@ const [formData, setFormData] = useState({
                       <input
                         type="time"
                         value={hour.from}
+                        // onChange={(e) => {
+                        //   const updatedBusinessHours = [...formData.businessHours];
+                        //   updatedBusinessHours[index].from = e.target.value;
+                        //   setFormData({
+                        //     ...formData,
+                        //     businessHours: updatedBusinessHours,
+                        //   });
+                        // }}
                         onChange={(e) => {
                           const updatedBusinessHours = [
                             ...formData.businessHours,
-                          ];
-                          updatedBusinessHours[index].from = e.target.value;
+                          ]; // Create a shallow copy of the array
+                          updatedBusinessHours[index] = {
+                            ...updatedBusinessHours[index],
+                            from: e.target.value,
+                          }; // Create a copy of the object being updated
                           setFormData({
                             ...formData,
-                            businessHours: updatedBusinessHours,
+                            businessHours: updatedBusinessHours, // Update the businessHours array
                           });
                         }}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
+                      {clientErrors?.errors?.businessHours?.[index]?.from && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors?.errors?.businessHours[index].from}
+                        </p>
+                      )}
                     </div>
                     <div className="flex-1">
                       <label className="block text-sm text-[#787F89] mb-1">
@@ -2182,6 +2856,11 @@ const [formData, setFormData] = useState({
                         }}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
+                      {clientErrors?.errors?.businessHours?.[index]?.to && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors?.errors?.businessHours[index].to}
+                        </p>
+                      )}
                     </div>
                     <div className="flex-1">
                       <label className="block text-sm text-[#787F89] mb-1">
@@ -2203,6 +2882,11 @@ const [formData, setFormData] = useState({
                         }}
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
+                      {clientErrors?.errors?.businessHours?.[index]?.type && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors?.errors?.businessHours[index].type}
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -2210,7 +2894,6 @@ const [formData, setFormData] = useState({
                 <div className="flex justify-end gap-4 pb-10">
                   <button
                     onClick={() => {
-                      // Add a new business hour block
                       const updatedBusinessHours = [
                         ...formData.businessHours,
                         { from: "", to: "", type: "" },
@@ -2236,6 +2919,11 @@ const [formData, setFormData] = useState({
                   <button
                     onClick={handleCreate}
                     className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
+
+                    // disabled={!isCardCreate}
+                    // className={`py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]
+                    //   ${isCardCreate ? "active:transform active:scale-110" : "opacity-50 cursor-not-allowed"}
+                    //   hover:${isCardCreate ? "bg-opacity-80" : "opacity-50"}`}
                   >
                     Create Card
                   </button>
@@ -2286,27 +2974,6 @@ const [formData, setFormData] = useState({
               </div>
             </div>
           )}
-
-          {/* <div className="mt-8 flex justify-end space-x-2">
-                <div className="text-white text-center text-4xl font-semibold py-6 px-6"
-                  style={{
-                      backgroundImage: `url('../../Underline.svg')`,
-                      backgroundSize: 'contain',
-                      backgroundPosition: 'left',
-                      backgroundRepeat: 'no-repeat',
-                      top: 0,
-                      left: 0,
-                      width: '70%',
-                      height: '10px',
-                  }}>
-                </div>
-            <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
-              Preview Card
-            </button>
-            <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-              Save Changes
-            </button>
-          </div> */}
         </div>
       </div>
     </div>
