@@ -23,7 +23,17 @@ import {
 } from "react-icons/bs";
 import { TestimonialsSection } from "./TestimonialSection";
 import axios from "../api_resources/axios";
-import { activeStep1Val, validateImagesStep9, validateLinksStep8, validateStep10, validateStep3, validateStep4, validateStep5, validateStep6, validateTestimonialsStep7 } from "./cardFormValidation/cardValidation";
+import {
+  activeStep1Val,
+  validateImagesStep9,
+  validateLinksStep8,
+  validateStep10,
+  validateStep3,
+  validateStep4,
+  validateStep5,
+  validateStep6,
+  validateTestimonialsStep7,
+} from "./cardFormValidation/cardValidation";
 import { uploadImages } from "./utils/imageUpload";
 
 export default function ModalForm({ setIsModalOpen, cardId }) {
@@ -31,7 +41,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   const [activeStep, setActiveStep] = useState(1);
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
-  const [isCardCreate, setIsCardCreate] = useState(false)
+  const [isCardCreate, setIsCardCreate] = useState(false);
   // const [testimonials, setTestimonials] = useState([
   //   {
   //     name: "",
@@ -117,199 +127,146 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
   const [testimonials, setTestimonials] = useState([
     {
-      name: "test1",
-      designation: "desgni",
-      description: "desc",
+      name: "",
+      designation: "",
+      description: "",
       imageUrl: "",
     },
   ]);
 
   const [instagramPost, setInstagramPost] = useState([
-    "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
+    // "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
+    "",
   ]);
 
   const [instagramReels, setInstagramReels] = useState([
-    "https://www.instagram.com/reel/DD7hegTgQ_G/",
+    // "https://www.instagram.com/reel/DD7hegTgQ_G/",
+    "",
   ]);
 
   const [youtubeVideo, setYoutubeVideo] = useState([
-    "https://www.youtube.com/watch?v=u4smAxDtbGc&feature=youtu.be",
+    // "https://www.youtube.com/watch?v=u4smAxDtbGc&feature=youtu.be",
+    "",
   ]);
 
-  const [images, setImages] = useState([
-
-  ]);
+  const [images, setImages] = useState([]);
 
   const [productData, setProductData] = useState([
+    // {
+    //   name: "Product",
+    //   imageUrl: null ,
+    //   serviceUrl: "https://personal-portfolio-eosin-xi.vercel.app/",
+    //   description: "desc",
+    //   cardId: ""
+    // },
     {
-      name: "Product",
-      imageUrl: null ,
-      serviceUrl: "https://personal-portfolio-eosin-xi.vercel.app/",
-      description: "desc",
-      cardId: ""
+      name: "",
+      imageUrl: null,
+      serviceUrl: "",
+      description: "",
+      cardId: "",
     },
   ]);
 
-  const [formData, setFormData] = useState({
-    // Personal information
-    firstName: "John",
-    middleName: "",
-    lastName: "Doe",
-    jobTitle: "Software Developer",
-    companyName: "Tech Innovators",
-    location: "San Francisco, CA",
-    profileImageUrl: null,
-    headerImageUrl: null,
-    templateType: "Modern",
-    cardName: "johns-business-card2" + new Date(),
-    qrCodeUrl: "https://example.com/qrcode.jpg",
-    aboutUs: "A software developer with a passion for coding.",
-    companyAddress: "123 Tech Avenue, San Francisco, CA",
-    dateOfBirth: "1990-05-15",
-    bio: "Specializing in web and mobile app development.",
-    gridType: "products",
-    languageSpoken: "English, Spanish",
-    additionalLink: "https://example.com/portfolio",
-    emails: ["john.doe@example.com", "other.email@example.com"],
-    phoneNumbers: ["1234567890", "0987654321"],
-    otherEmails: "other.email@example.com",
-    otherPhoneNumber: "0987654321",
-    phoneNumber: "1234567890",
-
-    // Emergency contact information
-    emergencyName: "John's Friend",
-    emergencyRelationship: "Friend",
-    emergencyNumber: "0987654321",
-    emergencyEmail: "emergency@example.com",
-
-    // Social media links
-    SocialMediaLink: [
-      {
-        // id: 1,
-        platform: "LinkedIn",
-        url: "https://linkedin.com/in/johndoe",
-        // iconUrl: "https://example.com/linkedin-icon.jpg",
-        cardId: "card1-uuid",
-      },
-      {
-        // id: 2,
-        cardId: "card2-uuid",
-
-        platform: "Twitter",
-        url: "https://twitter.com/johndoe",
-        // iconUrl: "https://example.com/twitter-icon.jpg",
-      },
-    ],
-    companySocialMediaLink: [
-      {
-        // id: 1,
-        platform: "LinkedIn",
-        url: "https://linkedin.com/in/johndoe",
-        // iconUrl: "https://example.com/linkedin-icon.jpg",
-        cardId: "card1-uuid",
-
-      },
-      {
-        // id: 2,
-        platform: "Twitter",
-        url: "https://twitter.com/johndoe",
-        iconUrl: "https://example.com/twitter-icon.jpg",
-        cardId: "card1-uuid",
-
-      },
-    ],
-
-    // Gallery and media
-    gallery: [],
-    instagramPost: ["https://instagram.com/johndoe/post1"],
-    instagramReel: ["https://instagram.com/johndoe/reel1"],
-    youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
-
-    // Testimonials
-    testimonials: [
-      {
-        id: 1,
-        name: "Alice Johnson",
-        designation: "CEO",
-        description: "John is a great developer, helped us with our project!",
-        imageUrl: "https://example.com/testimonial1.jpg",
-        cardId: "card1-uuid"
-
-      },
-    ],
-
-    // Services
-    services: [
-      {
-        id: 1,
-        name: "Web Development",
-        imageUrl: null,
-        serviceUrl: "https://example.com/webdev",
-        description: "Full-stack web development services.",
-        cardId:"asasfcardId"
-      },
-    ],
-
-    // Business hours
-    businessHours: [
-      {
-        id: 1,
-        type: "",
-        from: "",
-        to: "",
-        cardId: "card1-uuid"
-
-      },
-    ],
-  });
-
   // const [formData, setFormData] = useState({
   //   // Personal information
-  //   firstName: "",
+  //   firstName: "John",
   //   middleName: "",
-  //   lastName: "",
-  //   jobTitle: "",
-  //   companyName: "",
-  //   location: "",
-  //   profileImageUrl: "",
-  //   headerImageUrl: "",
-  //   templateType: "",
-  //   cardName: "",
-  //   qrCodeUrl: "",
-  //   aboutUs: "",
-  //   companyAddress: "",
-  //   dateOfBirth: "",
-  //   bio: "",
-  //   gridType: "",
-  //   languageSpoken: "",
-  //   additionalLink: "",
-  //   emails: [""],
-  //   phoneNumbers: [""],
-  //   otherEmails: "",
-  //   otherPhoneNumber: "",
-  //   phoneNumber: "",
+  //   lastName: "Doe",
+  //   jobTitle: "Software Developer",
+  //   companyName: "Tech Innovators",
+  //   location: "San Francisco, CA",
+  //   profileImageUrl: null,
+  //   headerImageUrl: null,
+  //   templateType: "Modern",
+  //   cardName: "johns-business-card2" + new Date(),
+  //   qrCodeUrl: "https://example.com/qrcode.jpg",
+  //   aboutUs: "A software developer with a passion for coding.",
+  //   companyAddress: "123 Tech Avenue, San Francisco, CA",
+  //   dateOfBirth: "1990-05-15",
+  //   bio: "Specializing in web and mobile app development.",
+  //   gridType: "products",
+  //   languageSpoken: "English, Spanish",
+  //   additionalLink: "https://example.com/portfolio",
+  //   emails: ["john.doe@example.com", "other.email@example.com"],
+  //   phoneNumbers: ["1234567890", "0987654321"],
+  //   otherEmails: "other.email@example.com",
+  //   otherPhoneNumber: "0987654321",
+  //   phoneNumber: "1234567890",
 
   //   // Emergency contact information
-  //   emergencyName: "",
-  //   emergencyRelationship: "",
-  //   emergencyNumber: "",
-  //   emergencyEmail: "",
+  //   emergencyName: "John's Friend",
+  //   emergencyRelationship: "Friend",
+  //   emergencyNumber: "0987654321",
+  //   emergencyEmail: "emergency@example.com",
 
   //   // Social media links
-  //   SocialMediaLink: [],
-  //   companySocialMediaLink: [],
+  //   SocialMediaLink: [
+  //     {
+  //       // id: 1,
+  //       platform: "LinkedIn",
+  //       url: "https://linkedin.com/in/johndoe",
+  //       // iconUrl: "https://example.com/linkedin-icon.jpg",
+  //       cardId: "card1-uuid",
+  //     },
+  //     {
+  //       // id: 2,
+  //       cardId: "card2-uuid",
+
+  //       platform: "Twitter",
+  //       url: "https://twitter.com/johndoe",
+  //       // iconUrl: "https://example.com/twitter-icon.jpg",
+  //     },
+  //   ],
+  //   companySocialMediaLink: [
+  //     {
+  //       // id: 1,
+  //       platform: "LinkedIn",
+  //       url: "https://linkedin.com/in/johndoe",
+  //       // iconUrl: "https://example.com/linkedin-icon.jpg",
+  //       cardId: "card1-uuid",
+
+  //     },
+  //     {
+  //       // id: 2,
+  //       platform: "Twitter",
+  //       url: "https://twitter.com/johndoe",
+  //       iconUrl: "https://example.com/twitter-icon.jpg",
+  //       cardId: "card1-uuid",
+
+  //     },
+  //   ],
 
   //   // Gallery and media
   //   gallery: [],
-  //   instagramPost: [],
-  //   instagramReel: [],
-  //   youtubeVideoLink: [],
+  //   instagramPost: ["https://instagram.com/johndoe/post1"],
+  //   instagramReel: ["https://instagram.com/johndoe/reel1"],
+  //   youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
 
   //   // Testimonials
-  //   testimonials: [],
+  //   testimonials: [
+  //     {
+  //       id: 1,
+  //       name: "Alice Johnson",
+  //       designation: "CEO",
+  //       description: "John is a great developer, helped us with our project!",
+  //       imageUrl: "https://example.com/testimonial1.jpg",
+  //       cardId: "card1-uuid"
+
+  //     },
+  //   ],
 
   //   // Services
-  //   services: [],
+  //   services: [
+  //     {
+  //       id: 1,
+  //       name: "Web Development",
+  //       imageUrl: null,
+  //       serviceUrl: "https://example.com/webdev",
+  //       description: "Full-stack web development services.",
+  //       cardId:"asasfcardId"
+  //     },
+  //   ],
 
   //   // Business hours
   //   businessHours: [
@@ -318,11 +275,71 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   //       type: "",
   //       from: "",
   //       to: "",
-  //       cardId: "",
+  //       cardId: "card1-uuid"
+
   //     },
   //   ],
   // });
 
+  const [formData, setFormData] = useState({
+    // Personal information
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    jobTitle: "",
+    companyName: "",
+    location: "",
+    profileImageUrl: "",
+    headerImageUrl: "",
+    templateType: "",
+    cardName: "",
+    qrCodeUrl: "",
+    aboutUs: "",
+    companyAddress: "",
+    dateOfBirth: "",
+    bio: "",
+    gridType: "Product",
+    languageSpoken: "",
+    additionalLink: "",
+    emails: ["",""],
+    phoneNumbers: [""],
+    otherEmails: "",
+    otherPhoneNumber: "",
+    phoneNumber: "",
+
+    // Emergency contact information
+    emergencyName: "",
+    emergencyRelationship: "",
+    emergencyNumber: "",
+    emergencyEmail: "",
+
+    // Social media links
+    SocialMediaLink: [],
+    companySocialMediaLink: [],
+
+    // Gallery and media
+    gallery: [],
+    instagramPost: [],
+    instagramReel: [],
+    youtubeVideoLink: [],
+
+    // Testimonials
+    testimonials: [],
+
+    // Services
+    services: [],
+
+    // Business hours
+    businessHours: [
+      {
+        id: 1,
+        type: "",
+        from: "",
+        to: "",
+        cardId: "",
+      },
+    ],
+  });
 
   const steps = [
     { id: 1, label: "Choose Template", icon: <BsTriangle /> },
@@ -342,7 +359,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     setActiveStep(stepId);
   };
 
-  const handleAdd = () => { };
+  const handleAdd = () => {};
 
   const handleTemplateSelection = (template) => {
     setFormData((prev) => ({
@@ -366,18 +383,17 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   //     reader.readAsDataURL(file);
   //   }
   // };
- 
+
   const handleProfileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setProfileImage(file); 
+      setProfileImage(file);
       setFormData((prevFormData) => ({
         ...prevFormData,
-        profileImageUrl: file, 
+        profileImageUrl: file,
       }));
     }
   };
-  
 
   // const handleCoverUpload = (event) => {
   //   const file = event.target.files[0];
@@ -400,12 +416,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     if (file) {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        headerImageUrl:file
+        headerImageUrl: file,
       }));
     }
   };
 
-  
   // const handleProductUpload = (event, index) => {
   //   const file = event.target.files[0];
   //   if (file) {
@@ -431,7 +446,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       );
     }
   };
-  
 
   const handleAddTestimonial = () => {
     const { name, designation, description, imageUrl } = formData;
@@ -464,7 +478,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     setImages((prev) => [...prev, ...files]);
   };
 
-  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -487,8 +500,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   const handleSave = () => {
     // dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
     console.log(formData, "formdata");
-    console.log(activeStep, "activeStep")
-
+    console.log(activeStep, "activeStep");
 
     // Move to the next step if conditions are met
     if (activeStep < steps.length) {
@@ -508,7 +520,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           setClientErrors({
             errors: {
               products: [],
-            }
+            },
           });
         }
       }
@@ -522,7 +534,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           setClientErrors({
             errors: {
               products: [],
-            }
+            },
           });
         }
       }
@@ -538,7 +550,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           setClientErrors({
             errors: {
               products: [],
-            }
+            },
           });
         }
       }
@@ -554,7 +566,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           setClientErrors({
             errors: {
               products: [],
-            }
+            },
           });
         }
       }
@@ -570,7 +582,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           setClientErrors({
             errors: {
               products: [],
-            }
+            },
           });
         }
       }
@@ -586,27 +598,45 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           setClientErrors({
             errors: {
               products: [],
-            }
+            },
           });
         }
       }
       if (activeStep === 8) {
         // Validate form data for step 8
-        const validInstagramPosts = validateLinksStep8(instagramPost, "instagramPost").valid;
-        const validInstagramReels = validateLinksStep8(instagramReels, "instagramReel").valid;
-        const validYouTubeVideos = validateLinksStep8(youtubeVideo, "youtubeVideoLink").valid;
+        const validInstagramPosts = validateLinksStep8(
+          instagramPost,
+          "instagramPost"
+        ).valid;
+        const validInstagramReels = validateLinksStep8(
+          instagramReels,
+          "instagramReel"
+        ).valid;
+        const validYouTubeVideos = validateLinksStep8(
+          youtubeVideo,
+          "youtubeVideoLink"
+        ).valid;
 
         if (validInstagramPosts && validInstagramReels && validYouTubeVideos) {
           setClientErrors({
             errors: {
               products: [],
-            }
+            },
           });
           // Proceed with saving
         } else {
-          const instagramValidation = validateLinksStep8(instagramPost, "instagramPost");
-          const reelsValidation = validateLinksStep8(instagramReels, "instagramReel");
-          const youtubeValidation = validateLinksStep8(youtubeVideo, "youtubeVideoLink");
+          const instagramValidation = validateLinksStep8(
+            instagramPost,
+            "instagramPost"
+          );
+          const reelsValidation = validateLinksStep8(
+            instagramReels,
+            "instagramReel"
+          );
+          const youtubeValidation = validateLinksStep8(
+            youtubeVideo,
+            "youtubeVideoLink"
+          );
 
           // const validInstagramPosts = instagramValidation.valid;
           // const validInstagramReels = reelsValidation.valid;
@@ -628,18 +658,16 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
         }
       }
       if (activeStep === 9) {
-
         const { valid, errors } = validateImagesStep9(images);
 
         if (valid) {
-
           setClientErrors({ ...clientErrors, ...errors });
           return; // Exit if validation fails
         } else {
           setClientErrors({
             errors: {
               products: [],
-            }
+            },
           });
         }
       }
@@ -652,7 +680,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
         } else {
           // If no errors, clear the errors state
           setClientErrors({});
-          return
+          return;
         }
       }
 
@@ -674,20 +702,22 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
         setClientErrors({
           errors: {
             products: [],
-          }
+          },
         });
       }
     }
-    const filesToUpload = productData.map((product) => product.imageUrl).filter((file) => file instanceof File);
-    
+    const filesToUpload = productData
+      .map((product) => product.imageUrl)
+      .filter((file) => file instanceof File);
+
     // Upload images and get URLs
     const uploadedUrls = await uploadImages(filesToUpload);
     // Map uploaded URLs back to productData
     const updatedProductData = productData.map((product, index) => ({
       ...product,
-      imageUrl: uploadedUrls[index] || product.imageUrl, 
+      imageUrl: uploadedUrls[index] || product.imageUrl,
     }));
-    console.log(updatedProductData,"updatedProductData")
+    console.log(updatedProductData, "updatedProductData");
 
     e.preventDefault();
     setFormData((prev) => ({
@@ -703,6 +733,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     try {
       const response = await createCard(formData);
       console.log("Card saved successfully:", response);
+      setIsModalOpen(false);
       // dispatch(setCardData(formData)); // Update Redux store
     } catch (error) {
       console.log("Failed to save card:", error);
@@ -771,10 +802,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   //       ],
   //     });
 
-
   //   if(cardId) getSingleCardData(cardId)
   // },[cardId])
-
 
   // Function to map backend data to the required format
   const transformCardData = (data) => {
@@ -814,25 +843,25 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       SocialMediaLink: [
         ...(data.linkedinLink
           ? [
-            {
-              id: 1,
-              platform: "LinkedIn",
-              url: data.linkedinLink,
-              iconUrl: "",
-              cardId: data.id,
-            },
-          ]
+              {
+                id: 1,
+                platform: "LinkedIn",
+                url: data.linkedinLink,
+                iconUrl: "",
+                cardId: data.id,
+              },
+            ]
           : []),
         ...(data.twitterLink
           ? [
-            {
-              id: 2,
-              platform: "Twitter",
-              url: data.twitterLink,
-              iconUrl: "",
-              cardId: data.id,
-            },
-          ]
+              {
+                id: 2,
+                platform: "Twitter",
+                url: data.twitterLink,
+                iconUrl: "",
+                cardId: data.id,
+              },
+            ]
           : []),
       ],
       companySocialMediaLink: [],
@@ -876,8 +905,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     }
   };
 
-
-
   return (
     <div
       className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
@@ -896,7 +923,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
         >
           <MdClose className="text-4xl p-2 text-black" />
         </button>
-
 
         <Sidebar
           activeStep={activeStep}
@@ -952,10 +978,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Medical")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Medical"
-                          ? "bg-[#707FDD] text-white"
-                          : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                          }`}
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
+                          formData.templateType === "Medical"
+                            ? "bg-[#707FDD] text-white"
+                            : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
+                        }`}
                       >
                         {formData.templateType === "Medical"
                           ? "Selected"
@@ -989,10 +1016,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Astrologer")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Astrologer"
-                          ? "bg-[#707FDD] text-white"
-                          : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                          }`}
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
+                          formData.templateType === "Astrologer"
+                            ? "bg-[#707FDD] text-white"
+                            : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
+                        }`}
                       >
                         {formData.templateType === "Astrologer"
                           ? "Selected"
@@ -1026,10 +1054,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("B2B Business")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "B2B Business"
-                          ? "bg-[#707FDD] text-white"
-                          : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                          }`}
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
+                          formData.templateType === "B2B Business"
+                            ? "bg-[#707FDD] text-white"
+                            : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
+                        }`}
                       >
                         {formData.templateType === "B2B Business"
                           ? "Selected"
@@ -1063,10 +1092,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Lawyer")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Lawyer"
-                          ? "bg-[#707FDD] text-white"
-                          : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                          }`}
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
+                          formData.templateType === "Lawyer"
+                            ? "bg-[#707FDD] text-white"
+                            : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
+                        }`}
                       >
                         {formData.templateType === "Lawyer"
                           ? "Selected"
@@ -1209,13 +1239,19 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         placeholder="First Name"
                         value={formData.firstName}
                         onChange={(e) =>
-                          setFormData({ ...formData, firstName: e.target.value })
+                          setFormData({
+                            ...formData,
+                            firstName: e.target.value,
+                          })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.firstName ? "border-red-500" : ""
-                          }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.firstName ? "border-red-500" : ""
+                        }`}
                       />
                       {clientErrors.firstName && (
-                        <p className="text-red-500 text-xs mt-1">{clientErrors.firstName}</p>
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.firstName}
+                        </p>
                       )}
                     </div>
                     <div className="flex-1">
@@ -1224,7 +1260,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         placeholder="Middle Name"
                         value={formData.middleName}
                         onChange={(e) =>
-                          setFormData({ ...formData, middleName: e.target.value })
+                          setFormData({
+                            ...formData,
+                            middleName: e.target.value,
+                          })
                         }
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
@@ -1237,11 +1276,14 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         onChange={(e) =>
                           setFormData({ ...formData, lastName: e.target.value })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.lastName ? "border-red-500" : ""
-                          }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.lastName ? "border-red-500" : ""
+                        }`}
                       />
                       {clientErrors.lastName && (
-                        <p className="text-red-500 text-xs mt-1">{clientErrors.lastName}</p>
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.lastName}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -1254,13 +1296,19 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         placeholder="Company's Name"
                         value={formData.companyName}
                         onChange={(e) =>
-                          setFormData({ ...formData, companyName: e.target.value })
+                          setFormData({
+                            ...formData,
+                            companyName: e.target.value,
+                          })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.companyName ? "border-red-500" : ""
-                          }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.companyName ? "border-red-500" : ""
+                        }`}
                       />
                       {clientErrors.companyName && (
-                        <p className="text-red-500 text-xs mt-1">{clientErrors.companyName}</p>
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.companyName}
+                        </p>
                       )}
                     </div>
                     <div className="flex-1">
@@ -1271,11 +1319,14 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         onChange={(e) =>
                           setFormData({ ...formData, location: e.target.value })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.location ? "border-red-500" : ""
-                          }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.location ? "border-red-500" : ""
+                        }`}
                       />
                       {clientErrors.location && (
-                        <p className="text-red-500 text-xs mt-1">{clientErrors.location}</p>
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.location}
+                        </p>
                       )}
                     </div>
                     <div className="flex-1">
@@ -1286,11 +1337,14 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         onChange={(e) =>
                           setFormData({ ...formData, jobTitle: e.target.value })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.jobTitle ? "border-red-500" : ""
-                          }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.jobTitle ? "border-red-500" : ""
+                        }`}
                       />
                       {clientErrors.jobTitle && (
-                        <p className="text-red-500 text-xs mt-1">{clientErrors.jobTitle}</p>
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.jobTitle}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -1305,11 +1359,14 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         onChange={(e) =>
                           setFormData({ ...formData, aboutUs: e.target.value })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.aboutUs ? "border-red-500" : ""
-                          }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.aboutUs ? "border-red-500" : ""
+                        }`}
                       />
                       {clientErrors.aboutUs && (
-                        <p className="text-red-500 text-xs mt-1">{clientErrors.aboutUs}</p>
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.aboutUs}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -1318,11 +1375,15 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <select
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.languageSpoken ? "border-red-500" : ""
-                          }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.languageSpoken ? "border-red-500" : ""
+                        }`}
                         value={formData.languageSpoken}
                         onChange={(e) =>
-                          setFormData({ ...formData, languageSpoken: e.target.value })
+                          setFormData({
+                            ...formData,
+                            languageSpoken: e.target.value,
+                          })
                         }
                       >
                         <option value="" disabled>
@@ -1347,47 +1408,50 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         placeholder="Date of Birth (yyyy-mm-dd)"
                         value={formData.dateOfBirth}
                         onChange={(e) =>
-                          setFormData({ ...formData, dateOfBirth: e.target.value })
+                          setFormData({
+                            ...formData,
+                            dateOfBirth: e.target.value,
+                          })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.dateOfBirth ? "border-red-500" : ""
-                          }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
+                          clientErrors.dateOfBirth ? "border-red-500" : ""
+                        }`}
                       />
                       {clientErrors.dateOfBirth && (
-                        <p className="text-red-500 text-xs mt-1">{clientErrors.dateOfBirth}</p>
+                        <p className="text-red-500 text-xs mt-1">
+                          {clientErrors.dateOfBirth}
+                        </p>
                       )}
-                <div className="py-6  flex justify-end space-x-2">
-                  <div
-                    className="text-white text-center text-4xl font-semibold py-6 px-6"
-                    style={{
-                      backgroundImage: `url('../../Underline.svg')`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "left",
-                      backgroundRepeat: "no-repeat",
-                      top: 0,
-                      left: 0,
-                      width: "70%",
-                      height: "10px",
-                    }}
-                  ></div>
-                  <button
-                    onClick={handleSave}
-                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
-                  >
-                    Save Changes
-                  </button>
-                </div>
+                      <div className="py-6  flex justify-end space-x-2">
+                        <div
+                          className="text-white text-center text-4xl font-semibold py-6 px-6"
+                          style={{
+                            backgroundImage: `url('../../Underline.svg')`,
+                            backgroundSize: "contain",
+                            backgroundPosition: "left",
+                            backgroundRepeat: "no-repeat",
+                            top: 0,
+                            left: 0,
+                            width: "70%",
+                            height: "10px",
+                          }}
+                        ></div>
+                        <button
+                          onClick={handleSave}
+                          className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
+                        >
+                          Save Changes
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
           )}
 
           {activeStep === 3 && (
-            <div
-              className="flex flex-col gap-5"
-            >
+            <div className="flex flex-col gap-5">
               <div
                 className="py-2"
                 style={{
@@ -1420,7 +1484,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors.errors?.phoneNumber0 && (
-                      <p className="text-red-500 text-sm">{clientErrors.errors.phoneNumber0}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.phoneNumber0}
+                      </p>
                     )}
                   </div>
                   <div className="flex-1">
@@ -1431,15 +1497,17 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          phoneNumbers: formData.phoneNumbers.map((num, index) =>
-                            index === 1 ? e.target.value : num
+                          phoneNumbers: formData.phoneNumbers.map(
+                            (num, index) => (index === 1 ? e.target.value : num)
                           ),
                         })
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors.errors?.phoneNumber1 && (
-                      <p className="text-red-500 text-sm">{clientErrors.errors.phoneNumber1}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.phoneNumber1}
+                      </p>
                     )}
                   </div>
                   <div className="flex-1">
@@ -1450,15 +1518,17 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          phoneNumbers: formData.phoneNumbers.map((num, index) =>
-                            index === 2 ? e.target.value : num
+                          phoneNumbers: formData.phoneNumbers.map(
+                            (num, index) => (index === 2 ? e.target.value : num)
                           ),
                         })
                       }
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors.errors?.phoneNumber2 && (
-                      <p className="text-red-500 text-sm">{clientErrors.errors.phoneNumber2}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.phoneNumber2}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -1480,7 +1550,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors.errors?.email0 && (
-                      <p className="text-red-500 text-sm">{clientErrors.errors.email0}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.email0}
+                      </p>
                     )}
                   </div>
                   <div className="flex-1">
@@ -1499,7 +1571,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors.errors?.email1 && (
-                      <p className="text-red-500 text-sm">{clientErrors.errors.email1}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.email1}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -1524,7 +1598,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors.errors?.emergencyName && (
-                      <p className="text-red-500 text-sm">{clientErrors.errors.emergencyName}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.emergencyName}
+                      </p>
                     )}
                   </div>
                   <div className="flex-1">
@@ -1541,7 +1617,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors.errors?.emergencyRelationship && (
-                      <p className="text-red-500 text-sm">{clientErrors.errors.emergencyRelationship}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.emergencyRelationship}
+                      </p>
                     )}
                   </div>
                   <div className="flex-1">
@@ -1558,7 +1636,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors?.errors?.emergencyNumber && (
-                      <p className="text-red-500 text-sm">{clientErrors.errors.emergencyNumber}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors.errors.emergencyNumber}
+                      </p>
                     )}
                   </div>
                   <div className="flex-1">
@@ -1575,7 +1655,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
                     {clientErrors?.errors?.emergencyEmail && (
-                      <p className="text-red-500 text-sm">{clientErrors?.errors?.emergencyEmail}</p>
+                      <p className="text-red-500 text-sm">
+                        {clientErrors?.errors?.emergencyEmail}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -1603,7 +1685,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
               </div>
             </div>
           )}
-
 
           {activeStep === 4 && (
             <div>
@@ -1646,11 +1727,14 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                           SocialMediaLink: updatedLinks,
                         });
                       }}
-                      className={`w-full p-3 border ${clientErrors?.errors?.Website ? "border-red-500" : ""
-                        } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
+                      className={`w-full p-3 border ${
+                        clientErrors?.errors?.Website ? "border-red-500" : ""
+                      } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
                     />
                     {clientErrors?.errors?.Website && (
-                      <p className="text-red-500 text-sm mt-1">{clientErrors?.errors?.Website}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {clientErrors?.errors?.Website}
+                      </p>
                     )}
                   </div>
 
@@ -1679,9 +1763,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         });
                       }}
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-
                     />
-
                   </div>
 
                   <div className="flex-1">
@@ -1873,11 +1955,16 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                           companySocialMediaLink: updatedLinks,
                         });
                       }}
-                      className={`w-full p-3 border ${clientErrors?.errors?.companyWebsite ? "border-red-500" : ""
-                        } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
+                      className={`w-full p-3 border ${
+                        clientErrors?.errors?.companyWebsite
+                          ? "border-red-500"
+                          : ""
+                      } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
                     />
                     {clientErrors?.errors?.companyWebsite && (
-                      <p className="text-red-500 text-sm mt-1">{clientErrors?.errors?.companyWebsite}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {clientErrors?.errors?.companyWebsite}
+                      </p>
                     )}
                   </div>
 
@@ -2085,10 +2172,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                 </div>
                 <div className="flex justify-center gap-4">
                   <button
-                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Product"
-                      ? "bg-[#707FDD] text-white border-[#707FDD]"
-                      : "bg-transparent text-[#707FDD] border-[#707FDD]"
-                      }`}
+                    className={`py-2 px-4 rounded-full border-2 ${
+                      formData.gridType === "Product"
+                        ? "bg-[#707FDD] text-white border-[#707FDD]"
+                        : "bg-transparent text-[#707FDD] border-[#707FDD]"
+                    }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Product" })
                     }
@@ -2098,10 +2186,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
                   {/* Service Button */}
                   <button
-                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Service"
-                      ? "bg-[#707FDD] text-white border-[#707FDD]"
-                      : "bg-transparent text-[#707FDD] border-[#707FDD]"
-                      }`}
+                    className={`py-2 px-4 rounded-full border-2 ${
+                      formData.gridType === "Service"
+                        ? "bg-[#707FDD] text-white border-[#707FDD]"
+                        : "bg-transparent text-[#707FDD] border-[#707FDD]"
+                    }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Service" })
                     }
@@ -2109,7 +2198,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     Service
                   </button>
                 </div>
-                {clientErrors?.errors?.gridType && <p className="text-red-500 text-sm mt-2">{clientErrors?.errors?.gridType}</p>}
+                {clientErrors?.errors?.gridType && (
+                  <p className="text-red-500 text-sm mt-2">
+                    {clientErrors?.errors?.gridType}
+                  </p>
+                )}
 
                 <div className="space-y-4 mt-4">
                   {/* Scrollable Container */}
@@ -2149,12 +2242,20 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                                 )
                               )
                             }
-                            className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.name && clientErrors?.errors?.products[index]?.name ? "border-red-500" : "border-gray-300"}`}
-
+                            className={`p-3 border w-full rounded-md ${
+                              clientErrors?.errors?.products?.length > 0 &&
+                              clientErrors?.errors?.products[index]?.name &&
+                              clientErrors?.errors?.products[index]?.name
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            }`}
                           />
-                          {clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.name && (
-                            <p className="text-red-500 text-sm">{clientErrors?.errors?.products[index]?.name}</p>
-                          )}
+                          {clientErrors?.errors?.products?.length > 0 &&
+                            clientErrors?.errors?.products[index]?.name && (
+                              <p className="text-red-500 text-sm">
+                                {clientErrors?.errors?.products[index]?.name}
+                              </p>
+                            )}
                           <input
                             type="text"
                             placeholder="Description of the Product/Service"
@@ -2168,12 +2269,22 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                                 )
                               )
                             }
-                            className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.description ? "border-red-500" : "border-gray-300"
-                              }`}
+                            className={`p-3 border w-full rounded-md ${
+                              clientErrors?.errors?.products?.length > 0 &&
+                              clientErrors?.errors?.products[index]?.description
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            }`}
                           />
-                          {clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.description && (
-                            <p className="text-red-500 text-sm">{clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.description}</p>
-                          )}
+                          {clientErrors?.errors?.products?.length > 0 &&
+                            clientErrors?.errors?.products[index]
+                              ?.description && (
+                              <p className="text-red-500 text-sm">
+                                {clientErrors?.errors?.products?.length > 0 &&
+                                  clientErrors?.errors?.products[index]
+                                    ?.description}
+                              </p>
+                            )}
 
                           <input
                             type="text"
@@ -2188,12 +2299,22 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                                 )
                               )
                             }
-                            className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.serviceUrl ? "border-red-500" : "border-gray-300"
-                              }`}
+                            className={`p-3 border w-full rounded-md ${
+                              clientErrors?.errors?.products?.length > 0 &&
+                              clientErrors?.errors?.products[index]?.serviceUrl
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            }`}
                           />
-                          {clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.serviceUrl && (
-                            <p className="text-red-500 text-sm">{clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.serviceUrl}</p>
-                          )}
+                          {clientErrors?.errors?.products?.length > 0 &&
+                            clientErrors?.errors?.products[index]
+                              ?.serviceUrl && (
+                              <p className="text-red-500 text-sm">
+                                {clientErrors?.errors?.products?.length > 0 &&
+                                  clientErrors?.errors?.products[index]
+                                    ?.serviceUrl}
+                              </p>
+                            )}
                         </div>
 
                         {/* Image Upload */}
@@ -2239,9 +2360,14 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                               id={`product-upload-${index}`}
                             />
                           </label>
-                          {clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index]?.imageUrl && (
-                            <p className="text-red-500 text-sm">{clientErrors?.errors?.products?.length > 0 && clientErrors?.errors?.products[index].imageUrl}</p>
-                          )}
+                          {clientErrors?.errors?.products?.length > 0 &&
+                            clientErrors?.errors?.products[index]?.imageUrl && (
+                              <p className="text-red-500 text-sm">
+                                {clientErrors?.errors?.products?.length > 0 &&
+                                  clientErrors?.errors?.products[index]
+                                    .imageUrl}
+                              </p>
+                            )}
                         </div>
 
                         {/* Delete Button */}
@@ -2498,7 +2624,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     setClientErrors={setClientErrors}
                     clientErrors={clientErrors}
                     type="instagramPost"
-
                   />
 
                   {/* Instagram Reels */}
@@ -2510,7 +2635,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     setClientErrors={setClientErrors}
                     clientErrors={clientErrors}
                     type="instagramReel"
-
                   />
 
                   {/* YouTube Videos */}
@@ -2526,26 +2650,26 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
                   {/* Save Button */}
                   <div className="py-6 flex justify-end space-x-2">
-                  <div
-                    className="text-white text-center text-4xl font-semibold py-6 px-6"
-                    style={{
-                      backgroundImage: `url('../../Underline.svg')`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "left",
-                      backgroundRepeat: "no-repeat",
-                      top: 0,
-                      left: 0,
-                      width: "70%",
-                      height: "10px",
-                    }}
-                  ></div>
-                  <button
-                    onClick={handleSave}
-                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
-                  >
-                    Save Changes
-                  </button>
-                </div>
+                    <div
+                      className="text-white text-center text-4xl font-semibold py-6 px-6"
+                      style={{
+                        backgroundImage: `url('../../Underline.svg')`,
+                        backgroundSize: "contain",
+                        backgroundPosition: "left",
+                        backgroundRepeat: "no-repeat",
+                        top: 0,
+                        left: 0,
+                        width: "70%",
+                        height: "10px",
+                      }}
+                    ></div>
+                    <button
+                      onClick={handleSave}
+                      className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2591,10 +2715,14 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
               {/* Error Messages */}
               {clientErrors?.images?.length === 1 && (
-                <p className="text-red-500 text-xs mt-2">* {clientErrors?.images[0]}</p>
+                <p className="text-red-500 text-xs mt-2">
+                  * {clientErrors?.images[0]}
+                </p>
               )}
               {clientErrors?.images?.length >= 1 && (
-                <p className="text-red-500 text-xs mt-2">* {clientErrors?.images[1]}</p>
+                <p className="text-red-500 text-xs mt-2">
+                  * {clientErrors?.images[1]}
+                </p>
               )}
 
               <div className="mt-20">
@@ -2642,7 +2770,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
             <div>
               <h2 className="text-lg font-bold mb-4">Business Hours</h2>
               <p className="text-sm text-[#787F89] mb-6">
-                Add or manage your business hours. Right-click on a block to delete it.
+                Add or manage your business hours. Right-click on a block to
+                delete it.
               </p>
               <div
                 className="py-2"
@@ -2663,9 +2792,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     className="flex gap-4 p-4 border rounded-md bg-[#F9FAFB] relative"
                     onContextMenu={(e) => {
                       e.preventDefault();
-                      const updatedBusinessHours = formData.businessHours.filter(
-                        (_, i) => i !== index
-                      );
+                      const updatedBusinessHours =
+                        formData.businessHours.filter((_, i) => i !== index);
                       setFormData({
                         ...formData,
                         businessHours: updatedBusinessHours,
@@ -2674,7 +2802,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     title="Right-click to remove this block"
                   >
                     <div className="flex-1">
-                      <label className="block text-sm text-[#787F89] mb-1">From</label>
+                      <label className="block text-sm text-[#787F89] mb-1">
+                        From
+                      </label>
                       <input
                         type="time"
                         value={hour.from}
@@ -2687,14 +2817,18 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         //   });
                         // }}
                         onChange={(e) => {
-                          const updatedBusinessHours = [...formData.businessHours]; // Create a shallow copy of the array
-                          updatedBusinessHours[index] = { ...updatedBusinessHours[index], from: e.target.value }; // Create a copy of the object being updated
+                          const updatedBusinessHours = [
+                            ...formData.businessHours,
+                          ]; // Create a shallow copy of the array
+                          updatedBusinessHours[index] = {
+                            ...updatedBusinessHours[index],
+                            from: e.target.value,
+                          }; // Create a copy of the object being updated
                           setFormData({
                             ...formData,
                             businessHours: updatedBusinessHours, // Update the businessHours array
                           });
                         }}
-
                         className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                       />
                       {clientErrors?.errors?.businessHours?.[index]?.from && (
@@ -2704,12 +2838,16 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       )}
                     </div>
                     <div className="flex-1">
-                      <label className="block text-sm text-[#787F89] mb-1">To</label>
+                      <label className="block text-sm text-[#787F89] mb-1">
+                        To
+                      </label>
                       <input
                         type="time"
                         value={hour.to}
                         onChange={(e) => {
-                          const updatedBusinessHours = [...formData.businessHours];
+                          const updatedBusinessHours = [
+                            ...formData.businessHours,
+                          ];
                           updatedBusinessHours[index].to = e.target.value;
                           setFormData({
                             ...formData,
@@ -2725,13 +2863,17 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       )}
                     </div>
                     <div className="flex-1">
-                      <label className="block text-sm text-[#787F89] mb-1">Type</label>
+                      <label className="block text-sm text-[#787F89] mb-1">
+                        Type
+                      </label>
                       <input
                         type="text"
                         placeholder="Type"
                         value={hour.type}
                         onChange={(e) => {
-                          const updatedBusinessHours = [...formData.businessHours];
+                          const updatedBusinessHours = [
+                            ...formData.businessHours,
+                          ];
                           updatedBusinessHours[index].type = e.target.value;
                           setFormData({
                             ...formData,
@@ -2778,10 +2920,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     onClick={handleCreate}
                     className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
 
-                  // disabled={!isCardCreate}
-                  // className={`py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] 
-                  //   ${isCardCreate ? "active:transform active:scale-110" : "opacity-50 cursor-not-allowed"} 
-                  //   hover:${isCardCreate ? "bg-opacity-80" : "opacity-50"}`}    
+                    // disabled={!isCardCreate}
+                    // className={`py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]
+                    //   ${isCardCreate ? "active:transform active:scale-110" : "opacity-50 cursor-not-allowed"}
+                    //   hover:${isCardCreate ? "bg-opacity-80" : "opacity-50"}`}
                   >
                     Create Card
                   </button>

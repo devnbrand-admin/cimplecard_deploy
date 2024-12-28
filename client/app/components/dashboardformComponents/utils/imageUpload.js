@@ -6,7 +6,7 @@ import axios from "../../api_resources/axios";
 export const uploadSingleImage = async (imageFile,name) => {
     
     console.log(imageFile,imageFile?.type,"imageType")
-    const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
+    const validImageTypes = ["image/jpeg", "image/png", "image/gif","image/jpg","image/svg+xml","image/webp"];
     const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
   
     if (!validImageTypes.includes(imageFile.type)) {
