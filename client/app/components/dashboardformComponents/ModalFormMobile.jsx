@@ -735,7 +735,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
           {/* Emergency Contact Header */}
           <div className="flex flex-col justify-center items-center gap-1">
-            <h1 className="text-l font-semibold text-[#707FDD]">Emergency Contact</h1>
+            <h1 className="text-l font-semibold text-center text-[#707FDD]">Emergency Contact</h1>
             <h2 className="text-xs font-semithin text-[#707FDD] text-center px-4">
               Add your contact information and Emergency Contact
             </h2>
