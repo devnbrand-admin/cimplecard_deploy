@@ -520,7 +520,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     },
     2: {
       id: 2, label: 'Profile', icon: <BsPerson />, component: <>
-        <div className="w-full my-2 space-y-2 flex flex-col justify-around h-full">
+        <div className="w-full relative my-2 space-y-2 flex flex-col justify-around h-full">
           <div className='my-2 space-y-2 '>
             <div className="flex gap-2">
               <div className="flex-1 flex gap-2">
@@ -1663,29 +1663,108 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
         <div className="bg-white w-full h-full flex flex-col gap-5 z-10 relative">
 
           {/* header */}
-          <div className='z-20 sticky'>
-            {/* Top SVG (fixed to the bottom edge, with a gap from other containers) */}
+          <div className="z-20 sticky">
+            {/* Top SVG (used as a decorative background, its position adjusts based on the active step) */}
             <Image
-              className='absolute right-0 left-0 scale-150 translate-y-[-5%] md:translate-y-[-20%] transition-transform duration-300'
+              className={`absolute right-0 left-0 scale-150 ${activeStep === 2 ? 'translate-y-[-25%]' : 'translate-y-[-5%]'
+                } md:translate-y-[-20%] transition-transform duration-300`}
               fill
               src={'../../ModalMobileTop.svg'}
             />
 
-            {/* Step SVG and Header Text Container */}
-            <div className=" sticky left-0 right-0 top-2 flex flex-col items-center justify-center">
-              {/* Step SVG (new SVG) */}
-              <img
-                src={steps[activeStep]?.imageUrl}
-                alt={steps[activeStep]?.label}
-                className="w-[40%] h-auto mb-4 md:w-[35%] lg:w-[30%] transition-all duration-300"
-              />
-              {/* Header Text */}
-              <h1 className="text-xl font-semibold text-[#707FDD] text-center px-4">
+            {/* Container for the Step SVG and Header Text */}
+            <div className="sticky left-0 right-0 top-2 flex flex-col items-center justify-center">
+              {/* Conditional rendering based on the active step */}
+              {activeStep === 2 ? (
+                // If activeStep is 2, display the profile upload section with a gradient border
+                <div
+                  className="w-40 h-40 relative top-[5rem] bg-white border-2 rounded-md border-transparent bg-gradient-to-b from-[#707FDD] via-[#FFFFFF] to-[#707FDD] bg-clip-border"
+                >
+                  {/* Profile upload area (inner white container for profile picture) */}
+                  <div className="w-full h-full flex justify-center items-center bg-white rounded-md">
+                    <label
+                      htmlFor="profile-upload"
+                      className="w-full h-full flex items-center justify-center"
+                      style={{
+                        borderRadius: '50%',
+                        // If profileImage exists, set it as the background; otherwise, leave it blank
+                        backgroundImage: profileImage ? `url(${profileImage})` : 'none',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                      }}
+                    >
+                      {/* Show default avatar if no profile image is uploaded */}
+                      {!profileImage && (
+                        <img
+                          src="../../ProfileAvatarMobile.svg"
+                          alt="Upload Icon"
+                          className="w-32 h-32"
+                        />
+                      )}
+                      {/* Hidden file input for profile picture upload */}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleProfileUpload}
+                        className="hidden"
+                        id="profile-upload"
+                      />
+                    </label>
+                  </div>
+
+                  {/* Small upload icon (floating on the side of the profile container) */}
+                  <div
+                    className="absolute -right-[50px] w-10 h-10 top-1/3 bg-white rounded-full flex justify-center items-center"
+                  >
+                    <label
+                      htmlFor="profile-upload"
+                      className="w-full h-full flex items-center justify-center"
+                      style={{
+                        borderRadius: '50%',
+                        // If profileImage exists, set it as the background; otherwise, leave it blank
+                        backgroundImage: profileImage ? `url(${profileImage})` : 'none',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                      }}
+                    >
+                      {/* Show default avatar if no profile image is uploaded */}
+                      {!profileImage && (
+                        <img
+                          src="../../ProfileAvatar.svg"
+                          alt="Upload Icon"
+                          className="w-32 h-32"
+                        />
+                      )}
+                      {/* Hidden file input for profile picture upload */}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleProfileUpload}
+                        className="hidden"
+                        id="profile-upload"
+                      />
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                // For other steps, render the step-specific image
+                <img
+                  src={steps[activeStep]?.imageUrl}
+                  alt={steps[activeStep]?.label}
+                  className="w-[40%] h-auto mb-4 md:w-[35%] lg:w-[30%] transition-all duration-300"
+                />
+              )}
+
+              {/* Header text displayed for each step */}
+              <h1
+                className={`text-xl font-semibold text-[#707FDD] ${activeStep === 2 ? 'relative -top-[7rem]' : ''
+                  } text-center px-4`}
+              >
                 {steps[activeStep]?.label}
-                {/* {steps.find((step) => step.id === activeStep)?.label || 'Default Header'} */}
               </h1>
             </div>
           </div>
+
 
           {/* content */}
           <div className=" bg-white top-10 w-full h-full flex relative overflow-hidden">
