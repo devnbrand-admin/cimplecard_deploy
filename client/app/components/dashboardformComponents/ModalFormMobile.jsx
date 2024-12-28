@@ -72,7 +72,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     languageSpoken: "",
     additionalLink: "",
     emails: [],
-    products:[],
+    products: [],
     phoneNumbers: [],
     otherEmails: "",
     otherPhoneNumber: "",
@@ -695,45 +695,45 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     3: {
       id: 3, label: 'Contact Details', icon: <BsTelephone />, component: <>
         <div className="w-full space-y-6">
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <input
-                type="text"
-                placeholder="Phone Number"
-                value={formData.phoneNumbers[0]}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    phoneNumbers: [
-                      e.target.value,
-                      ...formData.phoneNumbers.slice(1),
-                    ],
-                  })
-                }
-                className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
-              />
-            </div>
+          {/* Phone Numbers */}
+          <div className="flex flex-col gap-4">
+            {[0, 1, 2].map((index) => (
+              <div key={index} className="flex-1">
+                <input
+                  type="text"
+                  placeholder={index === 0 ? "Phone Number" : "Other Phone Number"}
+                  value={formData.phoneNumbers[index] || ""}
+                  onChange={(e) => {
+                    const updatedPhoneNumbers = [...formData.phoneNumbers];
+                    updatedPhoneNumbers[index] = e.target.value;
+                    setFormData({ ...formData, phoneNumbers: updatedPhoneNumbers });
+                  }}
+                  className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+                />
+              </div>
+            ))}
           </div>
 
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <input
-                type="text"
-                placeholder="Email"
-                value={formData.emails[0]}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    emails: formData.emails.map((email, index) =>
-                      index === 0 ? e.target.value : email
-                    ),
-                  })
-                }
-                className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
-              />
-            </div>
+          {/* Emails */}
+          <div className="flex flex-col gap-4">
+            {[0, 1].map((index) => (
+              <div key={index} className="flex-1">
+                <input
+                  type="text"
+                  placeholder={index === 0 ? "Email" : "Other Email"}
+                  value={formData.emails[index] || ""}
+                  onChange={(e) => {
+                    const updatedEmails = [...formData.emails];
+                    updatedEmails[index] = e.target.value;
+                    setFormData({ ...formData, emails: updatedEmails });
+                  }}
+                  className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+                />
+              </div>
+            ))}
           </div>
 
+          {/* Emergency Contact Header */}
           <div className="flex flex-col justify-center items-center gap-1">
             <h1 className="text-l font-semibold text-[#707FDD]">Emergency Contact</h1>
             <h2 className="text-xs font-semithin text-[#707FDD] text-center px-4">
@@ -741,17 +741,43 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
             </h2>
           </div>
 
+          {/* Emergency Contact Fields */}
           <div className="flex gap-4">
             <div className="flex-1">
               <input
                 type="text"
-                placeholder="Phone Number"
+                placeholder="Emergency Name"
+                value={formData.emergencyName}
+                onChange={(e) =>
+                  setFormData({ ...formData, emergencyName: e.target.value })
+                }
+                className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <input
+                type="text"
+                placeholder="Relationship"
+                value={formData.emergencyRelationship}
+                onChange={(e) =>
+                  setFormData({ ...formData, emergencyRelationship: e.target.value })
+                }
+                className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <input
+                type="text"
+                placeholder="Emergency Phone Number"
                 value={formData.emergencyNumber}
                 onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    emergencyNumber: e.target.value,
-                  })
+                  setFormData({ ...formData, emergencyNumber: e.target.value })
                 }
                 className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
               />
@@ -762,19 +788,17 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
             <div className="flex-1">
               <input
                 type="text"
-                placeholder="Email"
+                placeholder="Emergency Email"
                 value={formData.emergencyEmail}
                 onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    emergencyEmail: e.target.value,
-                  })
+                  setFormData({ ...formData, emergencyEmail: e.target.value })
                 }
                 className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
               />
             </div>
           </div>
 
+          {/* Action Buttons */}
           <div className="py-6 flex justify-between space-x-2">
             <button
               onClick={handleGoBack}
@@ -785,11 +809,13 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
             <button
               onClick={handleSave}
-              className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:transform active:scale-110">
+              className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:transform active:scale-110"
+            >
               Save
             </button>
           </div>
         </div>
+
       </>,
       imageUrl: '../../ContactDetails.svg'
     },
@@ -1262,7 +1288,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         placeholder="Name of service/product"
                         value={formData.products && formData?.products[index]?.name || ''} // Access the specific product's name
                         onChange={(e) => {
-                          const updatedProducts = [...formData.products||[]];
+                          const updatedProducts = [...formData.products || []];
                           updatedProducts[index] = {
                             ...updatedProducts[index],
                             name: e.target.value,
@@ -1283,9 +1309,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       <input
                         type="text"
                         placeholder="Description of service/product"
-                        value={formData.products&& formData?.products[index]?.description || ''} // Access the specific product's description
+                        value={formData.products && formData?.products[index]?.description || ''} // Access the specific product's description
                         onChange={(e) => {
-                          const updatedProducts = [...formData.products||[]];
+                          const updatedProducts = [...formData.products || []];
                           updatedProducts[index] = {
                             ...updatedProducts[index],
                             description: e.target.value,
