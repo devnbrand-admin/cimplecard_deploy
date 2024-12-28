@@ -50,3 +50,4 @@ export const uploadImages = async (imageFiles) => {
     throw new Error("Failed to upload images. Please try again.");
   }
 };
+
