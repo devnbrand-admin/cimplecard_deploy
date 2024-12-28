@@ -24,7 +24,7 @@ export const TestimonialsSection = ({ testimonials, setTestimonials }) => {
 
   return (
     <div>
-      <div className="space-y-4 mt-4">
+      <div className="space-y-4 mt-4 mx-2 md:mx-0">
         <div className="flex justify-center gap-4">
           <h1 className="text-2xl font-semibold text-[#707FDD]">
             Add Testimonial

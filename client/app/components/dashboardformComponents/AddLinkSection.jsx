@@ -39,7 +39,7 @@ export const AddLinkSection = ({ title, items, setItems, placeholder }) => {
         {items.map((item, index) => (
           <div
             key={index}
-            className="flex items-center justify-between p-4"
+            className="flex items-center justify-between p-0 md:p-4"
             style={{
               backgroundColor: "#F1F2FC",
               borderRadius: "8px",
@@ -51,7 +51,7 @@ export const AddLinkSection = ({ title, items, setItems, placeholder }) => {
               value={item}
               onChange={(e) => handleUpdateItem(index, e.target.value)}
               placeholder={placeholder}
-              className="flex-1 p-3 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+              className="flex-1 md:px-3 py-3 px-2 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
               style={{
                 marginRight: "8px",
               }}
