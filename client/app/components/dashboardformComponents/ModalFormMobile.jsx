@@ -72,6 +72,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     languageSpoken: "",
     additionalLink: "",
     emails: [],
+    products:[],
     phoneNumbers: [],
     otherEmails: "",
     otherPhoneNumber: "",
@@ -1229,7 +1230,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
               // padding: '20px',
             }}
           >
-            <div className="flex flex-col gap-2" style={{ width: '100%', maxWidth: '400px' }}>
+            <div className="flex flex-col gap-2 self-start" style={{ width: '100%', maxWidth: '400px' }}>
               {[...Array(5)].map((_, index) => (
                 <div
                   key={index}
@@ -1240,7 +1241,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     width: '100%',
-                    // height: '80px',
                     padding: '10px',
                     borderRadius: '8px',
                   }}
@@ -1255,15 +1255,20 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     >
                       Name of the Product/Services
                     </h1>
-                    <div
-                      className='flex flex-col gap-2'
-                    >
-
+                    <div className="flex flex-col gap-2">
+                      {/* Name Input */}
                       <input
                         type="text"
                         placeholder="Name of service/product"
-                        value={formData.productDesc}
-                        onChange={(e) => setFormData({ ...formData, productDesc: e.target.value })}
+                        value={formData.products && formData?.products[index]?.name || ''} // Access the specific product's name
+                        onChange={(e) => {
+                          const updatedProducts = [...formData.products||[]];
+                          updatedProducts[index] = {
+                            ...updatedProducts[index],
+                            name: e.target.value,
+                          };
+                          setFormData({ ...formData, products: updatedProducts });
+                        }}
                         className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         style={{
                           width: '100%',
@@ -1273,11 +1278,20 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                           textAlign: 'left',
                         }}
                       />
+
+                      {/* Description Input */}
                       <input
                         type="text"
                         placeholder="Description of service/product"
-                        value={formData.productDesc}
-                        onChange={(e) => setFormData({ ...formData, productDesc: e.target.value })}
+                        value={formData.products&& formData?.products[index]?.description || ''} // Access the specific product's description
+                        onChange={(e) => {
+                          const updatedProducts = [...formData.products||[]];
+                          updatedProducts[index] = {
+                            ...updatedProducts[index],
+                            description: e.target.value,
+                          };
+                          setFormData({ ...formData, products: updatedProducts });
+                        }}
                         className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         style={{
                           width: '100%',
@@ -1287,11 +1301,20 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                           textAlign: 'left',
                         }}
                       />
+
+                      {/* External Links Input */}
                       <input
                         type="text"
                         placeholder="External Links of service/product"
-                        value={formData.productDesc}
-                        onChange={(e) => setFormData({ ...formData, productDesc: e.target.value })}
+                        value={formData.products && formData?.products[index]?.link || ''} // Access the specific product's link
+                        onChange={(e) => {
+                          const updatedProducts = [...formData?.products || []];
+                          updatedProducts[index] = {
+                            ...updatedProducts[index],
+                            link: e.target.value,
+                          };
+                          setFormData({ ...formData, products: updatedProducts });
+                        }}
                         className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                         style={{
                           width: '100%',
@@ -1304,6 +1327,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     </div>
                   </div>
 
+                  {/* Image Upload Section */}
                   <div
                     className="ml-8"
                     style={{
@@ -1321,7 +1345,15 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       <input
                         type="file"
                         accept="image/*"
-                        onChange={(e) => handleProductUpload(e, index)}
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          const updatedProducts = [...formData.products];
+                          updatedProducts[index] = {
+                            ...updatedProducts[index],
+                            image: file, // Save the file or a preview URL
+                          };
+                          setFormData({ ...formData, products: updatedProducts });
+                        }}
                         className="hidden"
                         id={`product-upload-${index}`}
                       />
@@ -1666,7 +1698,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           <div className="z-20 sticky">
             {/* Top SVG (used as a decorative background, its position adjusts based on the active step) */}
             <Image
-              className={`absolute right-0 left-0 scale-150 ${steps[activeStep].label==='Profile' ? 'translate-y-[-25%]' : 'translate-y-[-5%]'
+              className={`absolute right-0 left-0 scale-150 ${steps[activeStep].label === 'Profile' ? 'translate-y-[-25%]' : 'translate-y-[-5%]'
                 } md:translate-y-[-20%] transition-transform duration-300`}
               fill
               src={'../../ModalMobileTop.svg'}
@@ -1675,7 +1707,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
             {/* Container for the Step SVG and Header Text */}
             <div className="sticky left-0 right-0 top-2 flex flex-col items-center justify-center">
               {/* Conditional rendering based on the active step */}
-              {steps[activeStep].label==='Profile' ? (
+              {steps[activeStep].label === 'Profile' ? (
                 // If activeStep is 2, display the profile upload section with a gradient border
                 <div
                   className="w-40 h-40 relative top-[5rem] bg-white border-2 rounded-md border-transparent bg-gradient-to-b from-[#707FDD] via-[#FFFFFF] to-[#707FDD] bg-clip-border"
