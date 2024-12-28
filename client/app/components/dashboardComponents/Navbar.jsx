@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const Navbar = () => {
+const Navbar = ({ userId }) => {
   return (
     <div
       className="rounded-3xl h-full mt-0 w-full"
@@ -20,7 +20,7 @@ const Navbar = () => {
         style={{ listStyleType: "none", padding: 0, color: "white" }}
       >
         <li className="flex items-center w-2/3 p-4">
-          <Link href="/home" className="flex items-center">
+          <Link href={`/dashboard/${userId}`} className="flex items-center">
             <img
               src="/Assets/Home.png"
               alt="Home Icon"
@@ -30,7 +30,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="flex items-center w-2/3 p-4">
-          <Link href="/projects" className="flex items-center">
+          <Link href="/about" className="flex items-center">
             <img
               src="/Assets/Group of Projects.png"
               alt="Projects Icon"
@@ -40,7 +40,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="flex items-center w-2/3 p-4">
-          <Link href="/inspiration" className="flex items-center">
+          <Link href="/contact" className="flex items-center">
             <img
               src="/Assets/Innovation.png"
               alt="Inspiration Icon"
@@ -50,7 +50,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="flex items-center w-2/3 p-4">
-          <Link href="/profile/${userId}" className="flex items-center">
+          <Link href={`/profile/${userId}`} className="flex items-center">
             <img
               src="/Assets/account.png"
               alt="Reviews Icon"
