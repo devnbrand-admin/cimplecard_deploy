@@ -1666,7 +1666,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           <div className="z-20 sticky">
             {/* Top SVG (used as a decorative background, its position adjusts based on the active step) */}
             <Image
-              className={`absolute right-0 left-0 scale-150 ${activeStep === 2 ? 'translate-y-[-25%]' : 'translate-y-[-5%]'
+              className={`absolute right-0 left-0 scale-150 ${steps[activeStep].label==='Profile' ? 'translate-y-[-25%]' : 'translate-y-[-5%]'
                 } md:translate-y-[-20%] transition-transform duration-300`}
               fill
               src={'../../ModalMobileTop.svg'}
@@ -1675,7 +1675,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
             {/* Container for the Step SVG and Header Text */}
             <div className="sticky left-0 right-0 top-2 flex flex-col items-center justify-center">
               {/* Conditional rendering based on the active step */}
-              {activeStep === 2 ? (
+              {steps[activeStep].label==='Profile' ? (
                 // If activeStep is 2, display the profile upload section with a gradient border
                 <div
                   className="w-40 h-40 relative top-[5rem] bg-white border-2 rounded-md border-transparent bg-gradient-to-b from-[#707FDD] via-[#FFFFFF] to-[#707FDD] bg-clip-border"
