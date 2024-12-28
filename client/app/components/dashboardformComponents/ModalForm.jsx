@@ -416,7 +416,7 @@ const [formData, setFormData] = useState({
 
     // Move to the next step
     if (activeStep < steps.length) {
-      if (activeStep === 9) {
+      if (activeStep === 10) {
         return;
       }
       setActiveStep(activeStep + 1);
@@ -1979,168 +1979,7 @@ const [formData, setFormData] = useState({
             />
           )}
 
-          {/* {activeStep === 6 && (
-            <div>
-              <div
-                className="flex mt-6 items-center justify-center"
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  width: "100%",
-                  height: "8rem",
-                  overflowY: "scroll",
-                  padding: "20px",
-                }}
-              >
-                <div
-                  className="flex flex-col gap-2"
-                  style={{ width: "100%", maxWidth: "1080px" }}
-                >
-                  {[...Array(5)].map((_, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-center"
-                      style={{
-                        backgroundColor: "#F1F2FC",
-                        backgroundSize: "contain",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                        width: "100%",
-                        height: "120px",
-                        padding: "20px",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      <div className="flex-1" style={{ maxWidth: "80%" }}>
-                        <h1
-                          className="text-[#787F89] text-sm mb-1"
-                          style={{
-                            fontSize: "14px",
-                            textAlign: "left",
-                          }}
-                        >
-                          Name | Job Role | Industry
-                        </h1>
-                        <input
-                          type="text"
-                          placeholder="Testimonial Message"
-                          className="p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                          style={{
-                            width: "100%",
-                            maxWidth: "1080px",
-                            display: "block",
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-4 mt-4">
-                <div className="flex justify-center gap-4">
-                  <h1 className="text-2xl font-semibold text-[#707FDD]">
-                    Add Testimonial
-                  </h1>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-1">
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      value={formData.testimonialName}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          testimonialName: e.target.value,
-                        })
-                      }
-                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <input
-                      type="text"
-                      placeholder="Job Role"
-                      value={formData.testimonialRole}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          testimonialRole: e.target.value,
-                        })
-                      }
-                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <select
-                      className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                      value={formData.testimonialIndustry}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          testimonialIndustry: e.target.value,
-                        })
-                      }
-                    >
-                      <option value="" disabled>
-                        Industry
-                      </option>
-                      <option value="Medical">Medical</option>
-                      <option value="Astrology">Astrology</option>
-                      <option value="Business">Business</option>
-                      <option value="Sports">Sports</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-1">
-                    <input
-                      type="text"
-                      placeholder="Testimonial Message"
-                      value={formData.testimonialMessage}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          testimonialMessage: e.target.value,
-                        })
-                      }
-                      className="w-full h-[120px] p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-center gap-4">
-                  <button className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]">
-                    Add Testimonial
-                  </button>
-                </div>
-                <div className="py-6 flex justify-end space-x-2">
-                  <div
-                    className="text-white text-center text-4xl font-semibold py-6 px-6"
-                    style={{
-                      backgroundImage: `url('../../Underline.svg')`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "left",
-                      backgroundRepeat: "no-repeat",
-                      top: 0,
-                      left: 0,
-                      width: "70%",
-                      height: "10px",
-                    }}
-                  ></div>
-                  {/* <button className="bg-transparent text-[#707FDD] py-2 px-4 rounded-full border-2 border-[#707FDD]">
-                        Preview Card
-                      </button> *
-                  <button
-                    onClick={handleSave}
-                    className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
-                  >
-                    {" "}
-                    Save Changes
-                  </button>
-                </div>
-              </div>
-            </div>
-          )} */}
+          
 
           {activeStep === 8 && (
             <div>
@@ -2205,7 +2044,7 @@ const [formData, setFormData] = useState({
                   ></div>
                 ))}
 
-                {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
+                {[...Array(Math.max(8 - images.length, 0))].map((_, index) => (
                   <div
                     key={`empty-${index}`}
                     className="w-40 h-56 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"

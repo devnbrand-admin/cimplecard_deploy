@@ -35,7 +35,7 @@ export const TestimonialsSection = ({ testimonials, setTestimonials }) => {
             <button
               onClick={() => handleDeleteTestimonial(index)}
               className="absolute top-0 right-0 text-red-500 text-3xl font-bold"
-              style={{ transform: "translate(50%, -50%)" }}
+              style={{ transform: "translate(0%, -60%)" }}
             >
               &times;
             </button>
