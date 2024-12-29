@@ -60,7 +60,7 @@ const HomeComponent = () => {
 
           {/* Logo */}
           <div
-            className=" self-start md:hidden z-20 flex justify-center items-center  mt-5"
+            className=" self-start  z-20 flex justify-center items-center  mt-5"
             style={{
               borderRadius: "50%",
             }}

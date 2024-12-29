@@ -15,7 +15,9 @@ const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
 );
 const ModalFormMobile = dynamic(() =>
-  import("../../components/dashboardformComponents/ModalFormMobile", { ssr: false })
+  import("../../components/dashboardformComponents/ModalFormMobile", {
+    ssr: false,
+  })
 );
 
 const DashboardPage = () => {
@@ -112,7 +114,7 @@ const DashboardPage = () => {
             className="m-5 mb-0 rounded-3xl"
             style={{ width: "20%", height: "92vh" }}
           >
-            <Navbar />
+            <Navbar userId={id} />
           </div>
           <div className="flex flex-col flex-1">
             <div className="flex flex-row w-full items-center justify-between my-2 p-5">
@@ -183,12 +185,12 @@ const DashboardPage = () => {
                   <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center rounded-xl justify-center text-xl opacity-0 group-hover:opacity-100 transition"></div>
                 </div>
                 {userDetails
+
                   ? (newSearchedCards.length > 0 || navbarSearch.trim()
                     ? newSearchedCards
                     : userDetails.cards
                   ).map((card, index) => <Card key={index} card={card} />)
                   : []}
-
               </div>
             </div>
           </div>
@@ -196,14 +198,17 @@ const DashboardPage = () => {
             <Provider store={store}>
               <div
                 className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-              // onClick={() => setIsModalOpen(false)} // Close modal on backdrop click
+
               >
                 <div
                   className="bg-white p-6 rounded shadow-md"
-                // Prevent backdrop click from closing the modal
-
+                  // Prevent backdrop click from closing the modal
                 >
-                  {isMobileSize ? <ModalFormMobile /> : <ModalForm setIsModalOpen={setIsModalOpen} />}
+                  {isMobileSize ? (
+                    <ModalFormMobile />
+                  ) : (
+                    <ModalForm setIsModalOpen={setIsModalOpen} />
+                  )}
                 </div>
               </div>
             </Provider>
