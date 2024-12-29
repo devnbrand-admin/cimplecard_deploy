@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 const Navbar = ({ userId }) => {
   return (
     <div
@@ -10,10 +10,10 @@ const Navbar = ({ userId }) => {
       }}
     >
       <h2
-        className="py-5 mb-4 text-center font-bold"
+        className="py-5 mb-4 text-center font-bold flex items-center justify-center pt-12" 
         style={{ color: "white" }}
       >
-        LOGO
+        <Image src="/Assets/cimplecardLogo.png" alt="Logo" width={150} height={100} />
       </h2>
       <ul
         className="flex-col h-100 justify-around justify-items-center content-around"
