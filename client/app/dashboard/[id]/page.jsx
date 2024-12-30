@@ -10,7 +10,6 @@ import { useMediaQuery } from "react-responsive";
 import profileIcon from "../../assets/profile_icon.png";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
-
 const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
 );

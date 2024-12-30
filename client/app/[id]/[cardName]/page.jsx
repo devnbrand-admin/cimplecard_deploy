@@ -14,13 +14,11 @@ const Page = () => {
   const [card, setCard] = useState();
   const getCardDetails = async () => {
     try {
-      console.log("id", id);
-      console.log(" name", cardName);
-      const response = await axios.get(
+           const response = await axios.get(
         `https://cimple-card.onrender.com/api/card/getby`,
         {
           params: {
-            name: cardName,
+            name: cardName.replace(/%20/g, " "),
             id: id,
           },
           headers: {
@@ -53,7 +51,6 @@ const Page = () => {
 
     fetchCardDetails();
   }, []);
-  console.log(card);
   const TEMPLATE_MAP = {
     medical: MedicalCard,
     lawyer: LawyerCard,
