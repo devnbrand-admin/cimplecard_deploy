@@ -1,9 +1,47 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import axios from "axios";
 const page = () => {
   const router = useRouter();
+
+  const [userDetails, setUserDetails] = useState(null);
+  const BASE_URL = "https://cimple-card.onrender.com/api/user";
+
+  const getUserDetails = async (token) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/getdetails`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        withCredentials: true,
+      });
+      console.log(response.data.user);
+      return response.data.user; // Return user details
+    } catch (error) {
+      throw new Error(
+        error.response?.data?.message || "Failed to fetch user details"
+      );
+    }
+  };
+
+  // Usage in useEffect
+  useEffect(() => {
+    const tokenString = sessionStorage.getItem("userToken");
+    const tokenObject = JSON.parse(tokenString);
+    const jwtToken = tokenObject?.value;
+    const fetchUserDetails = async () => {
+      try {
+        const userDetails = await getUserDetails(jwtToken);
+        setUserDetails(userDetails);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
 
   return (
     <div style={{ backgroundColor: "#5A6ACF", height: "100vh" }}>
@@ -26,54 +64,64 @@ const page = () => {
             boxShadow: "0px 10px 5px 0px #00000040",
           }}
         >
-          <div className="flex items-center gap-4">
-            <img
-              src="/Assets/Profile Picture.jpg"
-              alt="Profile"
-              className="w-20 h-20 rounded-full object-cover"
-            />
-            <div>
-              <h1 className="text-xl font-bold" style={{ color: "#5A6ACF" }}>
-                Name Surname
-              </h1>
-              <p className="text-gray-500">Designation</p>
-            </div>
-            <img
-              src="/Assets/more.png"
-              alt="Profile"
-              className="w-4 h-4 ml-auto"
-            />
-          </div>
-          <div className="mt-4 flex gap-3">
-            <button className="border border-gray-500 rounded-full">
-              <img
-                src="/Assets/Letter.png"
-                alt="Profile"
-                className="w-4 h-4 m-2"
-              />
-            </button>
-            <button className="border border-gray-500 rounded-full">
-              <img
-                src="/Assets/Ringer volume.png"
-                alt="Profile"
-                className="w-4 h-4 m-2"
-              />
-            </button>
-            <button className="border border-gray-500 rounded-full">
-              <img
-                src="/Assets/whatsApp.png"
-                alt="Profile"
-                className="w-4 h-4 m-2"
-              />
-            </button>
-            <button className="border border-gray-500 rounded-full">
-              <img
-                src="/Assets/Google Meet.png"
-                alt="Profile"
-                className="w-4 h-4 m-2"
-              />
-            </button>
-          </div>
+          {userDetails ? (
+            <>
+              <div className="flex items-center gap-4">
+                <img
+                  src={userDetails?.profilePictureUrl}
+                  alt="Profile"
+                  className="w-20 h-20 rounded-full object-cover"
+                />
+                <div>
+                  <h1
+                    className="text-xl font-bold"
+                    style={{ color: "#5A6ACF" }}
+                  >
+                    {userDetails.username}
+                  </h1>
+                  <p className="text-gray-500">Designation</p>
+                </div>
+
+                <img
+                  src="/Assets/more.png"
+                  alt="Profile"
+                  className="w-4 h-4 ml-auto"
+                />
+              </div>
+              <div className="mt-4 flex gap-3">
+                <button className="border border-gray-500 rounded-full">
+                  <img
+                    src="/Assets/Letter.png"
+                    alt="Profile"
+                    className="w-4 h-4 m-2"
+                  />
+                </button>
+                <button className="border border-gray-500 rounded-full">
+                  <img
+                    src="/Assets/Ringer volume.png"
+                    alt="Profile"
+                    className="w-4 h-4 m-2"
+                  />
+                </button>
+                <button className="border border-gray-500 rounded-full">
+                  <img
+                    src="/Assets/whatsApp.png"
+                    alt="Profile"
+                    className="w-4 h-4 m-2"
+                  />
+                </button>
+                <button className="border border-gray-500 rounded-full">
+                  <img
+                    src="/Assets/Google Meet.png"
+                    alt="Profile"
+                    className="w-4 h-4 m-2"
+                  />
+                </button>
+              </div>
+            </>
+          ) : (
+            "LOADING..."
+          )}
         </div>
 
         {/* Bio Section */}
@@ -86,14 +134,13 @@ const page = () => {
           <h2 className="text-xl font-bold" style={{ color: "#5A6ACF" }}>
             BIO
           </h2>
-          <p className="text-gray-500 text-sm mt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis. Lorem
-            ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Libero eveniet pariatur voluptates unde, ex
-            praesentium commodi, quasi error quas vitae soluta cum reprehenderit
-            doloribus odio, exercitationem quos iure autem quisquam.
-          </p>
+          {userDetails ? (
+            <p className="text-gray-500 text-sm mt-2">
+              {userDetails.bio || "Bio Not Added"}
+            </p>
+          ) : (
+            "Loading..."
+          )}
         </div>
       </div>
 
@@ -122,7 +169,7 @@ const page = () => {
               />
               <div className="flex-col ms-3">
                 <p className="text-md">Full Name</p>
-                <p className="text-sm">Name Surname</p>
+                <p className="text-sm">{userDetails?.username}</p>
               </div>
               <p className="text-green-500 ml-auto">Online</p>
             </div>
@@ -134,7 +181,7 @@ const page = () => {
               />
               <div className="flex-col ms-3">
                 <p className="text-md">Email</p>
-                <p className="text-sm">xyz@gmail.com</p>
+                <p className="text-sm">{userDetails?.email}</p>
               </div>
               <button className="border border-gray-500 rounded-full ml-auto">
                 <img
@@ -152,7 +199,9 @@ const page = () => {
               />
               <div className="flex-col ms-3">
                 <p className="text-md">Contact Number</p>
-                <p className="text-sm">729873498279</p>
+                <p className="text-sm">
+                  {userDetails?.contactNumber || "not added"}
+                </p>
               </div>
               <button className="border border-gray-500 rounded-full ml-auto">
                 <img

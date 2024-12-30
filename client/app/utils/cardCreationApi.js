@@ -1,4 +1,5 @@
 import axios from '../components/api_resources/axios';
+import uploadImage, { uploadImages, uploadSingleImage } from '../components/dashboardformComponents/utils/imageUpload';
 
 const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/card/create`;
 
@@ -27,15 +28,20 @@ export const loginUser = async () => {
 };
 
 
+
+
+
 export const createCard = async (formData) => {
+
   try {
     const tokenString = sessionStorage.getItem("userToken");
     const tokenObject = JSON.parse(tokenString);
     const jwtToken = tokenObject.value;
-
+    console.log('services:', formData.services)
 
     const requestData = {
-      title: `${formData.firstName} ${formData.middleName} ${formData.lastName}`,
+      headerImageUrl:await uploadSingleImage(formData.headerImageUrl),
+      title: `${formData.firstName} ${formData.middleName && formData.middleName} ${formData.lastName && formData.lastName}`,
       companyName: formData.companyName,
       companyAddress: formData.companyAddress,
       jobTitle: formData.jobTitle,
@@ -51,27 +57,27 @@ export const createCard = async (formData) => {
       emergencyRelationship: formData.emergencyRelationship,
       emergencyNumber: formData.emergencyNumber,
       emergencyEmail: formData.emergencyEmail,
-      cardName: formData.title + formData.templateType + Date.now(),
+      cardName:  formData.templateType + Date.now(),
       companySocialMediaLink: formData.companySocialMediaLink,
-      instagramLink: formData?.instagramPost[0] && formData?.instagramPost[0],
-
+      instagramPost: formData?.instagramPost && formData?.instagramPost,
+      profileImageUrl:await uploadSingleImage(formData.profileImageUrl && formData.profileImageUrl,"profileUrl"),
       githubLink: formData?.githubLink && formData?.githubLink,
       additionalLink: formData.additionalLink,
       productDesc: formData.productDesc,
       testimonials: formData.testimonials,
       businessHours: formData.businessHours,
-      profileImageUrl: formData.profileImageUrl,
       templateType: formData.templateType,
-      qrCodeUrl: formData.qrCodeUrl,
+      qrCodeUrl: formData?.qrCodeUrl,
       aboutUs: formData.aboutUs,
-      instagramVideoLink: formData?.instagramReel && formData?.instagramReel,
-      youtubeVideoLink: formData?.youtubeVideoLink && formData.youtubeVideoLink,
+      instagramReel : formData?.instagramReel && formData?.instagramReel,
+      youtubeVideoLink : formData?.youtubeVideoLink && formData.youtubeVideoLink,
       services: formData.services,
       socialMediaLink: formData.SocialMediaLink,
-      gallery: formData?.gallery
+      gallery:await uploadImages(formData?.gallery),
+      gridType:formData?.gridType
     };
 
-    console.log(requestData, "res")
+    console.log(requestData, "res-data")
 
 
 

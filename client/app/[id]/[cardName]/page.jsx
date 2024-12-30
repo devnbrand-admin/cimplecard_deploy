@@ -17,14 +17,19 @@ const Page = () => {
       console.log("id", id);
       console.log(" name", cardName);
       const response = await axios.get(
-        `https://cimple-card.onrender.com/api/card/getby/${id}/${cardName}`,
+        `https://cimple-card.onrender.com/api/card/getby`,
         {
+          params: {
+            name: cardName,
+            id: id,
+          },
           headers: {
             "Content-Type": "application/json",
           },
           withCredentials: true,
         }
       );
+
       console.log("respos: ", response.data);
       return response.data;
       // Return user details
@@ -50,8 +55,8 @@ const Page = () => {
   }, []);
   console.log(card);
   const TEMPLATE_MAP = {
-    lawyer: MedicalCard,
-    modern: LawyerCard,
+    medical: MedicalCard,
+    lawyer: LawyerCard,
     astrologer: AstrologerCard,
     b2b: B2bCard,
   };

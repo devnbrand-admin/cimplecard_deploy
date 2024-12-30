@@ -777,7 +777,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                 placeholder="Emergency Phone Number"
                 value={formData.emergencyNumber}
                 onChange={(e) =>
-                  setFormData({ ...formData, emergencyNumber: e.target.value })
+                  setFormData({
+                    ...formData,
+                    emergencyNumber: e.target.value,
+                  })
                 }
                 className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
               />
@@ -791,7 +794,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                 placeholder="Emergency Email"
                 value={formData.emergencyEmail}
                 onChange={(e) =>
-                  setFormData({ ...formData, emergencyEmail: e.target.value })
+                  setFormData({
+                    ...formData,
+                    emergencyEmail: e.target.value,
+                  })
                 }
                 className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
               />
@@ -1237,159 +1243,220 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           <div className="flex justify-center gap-4">
             <h1 className='font-semibold text-[#707FDD]'>Choose What To Add</h1>
           </div>
-          <div className="flex justify-center gap-2">
-            <button className="bg-transparent text-sm text-[#707FDD] py-2 px-3 rounded-full border border-[#707FDD]">
-              Product
-            </button>
-            <button className="bg-transparent text-sm text-[#707FDD] py-1 px-2 rounded-full border border-[#707FDD]">
-              Service
-            </button>
-          </div>
+                <div className="flex justify-center gap-4">
+                  <button
+                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Product"
+                        ? "bg-[#707FDD] text-white border-[#707FDD]"
+                        : "bg-transparent text-[#707FDD] border-[#707FDD]"
+                      }`}
+                    onClick={() =>
+                      setFormData({ ...formData, gridType: "Product" })
+                    }
+                  >
+                    Product
+                  </button>
 
-          <div
-            className="flex items-center justify-start"
-            style={{
-              backgroundColor: '#FFFFFF',
-              width: '100%',
-              height: '16rem',
-              overflowY: 'scroll',
-              // padding: '20px',
-            }}
-          >
-            <div className="flex flex-col gap-2 self-start" style={{ width: '100%', maxWidth: '400px' }}>
-              {[...Array(5)].map((_, index) => (
+                  {/* Service Button */}
+                  <button
+                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Service"
+                        ? "bg-[#707FDD] text-white border-[#707FDD]"
+                        : "bg-transparent text-[#707FDD] border-[#707FDD]"
+                      }`}
+                    onClick={() =>
+                      setFormData({ ...formData, gridType: "Service" })
+                    }
+                  >
+                    Service
+                  </button>
+                </div>
+
                 <div
-                  key={index}
-                  className="flex items-center justify-between"
+                  className="flex items-center justify-start"
                   style={{
-                    backgroundColor: '#F1F2FC',
-                    backgroundSize: 'contain',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    padding: '10px',
-                    borderRadius: '8px',
+                    backgroundColor: "#FFFFFF",
+                    width: "100%",
+                    height: "16rem",
+                    overflowY: "scroll",
                   }}
                 >
-                  <div className="flex-1" style={{ maxWidth: '80%', paddingBottom: '6px' }}>
-                    <h1
-                      className="text-[#787F89] text-sm mb-1"
-                      style={{
-                        fontSize: '10px',
-                        textAlign: 'left',
-                      }}
-                    >
-                      Name of the Product/Services
-                    </h1>
-                    <div className="flex flex-col gap-2">
-                      {/* Name Input */}
-                      <input
-                        type="text"
-                        placeholder="Name of service/product"
-                        value={formData.products && formData?.products[index]?.name || ''} // Access the specific product's name
-                        onChange={(e) => {
-                          const updatedProducts = [...formData.products || []];
-                          updatedProducts[index] = {
-                            ...updatedProducts[index],
-                            name: e.target.value,
-                          };
-                          setFormData({ ...formData, products: updatedProducts });
-                        }}
-                        className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                  <div
+                    className="flex flex-col gap-2 self-start"
+                    style={{ width: "100%", maxWidth: "400px" }}
+                  >
+                    {productData.map((product, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between"
                         style={{
-                          width: '100%',
-                          maxWidth: '320px',
-                          display: 'block',
-                          fontSize: '10px',
-                          textAlign: 'left',
+                          backgroundColor: "#F1F2FC",
+                          backgroundSize: "contain",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                          width: "100%",
+                          padding: "10px",
+                          borderRadius: "8px",
                         }}
-                      />
+                      >
+                        {/* Input Fields */}
+                        <div className="flex-1" style={{ maxWidth: "80%", paddingBottom: "6px" }}>
+                          <h1
+                            className="text-[#787F89] text-sm mb-1"
+                            style={{
+                              fontSize: "10px",
+                              textAlign: "left",
+                            }}
+                          >
+                            Name of the Product/Service
+                          </h1>
+                          <div className="flex flex-col gap-2">
+                            {/* Name Input */}
+                            <input
+                              type="text"
+                              placeholder="Name of service/product"
+                              value={product.name || ""}
+                              onChange={(e) =>
+                                setProductData(
+                                  productData.map((item, i) =>
+                                    i === index
+                                      ? { ...item, name: e.target.value }
+                                      : item
+                                  )
+                                )
+                              }
+                              className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                              style={{
+                                width: "100%",
+                                maxWidth: "320px",
+                                display: "block",
+                                fontSize: "10px",
+                                textAlign: "left",
+                              }}
+                            />
 
-                      {/* Description Input */}
-                      <input
-                        type="text"
-                        placeholder="Description of service/product"
-                        value={formData.products && formData?.products[index]?.description || ''} // Access the specific product's description
-                        onChange={(e) => {
-                          const updatedProducts = [...formData.products || []];
-                          updatedProducts[index] = {
-                            ...updatedProducts[index],
-                            description: e.target.value,
-                          };
-                          setFormData({ ...formData, products: updatedProducts });
-                        }}
-                        className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                        style={{
-                          width: '100%',
-                          maxWidth: '320px',
-                          display: 'block',
-                          fontSize: '10px',
-                          textAlign: 'left',
-                        }}
-                      />
+                            {/* Description Input */}
+                            <input
+                              type="text"
+                              placeholder="Description of service/product"
+                              value={product.description || ""}
+                              onChange={(e) =>
+                                setProductData(
+                                  productData.map((item, i) =>
+                                    i === index
+                                      ? { ...item, description: e.target.value }
+                                      : item
+                                  )
+                                )
+                              }
+                              className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                              style={{
+                                width: "100%",
+                                maxWidth: "320px",
+                                display: "block",
+                                fontSize: "10px",
+                                textAlign: "left",
+                              }}
+                            />
 
-                      {/* External Links Input */}
-                      <input
-                        type="text"
-                        placeholder="External Links of service/product"
-                        value={formData.products && formData?.products[index]?.link || ''} // Access the specific product's link
-                        onChange={(e) => {
-                          const updatedProducts = [...formData?.products || []];
-                          updatedProducts[index] = {
-                            ...updatedProducts[index],
-                            link: e.target.value,
-                          };
-                          setFormData({ ...formData, products: updatedProducts });
-                        }}
-                        className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
-                        style={{
-                          width: '100%',
-                          maxWidth: '320px',
-                          display: 'block',
-                          fontSize: '10px',
-                          textAlign: 'left',
-                        }}
-                      />
+                            {/* External Links Input */}
+                            <input
+                              type="text"
+                              placeholder="External Links of service/product"
+                              value={product.serviceUrl || ""}
+                              onChange={(e) =>
+                                setProductData(
+                                  productData.map((item, i) =>
+                                    i === index
+                                      ? { ...item, serviceUrl: e.target.value }
+                                      : item
+                                  )
+                                )
+                              }
+                              className="p-1 text-sm border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
+                              style={{
+                                width: "100%",
+                                maxWidth: "320px",
+                                display: "block",
+                                fontSize: "10px",
+                                textAlign: "left",
+                              }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Image Upload Section */}
+                        <div
+                          className="ml-8"
+                          style={{
+                            width: "4rem",
+                            height: "4rem",
+                            backgroundColor: "#707FDD",
+                            borderRadius: "0.5rem",
+                            overflow: "hidden",
+                            position: "relative",
+                          }}
+                        >
+                          <label
+                            htmlFor={`product-upload-${index}`}
+                            className="w-full h-full flex items-center justify-center cursor-pointer"
+                          >
+                            {product.imageUrl ? (
+                              <img
+                                src={product.imageUrl}
+                                alt="Uploaded"
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "cover",
+                                }}
+                              />
+                            ) : (
+                              <BsImages className="text-white text-2xl" />
+                            )}
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={(e) => handleProductUpload(e, index)}
+                              className="hidden"
+                              id={`product-upload-${index}`}
+                            />
+                          </label>
+                        </div>
+
+                        {/* Delete Button */}
+                        <button
+                          onClick={() =>
+                            setProductData(productData.filter((_, i) => i !== index))
+                          }
+                          className="text-red-500 text-4xl"
+                          title="Delete"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    ))}
+
+                    {/* Add New Button */}
+                    <div className="flex justify-center mt-4">
+                      <button
+                        onClick={() =>
+                          setProductData([
+                            ...productData,
+                            {
+                              name: "",
+                              imageUrl: "",
+                              serviceUrl: "",
+                              description: "",
+                            },
+                          ])
+                        }
+                        className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]"
+                      >
+                        Add New
+                      </button>
                     </div>
                   </div>
-
-                  {/* Image Upload Section */}
-                  <div
-                    className="ml-8"
-                    style={{
-                      width: '4rem',
-                      height: '4rem',
-                      backgroundColor: '#707FDD',
-                      borderRadius: '0.5rem',
-                    }}
-                  >
-                    <label
-                      htmlFor={`product-upload-${index}`}
-                      className="w-full h-full flex items-center justify-center cursor-pointer"
-                    >
-                      <BsImages className="text-white text-2xl" />
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files[0];
-                          const updatedProducts = [...formData.products];
-                          updatedProducts[index] = {
-                            ...updatedProducts[index],
-                            image: file, // Save the file or a preview URL
-                          };
-                          setFormData({ ...formData, products: updatedProducts });
-                        }}
-                        className="hidden"
-                        id={`product-upload-${index}`}
-                      />
-                    </label>
-                  </div>
                 </div>
-              ))}
-            </div>
 
-          </div>
 
 
           <div className="py-6 flex justify-between space-x-2">
@@ -1720,38 +1787,29 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
         <div className="bg-white w-full h-full flex flex-col gap-5 z-10 relative">
 
-          {/* header */}
           <div className="z-20 sticky">
-            {/* Top SVG (used as a decorative background, its position adjusts based on the active step) */}
             <Image
-              className={`absolute right-0 left-0 scale-150 ${steps[activeStep].label === 'Profile' ? 'translate-y-[-25%]' : 'translate-y-[-5%]'
-                } md:translate-y-[-20%] transition-transform duration-300`}
+              className='absolute right-0 left-0 scale-150 translate-y-[-5%] md:translate-y-[-20%] transition-transform duration-300'
               fill
               src={'../../ModalMobileTop.svg'}
             />
 
-            {/* Container for the Step SVG and Header Text */}
             <div className="sticky left-0 right-0 top-2 flex flex-col items-center justify-center">
-              {/* Conditional rendering based on the active step */}
               {steps[activeStep].label === 'Profile' ? (
-                // If activeStep is 2, display the profile upload section with a gradient border
                 <div
                   className="w-40 h-40 relative top-[5rem] bg-white border-2 rounded-md border-transparent bg-gradient-to-b from-[#707FDD] via-[#FFFFFF] to-[#707FDD] bg-clip-border"
                 >
-                  {/* Profile upload area (inner white container for profile picture) */}
                   <div className="w-full h-full flex justify-center items-center bg-white rounded-md">
                     <label
                       htmlFor="profile-upload"
                       className="w-full h-full flex items-center justify-center"
                       style={{
                         borderRadius: '50%',
-                        // If profileImage exists, set it as the background; otherwise, leave it blank
                         backgroundImage: profileImage ? `url(${profileImage})` : 'none',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                       }}
                     >
-                      {/* Show default avatar if no profile image is uploaded */}
                       {!profileImage && (
                         <img
                           src="../../ProfileAvatarMobile.svg"
@@ -1759,7 +1817,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                           className="w-32 h-32"
                         />
                       )}
-                      {/* Hidden file input for profile picture upload */}
                       <input
                         type="file"
                         accept="image/*"
@@ -1770,30 +1827,26 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     </label>
                   </div>
 
-                  {/* Small upload icon (floating on the side of the profile container) */}
                   <div
                     className="absolute -right-[50px] w-10 h-10 top-1/3 bg-white rounded-full flex justify-center items-center"
                   >
                     <label
                       htmlFor="profile-upload"
-                      className="w-full h-full flex items-center justify-center"
+                      className="w-[80%] h-[80%] flex items-center justify-center"
                       style={{
                         borderRadius: '50%',
-                        // If profileImage exists, set it as the background; otherwise, leave it blank
                         backgroundImage: profileImage ? `url(${profileImage})` : 'none',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                       }}
                     >
-                      {/* Show default avatar if no profile image is uploaded */}
                       {!profileImage && (
                         <img
-                          src="../../ProfileAvatar.svg"
+                          src="../../BannerUpload.svg"
                           alt="Upload Icon"
                           className="w-32 h-32"
                         />
                       )}
-                      {/* Hidden file input for profile picture upload */}
                       <input
                         type="file"
                         accept="image/*"
@@ -1805,7 +1858,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                   </div>
                 </div>
               ) : (
-                // For other steps, render the step-specific image
                 <img
                   src={steps[activeStep]?.imageUrl}
                   alt={steps[activeStep]?.label}
@@ -1813,7 +1865,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                 />
               )}
 
-              {/* Header text displayed for each step */}
               <h1
                 className={`text-xl font-semibold text-[#707FDD] ${activeStep === 2 ? 'relative -top-[7rem]' : ''
                   } text-center px-4`}
@@ -1822,7 +1873,6 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
               </h1>
             </div>
           </div>
-
 
           {/* content */}
           <div className=" bg-white top-10 w-full h-full flex relative overflow-hidden">
