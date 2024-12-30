@@ -127,146 +127,207 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
   const [testimonials, setTestimonials] = useState([
     {
-      name: "",
-      designation: "",
-      description: "",
+      name: "test",
+      designation: "Principal",
+      description: "desc",
       imageUrl: "",
     },
+    // {
+    //   name: "",
+    //   designation: "",
+    //   description: "",
+    //   imageUrl: "",
+    // },
   ]);
 
   const [instagramPost, setInstagramPost] = useState([
-    // "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
-    "",
+    "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
   ]);
 
   const [instagramReels, setInstagramReels] = useState([
-    // "https://www.instagram.com/reel/DD7hegTgQ_G/",
-    "",
+    "https://www.instagram.com/reel/DD7hegTgQ_G/",
+
   ]);
 
   const [youtubeVideo, setYoutubeVideo] = useState([
-    // "https://www.youtube.com/watch?v=u4smAxDtbGc&feature=youtu.be",
-    "",
+    "https://www.youtube.com/watch?v=u4smAxDtbGc&feature=youtu.be",
   ]);
+
+
 
   const [images, setImages] = useState([]);
 
   const [productData, setProductData] = useState([
-    // {
-    //   name: "Product",
-    //   imageUrl: null ,
-    //   serviceUrl: "https://personal-portfolio-eosin-xi.vercel.app/",
-    //   description: "desc",
-    //   cardId: ""
-    // },
     {
-      name: "",
+      name: "Product",
       imageUrl: null,
-      serviceUrl: "",
-      description: "",
-      cardId: "",
+      serviceUrl: "https://personal-portfolio-eosin-xi.vercel.app/",
+      description: "desc",
+      cardId: ""
     },
+    // {
+    //   name: "",
+    //   imageUrl: null,
+    //   serviceUrl: "",
+    //   description: "",
+    //   cardId: "",
+    // },
   ]);
+
+  const [formData, setFormData] = useState({
+    // Personal information
+    firstName: "John",
+    middleName: "",
+    lastName: "Doe",
+    jobTitle: "Software Developer",
+    companyName: "Tech Innovators",
+    location: "San Francisco, CA",
+    profileImageUrl: null,
+    headerImageUrl: null,
+    templateType: "Modern",
+    cardName: "johns-business-card2" + new Date(),
+    qrCodeUrl: "https://example.com/qrcode.jpg",
+    aboutUs: "A software developer with a passion for coding.",
+    companyAddress: "123 Tech Avenue, San Francisco, CA",
+    dateOfBirth: "1990-05-15",
+    bio: "Specializing in web and mobile app development.",
+    gridType: "products",
+    languageSpoken: "English, Spanish",
+    additionalLink: "https://example.com/portfolio",
+    emails: ["john.doe@example.com", "other.email@example.com"],
+    phoneNumbers: ["1234567890", "0987654321"],
+    otherEmails: "other.email@example.com",
+    otherPhoneNumber: "0987654321",
+    phoneNumber: "1234567890",
+
+    // Emergency contact information
+    emergencyName: "John's Friend",
+    emergencyRelationship: "Friend",
+    emergencyNumber: "0987654321",
+    emergencyEmail: "emergency@example.com",
+
+    // Social media links
+    SocialMediaLink: [
+      {
+        // id: 1,
+        platform: "LinkedIn",
+        url: "https://linkedin.com/in/johndoe",
+        // iconUrl: "https://example.com/linkedin-icon.jpg",
+        cardId: "card1-uuid",
+      },
+      {
+        // id: 2,
+        cardId: "card2-uuid",
+
+        platform: "Twitter",
+        url: "https://twitter.com/johndoe",
+        // iconUrl: "https://example.com/twitter-icon.jpg",
+      },
+    ],
+    companySocialMediaLink: [
+      {
+        // id: 1,
+        platform: "LinkedIn",
+        url: "https://linkedin.com/in/johndoe",
+        // iconUrl: "https://example.com/linkedin-icon.jpg",
+        cardId: "card1-uuid",
+
+      },
+      {
+        // id: 2,
+        platform: "Twitter",
+        url: "https://twitter.com/johndoe",
+        iconUrl: "https://example.com/twitter-icon.jpg",
+        cardId: "card1-uuid",
+
+      },
+    ],
+
+    // Gallery and media
+    gallery: [],
+    // instagramPost:[""],
+    // instagramReel:[""],
+    // youtubeVideoLink:[""],
+    instagramPost: ["https://instagram.com/johndoe/post1"],
+    instagramReel: ["https://instagram.com/johndoe/reel1"],
+    youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
+
+    // Testimonials
+    testimonials: [
+      {
+        id: 1,
+        name: "Alice Johnson",
+        designation: "CEO",
+        description: "John is a great developer, helped us with our project!",
+        imageUrl: "https://example.com/testimonial1.jpg",
+        cardId: "card1-uuid"
+
+      },
+    ],
+
+    // Business hours
+    businessHours: [
+      {
+        id: 1,
+        type: "asdfsda",
+        from: "",
+        to: "",
+        cardId: "card1-uuid"
+
+      },
+    ],
+  });
+
+  const [profileImagetoShow, setProfileImagetoShow] = useState(null)
+  const [headerImagetoShow, setHeaderImagetoShow] = useState(null)
+
 
   // const [formData, setFormData] = useState({
   //   // Personal information
-  //   firstName: "John",
+  //   firstName: "",
   //   middleName: "",
-  //   lastName: "Doe",
-  //   jobTitle: "Software Developer",
-  //   companyName: "Tech Innovators",
-  //   location: "San Francisco, CA",
-  //   profileImageUrl: null,
-  //   headerImageUrl: null,
-  //   templateType: "Modern",
-  //   cardName: "johns-business-card2" + new Date(),
-  //   qrCodeUrl: "https://example.com/qrcode.jpg",
-  //   aboutUs: "A software developer with a passion for coding.",
-  //   companyAddress: "123 Tech Avenue, San Francisco, CA",
-  //   dateOfBirth: "1990-05-15",
-  //   bio: "Specializing in web and mobile app development.",
-  //   gridType: "products",
-  //   languageSpoken: "English, Spanish",
-  //   additionalLink: "https://example.com/portfolio",
-  //   emails: ["john.doe@example.com", "other.email@example.com"],
-  //   phoneNumbers: ["1234567890", "0987654321"],
-  //   otherEmails: "other.email@example.com",
-  //   otherPhoneNumber: "0987654321",
-  //   phoneNumber: "1234567890",
+  //   lastName: "",
+  //   jobTitle: "",
+  //   companyName: "",
+    
+  //   location: "",
+  //   profileImageUrl: "",
+  //   headerImageUrl: "",
+  //   templateType: "",
+  //   cardName: "",
+  //   qrCodeUrl: "",
+  //   aboutUs: "",
+  //   companyAddress: "",
+    
+  //   dateOfBirth: "",
+  //   bio: "",
+  //   gridType: "Product",
+  //   languageSpoken: "",
+  //   additionalLink: "",
+  //   emails: ["",""],
+  //   phoneNumbers: [""],
+  //   otherEmails: "",
+  //   otherPhoneNumber: "",
+  //   phoneNumber: "",
 
   //   // Emergency contact information
-  //   emergencyName: "John's Friend",
-  //   emergencyRelationship: "Friend",
-  //   emergencyNumber: "0987654321",
-  //   emergencyEmail: "emergency@example.com",
+  //   emergencyName: "",
+  //   emergencyRelationship: "",
+  //   emergencyNumber: "",
+  //   emergencyEmail: "",
 
   //   // Social media links
-  //   SocialMediaLink: [
-  //     {
-  //       // id: 1,
-  //       platform: "LinkedIn",
-  //       url: "https://linkedin.com/in/johndoe",
-  //       // iconUrl: "https://example.com/linkedin-icon.jpg",
-  //       cardId: "card1-uuid",
-  //     },
-  //     {
-  //       // id: 2,
-  //       cardId: "card2-uuid",
-
-  //       platform: "Twitter",
-  //       url: "https://twitter.com/johndoe",
-  //       // iconUrl: "https://example.com/twitter-icon.jpg",
-  //     },
-  //   ],
-  //   companySocialMediaLink: [
-  //     {
-  //       // id: 1,
-  //       platform: "LinkedIn",
-  //       url: "https://linkedin.com/in/johndoe",
-  //       // iconUrl: "https://example.com/linkedin-icon.jpg",
-  //       cardId: "card1-uuid",
-
-  //     },
-  //     {
-  //       // id: 2,
-  //       platform: "Twitter",
-  //       url: "https://twitter.com/johndoe",
-  //       iconUrl: "https://example.com/twitter-icon.jpg",
-  //       cardId: "card1-uuid",
-
-  //     },
-  //   ],
+  //   SocialMediaLink: [],
+  //   companySocialMediaLink: [],
 
   //   // Gallery and media
   //   gallery: [],
-  //   instagramPost: ["https://instagram.com/johndoe/post1"],
-  //   instagramReel: ["https://instagram.com/johndoe/reel1"],
-  //   youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
+  //   instagramPost: [],
+  //   instagramReel: [],
+  //   youtubeVideoLink: [],
 
   //   // Testimonials
-  //   testimonials: [
-  //     {
-  //       id: 1,
-  //       name: "Alice Johnson",
-  //       designation: "CEO",
-  //       description: "John is a great developer, helped us with our project!",
-  //       imageUrl: "https://example.com/testimonial1.jpg",
-  //       cardId: "card1-uuid"
-
-  //     },
-  //   ],
-
-  //   // Services
-  //   services: [
-  //     {
-  //       id: 1,
-  //       name: "Web Development",
-  //       imageUrl: null,
-  //       serviceUrl: "https://example.com/webdev",
-  //       description: "Full-stack web development services.",
-  //       cardId:"asasfcardId"
-  //     },
-  //   ],
+  //   testimonials: [],
 
   //   // Business hours
   //   businessHours: [
@@ -275,71 +336,33 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   //       type: "",
   //       from: "",
   //       to: "",
-  //       cardId: "card1-uuid"
-
+  //       cardId: "",
   //     },
   //   ],
   // });
 
-  const [formData, setFormData] = useState({
-    // Personal information
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    jobTitle: "",
-    companyName: "",
-    location: "",
-    profileImageUrl: "",
-    headerImageUrl: "",
-    templateType: "",
-    cardName: "",
-    qrCodeUrl: "",
-    aboutUs: "",
-    companyAddress: "",
-    dateOfBirth: "",
-    bio: "",
-    gridType: "Product",
-    languageSpoken: "",
-    additionalLink: "",
-    emails: ["",""],
-    phoneNumbers: [""],
-    otherEmails: "",
-    otherPhoneNumber: "",
-    phoneNumber: "",
 
-    // Emergency contact information
-    emergencyName: "",
-    emergencyRelationship: "",
-    emergencyNumber: "",
-    emergencyEmail: "",
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      instagramPost: instagramPost,
+      instagramReel: instagramReels,
+      youtubeVideoLink: youtubeVideo,
+      
+      testimonials:testimonials,
 
-    // Social media links
-    SocialMediaLink: [],
-    companySocialMediaLink: [],
+    }));
+    console.log("link updating")
+  }, [instagramPost, instagramReels,youtubeVideo,testimonials]);
 
-    // Gallery and media
-    gallery: [],
-    instagramPost: [],
-    instagramReel: [],
-    youtubeVideoLink: [],
+  // useEffect(()=>{
+  //   setImages((prevData)=>({...prevData,images}))
+  // },[images])
 
-    // Testimonials
-    testimonials: [],
+  // useEffect(()=>{
+  //       setProductData((prevData)=>({...prevData,productData}))
 
-    // Services
-    services: [],
-
-    // Business hours
-    businessHours: [
-      {
-        id: 1,
-        type: "",
-        from: "",
-        to: "",
-        cardId: "",
-      },
-    ],
-  });
+  // },[productData])
 
   const steps = [
     { id: 1, label: "Choose Template", icon: <BsTriangle /> },
@@ -359,7 +382,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     setActiveStep(stepId);
   };
 
-  const handleAdd = () => {};
+  const handleAdd = () => { };
 
   const handleTemplateSelection = (template) => {
     setFormData((prev) => ({
@@ -386,8 +409,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
   const handleProfileUpload = (event) => {
     const file = event.target.files[0];
-    if (file) {
+    const previewUrl =  URL.createObjectURL(file);
+
+    if (file && previewUrl) {
       setProfileImage(file);
+      setProfileImagetoShow(previewUrl)
       setFormData((prevFormData) => ({
         ...prevFormData,
         profileImageUrl: file,
@@ -411,14 +437,16 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
   const handleCoverUpload = (event) => {
     const file = event.target.files[0];
-    // const fileURL = URL.createObjectURL(file);
+    const fileURL = URL.createObjectURL(file);
+    setHeaderImagetoShow(fileURL)
 
-    if (file) {
+    if (file && fileURL) {
       setFormData((prevFormData) => ({
         ...prevFormData,
         headerImageUrl: file,
       }));
     }
+    console.log(headerImagetoShow, "headerImage")
   };
 
   // const handleProductUpload = (event, index) => {
@@ -486,16 +514,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     }));
   };
 
-  // useEffect(()=>{
-  //   if(Object.entries(clientErrors).length===0 && Object.entries(formData.length)>=0){
-  //     setIsCardCreate(true)
-  //     console.log("btn-t",clientErrors,formData)
-  //   }else{
-  //     console.log("btn-f",clientErrors,formData)
 
-  //     setIsCardCreate(false)
-  //   }
-  // },[clientErrors,formData])
 
   const handleSave = () => {
     // dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
@@ -706,205 +725,253 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
         });
       }
     }
-    const filesToUpload = productData
-      .map((product) => product.imageUrl)
-      .filter((file) => file instanceof File);
+let updatedProductData
+    if(productData.length > 0){
 
-    // Upload images and get URLs
-    const uploadedUrls = await uploadImages(filesToUpload);
-    // Map uploaded URLs back to productData
-    const updatedProductData = productData.map((product, index) => ({
-      ...product,
-      imageUrl: uploadedUrls[index] || product.imageUrl,
-    }));
+      const filesToUpload = productData
+        .map((product) => product.imageUrl)
+        .filter((file) => file instanceof File);
+  
+      // Upload images and get URLs
+      const uploadedUrls = await uploadImages(filesToUpload);
+      // Map uploaded URLs back to productData
+       updatedProductData =uploadedUrls.length > 0 && productData.map((product, index) => ({
+        ...product,
+        imageUrl: uploadedUrls[index] && uploadedUrls[index] || product?.imageUrl && product.imageUrl,
+      }));
+    }
     console.log(updatedProductData, "updatedProductData");
 
     e.preventDefault();
-    setFormData((prev) => ({
+    await setFormData((prev) => ({ 
       ...prev,
-      services: updatedProductData,
       testimonials: testimonials,
       instagramPost: instagramPost,
       instagramReel: instagramReels,
       youtubeVideoLink: youtubeVideo,
-      gallery: images,
     }));
     console.log("Form Data:ModalForm", formData);
     try {
-      const response = await createCard(formData);
+      const response = await createCard(formData,images,updatedProductData);
       console.log("Card saved successfully:", response);
-      setIsModalOpen(false);
+      // setIsModalOpen(false);
       // dispatch(setCardData(formData)); // Update Redux store
     } catch (error) {
       console.log("Failed to save card:", error);
     }
   };
 
-  // useEffect(()=>{
+  //setting the state empty on initial rendering
 
-  //   setFormData({
-  //       // Personal information
-  //       firstName: "",
-  //       middleName: "",
-  //       lastName: "",
-  //       jobTitle: "",
-  //       companyName: "",
-  //       location: "",
-  //       profileImageUrl: "",
-  //       headerImageUrl: "",
-  //       templateType: "",
-  //       cardName: "",
-  //       qrCodeUrl: "",
-  //       aboutUs: "",
-  //       companyAddress: "",
-  //       dateOfBirth: "",
-  //       bio: "",
-  //       gridType: "",
-  //       languageSpoken: "",
-  //       additionalLink: "",
-  //       emails: [],
-  //       phoneNumbers: [],
-  //       otherEmails: "",
-  //       otherPhoneNumber: "",
-  //       phoneNumber: "",
+  useEffect(()=>{
 
-  //       // Emergency contact information
-  //       emergencyName: "",
-  //       emergencyRelationship: "",
-  //       emergencyNumber: "",
-  //       emergencyEmail: "",
+//     setFormData({
+//         // Personal information
+//         firstName: "",
+//         middleName: "",
+//         lastName: "",
+//         jobTitle: "",
+//         companyName: "",
+//         location: "",
+//         profileImageUrl: "",
+//         headerImageUrl: "",
+//         templateType: "",
+//         cardName: "",
+//         qrCodeUrl: "",
+//         aboutUs: "",
+//         companyAddress: "",
+//         dateOfBirth: "",
+//         bio: "",
+//         gridType: "",
+//         languageSpoken: "",
+//         additionalLink: "",
+//         emails: [],
+//         phoneNumbers: [],
+//         otherEmails: "",
+//         otherPhoneNumber: "",
+//         phoneNumber: "",
 
-  //       // Social media links
-  //       SocialMediaLink: [],
-  //       companySocialMediaLink: [],
+//         // Emergency contact information
+//         emergencyName: "",
+//         emergencyRelationship: "",
+//         emergencyNumber: "",
+//         emergencyEmail: "",
 
-  //       // Gallery and media
-  //       gallery: [],
-  //       instagramPost: [],
-  //       instagramReel: [],
-  //       youtubeVideoLink: [],
+//         // Social media links
+//         SocialMediaLink: [],
+//         companySocialMediaLink: [],
 
-  //       // Testimonials
-  //       testimonials: [],
+//         // Gallery and media
+//         gallery: [],
+//         instagramPost: [],
+//         instagramReel: [],
+//         youtubeVideoLink: [],
 
-  //       // Services
-  //       services: [],
+//         // Business hours
+//         businessHours: [
+//           {
+//             id: 1,
+//             type: "",
+//             from: "",
+//             to: "",
+//             cardId: "",
+//           },
+//         ],
+//       });
 
-  //       // Business hours
-  //       businessHours: [
-  //         {
-  //           id: 1,
-  //           type: "",
-  //           from: "",
-  //           to: "",
-  //           cardId: "",
-  //         },
-  //       ],
-  //     });
+//       setTestimonials([
+//         {
+//           name: "",
+//           designation: "",
+//           description: "",
+//           imageUrl: "",
+//         },
+//       ]);
+    
+//      setInstagramPost([
+//         "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
+//       ]);
+    
+//       setInstagramReels([
+// ""      ]);
+    
+//        setYoutubeVideo([
+// ""      ]);
+    
+//      setImages([]);
+    
+//       setProductData([
 
-  //   if(cardId) getSingleCardData(cardId)
-  // },[cardId])
+//         {
+//           name: "",
+//           imageUrl: null,
+//           serviceUrl: "",
+//           description: "",
+//           cardId: "",
+//         },
+//       ]);
+
+    
+
+    if(cardId) getSingleCardData(cardId)
+  },[cardId])
 
   // Function to map backend data to the required format
-  const transformCardData = (data) => {
+  const transformCardData = async (data) => {
+    // Transform data into the required format
+    console.log(data.profileImageUrl,"Data")
     return {
       // Personal information
-      firstName: data.title?.split(" ")[0] || "",
-      middleName: "",
-      lastName: data.title?.split(" ")[1] || "",
-      jobTitle: data.jobTitle || "",
-      companyName: data.companyName || "",
-      location: data.location || "N/A",
-      profileImageUrl: data.profileImageUrl || "",
-      headerImageUrl: data.headerImageUrl || "",
-      templateType: data.templateType || "",
-      cardName: data.cardName || `business-card-${new Date().getTime()}`,
-      qrCodeUrl: data.qrCodeUrl || "",
-      aboutUs: data.aboutUs || "",
-      companyAddress: data.companyAddress || "",
-      dateOfBirth: data.dateOfBirth || "",
-      bio: data.bio || "",
-      gridType: data.gridType || "",
-      languageSpoken: data.languageSpoken || "",
-      additionalLink: data.additionalLink || "",
-      emails: data.emails || [],
-      phoneNumbers: data.phoneNumbers || [],
-      otherEmails: data.otherEmails || "",
-      otherPhoneNumber: data.otherPhoneNumber || "",
-      phoneNumber: data.phoneNumber || "",
-
-      // Emergency contact information
-      emergencyName: data.emergencyName || "",
-      emergencyRelationship: data.emergencyRelationship || "",
-      emergencyNumber: data.emergencyNumber || "",
-      emergencyEmail: data.emergencyEmail || "",
-
-      // Social media links
+      firstName: data?.title?.split(" ")[0] || "",
+      middleName: data?.title?.split(" ")[1] || "",
+      lastName: data?.title?.split(" ")[2] || "",
+      jobTitle: data?.jobTitle || "",
+      companyName: data?.companyName || "",
+      location: data?.comanyAddress || "",
+      profileImageUrl: data?.profileImageUrl || "",
+      headerImageUrl: data?.headerImageUrl || "",
+      templateType: data?.templateType || "",
+      cardName: data?.cardName || `business-card-${new Date().getTime()}`,
+      qrCodeUrl: data?.qrCodeUrl || "",
+      aboutUs: data?.aboutUs || "",
+      companyAddress: data?.companyAddress || "",
+      dateOfBirth: data?.dateOfBirth || "",
+      bio: data?.bio || "",
+      gridType: data?.gridType || "",
+      languageSpoken: data?.languageSpoken || "",
+      additionalLink: data?.additionalLink || "",
+      emails: data?.emails || [],
+      phoneNumbers: data?.phoneNumbers || [],
+      otherEmails: data?.otherEmails || "",
+      otherPhoneNumber: data?.otherPhoneNumber || "",
+      phoneNumber: data?.phoneNumber || "",
+      emergencyName: data?.emergencyName || "",
+      emergencyRelationship: data?.emergencyRelationship || "",
+      emergencyNumber: data?.emergencyNumber || "",
+      emergencyEmail: data?.emergencyEmail || "",
       SocialMediaLink: [
-        ...(data.linkedinLink
-          ? [
-              {
-                id: 1,
-                platform: "LinkedIn",
-                url: data.linkedinLink,
-                iconUrl: "",
-                cardId: data.id,
-              },
-            ]
+        ...(data?.linkedinLink
+          ? [{ id: 1, platform: "LinkedIn", url: data.linkedinLink, cardId: data?.id }]
           : []),
-        ...(data.twitterLink
-          ? [
-              {
-                id: 2,
-                platform: "Twitter",
-                url: data.twitterLink,
-                iconUrl: "",
-                cardId: data.id,
-              },
-            ]
+        ...(data?.twitterLink
+          ? [{ id: 2, platform: "Twitter", url: data?.twitterLink, cardId: data?.id }]
           : []),
       ],
-      companySocialMediaLink: [],
-
-      // Gallery and media
-      gallery: data.gallery || [],
-      instagramPost: data.instagramPost || [],
-      instagramReel: data.instagramReel || [],
-      youtubeVideoLink: data.youtubeVideoLink || [],
-
-      // Testimonials
-      testimonials: data.testimonials || [],
-
-      // Services
-      services: data.services || [],
-
-      // Business hours
-      businessHours: data.businessHours || [],
+      companySocialMediaLink: data?.companySocialMediaLink || [],
+      gallery: data?.gallery || [],
+      businessHours: data?.businessHours || [
+        {
+          type: "",
+          from: "12:33",
+          to: "",
+          cardId: "",
+        },
+      ],
+      testimonials: data?.testimonials || [
+        {
+          name: "",
+          designation: "",
+          description: "",
+          imageUrl: "",
+        },
+      ],
+      instagramPost: data?.instagramPost || [""],
+      instagramReel: data?.instagramReel || [""],
+      youtubeVideoLink: data?.youtubeVideoLink || [""],
+      productData: data?.services || [
+        {
+          name: "",
+          imageUrl: null,
+          serviceUrl: "",
+          description: "",
+          cardId: "",
+        },
+      ],
     };
   };
-
-  // Fetch and process single card data
+  
   const getSingleCardData = async (cardId) => {
     try {
       if (!cardId) {
         console.error("Card ID is required.");
         return;
       }
+  
       console.log(cardId, "cardId");
-
+  
+      // Fetch card data
       const response = await axios.get(`/api/card/get/${cardId}`);
-      const backendData = response.data;
+      console.log(response.data,"response data")
 
-      console.log(backendData, "singleData");
-
-      // Transform backend data to required format
-      const transformedData = transformCardData(backendData);
-      console.log(transformedData, "Transformed Data");
+  
+    // Transform backend data
+      const transformedData = await transformCardData(response?.data?.card);
+      console.log(transformedData?.profileImageUrl,"proImg")
+  
+      // Update states sequentially
+      await Promise.all([
+        setFormData((prev) => ({ ...prev, ...transformedData })),
+        setHeaderImagetoShow(transformedData?.headerImageUrl),
+        setProfileImagetoShow(transformedData?.profileImageUrl),
+        setTestimonials(transformedData.testimonials),
+        setInstagramPost(transformedData.instagramPost),
+        setInstagramReels(transformedData.instagramReel),
+        setYoutubeVideo(transformedData.youtubeVideoLink),
+        setImages(transformedData.gallery),
+        setProductData(transformedData.productData),
+      ]);
+  
+      console.log("Updated formData:", transformedData);
     } catch (error) {
       console.error("Error fetching single card data:", error);
     }
   };
-
+  
+  // Log updates to formData in useEffect
+  useEffect(() => {
+    console.log(formData, "formData updated");
+  }, [formData]);
+  
   return (
     <div
       className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
@@ -978,11 +1045,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Medical")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
-                          formData.templateType === "Medical"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Medical"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                        }`}
+                          }`}
                       >
                         {formData.templateType === "Medical"
                           ? "Selected"
@@ -1016,11 +1082,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Astrologer")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
-                          formData.templateType === "Astrologer"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Astrologer"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                        }`}
+                          }`}
                       >
                         {formData.templateType === "Astrologer"
                           ? "Selected"
@@ -1054,11 +1119,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("B2B Business")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
-                          formData.templateType === "B2B Business"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "B2B Business"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                        }`}
+                          }`}
                       >
                         {formData.templateType === "B2B Business"
                           ? "Selected"
@@ -1092,11 +1156,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     <div className="py-2 px-4 flex space-x-2 mt-2">
                       <button
                         onClick={() => handleTemplateSelection("Lawyer")}
-                        className={`py-2 px-4 rounded-full text-[#707FDD] ${
-                          formData.templateType === "Lawyer"
+                        className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Lawyer"
                             ? "bg-[#707FDD] text-white"
                             : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
-                        }`}
+                          }`}
                       >
                         {formData.templateType === "Lawyer"
                           ? "Selected"
@@ -1145,8 +1208,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     top: "0",
                     left: "0",
                     right: "0",
-                    backgroundImage: formData.headerImageUrl
-                      ? `url(${formData.headerImageUrl})`
+                    backgroundImage: headerImagetoShow
+                      ? `url(${headerImagetoShow})`
                       : "none",
                   }}
                 >
@@ -1205,9 +1268,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         height: "128px",
                         borderRadius: "50%",
                         // overflow: "hidden",
-                        backgroundImage: profileImage
-                          ? `url(${profileImage})`
+                        backgroundImage:profileImagetoShow
+                          ? `url(${profileImagetoShow})`
                           : "none",
+                          
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                       }}
@@ -1244,9 +1308,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                             firstName: e.target.value,
                           })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
-                          clientErrors.firstName ? "border-red-500" : ""
-                        }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.firstName ? "border-red-500" : ""
+                          }`}
                       />
                       {clientErrors.firstName && (
                         <p className="text-red-500 text-xs mt-1">
@@ -1276,9 +1339,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         onChange={(e) =>
                           setFormData({ ...formData, lastName: e.target.value })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
-                          clientErrors.lastName ? "border-red-500" : ""
-                        }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.lastName ? "border-red-500" : ""
+                          }`}
                       />
                       {clientErrors.lastName && (
                         <p className="text-red-500 text-xs mt-1">
@@ -1301,9 +1363,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                             companyName: e.target.value,
                           })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
-                          clientErrors.companyName ? "border-red-500" : ""
-                        }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.companyName ? "border-red-500" : ""
+                          }`}
                       />
                       {clientErrors.companyName && (
                         <p className="text-red-500 text-xs mt-1">
@@ -1319,9 +1380,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         onChange={(e) =>
                           setFormData({ ...formData, location: e.target.value })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
-                          clientErrors.location ? "border-red-500" : ""
-                        }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.location ? "border-red-500" : ""
+                          }`}
                       />
                       {clientErrors.location && (
                         <p className="text-red-500 text-xs mt-1">
@@ -1337,9 +1397,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         onChange={(e) =>
                           setFormData({ ...formData, jobTitle: e.target.value })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
-                          clientErrors.jobTitle ? "border-red-500" : ""
-                        }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.jobTitle ? "border-red-500" : ""
+                          }`}
                       />
                       {clientErrors.jobTitle && (
                         <p className="text-red-500 text-xs mt-1">
@@ -1359,9 +1418,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                         onChange={(e) =>
                           setFormData({ ...formData, aboutUs: e.target.value })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
-                          clientErrors.aboutUs ? "border-red-500" : ""
-                        }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.aboutUs ? "border-red-500" : ""
+                          }`}
                       />
                       {clientErrors.aboutUs && (
                         <p className="text-red-500 text-xs mt-1">
@@ -1375,9 +1433,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <select
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
-                          clientErrors.languageSpoken ? "border-red-500" : ""
-                        }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.languageSpoken ? "border-red-500" : ""
+                          }`}
                         value={formData.languageSpoken}
                         onChange={(e) =>
                           setFormData({
@@ -1413,9 +1470,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                             dateOfBirth: e.target.value,
                           })
                         }
-                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${
-                          clientErrors.dateOfBirth ? "border-red-500" : ""
-                        }`}
+                        className={`w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md ${clientErrors.dateOfBirth ? "border-red-500" : ""
+                          }`}
                       />
                       {clientErrors.dateOfBirth && (
                         <p className="text-red-500 text-xs mt-1">
@@ -1727,9 +1783,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                           SocialMediaLink: updatedLinks,
                         });
                       }}
-                      className={`w-full p-3 border ${
-                        clientErrors?.errors?.Website ? "border-red-500" : ""
-                      } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
+                      className={`w-full p-3 border ${clientErrors?.errors?.Website ? "border-red-500" : ""
+                        } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
                     />
                     {clientErrors?.errors?.Website && (
                       <p className="text-red-500 text-sm mt-1">
@@ -1738,7 +1793,8 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     )}
                   </div>
 
-                  <div className="flex-1">
+
+                  {/* <div className="flex-1">
                     <input
                       type="text"
                       placeholder="LinkedIn (Optional)"
@@ -1764,7 +1820,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       }}
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
-                  </div>
+                  </div> */}
 
                   <div className="flex-1">
                     <input
@@ -1955,11 +2011,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                           companySocialMediaLink: updatedLinks,
                         });
                       }}
-                      className={`w-full p-3 border ${
-                        clientErrors?.errors?.companyWebsite
+                      className={`w-full p-3 border ${clientErrors?.errors?.companyWebsite
                           ? "border-red-500"
                           : ""
-                      } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
+                        } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
                     />
                     {clientErrors?.errors?.companyWebsite && (
                       <p className="text-red-500 text-sm mt-1">
@@ -1967,8 +2022,9 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       </p>
                     )}
                   </div>
+{/* linkedIn */}
 
-                  <div className="flex-1">
+                  {/* <div className="flex-1">
                     <input
                       type="text"
                       placeholder="LinkedIn (Optional)"
@@ -1995,7 +2051,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       }}
                       className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
                     />
-                  </div>
+                  </div> */}
 
                   <div className="flex-1">
                     <input
@@ -2172,11 +2228,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                 </div>
                 <div className="flex justify-center gap-4">
                   <button
-                    className={`py-2 px-4 rounded-full border-2 ${
-                      formData.gridType === "Product"
+                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Product"
                         ? "bg-[#707FDD] text-white border-[#707FDD]"
                         : "bg-transparent text-[#707FDD] border-[#707FDD]"
-                    }`}
+                      }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Product" })
                     }
@@ -2186,11 +2241,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
                   {/* Service Button */}
                   <button
-                    className={`py-2 px-4 rounded-full border-2 ${
-                      formData.gridType === "Service"
+                    className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Service"
                         ? "bg-[#707FDD] text-white border-[#707FDD]"
                         : "bg-transparent text-[#707FDD] border-[#707FDD]"
-                    }`}
+                      }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Service" })
                     }
@@ -2242,13 +2296,12 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                                 )
                               )
                             }
-                            className={`p-3 border w-full rounded-md ${
-                              clientErrors?.errors?.products?.length > 0 &&
-                              clientErrors?.errors?.products[index]?.name &&
-                              clientErrors?.errors?.products[index]?.name
+                            className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 &&
+                                clientErrors?.errors?.products[index]?.name &&
+                                clientErrors?.errors?.products[index]?.name
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            }`}
+                              }`}
                           />
                           {clientErrors?.errors?.products?.length > 0 &&
                             clientErrors?.errors?.products[index]?.name && (
@@ -2269,12 +2322,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                                 )
                               )
                             }
-                            className={`p-3 border w-full rounded-md ${
-                              clientErrors?.errors?.products?.length > 0 &&
-                              clientErrors?.errors?.products[index]?.description
+                            className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 &&
+                                clientErrors?.errors?.products[index]?.description
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            }`}
+                              }`}
                           />
                           {clientErrors?.errors?.products?.length > 0 &&
                             clientErrors?.errors?.products[index]
@@ -2299,12 +2351,11 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                                 )
                               )
                             }
-                            className={`p-3 border w-full rounded-md ${
-                              clientErrors?.errors?.products?.length > 0 &&
-                              clientErrors?.errors?.products[index]?.serviceUrl
+                            className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 &&
+                                clientErrors?.errors?.products[index]?.serviceUrl
                                 ? "border-red-500"
                                 : "border-gray-300"
-                            }`}
+                              }`}
                           />
                           {clientErrors?.errors?.products?.length > 0 &&
                             clientErrors?.errors?.products[index]
@@ -2341,7 +2392,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                           >
                             {productData[index]?.imageUrl ? (
                               <img
-                                src={productData[index].imageUrl}
+                                src={URL.createObjectURL(productData[index]?.imageUrl)}
                                 alt="Uploaded"
                                 style={{
                                   width: "100%",
@@ -2682,12 +2733,16 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                   <div
                     key={index}
                     className="w-40 h-56 rounded-lg flex-shrink-0"
+
                     style={{
-                      backgroundImage: `url(${image})`,
+                      backgroundImage: `url(${cardId ? image && image : images[index] && URL.createObjectURL(images[index])})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
-                  ></div>
+                  >
+                                  
+
+                  </div>
                 ))}
 
                 {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
@@ -2920,10 +2975,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     onClick={handleCreate}
                     className="py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:scale-90 active:transform active:scale-110"
 
-                    // disabled={!isCardCreate}
-                    // className={`py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]
-                    //   ${isCardCreate ? "active:transform active:scale-110" : "opacity-50 cursor-not-allowed"}
-                    //   hover:${isCardCreate ? "bg-opacity-80" : "opacity-50"}`}
+                  // disabled={!isCardCreate}
+                  // className={`py-2 px-4 rounded-full text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98]
+                  //   ${isCardCreate ? "active:transform active:scale-110" : "opacity-50 cursor-not-allowed"}
+                  //   hover:${isCardCreate ? "bg-opacity-80" : "opacity-50"}`}
                   >
                     Create Card
                   </button>

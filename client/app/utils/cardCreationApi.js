@@ -27,25 +27,22 @@ export const loginUser = async () => {
   }
 };
 
-
-
-
-
-export const createCard = async (formData) => {
+export const createCard = async (formData,images,updatedProductData) => {
 
   try {
     const tokenString = sessionStorage.getItem("userToken");
     const tokenObject = JSON.parse(tokenString);
     const jwtToken = tokenObject.value;
-    console.log('services:', formData.services)
+    console.log('services:', images)
+    console.log("gallery :",updatedProductData)
 
     const requestData = {
       headerImageUrl:await uploadSingleImage(formData.headerImageUrl),
-      title: `${formData.firstName} ${formData.middleName && formData.middleName} ${formData.lastName && formData.lastName}`,
+      title: `${formData.firstName && formData.firstName} ${formData.middleName && formData.middleName} ${formData.lastName && formData.lastName}`,
       companyName: formData.companyName,
       companyAddress: formData.companyAddress,
       jobTitle: formData.jobTitle,
-      bio: formData.bio,
+      // bio: formData.bio,
       languageSpoken: formData.languageSpoken,
       dateOfBirth: formData.dateOfBirth,
       phoneNumber: formData.phoneNumber,
@@ -71,9 +68,9 @@ export const createCard = async (formData) => {
       aboutUs: formData.aboutUs,
       instagramReel : formData?.instagramReel && formData?.instagramReel,
       youtubeVideoLink : formData?.youtubeVideoLink && formData.youtubeVideoLink,
-      services: formData.services,
+      services: updatedProductData,
       socialMediaLink: formData.SocialMediaLink,
-      gallery:await uploadImages(formData?.gallery),
+      gallery:await uploadImages(images.length > 0 ? images : []),
       gridType:formData?.gridType
     };
 
