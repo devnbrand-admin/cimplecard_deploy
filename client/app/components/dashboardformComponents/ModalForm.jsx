@@ -2446,6 +2446,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
               setTestimonials={setTestimonials}
               setClientErrors={setClientErrors}
               clientErrors={clientErrors}
+              handleAddTestimonial={handleAddTestimonial}
               handleSave={handleSave}
             />
           )}

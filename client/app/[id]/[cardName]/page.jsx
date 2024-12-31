@@ -16,7 +16,7 @@ const Page = () => {
     try {
       console.log("id", id);
       console.log(" name", cardName);
-      const response = await axios.get(
+      const { data: { card } } = await axios.get(
         `https://cimple-card.onrender.com/api/card/getby`,
         {
           params: {
@@ -30,8 +30,8 @@ const Page = () => {
         }
       );
 
-      console.log("respos: ", response.data);
-      return response.data;
+      // console.log("respos: ", response.data);
+      return card;
       // Return user details
     } catch (error) {
       throw new Error(
@@ -55,8 +55,8 @@ const Page = () => {
   }, []);
   console.log(card);
   const TEMPLATE_MAP = {
-    medical: MedicalCard,
-    lawyer: LawyerCard,
+    lawyer: MedicalCard,
+    medical: LawyerCard,
     astrologer: AstrologerCard,
     b2b: B2bCard,
   };
@@ -64,9 +64,9 @@ const Page = () => {
   return (
     <>
       {card ? (
-        TEMPLATE_MAP[card?.card.templateType.toLowerCase()] ? (
+        TEMPLATE_MAP[card?.templateType.toLowerCase()] ? (
           React.createElement(
-            TEMPLATE_MAP[card?.card.templateType.toLowerCase()],
+            TEMPLATE_MAP[card?.templateType.toLowerCase()],
             { card, setCard }
           )
         ) : (
