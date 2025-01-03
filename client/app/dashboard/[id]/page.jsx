@@ -3,8 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Navbar from "../../components/dashboardComponents/Navbar";
 import Card from "../../components/dashboardComponents/Card";
-import axios from "axios";
-import MobileComponent from "../../components/dashboardComponents/MobileComponent";
+import axios from "@/app/components/api_resources/axios"; 
 import dynamic from "next/dynamic";
 import { useMediaQuery } from "react-responsive";
 import profileIcon from "../../assets/profile_icon.png";
@@ -36,11 +35,11 @@ const DashboardPage = () => {
   // API call using fetch - will update it later using axios
   const [userDetails, setUserDetails] = useState();
 
-  const BASE_URL = "https://cimple-card.onrender.com/api/user";
+  const BASE_URL = "/api/user/getdetails";
 
   const getUserDetails = async (token) => {
     try {
-      const response = await axios.get(`${BASE_URL}/getdetails`, {
+      const response = await axios.get(`${BASE_URL}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${token}`,

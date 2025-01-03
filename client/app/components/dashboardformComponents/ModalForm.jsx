@@ -42,244 +42,257 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   const [profileImage, setProfileImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
   const [isCardCreate, setIsCardCreate] = useState(false);
-  // const [testimonials, setTestimonials] = useState([
-  //   {
-  //     name: "",
-  //     designation: "",
-  //     description: "",
-  //     imageUrl: "",
-  //   },
-  // ]);
-  // const [instagramPost, setInstagramPost] = useState([""]);
-  // const [instagramReels, setInstagramReels] = useState([""]);
-  // const [youtubeVideo, setYoutubeVideo] = useState([""]);
-  // const [images, setImages] = useState([]);
-  // const [productData, setProductData] = useState([
-  //   {
-  //     name: "",
-  //     imageUrl: "",
-  //     serviceUrl: "",
-  //     description: "",
-  //   },
-  // ]);
+  const [isLoading, setIsLoading] = useState(false)
+  const [testimonials, setTestimonials] = useState([
+    {
+      name: "",
+      designation: "",
+      description: "",
+      imageUrl: "",
+    },
+  ]);
+  const [instagramPost, setInstagramPost] = useState([""]);
+  const [instagramReels, setInstagramReels] = useState([""]);
+  const [youtubeVideo, setYoutubeVideo] = useState([""]);
+  const [images, setImages] = useState([]);
+  const [productData, setProductData] = useState([
+    {
+      name: "",
+      imageUrl: "",
+      serviceUrl: "",
+      description: "",
+    },
+  ]);
 
-  // const [formData, setFormData] = useState({
-  //   // Personal information
-  //   firstName: "",
-  //   middleName: "",
-  //   lastName: "",
-  //   jobTitle: "",
-  //   companyName: "",
-  //   location: "",
-  //   profileImageUrl: "",
-  //   headerImageUrl: "",
-  //   templateType: "",
-  //   cardName: "",
-  //   qrCodeUrl: "",
-  //   aboutUs: "",
-  //   comanyAddress: "",
-  //   dateOfBirth: "",
-  //   bio: "",
-  //   gridType: "Product",
-  //   languageSpoken: "",
-  //   additionalLink: "",
-  //   emails: ["", ""],
-  //   phoneNumbers: ["", "", ""],
-  //   otherEmails: "",
-  //   otherPhoneNumber: "",
-  //   phoneNumber: "",
+  const [formData, setFormData] = useState({
+    // Personal information
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    jobTitle: "",
+    companyName: "",
+    location: "",
+    profileImageUrl: "",
+    headerImageUrl: "",
+    templateType: "",
+    cardName: "",
+    qrCodeUrl: "",
+    aboutUs: "",
+    companyAddress: "",
+    dateOfBirth: "",
+    bio: "",
+    gridType: "",
+    languageSpoken: "",
+    additionalLink: "",
+    emails: ["", ""],
+    phoneNumbers: ["", "", ""],
+    otherEmails: "",
+    otherPhoneNumber: "",
+    // phoneNumber: "",
 
-  //   // Emergency contact information
-  //   emergencyName: "",
-  //   emergencyRelationship: "",
-  //   emergencyNumber: "",
-  //   emergencyEmail: "",
+    // Emergency contact information
+    emergencyName: "",
+    emergencyRelationship: "",
+    emergencyNumber: "",
+    emergencyEmail: "",
 
-  //   // Social media links
-  //   SocialMediaLink: [], // Array of SocialMediaLink model objects
-  //   companySocialMediaLink: [], // Array of companySocialMediaLink model objects
+    // Social media links
+    SocialMediaLink: [
 
-  //   // Gallery and media
-  //   gallery: [],
-  //   instagramPost: [],
-  //   instagramReel: [],
-  //   youtubeVideoLink: [],
+      // {
+      //   id: 1 ,
+      // platform: "Twitter",
+      //   url: "https://twitter.com/lawyer-services",
+      //   cardId: "lawyer-card1-uuid",
+      //   iconUrl: "https://example.com/twitter-icon.jpg"
+      // }
+    ], // Array of SocialMediaLink model objects
+    companySocialMediaLink: [], // Array of companySocialMediaLink model objects
 
-  //   // Testimonials
-  //   testimonials: [],
-  //   // Services
-  //   services: [],
+    // Gallery and media
+    gallery: [],
+    instagramPost: [],
+    instagramReel: [],
+    youtubeVideoLink: [],
 
-  //   // Business hours
-  //   businessHours: [
-  //     {
-  //       type: "",
-  //       from: "",
-  //       to: "",
-  //     },
-  //   ],
-  // });
+    // Testimonials
+    testimonials: [],
+    // Services
+    services: [],
+
+    // Business hours
+    businessHours: [
+      {
+        type: "",
+        from: "",
+        to: "",
+      },
+    ],
+  });
+  
   const [clientErrors, setClientErrors] = useState({
     errors: {
       products: [],
     },
   });
 
-  const [testimonials, setTestimonials] = useState([
-    {
-      name: "test",
-      designation: "Principal",
-      description: "desc",
-      imageUrl: "",
-    },
-    // {
-    //   name: "",
-    //   designation: "",
-    //   description: "",
-    //   imageUrl: "",
-    // },
-  ]);
+  // const [testimonials, setTestimonials] = useState([
+  //   // {
+  //   //   name: "test",
+  //   //   designation: "Principal",
+  //   //   description: "desc",
+  //   //   imageUrl: "",
+  //   // },
+  //   // {
+  //   //   name: "",
+  //   //   designation: "",
+  //   //   description: "",
+  //   //   imageUrl: "",
+  //   // },
+  // ]);
 
-  const [instagramPost, setInstagramPost] = useState([
-    "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
-  ]);
+  // const [instagramPost, setInstagramPost] = useState([
+  //   // ""
+  //   "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
+  // ]);
 
-  const [instagramReels, setInstagramReels] = useState([
-    "https://www.instagram.com/reel/DD7hegTgQ_G/",
+  // const [instagramReels, setInstagramReels] = useState([
+  //   // ""
+  //   "https://www.instagram.com/reel/DD7hegTgQ_G/",
 
-  ]);
+  // ]);
 
-  const [youtubeVideo, setYoutubeVideo] = useState([
-    "https://www.youtube.com/watch?v=u4smAxDtbGc&feature=youtu.be",
-  ]);
+  // const [youtubeVideo, setYoutubeVideo] = useState([
+  //   // ""
+  //   "https://www.youtube.com/watch?v=u4smAxDtbGc&feature=youtu.be",
+  // ]);
 
 
 
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
 
-  const [productData, setProductData] = useState([
-    {
-      name: "Product",
-      imageUrl: null,
-      serviceUrl: "https://personal-portfolio-eosin-xi.vercel.app/",
-      description: "desc",
-      cardId: ""
-    },
-    // {
-    //   name: "",
-    //   imageUrl: null,
-    //   serviceUrl: "",
-    //   description: "",
-    //   cardId: "",
-    // },
-  ]);
+  // const [productData, setProductData] = useState([
+  //   {
+  //     name: "Product",
+  //     imageUrl: null,
+  //     serviceUrl: "https://personal-portfolio-eosin-xi.vercel.app/",
+  //     description: "desc",
+  //   },
+  //   // {
+  //   //   name: "",
+  //   //   imageUrl: null,
+  //   //   serviceUrl: "",
+  //   //   description: "",
+  //   // },
+  // ]);
 
-  const [formData, setFormData] = useState({
-    // Personal information
-    firstName: "John",
-    middleName: "",
-    lastName: "Doe",
-    jobTitle: "Software Developer",
-    companyName: "Tech Innovators",
-    location: "San Francisco, CA",
-    profileImageUrl: null,
-    headerImageUrl: null,
-    templateType: "Modern",
-    cardName: "johns-business-card2" + new Date(),
-    qrCodeUrl: "https://example.com/qrcode.jpg",
-    aboutUs: "A software developer with a passion for coding.",
-    companyAddress: "123 Tech Avenue, San Francisco, CA",
-    dateOfBirth: "1990-05-15",
-    bio: "Specializing in web and mobile app development.",
-    gridType: "products",
-    languageSpoken: "English, Spanish",
-    additionalLink: "https://example.com/portfolio",
-    emails: ["john.doe@example.com", "other.email@example.com"],
-    phoneNumbers: ["1234567890", "0987654321"],
-    otherEmails: "other.email@example.com",
-    otherPhoneNumber: "0987654321",
-    phoneNumber: "1234567890",
+  // const [formData, setFormData] = useState({
+  //   // Personal information
+  //   firstName: "John",
+  //   middleName: "",
+  //   lastName: "Doe",
+  //   jobTitle: "Software Developer",
+  //   companyName: "Tech Innovators",
+  //   location: "San Francisco, CA",
+  //   profileImageUrl: null,
+  //   headerImageUrl: null,
+  //   templateType: "Modern",
+  //   cardName: "johns-business-card2" + new Date(),
+  //   qrCodeUrl: "https://example.com/qrcode.jpg",
+  //   aboutUs: "A software developer with a passion for coding.",
+  //   companyAddress: "123 Tech Avenue, San Francisco, CA",
+  //   dateOfBirth: "1990-05-15",
+  //   // bio: "Specializing in web and mobile app development.",
+  //   gridType: "Product",
+  //   languageSpoken: "English",
+  //   additionalLink: "https://example.com/portfolio",
+  //   emails: ["john.doe@example.com", "other.email@example.com"],
+  //   phoneNumbers: ["1234567890", "0987654321"],
+  //   otherEmails: "other.email@example.com",
+  //   otherPhoneNumber: "0987654321",
+  //   phoneNumber: "1234567890",
 
-    // Emergency contact information
-    emergencyName: "John's Friend",
-    emergencyRelationship: "Friend",
-    emergencyNumber: "0987654321",
-    emergencyEmail: "emergency@example.com",
+  //   // Emergency contact information
+  //   emergencyName: "John's Friend",
+  //   emergencyRelationship: "Friend",
+  //   emergencyNumber: "0987654321",
+  //   emergencyEmail: "emergency@example.com",
 
-    // Social media links
-    SocialMediaLink: [
-      {
-        // id: 1,
-        platform: "LinkedIn",
-        url: "https://linkedin.com/in/johndoe",
-        // iconUrl: "https://example.com/linkedin-icon.jpg",
-        cardId: "card1-uuid",
-      },
-      {
-        // id: 2,
-        cardId: "card2-uuid",
+  //   // Social media links
+  //   SocialMediaLink: [
+  //     {
+  //       // id: 1,
+  //       platform: "LinkedIn",
+  //       url: "https://linkedin.com/in/johndoe",
+  //       // iconUrl: "https://example.com/linkedin-icon.jpg",
+  //       cardId: "card1-uuid",
+  //     },
+  //     {
+  //       // id: 2,
+  //       cardId: "card2-uuid",
 
-        platform: "Twitter",
-        url: "https://twitter.com/johndoe",
-        // iconUrl: "https://example.com/twitter-icon.jpg",
-      },
-    ],
-    companySocialMediaLink: [
-      {
-        // id: 1,
-        platform: "LinkedIn",
-        url: "https://linkedin.com/in/johndoe",
-        // iconUrl: "https://example.com/linkedin-icon.jpg",
-        cardId: "card1-uuid",
+  //       platform: "Twitter",
+  //       url: "https://twitter.com/johndoe",
+  //       // iconUrl: "https://example.com/twitter-icon.jpg",
+  //     },
+  //   ],
+  //   companySocialMediaLink: [
+  //     {
+  //       // id: 1,
+  //       platform: "LinkedIn",
+  //       url: "https://linkedin.com/in/johndoe",
+  //       // iconUrl: "https://example.com/linkedin-icon.jpg",
+  //       cardId: "card1-uuid",
 
-      },
-      {
-        // id: 2,
-        platform: "Twitter",
-        url: "https://twitter.com/johndoe",
-        iconUrl: "https://example.com/twitter-icon.jpg",
-        cardId: "card1-uuid",
+  //     },
+  //     {
+  //       // id: 2,
+  //       platform: "Twitter",
+  //       url: "https://twitter.com/johndoe",
+  //       iconUrl: "https://example.com/twitter-icon.jpg",
+  //       cardId: "card1-uuid",
 
-      },
-    ],
+  //     },
+  //   ],
 
-    // Gallery and media
-    gallery: [],
-    // instagramPost:[""],
-    // instagramReel:[""],
-    // youtubeVideoLink:[""],
-    instagramPost: ["https://instagram.com/johndoe/post1"],
-    instagramReel: ["https://instagram.com/johndoe/reel1"],
-    youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
+  //   // Gallery and media
+  //   gallery: [],
+  //   // instagramPost:[""],
+  //   // instagramReel:[""],
+  //   // youtubeVideoLink:[""],
+  //   instagramPost: ["https://instagram.com/johndoe/post1"],
+  //   instagramReel: ["https://instagram.com/johndoe/reel1"],
+  //   youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
 
-    // Testimonials
-    testimonials: [
-      {
-        id: 1,
-        name: "Alice Johnson",
-        designation: "CEO",
-        description: "John is a great developer, helped us with our project!",
-        imageUrl: "https://example.com/testimonial1.jpg",
-        cardId: "card1-uuid"
+  //   // Testimonials
+  //   testimonials: [
+  //     {
+  //       id: 1,
+  //       name: " ",
+  //       designation: "",
+  //       description: "",
+  //       imageUrl: "",
+  //       cardId: "card1-uuid"
 
-      },
-    ],
+  //       //     },
+  //     },
 
-    // Business hours
-    businessHours: [
-      {
-        id: 1,
-        type: "asdfsda",
-        from: "",
-        to: "",
-        cardId: "card1-uuid"
+  //   ],
 
-      },
-    ],
-  });
 
-  const [profileImagetoShow, setProfileImagetoShow] = useState(null)
-  const [headerImagetoShow, setHeaderImagetoShow] = useState(null)
+
+  //   // Business hours
+  //   businessHours: [
+  //     {
+  //       id: 1,
+  //       type: "asdfsda",
+  //       from: "",
+  //       to: "",
+  //       cardId: "card1-uuid"
+
+  //     },
+  //   ],
+  // });
 
 
   // const [formData, setFormData] = useState({
@@ -289,23 +302,21 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   //   lastName: "",
   //   jobTitle: "",
   //   companyName: "",
-    
   //   location: "",
-  //   profileImageUrl: "",
-  //   headerImageUrl: "",
+  //   profileImageUrl: null,
+  //   headerImageUrl: null,
   //   templateType: "",
-  //   cardName: "",
+  //   cardName: "" + new Date(),
   //   qrCodeUrl: "",
   //   aboutUs: "",
   //   companyAddress: "",
-    
   //   dateOfBirth: "",
-  //   bio: "",
-  //   gridType: "Product",
+  //   // bio: "Specializing in web and mobile app development.",
+  //   gridType: "",
   //   languageSpoken: "",
   //   additionalLink: "",
-  //   emails: ["",""],
-  //   phoneNumbers: [""],
+  //   emails: ["", ""],
+  //   phoneNumbers: ["", ""],
   //   otherEmails: "",
   //   otherPhoneNumber: "",
   //   phoneNumber: "",
@@ -317,17 +328,63 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   //   emergencyEmail: "",
 
   //   // Social media links
-  //   SocialMediaLink: [],
-  //   companySocialMediaLink: [],
+  //   SocialMediaLink: [
+  //     // {
+  //     //   // id: 1,
+  //     //   platform: "LinkedIn",
+  //     //   url: "https://linkedin.com/in/johndoe",
+  //     //   // iconUrl: "https://example.com/linkedin-icon.jpg",
+  //     //   cardId: "card1-uuid",
+  //     // },
+  //     {
+  //       // id: 2,
+  //       cardId: "card2-uuid",
+
+  //       platform: "",
+  //       url: "",
+  //       // iconUrl: "https://example.com/twitter-icon.jpg",
+  //     },
+  //   ],
+  //   companySocialMediaLink: [
+  //     // {
+  //     //   // id: 1,
+  //     //   platform: "LinkedIn",
+  //     //   url: "https://linkedin.com/in/johndoe",
+  //     //   // iconUrl: "https://example.com/linkedin-icon.jpg",
+  //     //   cardId: "card1-uuid",
+
+  //     // },
+  //     {
+  //       // id: 2,
+  //       platform: "",
+  //       url: "",
+  //       iconUrl: "",
+  //       cardId: "",
+
+  //     },
+  //   ],
 
   //   // Gallery and media
   //   gallery: [],
-  //   instagramPost: [],
-  //   instagramReel: [],
-  //   youtubeVideoLink: [],
+  //   instagramPost: [""],
+  //   instagramReel: [""],
+  //   youtubeVideoLink: [""],
+  //   // instagramPost: ["https://instagram.com/johndoe/post1"],
+  //   // instagramReel: ["https://instagram.com/johndoe/reel1"],
+  //   // youtubeVideoLink: ["https://youtube.com/watch?v=12345"],
 
   //   // Testimonials
-  //   testimonials: [],
+  //   testimonials: [
+  //     {
+  //       id: 1,
+  //       name: " ",
+  //       designation: "",
+  //       description: "",
+  //       imageUrl: "",
+  //       cardId: "card1-uuid"
+
+  //     },
+  //   ],
 
   //   // Business hours
   //   businessHours: [
@@ -336,10 +393,16 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   //       type: "",
   //       from: "",
   //       to: "",
-  //       cardId: "",
+  //       cardId: "card1-uuid"
+
   //     },
   //   ],
   // });
+
+  const [profileImagetoShow, setProfileImagetoShow] = useState(null)
+  const [headerImagetoShow, setHeaderImagetoShow] = useState(null)
+
+
 
 
   useEffect(() => {
@@ -348,12 +411,12 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       instagramPost: instagramPost,
       instagramReel: instagramReels,
       youtubeVideoLink: youtubeVideo,
-      
-      testimonials:testimonials,
+
+      testimonials: testimonials,
 
     }));
     console.log("link updating")
-  }, [instagramPost, instagramReels,youtubeVideo,testimonials]);
+  }, [instagramPost, instagramReels, youtubeVideo, testimonials]);
 
   // useEffect(()=>{
   //   setImages((prevData)=>({...prevData,images}))
@@ -409,7 +472,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
   const handleProfileUpload = (event) => {
     const file = event.target.files[0];
-    const previewUrl =  URL.createObjectURL(file);
+    const previewUrl = URL.createObjectURL(file);
 
     if (file && previewUrl) {
       setProfileImage(file);
@@ -514,12 +577,10 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     }));
   };
 
-
-
   const handleSave = () => {
     // dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
-    console.log(formData, "formdata");
-    console.log(activeStep, "activeStep");
+    // console.log(formData, "formdata");
+    // console.log(activeStep, "activeStep");
 
     // Move to the next step if conditions are met
     if (activeStep < steps.length) {
@@ -725,25 +786,51 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
         });
       }
     }
-let updatedProductData
-    if(productData.length > 0){
 
-      const filesToUpload = productData
-        .map((product) => product.imageUrl)
-        .filter((file) => file instanceof File);
-  
-      // Upload images and get URLs
-      const uploadedUrls = await uploadImages(filesToUpload);
-      // Map uploaded URLs back to productData
-       updatedProductData =uploadedUrls.length > 0 && productData.map((product, index) => ({
-        ...product,
-        imageUrl: uploadedUrls[index] && uploadedUrls[index] || product?.imageUrl && product.imageUrl,
-      }));
+    const isFilled = Object.values(productData[0]).every(
+      (value) => value !== null && value !== ""
+    );
+
+    console.log("isFilled:", isFilled);
+
+    let updatedProductData = [];
+
+    if (isFilled) {
+      try {
+        // Extract files from `imageUrl` that are instances of `File`
+        const filesToUpload = productData
+          .map((product) => product.imageUrl)
+          .filter((file) => file instanceof File);
+
+        if (filesToUpload.length > 0) {
+          // Upload images and get URLs
+          const uploadedUrls = await uploadImages(filesToUpload);
+
+          // Map uploaded URLs back to `productData`
+          updatedProductData = productData.map((product, index) => ({
+            ...product,
+            imageUrl:
+              uploadedUrls[index] || // Assign uploaded URL if available
+              product?.imageUrl, // Fallback to the original imageUrl
+          }));
+        } else {
+          // If no files to upload, keep the original productData as-is
+          updatedProductData = [...productData];
+        }
+
+        console.log("Updated Product Data:", updatedProductData);
+      } catch (error) {
+        console.error("Error uploading images or updating product data:", error);
+      }
+    } else {
+      console.log("Product data is incomplete.");
     }
+
+
     console.log(updatedProductData, "updatedProductData");
 
     e.preventDefault();
-    await setFormData((prev) => ({ 
+    setFormData((prev) => ({
       ...prev,
       testimonials: testimonials,
       instagramPost: instagramPost,
@@ -752,114 +839,119 @@ let updatedProductData
     }));
     console.log("Form Data:ModalForm", formData);
     try {
-      const response = await createCard(formData,images,updatedProductData);
+      setIsLoading(true)
+      // same fun i called for both create and update becoz in the blw fun data formdata is changeable
+      const response = await createCard(formData, images, updatedProductData,cardId);
       console.log("Card saved successfully:", response);
-      // setIsModalOpen(false);
+      setIsModalOpen(false);
       // dispatch(setCardData(formData)); // Update Redux store
+      setIsLoading(false)
     } catch (error) {
+      setIsLoading(false)
+
       console.log("Failed to save card:", error);
     }
   };
 
   //setting the state empty on initial rendering
 
-  useEffect(()=>{
+  useEffect(() => {
 
-//     setFormData({
-//         // Personal information
-//         firstName: "",
-//         middleName: "",
-//         lastName: "",
-//         jobTitle: "",
-//         companyName: "",
-//         location: "",
-//         profileImageUrl: "",
-//         headerImageUrl: "",
-//         templateType: "",
-//         cardName: "",
-//         qrCodeUrl: "",
-//         aboutUs: "",
-//         companyAddress: "",
-//         dateOfBirth: "",
-//         bio: "",
-//         gridType: "",
-//         languageSpoken: "",
-//         additionalLink: "",
-//         emails: [],
-//         phoneNumbers: [],
-//         otherEmails: "",
-//         otherPhoneNumber: "",
-//         phoneNumber: "",
+    //     setFormData({
+    //         // Personal information
+    //         firstName: "",
+    //         middleName: "",
+    //         lastName: "",
+    //         jobTitle: "",
+    //         companyName: "",
+    //         location: "",
+    //         profileImageUrl: "",
+    //         headerImageUrl: "",
+    //         templateType: "",
+    //         cardName: "",
+    //         qrCodeUrl: "",
+    //         aboutUs: "",
+    //         companyAddress: "",
+    //         dateOfBirth: "",
+    //         bio: "",
+    //         gridType: "",
+    //         languageSpoken: "",
+    //         additionalLink: "",
+    //         emails: [],
+    //         phoneNumbers: [],
+    //         otherEmails: "",
+    //         otherPhoneNumber: "",
+    //         phoneNumber: "",
 
-//         // Emergency contact information
-//         emergencyName: "",
-//         emergencyRelationship: "",
-//         emergencyNumber: "",
-//         emergencyEmail: "",
+    //         // Emergency contact information
+    //         emergencyName: "",
+    //         emergencyRelationship: "",
+    //         emergencyNumber: "",
+    //         emergencyEmail: "",
 
-//         // Social media links
-//         SocialMediaLink: [],
-//         companySocialMediaLink: [],
+    //         // Social media links
+    //         SocialMediaLink: [],
+    //         companySocialMediaLink: [],
 
-//         // Gallery and media
-//         gallery: [],
-//         instagramPost: [],
-//         instagramReel: [],
-//         youtubeVideoLink: [],
+    //         // Gallery and media
+    //         gallery: [],
+    //         instagramPost: [],
+    //         instagramReel: [],
+    //         youtubeVideoLink: [],
 
-//         // Business hours
-//         businessHours: [
-//           {
-//             id: 1,
-//             type: "",
-//             from: "",
-//             to: "",
-//             cardId: "",
-//           },
-//         ],
-//       });
+    //         // Business hours
+    //         businessHours: [
+    //           {
+    //             id: 1,
+    //             type: "",
+    //             from: "",
+    //             to: "",
+    //             cardId: "",
+    //           },
+    //         ],
+    //       });
 
-//       setTestimonials([
-//         {
-//           name: "",
-//           designation: "",
-//           description: "",
-//           imageUrl: "",
-//         },
-//       ]);
-    
-//      setInstagramPost([
-//         "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
-//       ]);
-    
-//       setInstagramReels([
-// ""      ]);
-    
-//        setYoutubeVideo([
-// ""      ]);
-    
-//      setImages([]);
-    
-//       setProductData([
+    //       setTestimonials([
+    //         {
+    //           name: "",
+    //           designation: "",
+    //           description: "",
+    //           imageUrl: "",
+    //         },
+    //       ]);
 
-//         {
-//           name: "",
-//           imageUrl: null,
-//           serviceUrl: "",
-//           description: "",
-//           cardId: "",
-//         },
-//       ]);
+    //      setInstagramPost([
+    //         "https://www.instagram.com/p/DDjXrD7OX3o/?img_index=10",
+    //       ]);
 
-    
+    //       setInstagramReels([
+    // ""      ]);
 
-    if(cardId) getSingleCardData(cardId)
-  },[cardId])
+    //        setYoutubeVideo([
+    // ""      ]);
+
+    //      setImages([]);
+
+    //       setProductData([
+
+    //         {
+    //           name: "",
+    //           imageUrl: null,
+    //           serviceUrl: "",
+    //           description: "",
+    //           cardId: "",
+    //         },
+    //       ]);
+
+
+
+    if (cardId) getSingleCardData(cardId)
+  }, [cardId])
 
   // Function to map backend data to the required format
   const transformCardData = async (data) => {
     // Transform data into the required format
-    console.log(data.profileImageUrl,"Data")
+    console.log(data.profileImageUrl, "Data")
     return {
       // Personal information
       firstName: data?.title?.split(" ")[0] || "",
@@ -867,15 +959,15 @@ let updatedProductData
       lastName: data?.title?.split(" ")[2] || "",
       jobTitle: data?.jobTitle || "",
       companyName: data?.companyName || "",
-      location: data?.comanyAddress || "",
+      companyAddress: data?.companyAddress || "",
       profileImageUrl: data?.profileImageUrl || "",
       headerImageUrl: data?.headerImageUrl || "",
       templateType: data?.templateType || "",
       cardName: data?.cardName || `business-card-${new Date().getTime()}`,
       qrCodeUrl: data?.qrCodeUrl || "",
       aboutUs: data?.aboutUs || "",
-      companyAddress: data?.companyAddress || "",
-      dateOfBirth: data?.dateOfBirth || "",
+      location: data?.companyAddress || "",
+      dateOfBirth: data?.dateOfBirth && JSON.parse(data?.dateOfBirth) || "",
       bio: data?.bio || "",
       gridType: data?.gridType || "",
       languageSpoken: data?.languageSpoken || "",
@@ -889,14 +981,8 @@ let updatedProductData
       emergencyRelationship: data?.emergencyRelationship || "",
       emergencyNumber: data?.emergencyNumber || "",
       emergencyEmail: data?.emergencyEmail || "",
-      SocialMediaLink: [
-        ...(data?.linkedinLink
-          ? [{ id: 1, platform: "LinkedIn", url: data.linkedinLink, cardId: data?.id }]
-          : []),
-        ...(data?.twitterLink
-          ? [{ id: 2, platform: "Twitter", url: data?.twitterLink, cardId: data?.id }]
-          : []),
-      ],
+      SocialMediaLink: data?.SocialMediaLink || []
+      ,
       companySocialMediaLink: data?.companySocialMediaLink || [],
       gallery: data?.gallery || [],
       businessHours: data?.businessHours || [
@@ -929,25 +1015,23 @@ let updatedProductData
       ],
     };
   };
-  
+
   const getSingleCardData = async (cardId) => {
     try {
       if (!cardId) {
         console.error("Card ID is required.");
         return;
       }
-  
-      console.log(cardId, "cardId");
-  
+
+
       // Fetch card data
       const response = await axios.get(`/api/card/get/${cardId}`);
-      console.log(response.data,"response data")
+      console.log(cardId,response.data, "response data")
 
-  
-    // Transform backend data
+
+      // Transform backend data
       const transformedData = await transformCardData(response?.data?.card);
-      console.log(transformedData?.profileImageUrl,"proImg")
-  
+
       // Update states sequentially
       await Promise.all([
         setFormData((prev) => ({ ...prev, ...transformedData })),
@@ -960,18 +1044,18 @@ let updatedProductData
         setImages(transformedData.gallery),
         setProductData(transformedData.productData),
       ]);
-  
+
       console.log("Updated formData:", transformedData);
     } catch (error) {
       console.error("Error fetching single card data:", error);
     }
   };
-  
+
   // Log updates to formData in useEffect
   useEffect(() => {
     console.log(formData, "formData updated");
   }, [formData]);
-  
+
   return (
     <div
       className="fixed  inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
@@ -1046,8 +1130,8 @@ let updatedProductData
                       <button
                         onClick={() => handleTemplateSelection("Medical")}
                         className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Medical"
-                            ? "bg-[#707FDD] text-white"
-                            : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
+                          ? "bg-[#707FDD] text-white"
+                          : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
                           }`}
                       >
                         {formData.templateType === "Medical"
@@ -1083,8 +1167,8 @@ let updatedProductData
                       <button
                         onClick={() => handleTemplateSelection("Astrologer")}
                         className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Astrologer"
-                            ? "bg-[#707FDD] text-white"
-                            : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
+                          ? "bg-[#707FDD] text-white"
+                          : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
                           }`}
                       >
                         {formData.templateType === "Astrologer"
@@ -1120,8 +1204,8 @@ let updatedProductData
                       <button
                         onClick={() => handleTemplateSelection("B2B Business")}
                         className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "B2B Business"
-                            ? "bg-[#707FDD] text-white"
-                            : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
+                          ? "bg-[#707FDD] text-white"
+                          : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
                           }`}
                       >
                         {formData.templateType === "B2B Business"
@@ -1157,8 +1241,8 @@ let updatedProductData
                       <button
                         onClick={() => handleTemplateSelection("Lawyer")}
                         className={`py-2 px-4 rounded-full text-[#707FDD] ${formData.templateType === "Lawyer"
-                            ? "bg-[#707FDD] text-white"
-                            : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
+                          ? "bg-[#707FDD] text-white"
+                          : "bg-transparent border-2 border-[#707FDD] text-[#707FDD]"
                           }`}
                       >
                         {formData.templateType === "Lawyer"
@@ -1196,7 +1280,7 @@ let updatedProductData
 
           {activeStep === 2 && (
             <div>
-              <div className="relative flex flex-col gap-[4rem] py-2">
+              <div className={`relative flex flex-col gap-[4rem] py-2 `}>
                 <div
                   className="w-full"
                   style={{
@@ -1262,21 +1346,21 @@ let updatedProductData
                   >
                     <label
                       htmlFor="profile-upload"
-                      className="w-full h-full flex items-center justify-center"
+                      className={`w-full h-full flex items-center justify-center ${formData.profileImageUrl && profileImagetoShow && 'z-10'}`}
                       style={{
                         width: "128px",
                         height: "128px",
                         borderRadius: "50%",
                         // overflow: "hidden",
-                        backgroundImage:profileImagetoShow
+                        backgroundImage: profileImagetoShow
                           ? `url(${profileImagetoShow})`
                           : "none",
-                          
+
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                       }}
                     >
-                      {!profileImage && (
+                      {!profileImagetoShow && (
                         <img
                           src="../../ProfileAvatar.svg"
                           alt="Upload Icon"
@@ -1392,7 +1476,7 @@ let updatedProductData
                     <div className="flex-1">
                       <input
                         type="text"
-                        placeholder="Job Role"
+                        placeholder="Job Roles"
                         value={formData.jobTitle}
                         onChange={(e) =>
                           setFormData({ ...formData, jobTitle: e.target.value })
@@ -2012,8 +2096,8 @@ let updatedProductData
                         });
                       }}
                       className={`w-full p-3 border ${clientErrors?.errors?.companyWebsite
-                          ? "border-red-500"
-                          : ""
+                        ? "border-red-500"
+                        : ""
                         } text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md`}
                     />
                     {clientErrors?.errors?.companyWebsite && (
@@ -2022,7 +2106,7 @@ let updatedProductData
                       </p>
                     )}
                   </div>
-{/* linkedIn */}
+                  {/* linkedIn */}
 
                   {/* <div className="flex-1">
                     <input
@@ -2229,8 +2313,8 @@ let updatedProductData
                 <div className="flex justify-center gap-4">
                   <button
                     className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Product"
-                        ? "bg-[#707FDD] text-white border-[#707FDD]"
-                        : "bg-transparent text-[#707FDD] border-[#707FDD]"
+                      ? "bg-[#707FDD] text-white border-[#707FDD]"
+                      : "bg-transparent text-[#707FDD] border-[#707FDD]"
                       }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Product" })
@@ -2242,8 +2326,8 @@ let updatedProductData
                   {/* Service Button */}
                   <button
                     className={`py-2 px-4 rounded-full border-2 ${formData.gridType === "Service"
-                        ? "bg-[#707FDD] text-white border-[#707FDD]"
-                        : "bg-transparent text-[#707FDD] border-[#707FDD]"
+                      ? "bg-[#707FDD] text-white border-[#707FDD]"
+                      : "bg-transparent text-[#707FDD] border-[#707FDD]"
                       }`}
                     onClick={() =>
                       setFormData({ ...formData, gridType: "Service" })
@@ -2297,10 +2381,10 @@ let updatedProductData
                               )
                             }
                             className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 &&
-                                clientErrors?.errors?.products[index]?.name &&
-                                clientErrors?.errors?.products[index]?.name
-                                ? "border-red-500"
-                                : "border-gray-300"
+                              clientErrors?.errors?.products[index]?.name &&
+                              clientErrors?.errors?.products[index]?.name
+                              ? "border-red-500"
+                              : "border-gray-300"
                               }`}
                           />
                           {clientErrors?.errors?.products?.length > 0 &&
@@ -2323,9 +2407,9 @@ let updatedProductData
                               )
                             }
                             className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 &&
-                                clientErrors?.errors?.products[index]?.description
-                                ? "border-red-500"
-                                : "border-gray-300"
+                              clientErrors?.errors?.products[index]?.description
+                              ? "border-red-500"
+                              : "border-gray-300"
                               }`}
                           />
                           {clientErrors?.errors?.products?.length > 0 &&
@@ -2352,9 +2436,9 @@ let updatedProductData
                               )
                             }
                             className={`p-3 border w-full rounded-md ${clientErrors?.errors?.products?.length > 0 &&
-                                clientErrors?.errors?.products[index]?.serviceUrl
-                                ? "border-red-500"
-                                : "border-gray-300"
+                              clientErrors?.errors?.products[index]?.serviceUrl
+                              ? "border-red-500"
+                              : "border-gray-300"
                               }`}
                           />
                           {clientErrors?.errors?.products?.length > 0 &&
@@ -2390,10 +2474,15 @@ let updatedProductData
                               cursor: "pointer",
                             }}
                           >
+                          {console.log(productData[index]?.imageUrl,"images")}
                             {productData[index]?.imageUrl ? (
+                              
                               <img
-                                src={URL.createObjectURL(productData[index]?.imageUrl)}
-                                alt="Uploaded"
+                              src={
+                                productData[index]?.imageUrl instanceof File
+                                  ? URL.createObjectURL(productData[index]?.imageUrl)
+                                  : productData[index]?.imageUrl
+                              }                                alt="Uploaded"
                                 style={{
                                   width: "100%",
                                   height: "100%",
@@ -2740,7 +2829,7 @@ let updatedProductData
                       backgroundPosition: "center",
                     }}
                   >
-                                  
+
 
                   </div>
                 ))}
@@ -2980,7 +3069,7 @@ let updatedProductData
                   //   ${isCardCreate ? "active:transform active:scale-110" : "opacity-50 cursor-not-allowed"}
                   //   hover:${isCardCreate ? "bg-opacity-80" : "opacity-50"}`}
                   >
-                    Create Card
+                    {isLoading ? 'Loading...' : cardId ? `Update Card` : 'Create Card'}
                   </button>
                 </div>
               </div>
