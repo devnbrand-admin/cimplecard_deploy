@@ -52,7 +52,7 @@ export default function SignIn({ setIsLogin }) {
     if (validateForm()) {
       setLoading(true);
       try {
-        const response = await axios.post("/api/user/login",
+        const response = await axios.post(`/api/user/login`,
           formData
         )
         console.log(response,"res")

@@ -735,7 +735,7 @@ let updatedProductData
       // Upload images and get URLs
       const uploadedUrls = await uploadImages(filesToUpload);
       // Map uploaded URLs back to productData
-       updatedProductData =uploadedUrls.length > 0 && productData.map((product, index) => ({
+       updatedProductData =uploadedUrls?.length > 0 && productData?.map((product, index) => ({
         ...product,
         imageUrl: uploadedUrls[index] && uploadedUrls[index] || product?.imageUrl && product.imageUrl,
       }));

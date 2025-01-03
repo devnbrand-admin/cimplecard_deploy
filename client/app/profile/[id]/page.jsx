@@ -6,7 +6,7 @@ const page = () => {
   const router = useRouter();
 
   const [userDetails, setUserDetails] = useState(null);
-  const BASE_URL = "https://cimple-card.onrender.com/api/user";
+  const BASE_URL = "https://cimple-card-1.onrender.com/api/user";
 
   const getUserDetails = async (token) => {
     try {

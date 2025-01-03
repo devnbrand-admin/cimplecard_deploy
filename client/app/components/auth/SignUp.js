@@ -56,7 +56,7 @@ export default function SignUp({ setIsLogin }) {
     if (validateForm()) {
       setLoading(true);
       try {
-        const response = await axios.post("/api/user/send-otp", {
+        const response = await axios.post(`/api/user/send-otp`, {
           email: formData.email,
         });
         if (response.status === 200) {
@@ -66,7 +66,7 @@ export default function SignUp({ setIsLogin }) {
       } catch (error) {
         console.log(error);
         setIsOtp(false);
-        setServerError(error.response.data.message);
+        setServerError(error?.response?.data?.message);
       } finally {
         setLoading(false);
       }

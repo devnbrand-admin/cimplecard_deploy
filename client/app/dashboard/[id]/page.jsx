@@ -9,11 +9,14 @@ import dynamic from "next/dynamic";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
 import { useMediaQuery } from "react-responsive";
-
-const ModalForm = dynamic(() => import("../../components/dashboardformComponents/ModalForm"));
-const MobileComponent = dynamic(() => import("../../components/dashboardComponents/MobileComponent"));
-const ResponsiveModalForm = dynamic(() => import("../../components/dashboardformComponents/Modal"));
-const ModalFormMobile = dynamic(() => import("../../components/dashboardformComponents/ModalFormMobile", { ssr: false }));
+const ModalForm = dynamic(() =>
+  import("../../components/dashboardformComponents/ModalForm")
+);
+const ModalFormMobile = dynamic(() =>
+  import("../../components/dashboardformComponents/ModalFormMobile", {
+    ssr: false,
+  })
+);
 
 const DashboardPage = () => {
   const params = useParams();
@@ -33,7 +36,7 @@ const DashboardPage = () => {
   // API call using fetch - will update it later using axios
   const [userDetails, setUserDetails] = useState();
 
-  const BASE_URL = "https://cimple-card.onrender.com/api/user";
+  const BASE_URL = "https://cimple-card-1.onrender.com/api/user";
 
   const getUserDetails = async (token) => {
     try {

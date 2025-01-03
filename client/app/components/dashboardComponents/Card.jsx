@@ -8,7 +8,7 @@ import { store } from "../../../store/store";
 import { useMediaQuery } from "react-responsive";
 import { MdClose } from "react-icons/md";
 import axios from "../api_resources/axios";
-
+import Link from "next/link";
 const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
 );
@@ -22,7 +22,7 @@ const Card = ({ card }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal open state
   const [isMobile, setIsMobile] = useState(false);
-  const [editId,setEditId] = useState(null)
+  const [editId, setEditId] = useState(null);
 
   // console.log(card,"Card")
   const isMobileSize = useMediaQuery({ maxWidth: 768 });
@@ -35,8 +35,6 @@ const Card = ({ card }) => {
     return `${diffInHours} hour${diffInHours !== 1 ? "s" : ""} ago`;
   }
 
-
-
   // Function to open the modal
   const openModal = () => {
     setIsModalOpen(true);
@@ -47,16 +45,15 @@ const Card = ({ card }) => {
     setIsModalOpen(false);
   };
 
-    useEffect(() => {
-      setEditId(null)
-      const handleResize = () => setIsMobile(window.innerWidth <= 768);
-      handleResize();
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
+  useEffect(() => {
+    setEditId(null);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-
-
+  console.log("click", card.qrCodeUrl);
   return (
     <div className="w-80 flex-col relative m-3 rounded-xl bg-white">
       <div
@@ -67,10 +64,7 @@ const Card = ({ card }) => {
           transform: "translate(-50%, -25%)",
         }}
       >
-        <div
-          className="relative w-56 h-full group"
-          onClick={() => window?.open(card.uniqueUrl, "_blank")}
-        >
+        <Link href={card.qrCodeUrl} target="_blank" className="relative w-56 h-full group">
           <iframe
             src={card.qrCodeUrl}
             title="Scaled Iframe"
@@ -84,12 +78,13 @@ const Card = ({ card }) => {
               pointerEvents: "none", // Prevents interaction inside the iframe
             }}
           ></iframe>
+
           {/* Overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center justify-center text-xl opacity-0 group-hover:opacity-100 transition">
             Visit
             {/* </div> */}
           </div>
-        </div>
+        </Link>
       </div>
 
       <div className="h-28"></div>
@@ -101,6 +96,7 @@ const Card = ({ card }) => {
           <span className="text-sm" style={{ color: "#AB6BD4" }}>
             {card.bio}
           </span>
+
           <img
             src="/Assets/Star.png"
             alt="Star Icon"
@@ -141,20 +137,17 @@ const Card = ({ card }) => {
                 "linear-gradient(92.84deg, #707FDD 0.39%, #004AAD 93.99%)",
             }}
             className="flex items-center justify-center px-3 text-white rounded-full focus:outline-none"
-            onClick={()=>{
-
+            onClick={() => {
               openModal();
-              setEditId(card?.id)
-            }
-            
-            } // Open modal on click
+              setEditId(card?.id);
+            }} // Open modal on click
           >
             <img
               src="/Assets/Edit.png"
               alt="Edit Icon"
               className="w-5 h-5 mr-4"
             />
-            <span>Edit this File</span> 
+            <span>Edit this File</span>
           </button>
         </div>
       </div>
@@ -164,14 +157,22 @@ const Card = ({ card }) => {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white flex flex-col p-6 rounded-lg w-3/4 h-fit">
             <h2 className="text-xl font-bold mb-4">Edit Card File </h2>
-            <div className="w-3/4 h-fit"><Provider store={store}>
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                <div className="bg-white p-6 rounded shadow-md" >
-
-                  {isMobileSize ? <ModalFormMobile cardId={editId ? editId :null}/> : <ModalForm setIsModalOpen={setIsModalOpen} cardId={editId ? editId :null}/> }
+            <div className="w-3/4 h-fit">
+              <Provider store={store}>
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                  <div className="bg-white p-6 rounded shadow-md">
+                    {isMobileSize ? (
+                      <ModalFormMobile cardId={editId ? editId : null} />
+                    ) : (
+                      <ModalForm
+                        setIsModalOpen={setIsModalOpen}
+                        cardId={editId ? editId : null}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Provider> </div>
+              </Provider>{" "}
+            </div>
             <div className="flex justify-end">
               <button onClick={closeModal} className="text-sm text-red-500">
                 Close
