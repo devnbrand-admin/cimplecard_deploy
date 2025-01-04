@@ -4,10 +4,17 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setStepData } from '../../../store/cardSlice';
 import { createCard } from '../../utils/cardCreationApi';
-import "../../style/cardCreation.css"
-import { BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsEnvelopeAt, BsImages, BsBuilding } from "react-icons/bs";
-import { MdClose } from "react-icons/md";
+import "../../style/cardCreation.css";
+import { validateFormData } from '../../utils/validation';
 import Sidebar from './Sidebar';
+import { FormButton } from './ModalFormMobile';
+import { uploadSingleImage } from './utils/imageUpload';
+import {
+    BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo,
+    BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsImages, BsBuilding
+} from "react-icons/bs";
+
+// Steps Import
 import ChooseTemplateStep from './steps/ChooseTemplateStep';
 import ProfileStep from './steps/ProfileStep';
 import ContactDetailsStep from './steps/ContactDetailsStep';
@@ -19,75 +26,16 @@ import PostLinksStep from './steps/PostLinksStep';
 import GalleryStep from './steps/GalleryStep';
 import BusinessHoursStep from './steps/BusinessHour';
 import HelpStep from './steps/HelpStep';
-import { FormButton } from './ModalFormMobile';
-import { validateFormData } from '../../utils/validation';
-import { cardForm } from '../../utils/constant';
-import { uploadSingleImage } from './utils/imageUpload';
+import { initialFormData } from '../../utils/constant';
+import { MdClose } from 'react-icons/md';
 
 export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
     const dispatch = useDispatch();
     const [activeStep, setActiveStep] = useState(1);
     const [errors, setErrors] = useState({});
-    const [formData, setFormData] = useState({
-        // Personal information
-        firstName: "",
-        middleName: "",
-        lastName: "",
-        jobTitle: "",
-        companyName: "",
-        location: "",
-        profileImageUrl: "",
-        headerImageUrl: "",
-        templateType: "",
-        cardName: "",
-        qrCodeUrl: "",
-        aboutUs: "",
-        companyAddress: "",
-        dateOfBirth: "",
-        bio: "",
-        gridType: "",
-        languageSpoken: "",
-        additionalLink: "",
-        emails: [],
-        phoneNumbers: [],
-        otherEmails: "",
-        otherPhoneNumber: "",
-        phoneNumber: "",
+    const [formData, setFormData] = useState(initialFormData);
 
-        // Emergency contact information
-        emergencyName: "",
-        emergencyRelationship: "",
-        emergencyNumber: "",
-        emergencyEmail: "",
-
-        // Social media links
-        SocialMediaLink: [],
-        companySocialMediaLink: [],
-        // card:[],
-
-        // Gallery and media
-        gallery: [],
-        instagramPost: [],
-        instagramReel: [],
-        youtubeVideoLink: [],
-
-        // Testimonials
-        testimonials: [],
-
-        // Services
-        services: [],
-
-        // Business hours
-        businessHours: [],
-    });
-
-    const handleTemplateSelection = (template) => {
-        setFormData((prev) => ({
-            ...prev,
-            templateType: template,
-        }));
-    };
-
+    // Steps Configuration
     const steps = [
         { id: 1, label: "Choose Template", icon: <BsTriangle />, component: ChooseTemplateStep },
         { id: 2, label: "Profile", icon: <BsPerson />, component: ProfileStep },
@@ -102,184 +50,64 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
         { id: 11, label: "Help", icon: <BsChat />, component: HelpStep },
     ];
 
+    const ActiveStepComponent = steps[activeStep - 1]?.component;
 
+    // Handlers
+    const handleTemplateSelection = (template) =>
+        setFormData((prev) => ({ ...prev, templateType: template }));
 
-    const handleStepClick = (stepId) => {
-        setActiveStep(stepId);
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleImageUpload = async (event) => {
         const { name, files } = event.target;
         const file = files[0];
-
-        if (!file) return; // Ensure there's a file to process
+        if (!file) return;
 
         try {
-            // Get the uploaded image URL
             const url = await uploadSingleImage(file, name);
-
-            // Update the formData synchronously
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                [name]: url, // Set the uploaded image URL
-            }));
+            setFormData((prev) => ({ ...prev, [name]: url }));
         } catch (error) {
-            console.error("Error uploading the image:", error);
+            console.error("Error uploading image:", error);
         }
     };
 
-
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        // console.log(formData)
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
-
-    const handleSave = (e) => {
-        // Save current step data to Redux
+    const handleSave = async () => {
         dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
-        const valid = validateFormData(cardForm[activeStep - 1], setErrors, formData)
-        console.log(formData)
-        if (!valid) return
+        if (!validateFormData(cardForm[activeStep - 1], setErrors, formData)) return;
 
-        // Move to the next step
-        if (activeStep < steps?.length) {
-            if (activeStep === 10) {
-                return handleCreate(e);
-            }
-            setActiveStep(activeStep + 1);
-        }
-    };
-    const handleBack = () => {
-        if (activeStep > 1) {
-            setActiveStep(activeStep - 1);
-        }
+        if (activeStep === 10) return handleCreate();
+        setActiveStep((prev) => Math.min(prev + 1, steps.length));
     };
 
-    const handleCreate = async (e) => {
-        e.preventDefault();
-        // console.log("Form Data:", formData);
+    const handleBack = () =>
+        setActiveStep((prev) => Math.max(prev - 1, 1));
+
+    const handleCreate = async () => {
         try {
             await createCard(formData);
-            // console.log("Card saved successfully:", response);
-            dispatch(setCardData(formData)); // Update Redux store
+            dispatch(setCardData(formData));
         } catch (error) {
-            console.error("Failed to save card:", error);
+            console.error("Failed to create card:", error);
         }
     };
 
     useEffect(() => {
+        if (cardId) fetchCardData(cardId);
+    }, [cardId]);
 
-
-        if (cardId) getSingleCardData(cardId)
-    }, [cardId])
-
-
-    // Function to map backend data to the required format
-    const transformCardData = (data) => {
-        return {
-            // Personal information
-            firstName: data.title?.split(" ")[0] || "",
-            middleName: "",
-            lastName: data.title?.split(" ")[1] || "",
-            jobTitle: data.jobTitle || "",
-            companyName: data.companyName || "",
-            location: data.location || "N/A",
-            profileImageUrl: data.profileImageUrl || "",
-            headerImageUrl: data.headerImageUrl || "",
-            templateType: data.templateType || "",
-            cardName: data.cardName || `business-card-${new Date().getTime()}`,
-            qrCodeUrl: data.qrCodeUrl || "",
-            aboutUs: data.aboutUs || "",
-            companyAddress: data.companyAddress || "",
-            dateOfBirth: data.dateOfBirth || "",
-            bio: data.bio || "",
-            gridType: data.gridType || "",
-            languageSpoken: data.languageSpoken || "",
-            additionalLink: data.additionalLink || "",
-            emails: data.emails || [],
-            phoneNumbers: data.phoneNumbers || [],
-            otherEmails: data.otherEmails || "",
-            otherPhoneNumber: data.otherPhoneNumber || "",
-            phoneNumber: data.phoneNumber || "",
-
-            // Emergency contact information
-            emergencyName: data.emergencyName || "",
-            emergencyRelationship: data.emergencyRelationship || "",
-            emergencyNumber: data.emergencyNumber || "",
-            emergencyEmail: data.emergencyEmail || "",
-
-            // Social media links
-            SocialMediaLink: [
-                ...(data.linkedinLink
-                    ? [
-                        {
-                            id: 1,
-                            platform: "LinkedIn",
-                            url: data.linkedinLink,
-                            iconUrl: "",
-                            cardId: data.id,
-                        },
-                    ]
-                    : []),
-                ...(data.twitterLink
-                    ? [
-                        {
-                            id: 2,
-                            platform: "Twitter",
-                            url: data.twitterLink,
-                            iconUrl: "",
-                            cardId: data.id,
-                        },
-                    ]
-                    : []),
-            ],
-            companySocialMediaLink: [],
-
-            // Gallery and media
-            gallery: data.gallery || [],
-            instagramPost: data.instagramPost || [],
-            instagramReel: data.instagramReel || [],
-            youtubeVideoLink: data.youtubeVideoLink || [],
-
-            // Testimonials
-            testimonials: data.testimonials || [],
-
-            // Services
-            services: data.services || [],
-
-            // Business hours
-            businessHours: data.businessHours || [],
-        };
-    };
-
-    // Fetch and process single card data
-    const getSingleCardData = async (cardId) => {
+    const fetchCardData = async (id) => {
         try {
-            if (!cardId) {
-                console.error("Card ID is required.");
-                return;
-            }
-            console.log(cardId, "cardId");
-
-            const response = await axios.get(`/api/card/get/${cardId}`);
-            const backendData = response.data;
-
-            console.log(backendData, "singleData");
-
-            // Transform backend data to required format
-            const transformedData = transformCardData(backendData);
-            console.log(transformedData, "Transformed Data");
+            const { data } = await axios.get(`/api/card/get/${id}`);
+            const transformedData = transformCardData(data);
+            setFormData(transformedData);
         } catch (error) {
-            console.error("Error fetching single card data:", error);
+            console.error("Error fetching card data:", error);
         }
     };
 
-    const ActiveStepComponent = steps.find(step => step.id === activeStep)?.component;
     return (
         <div className="fixed inset-0 shadow-sm bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 p-4 md:p-0">
             <div className="bg-white relative rounded-lg w-full max-w-7xl h-[90vh] md:h-[80vh] flex flex-col md:flex-row overflow-hidden">
@@ -289,24 +117,15 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
                 >
                     <MdClose className="text-4xl p-2" />
                 </button>
-
-                <div className="md:hidden">
-                    <MobileHeader activeStep={activeStep} steps={steps} />
-                </div>
-
-                <div className="hidden md:flex md:w-1/4 bg-white relative rounded-lg w-full">
+                <div className="hidden md:flex md:w-1/4 bg-white">
                     <Sidebar
                         activeStep={activeStep}
-                        handleStepClick={handleStepClick}
+                        handleStepClick={setActiveStep}
                         steps={steps}
                     />
                 </div>
-
-                <div className="w-full  md:w-full  px-4 md:px-6 overflow-y-auto">
-                    <div className="mb-4 hidden md:block sticky top-0 z-10 bg-white">
-                        <StepHeader activeStep={activeStep} steps={steps} />
-                    </div>
-
+                <div className="w-full px-4 md:px-6 relative overflow-y-auto">
+                    <StepHeader activeStep={activeStep} steps={steps} />
                     {ActiveStepComponent && (
                         <ActiveStepComponent
                             formData={formData}
@@ -315,51 +134,28 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
                             handleTemplateSelection={handleTemplateSelection}
                             handleImageUpload={handleImageUpload}
                             handleInputChange={handleInputChange}
-                            handleCreate={handleCreate}
                             errors={errors}
-                            setErrors={setErrors}
-                            testimonials={formData?.testimonials}
-                            gallery={formData?.gallery}
                         />
                     )}
-
-                    {/* Common save button with underline */}
-                    {activeStep !== 0 && (
-                        <div className="py-6 flex justify-end space-x-2">
-                            <div
-                                className="text-white hidden md:flex text-center text-4xl font-semibold py-6 px-6"
-                                style={{
-                                    backgroundImage: `url('../../Underline.svg')`,
-                                    backgroundSize: "contain",
-                                    backgroundPosition: "left",
-                                    backgroundRepeat: "no-repeat",
-                                    top: 0,
-                                    left: 0,
-                                    width: "70%",
-                                    height: "10px",
-                                }}
-                            ></div>
-                            {/* Back button visible on small screens */}
-                            {activeStep > 1 && <div className="block lg:hidden ">
-                                <button
-                                    onClick={handleBack}
-                                    className="text-primary transform transition-transform duration-200 ease-out active:transform active:scale-110 font-semibold py-2 px-3 border rounded-lg"
-                                >
-                                    Back
-                                </button>
-                            </div>}
-                            <FormButton onClick={handleSave} variant="primary">
-                                {activeStep === 10 ? "Create" : "Save Changes"}
-                            </FormButton>
-                        </div>
-                    )}
-
-
+                    <div className="py-6 flex justify-end">
+                        {activeStep > 1 && (
+                            <button
+                                onClick={handleBack}
+                                className="text-primary font-semibold py-2 px-3 border rounded-lg"
+                            >
+                                Back
+                            </button>
+                        )}
+                        <FormButton onClick={handleSave} variant="primary">
+                            {activeStep === 10 ? "Create" : "Save Changes"}
+                        </FormButton>
+                    </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
+
 
 const MobileHeader = ({ activeStep, steps }) => (
     <div className="bg-gradient-to-r from-[#707FDD] to-[#1E2F98] p-4 text-white">
@@ -369,13 +165,12 @@ const MobileHeader = ({ activeStep, steps }) => (
 
 const StepHeader = ({ activeStep, steps }) => (
     <div
-        className="text-[white] text-center text-2xl md:text-4xl font-semibold py-4 md:py-6 px-4 md:px-6"
+        className="text-[white] text-center text-2xl md:text-4xl sticky top-0 font-semibold py-4 md:py-6 px-4 md:px-6"
         style={{
-            backgroundImage: `url('../../ModalHeader2.png')`,
+            backgroundImage: "url('/ModalHeader2.png')", // Corrected format
             backgroundSize: "contain",
             backgroundPosition: "top",
             backgroundRepeat: "no-repeat",
-
         }}
     >
         {steps.find(step => step.id === activeStep)?.label}
