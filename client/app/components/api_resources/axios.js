@@ -6,6 +6,6 @@ axios.defaults.withCredentials = true;
 
 export default axios.create({
     // baseURL: ""
-    baseURL: "https://cimple-card.onrender.com"
+    baseURL: "https://cimple-card-1.onrender.com"
 
 })

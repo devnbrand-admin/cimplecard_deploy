@@ -27,28 +27,29 @@ export const loginUser = async () => {
   }
 };
 
-
-
-
-
-export const createCard = async (formData) => {
+export const createCard = async (formData,images,updatedProductData,cardId) => {
 
   try {
     const tokenString = sessionStorage.getItem("userToken");
     const tokenObject = JSON.parse(tokenString);
     const jwtToken = tokenObject.value;
-    console.log('services:', formData.services)
+    console.log(      " dateOfBirth:" ,formData.dateOfBirth,
+    )
+    // return 
+    console.log('services:', updatedProductData)
+    console.log("gallery :",images)
+
 
     const requestData = {
       headerImageUrl:await uploadSingleImage(formData.headerImageUrl),
-      title: `${formData.firstName} ${formData.middleName && formData.middleName} ${formData.lastName && formData.lastName}`,
+      title: `${formData.firstName && formData.firstName} ${formData.middleName && formData.middleName} ${formData.lastName && formData.lastName}`,
       companyName: formData.companyName,
-      companyAddress: formData.companyAddress,
+      companyAddress: formData.companyAddress || formData.location,
       jobTitle: formData.jobTitle,
       bio: formData.bio,
       languageSpoken: formData.languageSpoken,
-      dateOfBirth: formData.dateOfBirth,
-      phoneNumber: formData.phoneNumber,
+      dateOfBirth: JSON.stringify(formData.dateOfBirth),
+      gallery:await uploadImages(images.length > 0 ? images : []),
       phoneNumbers: formData.phoneNumbers,
       otherPhoneNumber: formData.otherPhoneNumber,
       emails: formData.emails,
@@ -58,7 +59,6 @@ export const createCard = async (formData) => {
       emergencyNumber: formData.emergencyNumber,
       emergencyEmail: formData.emergencyEmail,
       cardName:  formData.templateType + Date.now(),
-      companySocialMediaLink: formData.companySocialMediaLink,
       instagramPost: formData?.instagramPost && formData?.instagramPost,
       profileImageUrl:await uploadSingleImage(formData.profileImageUrl && formData.profileImageUrl,"profileUrl"),
       githubLink: formData?.githubLink && formData?.githubLink,
@@ -66,32 +66,86 @@ export const createCard = async (formData) => {
       productDesc: formData.productDesc,
       testimonials: formData.testimonials,
       businessHours: formData.businessHours,
+      companySocialMediaLink: formData.companySocialMediaLink,
       templateType: formData.templateType,
       qrCodeUrl: formData?.qrCodeUrl,
       aboutUs: formData.aboutUs,
       instagramReel : formData?.instagramReel && formData?.instagramReel,
       youtubeVideoLink : formData?.youtubeVideoLink && formData.youtubeVideoLink,
-      services: formData.services,
+      services: updatedProductData,
       socialMediaLink: formData.SocialMediaLink,
-      gallery:await uploadImages(formData?.gallery),
+      
       gridType:formData?.gridType
     };
 
-    console.log(requestData, "res-data")
+    if(cardId){
+      const requestData = {
+        headerImageUrl:await uploadSingleImage(formData.headerImageUrl),
+        title: `${formData.firstName && formData.firstName} ${formData.middleName && formData.middleName} ${formData.lastName && formData.lastName}`,
+        companyName: formData.companyName,
+        companyAddress: formData.companyAddress || formData.location,
+        jobTitle: formData.jobTitle,
+        // bio: formData.bio,
+        languageSpoken: formData.languageSpoken,
+        dateOfBirth: JSON.stringify(formData.dateOfBirth),
+        gallery:await uploadImages(images.length > 0 ? images : []),
+        phoneNumbers: formData.phoneNumbers,
+        // otherPhoneNumber: formData.otherPhoneNumber,
+        emails: formData.emails,
+        // otherEmails: formData.otherEmails,
+        emergencyName: formData.emergencyName,
+        emergencyRelationship: formData.emergencyRelationship,
+        emergencyNumber: formData.emergencyNumber,
+        emergencyEmail: formData.emergencyEmail,
+        cardName:  formData.templateType + Date.now(),
+        instagramPost: formData?.instagramPost && formData?.instagramPost,
+        profileImageUrl:await uploadSingleImage(formData.profileImageUrl && formData.profileImageUrl,"profileUrl"),
+        githubLink: formData?.githubLink && formData?.githubLink,
+        additionalLink: formData.additionalLink,
+        productDesc: formData.productDesc,
+        testimonials: formData.testimonials,
+        businessHours: formData.businessHours,
+        companySocialMediaLink: formData.companySocialMediaLink,
+        templateType: formData.templateType,
+        qrCodeUrl: formData?.qrCodeUrl,
+        aboutUs: formData.aboutUs,
+        instagramReel : formData?.instagramReel && formData?.instagramReel,
+        youtubeVideoLink : formData?.youtubeVideoLink && formData.youtubeVideoLink,
+        services: updatedProductData,
+        SocialMediaLink: formData.SocialMediaLink,
+        
+        gridType:formData?.gridType
+      };
+
+      console.log(requestData, "req-updated-data")
 
 
+      const response = await axios.put(`/api/card/update/${cardId}`, requestData, {
+        headers: {
+          Authorization: `${jwtToken}`,
+        },
+      });
+      console.log(response.data,"updated res-data");
+      return response.data;
 
-    const response = await axios.post("/api/card/create", requestData, {
-      headers: {
-        Authorization: `${jwtToken}`,
-      },
-    });
 
-    console.log(response.data);
-    
-    return response.data;
+     
+    }else{
+      console.log(requestData, "req-data")
+
+      const response = await axios.post("/api/card/create", requestData, {
+        headers: {
+          Authorization: `${jwtToken}`,
+        },
+      });
+      console.log(response.data,"created res-data");
+      return response.data;
+
+    }
+
+ 
   } catch (error) {
-    console.error('Error creating card:', error.message || error.response?.data || error);
+    console.log('Error creating card:', error.message || error.response?.data || error);
     throw error;
   }
 };

@@ -1,11 +1,11 @@
 export const TestimonialsSection = ({ testimonials, setTestimonials,setClientErrors,clientErrors,handleSave }) => {
-
+console.log(testimonials,"test")
   const handleAddTestimonial = () => {
     setTestimonials([
       ...testimonials,
       {
         name: "",
-        designation: "",
+        designation : "",
         description: "",
         imageUrl: "",
       },
@@ -61,15 +61,15 @@ export const TestimonialsSection = ({ testimonials, setTestimonials,setClientErr
               <input
                 type="text"
                 placeholder="Job Role"
-                value={testimonial.designation}
+                value={testimonial.designation  }
                 onChange={(e) =>
                   handleInputChange(index, "designation", e.target.value)
                 }
                 className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
               />
-              {clientErrors?.errors?.[index]?.designation && (
+              {clientErrors?.errors?.[index]?.designation   && (
                 <p className="text-red-500 text-sm">
-                  {clientErrors.errors[index].designation}
+                  {clientErrors.errors[index].designation  }
                 </p>
               )}
             </div>
