@@ -24,6 +24,8 @@ const Card = ({ card }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [editId, setEditId] = useState(null);
 
+  console.log("card",card)
+
   // console.log(card,"Card")
   const isMobileSize = useMediaQuery({ maxWidth: 768 });
 

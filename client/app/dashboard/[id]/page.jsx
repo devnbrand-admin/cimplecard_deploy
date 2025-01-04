@@ -4,6 +4,9 @@ import { useParams } from "next/navigation";
 import Navbar from "../../components/dashboardComponents/Navbar";
 import Card from "../../components/dashboardComponents/Card";
 import axios from "axios";
+import MobileComponent from "../../components/dashboardComponents/MobileComponent";
+import dynamic from "next/dynamic";
+import { useMediaQuery } from "react-responsive";
 import profileIcon from "../../assets/profile_icon.png";
 import dynamic from "next/dynamic";
 import { Provider } from "react-redux";
@@ -41,7 +44,7 @@ const DashboardPage = () => {
 
   const getUserDetails = async (token) => {
     try {
-      const response = await axios.get(`${BASE_URL}/getdetails`, {
+      const response = await axios.get(`${BASE_URL}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${token}`,
