@@ -31,7 +31,7 @@ const ProfileCard = ({ card }) => {
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 lg:space-y-16 px-0 py-0 lg:px-14 lg:py-16">
           {/* Name and Details */}
           <div className="font-Cormorant space-y-4">
-            <h1 className="lg:text-5xl text-3xl font-bold">{card.title}</h1>
+            <h1 className="lg:text-5xl text-3xl font-bold">{card?.title}</h1>
             <p className="lg:text-3xl text-xl mt-2 font-medium">
               Ph.D. in Vedic Astrology, Gold Medalist
             </p>
@@ -71,16 +71,26 @@ const ProfileCard = ({ card }) => {
           <div className="flex flex-col items-center gap-4">
             <FaEnvelope size={28} />
             <p className="text-xl font-bold">Email</p>
-            <p className="text-sm">johndoe@techsolutions.com</p>
-            <p className="text-sm">contact@techsolutions.com</p>
+            {
+              card?.emails?.map((email, index) => (
+                <p key={index} className="text-sm">{email}</p>
+              ))
+            }
+            {/* <p className="text-sm">johndoe@techsolutions.com</p>
+            <p className="text-sm">contact@techsolutions.com</p> */}
           </div>
         </div>
         <div className="bg-[#020013] border border-violet-950 pt-8 pb-8 text-center rounded-lg flex flex-col items-center space-x-4 gap-4">
           <div className="flex flex-col items-center gap-4">
             <FaPhone size={28} />
             <p className="text-xl font-bold">Mobile</p>
-            <p className="text-sm">+1-234-667-9876</p>
-            <p className="text-sm">+999-234-87960</p>
+            {
+              card?.phoneNumbers?.map((phone, index) => (
+                <p key={index} className="text-sm">{phone}</p>
+              ))
+            }
+            {/* <p className="text-sm">+1-234-667-9876</p>
+            <p className="text-sm">+999-234-87960</p> */}
           </div>
         </div>
         <div className="bg-[#020013] border border-violet-950 pt-8 pb-8 text-center rounded-lg flex flex-col items-center space-x-4 gap-4">

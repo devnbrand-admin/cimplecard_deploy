@@ -3,22 +3,27 @@ import { FormButton, FormInput } from '../ModalFormMobile';
 import { BsImages } from "react-icons/bs";
 import { cardForm } from '../../../utils/constant';
 const productServicesStructure = cardForm[5]
-const ProductServicesStep = ({ formData, setFormData, handleSave }) => {
-  const handleProductUpload = (event, index) => {
+const ProductServicesStep = ({ formData, setFormData, }) => {
+  const handleProductUpload = async (event, index) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
+      try {
+        // Call the uploadSingleImage function to upload the file
+        const imageUrl = await uploadSingleImage(file, `Product ${index + 1}`);
+
+        // Update the form data with the uploaded image URL
         setFormData(prevData => ({
           ...prevData,
           products: prevData.products.map((item, i) =>
-            i === index ? { ...item, imageUrl: reader.result } : item
+            i === index ? { ...item, imageUrl } : item
           )
         }));
-      };
-      reader.readAsDataURL(file);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
     }
   };
+
   // console.log(formData?.products)
   const renderImage = (section) => (
     <div key={section.src} className={section.className} style={{ backgroundImage: `url('${section.src}')` }}></div>

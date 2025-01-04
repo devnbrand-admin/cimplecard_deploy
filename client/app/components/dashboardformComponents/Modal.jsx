@@ -7,7 +7,6 @@ import { createCard } from '../../utils/cardCreationApi';
 import "../../style/cardCreation.css"
 import { BsTriangle, BsPerson, BsTelephone, BsLinkedin, BsPersonVideo, BsClockHistory, BsCartCheckFill, BsChat, BsUpload, BsEnvelopeAt, BsImages, BsBuilding } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
-import Image from 'next/image';
 import Sidebar from './Sidebar';
 import ChooseTemplateStep from './steps/ChooseTemplateStep';
 import ProfileStep from './steps/ProfileStep';
@@ -23,45 +22,12 @@ import HelpStep from './steps/HelpStep';
 import { FormButton } from './ModalFormMobile';
 import { validateFormData } from '../../utils/validation';
 import { cardForm } from '../../utils/constant';
+import { uploadSingleImage } from './utils/imageUpload';
 
 export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
     const dispatch = useDispatch();
     const [activeStep, setActiveStep] = useState(1);
     const [errors, setErrors] = useState({});
-    const [profileImage, setProfileImage] = useState(null);
-    const [coverImage, setCoverImage] = useState(null);
-
-    const [testimonials, setTestimonials] = useState();
-
-    const [instagramPost, setInstagramPost] = useState([
-        "https://instagram.com/johndoe/post1",
-    ]);
-
-    const [instagramReels, setInstagramReels] = useState([
-        "https://instagram.com/johndoe/reel1",
-    ]);
-
-    const [youtubeVideo, setYoutubeVideo] = useState([
-        "https://youtube.com/watch?v=12345",
-    ]);
-
-    const [images, setImages] = useState([
-        // "https://example.com/photo1.jpg",
-        // "https://example.com/photo2.jpg",
-    ]);
-
-    const [productData, setProductData] = useState([
-        {
-            name: "Web Development",
-            imageUrl: "https://example.com/service1.jpg",
-            serviceUrl: "https://example.com/webdev",
-            description: "Full-stack web development services.",
-            cardId: "sadfasdf"
-        },
-    ]);
-
-
-
     const [formData, setFormData] = useState({
         // Personal information
         firstName: "",
@@ -112,38 +78,9 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
         services: [],
 
         // Business hours
-        businessHours: [
-            {
-                id: 1,
-                type: "",
-                from: "",
-                to: "",
-                cardId: "",
-            },
-        ],
+        businessHours: [],
     });
 
-
-    const steps = [
-        { id: 1, label: "Choose Template", icon: <BsTriangle /> },
-        { id: 2, label: "Profile", icon: <BsPerson /> },
-        { id: 3, label: "Contact Details", icon: <BsTelephone /> },
-        { id: 4, label: "Social Media Links", icon: <BsLinkedin /> },
-        { id: 5, label: "Company Media Links", icon: <BsBuilding /> },
-        { id: 6, label: "Product / Services", icon: <BsCartCheckFill /> },
-        { id: 7, label: "Testimonials", icon: <BsPersonVideo /> },
-        { id: 8, label: "Post Links", icon: <BsUpload /> },
-        { id: 9, label: "Gallery", icon: <BsImages /> },
-        { id: 10, label: "Business Hours", icon: <BsClockHistory /> },
-        { id: 11, label: "Help", icon: <BsChat /> },
-    ];
-
-
-    const handleStepClick = (stepId) => {
-        setActiveStep(stepId);
-    };
-
-    const handleAdd = () => { };
     const handleTemplateSelection = (template) => {
         setFormData((prev) => ({
             ...prev,
@@ -151,58 +88,47 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
         }));
     };
 
-    const handleProfileUpload = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const imageUrl = reader.result;
-                setProfileImage(imageUrl);
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    profileImageUrl: imageUrl,
-                }));
-            };
-            reader.readAsDataURL(file);
-        }
+    const steps = [
+        { id: 1, label: "Choose Template", icon: <BsTriangle />, component: ChooseTemplateStep },
+        { id: 2, label: "Profile", icon: <BsPerson />, component: ProfileStep },
+        { id: 3, label: "Contact Details", icon: <BsTelephone />, component: ContactDetailsStep },
+        { id: 4, label: "Social Media Links", icon: <BsLinkedin />, component: SocialMediaLinksStep },
+        { id: 5, label: "Company Media Links", icon: <BsBuilding />, component: CompanyMediaLinksStep },
+        { id: 6, label: "Product / Services", icon: <BsCartCheckFill />, component: ProductServicesStep },
+        { id: 7, label: "Testimonials", icon: <BsPersonVideo />, component: TestimonialsStep },
+        { id: 8, label: "Post Links", icon: <BsUpload />, component: PostLinksStep },
+        { id: 9, label: "Gallery", icon: <BsImages />, component: GalleryStep },
+        { id: 10, label: "Business Hours", icon: <BsClockHistory />, component: BusinessHoursStep },
+        { id: 11, label: "Help", icon: <BsChat />, component: HelpStep },
+    ];
+
+
+
+    const handleStepClick = (stepId) => {
+        setActiveStep(stepId);
     };
 
-    const handleCoverUpload = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    headerImageUrl: reader.result,
-                }));
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+    const handleImageUpload = async (event) => {
+        const { name, files } = event.target;
+        const file = files[0];
 
-    const handleProductUpload = (event, index) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setProductData((prevData) =>
-                    prevData.map((item, i) =>
-                        i === index ? { ...item, imageUrl: reader.result } : item
-                    )
-                );
-            };
-            reader.readAsDataURL(file);
+        if (!file) return; // Ensure there's a file to process
+
+        try {
+            // Get the uploaded image URL
+            const url = await uploadSingleImage(file, name);
+
+            // Update the formData synchronously
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                [name]: url, // Set the uploaded image URL
+            }));
+        } catch (error) {
+            console.error("Error uploading the image:", error);
         }
     };
 
 
-
-    const handleImageUpload = (e) => {
-        const files = Array.from(e.target.files);
-        const newImages = files.map((file) => URL.createObjectURL(file));
-        setImages((prev) => [...prev, ...newImages]);
-    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -213,17 +139,17 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
         }));
     };
 
-    const handleSave = () => {
+    const handleSave = (e) => {
         // Save current step data to Redux
         dispatch(setStepData({ step: `step${activeStep}`, data: formData }));
+        const valid = validateFormData(cardForm[activeStep - 1], setErrors, formData)
         console.log(formData)
-        const valid = validateFormData(cardForm[activeStep-1], setErrors, formData)
         if (!valid) return
-        
+
         // Move to the next step
-        if (activeStep < steps.length) {
-            if (activeStep === 9) {
-                return;
+        if (activeStep < steps?.length) {
+            if (activeStep === 10) {
+                return handleCreate(e);
             }
             setActiveStep(activeStep + 1);
         }
@@ -236,18 +162,9 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
 
     const handleCreate = async (e) => {
         e.preventDefault();
-        setFormData((prev) => ({
-            ...prev,
-            services: productData,
-            testimonials: testimonials,
-            instagramPost: instagramPost,
-            instagramReel: instagramReels,
-            youtubeVideoLink: youtubeVideo,
-            gallery: images,
-        }));
         // console.log("Form Data:", formData);
         try {
-            const response = await createCard(formData);
+            await createCard(formData);
             // console.log("Card saved successfully:", response);
             dispatch(setCardData(formData)); // Update Redux store
         } catch (error) {
@@ -256,65 +173,6 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
     };
 
     useEffect(() => {
-        setFormData({
-            // Personal information
-            firstName: "",
-            middleName: "",
-            lastName: "",
-            jobTitle: "",
-            companyName: "",
-            location: "",
-            profileImageUrl: "",
-            headerImageUrl: "",
-            templateType: "",
-            cardName: "",
-            qrCodeUrl: "",
-            aboutUs: "",
-            companyAddress: "",
-            dateOfBirth: "",
-            bio: "",
-            gridType: "",
-            languageSpoken: "",
-            additionalLink: "",
-            emails: [],
-            phoneNumbers: [],
-            otherEmails: "",
-            otherPhoneNumber: "",
-            phoneNumber: "",
-
-            // Emergency contact information
-            emergencyName: "",
-            emergencyRelationship: "",
-            emergencyNumber: "",
-            emergencyEmail: "",
-
-            // Social media links
-            SocialMediaLink: [],
-            companySocialMediaLink: [],
-
-            // Gallery and media
-            gallery: [],
-            instagramPost: [],
-            instagramReel: [],
-            youtubeVideoLink: [],
-
-            // Testimonials
-            testimonials: [],
-
-            // Services
-            services: [],
-
-            // Business hours
-            businessHours: [
-                {
-                    id: 1,
-                    type: "",
-                    from: "",
-                    to: "",
-                    cardId: "",
-                },
-            ],
-        });
 
 
         if (cardId) getSingleCardData(cardId)
@@ -421,6 +279,7 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
         }
     };
 
+    const ActiveStepComponent = steps.find(step => step.id === activeStep)?.component;
     return (
         <div className="fixed inset-0 shadow-sm bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 p-4 md:p-0">
             <div className="bg-white relative rounded-lg w-full max-w-7xl h-[90vh] md:h-[80vh] flex flex-col md:flex-row overflow-hidden">
@@ -443,102 +302,25 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
                     />
                 </div>
 
-                <div className="w-full  md:w-3/4  px-4 md:px-6 overflow-y-auto">
+                <div className="w-full  md:w-full  px-4 md:px-6 overflow-y-auto">
                     <div className="mb-4 hidden md:block sticky top-0 z-10 bg-white">
                         <StepHeader activeStep={activeStep} steps={steps} />
                     </div>
 
-                    {activeStep === 1 && (
-                        <ChooseTemplateStep
+                    {ActiveStepComponent && (
+                        <ActiveStepComponent
                             formData={formData}
+                            setFormData={setFormData}
+                            handleSave={handleSave}
                             handleTemplateSelection={handleTemplateSelection}
-                            handleSave={handleSave}
-                        />
-                    )}
-                    {activeStep === 2 && (
-                        <ProfileStep
-                            formData={formData}
-                            setFormData={setFormData}
-                            handleProfileUpload={handleProfileUpload}
+                            handleImageUpload={handleImageUpload}
                             handleInputChange={handleInputChange}
-                            handleSave={handleSave}
-                            errors={errors}
-                        />
-                    )}
-                    {activeStep === 3 && (
-                        <ContactDetailsStep
-                            formData={formData}
-                            setFormData={setFormData}
-                            handleInputChange={handleInputChange}
-                            handleSave={handleSave}
-                            errors={errors}
-                        />
-                    )}
-                    {activeStep === 4 && (
-                        <SocialMediaLinksStep
-                            formData={formData}
-                            setFormData={setFormData}
-                            handleSave={handleSave}
-                            errors={errors}
-                        />
-                    )}
-                    {activeStep === 5 && (
-                        <CompanyMediaLinksStep
-                            formData={formData}
-                            setFormData={setFormData}
-                            handleSave={handleSave}
-                            errors={errors}
-                        />
-                    )}
-                    {activeStep === 6 && (
-                        <ProductServicesStep
-                            formData={formData}
-                            setFormData={setFormData}
-                            productData={productData}
-                            setProductData={setProductData}
-                            handleSave={handleSave}
-                            errors={errors}
-                        />
-                    )}
-                    {activeStep === 7 && (
-                        <TestimonialsStep
-                            testimonials={formData?.testimonials}
-                            handleSave={handleSave}
-                            setFormData={setFormData}
-                            errors={errors}
-                        />
-                    )}
-                    {activeStep === 8 && (
-                        <PostLinksStep
-                            instagramPost={instagramPost}
-                            setInstagramPost={setInstagramPost}
-                            instagramReels={instagramReels}
-                            handleSave={handleSave}
-                            setInstagramReels={setInstagramReels}
-                            youtubeVideo={youtubeVideo}
-                            setYoutubeVideo={setYoutubeVideo}
-                            errors={errors}
-                        />
-                    )}
-                    {activeStep === 9 && (
-                        <GalleryStep
-                            images={images}
-                            setImages={setImages}
-                            handleSave={handleSave}
-                            errors={errors}
-                        />
-                    )}
-                    {activeStep === 10 && (
-                        <BusinessHoursStep
-                            formData={formData}
-                            setFormData={setFormData}
-                            handleSave={handleSave}
                             handleCreate={handleCreate}
                             errors={errors}
+                            setErrors={setErrors}
+                            testimonials={formData?.testimonials}
+                            gallery={formData?.gallery}
                         />
-                    )}
-                    {activeStep === 11 && (
-                        <HelpStep />
                     )}
 
                     {/* Common save button with underline */}
@@ -567,7 +349,7 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
                                 </button>
                             </div>}
                             <FormButton onClick={handleSave} variant="primary">
-                                Save Changes
+                                {activeStep === 10 ? "Create" : "Save Changes"}
                             </FormButton>
                         </div>
                     )}
@@ -599,4 +381,3 @@ const StepHeader = ({ activeStep, steps }) => (
         {steps.find(step => step.id === activeStep)?.label}
     </div>
 );
-

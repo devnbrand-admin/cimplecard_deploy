@@ -52,12 +52,12 @@ const Gallery = ({ card }) => {
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         pagination={{ el: ".custom-pagination", clickable: true }}
         loop={true}
-        className="max-w-5xl overflow-y-visible mx-auto rounded-lg"
+        className="max-w-5xl !overflow-y-visible py-2 mx-auto rounded-lg"
       >
         {card?.gallery?.map((image, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide className="" key={index}>
             <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-white rounded-lg shadow-lg overflow-hidden group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
-              <div className="w-full h-full rounded-lg overflow-hidden">
+              <div className="w-full h-full rounded-lg ">
                 <Image
                   src={image.src}
                   alt={image.alt || `Gallery Image ${index + 1}`}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormButton } from '../ModalFormMobile';
 
-const ChooseTemplateStep = ({ formData, handleTemplateSelection, handleSave }) => {
+const ChooseTemplateStep = ({ formData, handleTemplateSelection }) => {
   const templates = ['Medical', 'Astrologer', 'B2B Business', 'Lawyer'];
 
   return (

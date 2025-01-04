@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormButton, FormInput } from '../ModalFormMobile';
 
-const BusinessHoursStep = ({ formData, setFormData, handleSave, handleCreate }) => {
+const BusinessHoursStep = ({ formData, setFormData, }) => {
 
     // Function to add a new business hour entry
     const addBusinessHour = () => {
@@ -41,7 +41,7 @@ const BusinessHoursStep = ({ formData, setFormData, handleSave, handleCreate }) 
             </p>
 
             {/* Render each business hour entry */}
-            {formData.businessHours.map((hour, index) => (
+            {formData.businessHours?.map((hour, index) => (
                 <div
                     key={index}
                     className="flex gap-4 p-4 border rounded-md bg-[#F9FAFB] relative cursor-pointer"
@@ -73,17 +73,6 @@ const BusinessHoursStep = ({ formData, setFormData, handleSave, handleCreate }) 
                 {/* Button to add a new business hour */}
                 <FormButton onClick={addBusinessHour} variant="secondary">
                     Add Timings
-                </FormButton>
-                {/* Button to save business hours */}
-                <FormButton onClick={handleSave} variant="primary">
-                    Save Timings
-                </FormButton>
-            </div>
-
-            {/* Button to create card after business hours */}
-            <div className="py-6 flex justify-end">
-                <FormButton onClick={handleCreate} variant="primary">
-                    Create Card
                 </FormButton>
             </div>
         </div>

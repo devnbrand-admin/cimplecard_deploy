@@ -19,7 +19,7 @@ const Page = () => {
         {
           params: {
             name: cardName.replace(/%20/g, " "),
-            id: id,
+            publicId: id,
           },
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const Page = () => {
     fetchCardDetails();
   }, []);
   const TEMPLATE_MAP = {
-    medical: MedicalCard,
+    medical: AstrologerCard,
     lawyer: LawyerCard,
     astrologer: AstrologerCard,
     b2b: B2bCard,

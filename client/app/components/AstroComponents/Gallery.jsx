@@ -20,7 +20,7 @@ const galleryImages = [
   { id: 6, src: image3, alt: "Gallery Image 6" },
 ];
 
-function Gallery() {
+function Gallery({card}) {
   const swiperRef = useRef(null);
 
   // Custom Navigation Handlers
@@ -70,7 +70,7 @@ function Gallery() {
         loop={true}
         className="max-w-5xl mx-auto"
       >
-        {galleryImages.map((image) => (
+        {card?.gallery?.map((image) => (
           <SwiperSlide key={image.id}>
             <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-white rounded-lg shadow-lg overflow-hidden">
               <Image

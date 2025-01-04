@@ -17,6 +17,7 @@ export const cardForm = [
                 type: "imageUpload",
                 title: "Profile Image",
                 key: "profileImageUrl",
+                name: 'profileImageUrl',
                 description: "Upload a profile picture.",
                 placeholder: "Upload Profile",
                 actionKey: "uploadProfileImage",
@@ -26,18 +27,18 @@ export const cardForm = [
                 type: "formSection",
                 title: "Personal Details",
                 fields: [
-                    { type: "text", name: "firstName", placeholder: "First Name",required:true },
+                    { type: "text", name: "firstName", placeholder: "First Name", required: true },
                     { type: "text", name: "middleName", placeholder: "Middle Name" },
-                    { type: "text", name: "lastName", placeholder: "Last Name",required:true }
+                    { type: "text", name: "lastName", placeholder: "Last Name", required: true }
                 ]
             },
             {
                 type: "formSection",
                 title: "Professional Details",
                 fields: [
-                    { type: "text", name: "companyName", placeholder: "Company's Name",required:true },
-                    { type: "text", name: "location", placeholder: "Company's Address",required:true },
-                    { type: "text", name: "jobTitle", placeholder: "Job Role",required:true }
+                    { type: "text", name: "companyName", placeholder: "Company's Name", required: true },
+                    { type: "text", name: "location", placeholder: "Company's Address", required: true },
+                    { type: "text", name: "jobTitle", placeholder: "Job Role", required: true }
                 ]
             },
             {
@@ -45,7 +46,7 @@ export const cardForm = [
                 title: "About You",
                 name: "aboutUs",
                 placeholder: "Write briefly about yourself",
-                rows: 4,required:true
+                rows: 4, required: true
             },
             {
                 type: "formSection",
@@ -63,9 +64,9 @@ export const cardForm = [
                             { value: "Marathi", label: "Marathi" },
                             { value: "Tamil", label: "Tamil" },
                             { value: "Telugu", label: "Telugu" }
-                        ],required:true
+                        ], required: true
                     },
-                    { type: "date", name: "dateOfBirth", placeholder: "Date of Birth",required:true }
+                    { type: "date", name: "dateOfBirth", placeholder: "Date of Birth", required: true }
                 ]
             },
         ],
@@ -86,16 +87,13 @@ export const cardForm = [
                         type: "formSection",
                         className: 'mx-0 md:mx-5',
                         fields: [
-                            { type: "tel", name: "phoneNumbers[0]", placeholder: "Phone Number", required: true },
-                            { type: "tel", name: "phoneNumbers[1]", placeholder: "Other Number", required: true },
-                            { type: "tel", name: "phoneNumbers[2]", placeholder: "Other Number" },
+                            { type: "tel", name: "phoneNumbers[3]", placeholder: "Phone Number", required: true },
                         ]
                     },
                     {
                         type: "formSection",
                         fields: [
-                            { type: "email", name: "emails[0]", placeholder: "Email Address", required: true },
-                            { type: "email", name: "emails[1]", placeholder: "Other Email Address", required: true }
+                            { type: "email", name: "emails[3]", placeholder: "Email Address", required: true }
                         ]
                     }
                 ]
@@ -239,8 +237,8 @@ export const cardForm = [
                 fields: [
                     { type: "text", name: "name", placeholder: "Name", },
                     { type: "text", name: "designation", placeholder: "Designation", },
+                    { type: "url", name: "imageUrl", placeholder: "Image URL (optional)" },
                     { type: "textarea", name: "description", placeholder: "Testimonial", rows: 4, },
-                    { type: "url", name: "imageUrl", placeholder: "Image URL (optional)" }
                 ],
                 buttonText: "Add Testimonial"
             }
@@ -250,27 +248,44 @@ export const cardForm = [
         title: "Post Links Step",
         sections: [
             {
-                type: "addLinkSection",
-                title: "Add Instagram Posts",
-                placeholder: "Instagram Post Link", required: true
-            },
-            {
-                type: "addLinkSection",
-                title: "Add Instagram Reels",
-                placeholder: "Instagram Reel Link", required: true
-            },
-            {
-                type: "addLinkSection",
-                title: "Add YouTube Videos",
-                placeholder: "YouTube Video Link", required: true
+                type: "addLinkSection", // The type of section
+                fields: [
+                    {
+                        title: "Add Instagram Posts",
+                        placeholder: "Instagram Post Link",
+                        required: true,
+                        type: "addLinkSection" // The type should be specified for each field as well
+                    },
+                    {
+                        title: "Add Instagram Reels",
+                        placeholder: "Instagram Reel Link",
+                        required: true,
+                        type: "addLinkSection"
+                    },
+                    {
+                        title: "Add YouTube Videos",
+                        placeholder: "YouTube Video Link",
+                        required: true,
+                        type: "addLinkSection"
+                    }
+                ]
             }
         ]
-    },
+    }
+    ,
     {
-        title: 'Gallery',
-        icon: '',
-        fields: [],
-        buttons: ['Save Changes', 'Go Back'],
+        title: "Gallery Step",
+        sections: [
+            {
+                type: "imageGallery",
+                className: "flex gap-4 flex-wrap justify-start w-full overflow-x-auto p-4 scrollbar-thin scrollbar-thumb-[#707FDD] hover:scrollbar-thumb-[#5C6CCF]"
+            },
+            {
+                type: "addButton",
+                label: "Add Images",
+                className: "flex justify-center"
+            }
+        ]
     },
     {
         title: 'Business Hours',
@@ -290,3 +305,41 @@ export const cardForm = [
     },
 ];
 
+export const initialFormData = {
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    jobTitle: "",
+    companyName: "",
+    location: "",
+    profileImageUrl: "",
+    headerImageUrl: "",
+    templateType: "",
+    cardName: "",
+    qrCodeUrl: "",
+    aboutUs: "",
+    companyAddress: "",
+    dateOfBirth: "",
+    bio: "",
+    gridType: "",
+    languageSpoken: "",
+    additionalLink: "",
+    emails: [],
+    phoneNumbers: [],
+    otherEmails: "",
+    otherPhoneNumber: "",
+    phoneNumber: "",
+    emergencyName: "",
+    emergencyRelationship: "",
+    emergencyNumber: "",
+    emergencyEmail: "",
+    SocialMediaLink: [],
+    companySocialMediaLink: [],
+    gallery: [],
+    instagramPost: [],
+    instagramReel: [],
+    youtubeVideoLink: [],
+    testimonials: [],
+    services: [],
+    businessHours: [],
+};

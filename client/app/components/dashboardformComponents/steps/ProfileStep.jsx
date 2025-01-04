@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { FormInput } from '../ModalFormMobile';
 import { cardForm } from '../../../utils/constant';
 
-const structure = cardForm[1]
+const structure = cardForm[1];
 
-
-const ProfileStep = ({ formData, setFormData, handleProfileUpload, handleInputChange,errors }) => {
+const ProfileStep = ({ formData, setFormData, handleImageUpload, handleInputChange, errors }) => {
 
   const renderImageUpload = (section) => (
     <div key={section.key} className="relative mb-[5rem]">
@@ -28,13 +27,8 @@ const ProfileStep = ({ formData, setFormData, handleProfileUpload, handleInputCh
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => {
-              if (e.target.files && e.target.files[0]) {
-                handleInputChange({
-                  target: { name: section.key, value: URL.createObjectURL(e.target.files[0]) },
-                });
-              }
-            }}
+            name='profileImageUrl'
+            onChange={handleImageUpload}
             className="hidden"
             id={`${section.key}-upload`}
           />
@@ -46,22 +40,23 @@ const ProfileStep = ({ formData, setFormData, handleProfileUpload, handleInputCh
             htmlFor="profile-upload"
             className="w-24 h-24 rounded-full bg-[#707FDD] bg-opacity-10 flex items-center justify-center overflow-hidden cursor-pointer"
             style={{
-              backgroundImage: formData.profileImageUrl
-                ? `url(${formData.profileImageUrl})`
+              backgroundImage: formData.headerImageUrl
+                ? `url(${formData.headerImageUrl})`
                 : 'none',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
-            {!formData.profileImageUrl && (
+            {!formData.headerImageUrl && (
               <img src="../../ProfileAvatar.svg" alt="Upload Icon" className="w-16 h-16" />
             )}
             <input
               type="file"
               accept="image/*"
-              onChange={handleProfileUpload}
+              onChange={handleImageUpload}
               className="hidden"
               id="profile-upload"
+              name='headerImageUrl'
             />
           </label>
         </div>

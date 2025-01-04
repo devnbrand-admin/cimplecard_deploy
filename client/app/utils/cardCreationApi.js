@@ -70,7 +70,7 @@ export const createCard = async (formData,images,updatedProductData) => {
       youtubeVideoLink : formData?.youtubeVideoLink && formData.youtubeVideoLink,
       services: updatedProductData,
       socialMediaLink: formData.SocialMediaLink,
-      gallery:await uploadImages(images.length > 0 ? images : []),
+      gallery:await uploadImages(images?.length > 0 ? images : []),
       gridType:formData?.gridType
     };
 

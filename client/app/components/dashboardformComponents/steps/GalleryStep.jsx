@@ -1,34 +1,36 @@
 import React from 'react';
 import { BsImages } from "react-icons/bs";
 import { FormButton } from '../ModalFormMobile';
+import { cardForm } from '../../../utils/constant';
+import { uploadImages } from '../utils/imageUpload';
 
-const galleryStructure = {
-  title: "Gallery Step",
-  sections: [
-    {
-      type: "imageGallery",
-      className: "flex gap-4 flex-wrap justify-start w-full overflow-x-auto p-4 scrollbar-thin scrollbar-thumb-[#707FDD] hover:scrollbar-thumb-[#5C6CCF]"
-    },
-    {
-      type: "addButton",
-      label: "Add Images",
-      className: "flex justify-center"
-    }
-  ]
-};
+const galleryStructure = cardForm[8];
 
+const GalleryStep = ({ gallery, setFormData, }) => {
 
-
-const GalleryStep = ({ images, setImages, handleSave }) => {
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);
-    const newImages = files.map(file => URL.createObjectURL(file));
-    setImages(prev => [...prev, ...newImages]);
+
+    try {
+      // Assuming uploadImages is a function that takes an array of files and returns a promise
+      const newImages = await uploadImages(files);
+
+      setFormData(prevGallery => {
+        const updatedGallery = [...(prevGallery.gallery || []), ...newImages];
+
+        return {
+          ...prevGallery,
+          gallery: updatedGallery,
+        };
+      });
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    }
   };
 
   const renderImageGallery = (section) => (
     <div key="imageGallery" className={section.className}>
-      {images.map((image, index) => (
+      {gallery?.map((image, index) => (
         <div
           key={index}
           className="w-40 h-56 rounded-lg flex-shrink-0 bg-cover bg-center"
@@ -36,7 +38,7 @@ const GalleryStep = ({ images, setImages, handleSave }) => {
         ></div>
       ))}
 
-      {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
+      {[...Array(Math.max(5 - gallery?.length || 0, 0))].map((_, index) => (
         <div
           key={`empty-${index}`}
           className="w-40 h-56 flex-1 basis-[200px] md:grow-0 !grow-0 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"
@@ -95,4 +97,3 @@ const GalleryStep = ({ images, setImages, handleSave }) => {
 };
 
 export default GalleryStep;
-

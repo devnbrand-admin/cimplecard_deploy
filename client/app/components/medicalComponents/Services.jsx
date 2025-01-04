@@ -58,7 +58,7 @@ const Services = ({ card }) => {
               src={card.profileImageUrl}
               alt="doctor img"
               className="rounded-full"
-              style={{ height: "70vh", width: "70vh" }}
+              style={{ height: "50vh", width: "50vh" }}
             />
           </div>
         </div>

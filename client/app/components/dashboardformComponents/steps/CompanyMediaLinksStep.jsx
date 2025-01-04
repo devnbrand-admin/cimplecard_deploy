@@ -4,7 +4,7 @@ import { cardForm } from '../../../utils/constant';
 
 const structure = cardForm[4];
 
-const CompanyMediaLinksStep = ({ formData, setFormData, handleSave, errors }) => {
+const CompanyMediaLinksStep = ({ formData, setFormData, errors }) => {
     const updateCompanySocialMediaLink = (platform, value) => {
         const updatedLinks = formData.companySocialMediaLink.filter(link => link.platform !== platform);
         if (value.trim()) {

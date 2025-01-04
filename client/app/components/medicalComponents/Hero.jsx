@@ -12,7 +12,7 @@ const Hero = ({ card }) => {
       }}
       id="Profile"
     >
-      <div className="w-1/2 absolute top-40 left-52 flex justify-between flex-col">
+      <div className="w-1/2 absolute top-40 left-[10vw] flex justify-between flex-col">
         <div className="my-7">
           <h1 className="text-7xl font-bold" style={{ color: "#0B8823" }}>
             {card.title}
@@ -79,7 +79,7 @@ const Hero = ({ card }) => {
             />
           </div>
         </div>
-        <div className="w-72 border text-white my-7 h-[500px] relative">
+        <div className="w-72 text-white my-7 h-[500px] relative">
           <img
             src="/Assets/MedicalAssets/Rectangleup.png"
             alt="img"
@@ -103,8 +103,8 @@ const Hero = ({ card }) => {
 
       <img
         src={card.profileImageUrl}
-        style={{ bottom: 20, right: 100, width: "70vh", height: "70vh" }}
-        className="absolute rounded-full bg-center bg-cover"
+        style={{ width: "50vh", height: "50vh" }}
+        className="absolute md:!bottom-1/3 lg:!bottom-1/4 !shadow-sm right-[10vw] rounded-full bg-center bg-cover"
         alt="profile img"
       />
     </div>

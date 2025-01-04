@@ -4,6 +4,9 @@ const generateValidationRules = (structure) => {
   // Regex for email validation
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+  // Regex for URL validation (http:// or https://)
+  const urlPattern = /^https?:\/\/[^\s/$.?#].[^\s]*$/;
+
   // Recursive function to extract rules from a section
   const extractRules = (section) => {
     if (!section) return;
@@ -31,6 +34,12 @@ const generateValidationRules = (structure) => {
           rule.message = 'Please enter a valid email address.';
         }
 
+        // If the field is of type 'url', add validation for URL format
+        if (field.type === 'url') {
+          rule.pattern = urlPattern; // Regex pattern for URL validation
+          rule.message = 'Please enter a valid URL starting with http:// or https://';
+        }
+
         // If min or max is specified, add them to the rule
         if (field.min !== undefined) {
           rule.min = field.min;
@@ -41,7 +50,8 @@ const generateValidationRules = (structure) => {
 
         // Add the rule to the rules object if any validation exists
         if (Object.keys(rule).length > 0) {
-          rules[field.name] = rule;
+          const fieldName = field.name.replace(/\[\d+\]/g, ''); // Set all indices to 0 for validation
+          rules[fieldName] = rule;
         }
 
         // Recursively process nested fields
@@ -71,13 +81,15 @@ const generateValidationRules = (structure) => {
 
 
 
-
 function formatString(input) {
   // Replace camel case with spaces
   const spacedString = input.replace(/([a-z])([A-Z])/g, '$1 $2');
 
+  // Handle array notation like 'phone[0]' to 'phone 1'
+  const cleanedString = spacedString.replace(/\[(\d+)\]/g, (match, number) => ` ${parseInt(number) + 1}`);
+
   // Split the string into words
-  const words = spacedString.split(' ');
+  const words = cleanedString.split(' ');
 
   // Capitalize the first word and make the rest lowercase
   const formattedWords = words.map((word, index) => {
@@ -91,6 +103,7 @@ function formatString(input) {
   // Join the words back into a single string
   return formattedWords.join(' ');
 }
+
 export const validateFormData = (structure, setErrors, formData) => {
   const rules = generateValidationRules(structure);
   const validationErrors = {};
@@ -100,8 +113,19 @@ export const validateFormData = (structure, setErrors, formData) => {
     const rule = rules[field];
 
     // Check if field is required and empty
-    if (rule.required && (!value || value.trim() === "")) {
-      validationErrors[field] = `${formatString(field)} is required.`;
+    if (rule.required) {
+      if (Array.isArray(value)) {
+        // Check if the array is empty or contains only empty values
+        const isArrayEmpty = value.length === 0 || value.every(item => !item || item.trim() === "");
+        if (isArrayEmpty) {
+          validationErrors[field] = `${formatString(field)} is required.`;
+        }
+      } else {
+        // For non-array values (strings, numbers, etc.)
+        if (!value || value.trim() === "") {
+          validationErrors[field] = `${formatString(field)} is required.`;
+        }
+      }
     }
 
     // Check if field has a min value and validate it

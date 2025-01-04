@@ -4,15 +4,30 @@ import { cardForm } from '../../../utils/constant';
 
 const structure = cardForm[3];
 
-const SocialMediaLinksStep = ({ formData, setFormData, handleInputChange, handleSave, errors }) => {
-    const updateSocialMediaLink = (platform, value) => {
-        const updatedLinks = formData.SocialMediaLink.filter(link => link.platform !== platform);
-        if (value.trim()) {
-            updatedLinks.push({ platform, url: value });
+const SocialMediaLinksStep = ({ formData, setFormData, handleSave, errors }) => {
+
+    // This function handles changes to input fields and updates the form data
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+        if (name === "SocialMediaLink") {
+            // If the field is SocialMediaLink, update the respective platform's URL
+            setFormData((prevFormData) => {
+                const updatedLinks = prevFormData.SocialMediaLink.map((link) =>
+                    link.platform === e.target.dataset.platform ? { ...link, url: value } : link
+                );
+                return { ...prevFormData, SocialMediaLink: updatedLinks };
+            });
+        } else {
+            // Otherwise, just update the formData for normal input fields
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
         }
-        setFormData({ ...formData, SocialMediaLink: updatedLinks });
     };
 
+    // Function to render image sections
     const renderImage = (section) => (
         <div
             key={section.src}
@@ -21,6 +36,7 @@ const SocialMediaLinksStep = ({ formData, setFormData, handleInputChange, handle
         ></div>
     );
 
+    // Function to render individual input fields
     const renderField = (field) => (
         <div
             key={field.name}
@@ -38,6 +54,7 @@ const SocialMediaLinksStep = ({ formData, setFormData, handleInputChange, handle
         </div>
     );
 
+    // Function to render form sections with multiple fields
     const renderFormSection = (section) => (
         <div key={section.title || Math.random()} className="space-y-4">
             {section.title && <h2 className={section.titleClassName || ''}>{section.title}</h2>}
@@ -53,8 +70,26 @@ const SocialMediaLinksStep = ({ formData, setFormData, handleInputChange, handle
         </div>
     );
 
+    // Function to render social media link fields
+    const renderSocialMediaLinks = () => {
+        return formData.SocialMediaLink.map((link, index) => (
+            <div key={index} className="flex gap-4 mb-4">
+                <input
+                    type="text"
+                    placeholder={`Enter ${link.platform} URL`}
+                    name="SocialMediaLink"
+                    data-platform={link.platform}
+                    value={link.url || ''}
+                    onChange={handleInputChange}
+                    className="flex-1 p-3 border rounded-md"
+                />
+            </div>
+        ));
+    };
+
     return (
         <div className="space-y-6">
+            {/* Render Sections */}
             {structure.sections.map((section) => {
                 switch (section.type) {
                     case 'image':
@@ -65,6 +100,9 @@ const SocialMediaLinksStep = ({ formData, setFormData, handleInputChange, handle
                         return null;
                 }
             })}
+
+            {/* Render Social Media Links Fields */}
+            {renderSocialMediaLinks()}
         </div>
     );
 };
