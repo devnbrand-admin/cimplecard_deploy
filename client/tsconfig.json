@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/components/dashboardformComponents/Modal.jsx", "app/utils/validation.js"  ],
+, "app/components/dashboardformComponents/Modal.jsx", "app/utils/validation.ts"  ],
   "exclude": [
     "node_modules"
   ]

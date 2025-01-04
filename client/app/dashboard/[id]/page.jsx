@@ -4,15 +4,12 @@ import { useParams } from "next/navigation";
 import Navbar from "../../components/dashboardComponents/Navbar";
 import Card from "../../components/dashboardComponents/Card";
 import axios from "axios";
-import MobileComponent from "../../components/dashboardComponents/MobileComponent";
-import dynamic from "next/dynamic";
 import { useMediaQuery } from "react-responsive";
 import profileIcon from "../../assets/profile_icon.png";
-import dynamic from "next/dynamic";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
-import { useMediaQuery } from "react-responsive";
 import ResponsiveModalForm from "../../components/dashboardformComponents/Modal";
+import dynamic from "next/dynamic";
 const ModalForm = dynamic(() =>
   import("../../components/dashboardformComponents/ModalForm")
 );
