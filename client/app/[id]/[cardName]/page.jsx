@@ -14,8 +14,8 @@ const Page = () => {
   const [card, setCard] = useState();
   const getCardDetails = async () => {
     try {
-           const response = await axios.get(
-        `https://cimple-card.onrender.com/api/card/getby`,
+      const response = await axios.get(
+        `https://cimple-card-1.onrender.com/api/card/getby`,
         {
           params: {
             name: cardName.replace(/%20/g, " "),

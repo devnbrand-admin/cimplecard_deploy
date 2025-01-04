@@ -25,8 +25,8 @@ const DashboardPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [navbarSearch, setNavBarSearch] = useState("")
-  const [newSearchedCards, setNewSearchedCards] = useState([])
+  const [navbarSearch, setNavBarSearch] = useState("");
+  const [newSearchedCards, setNewSearchedCards] = useState([]);
 
   const isMobileSize = useMediaQuery({ maxWidth: 768 });
 
@@ -37,7 +37,7 @@ const DashboardPage = () => {
   // API call using fetch - will update it later using axios
   const [userDetails, setUserDetails] = useState();
 
-  const BASE_URL = "https://cimple-card.onrender.com/api/user";
+  const BASE_URL = "https://cimple-card-1.onrender.com/api/user";
 
   const getUserDetails = async (token) => {
     try {
@@ -66,7 +66,7 @@ const DashboardPage = () => {
       try {
         const userDetails = await getUserDetails(jwtToken);
         setUserDetails(userDetails);
-        console.log(userDetails,"userDe")
+        console.log(userDetails, "userDe");
       } catch (err) {
         console.log(err.message);
       }
@@ -82,26 +82,22 @@ const DashboardPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
-  
-
   useEffect(() => {
     if (navbarSearch && userDetails?.cards?.length > 0) {
-      console.log(navbarSearch && userDetails?.cards?.length,"use")
+      console.log(navbarSearch && userDetails?.cards?.length, "use");
       const searchedCards = userDetails?.cards?.filter((card) => {
-        const isMatch = card?.templateType?.toLowerCase().includes(navbarSearch?.toString()?.toLowerCase());
+        const isMatch = card?.templateType
+          ?.toLowerCase()
+          .includes(navbarSearch?.toString()?.toLowerCase());
         console.log(card?.templateType, navbarSearch, "Match:", isMatch);
         return isMatch;
       });
-            console.log(searchedCards,"newCards")
-      if (searchedCards?.length > 0) setNewSearchedCards(searchedCards)
+      console.log(searchedCards, "newCards");
+      if (searchedCards?.length > 0) setNewSearchedCards(searchedCards);
     } else {
-      setNewSearchedCards([])
+      setNewSearchedCards([]);
     }
-
-  }, [navbarSearch])
-
-
+  }, [navbarSearch]);
 
   return (
     <>
@@ -184,21 +180,17 @@ const DashboardPage = () => {
                   <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center rounded-xl justify-center text-xl opacity-0 group-hover:opacity-100 transition"></div>
                 </div>
                 {userDetails
-
                   ? (newSearchedCards.length > 0 || navbarSearch.trim()
-                    ? newSearchedCards
-                    : userDetails.cards
-                  ).map((card, index) => <Card key={index} card={card} />)
+                      ? newSearchedCards
+                      : userDetails.cards
+                    ).map((card, index) => <Card key={index} card={card} />)
                   : []}
               </div>
             </div>
           </div>
           {isModalOpen && (
             <Provider store={store}>
-              <div
-                className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-
-              >
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                 <div
                   className="bg-white p-6 rounded shadow-md"
                   // Prevent backdrop click from closing the modal
