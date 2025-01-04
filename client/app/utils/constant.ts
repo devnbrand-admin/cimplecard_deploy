@@ -248,23 +248,27 @@ export const cardForm = [
         title: "Post Links Step",
         sections: [
             {
+                title: "Add Social Media Posts",
                 type: "addLinkSection", // The type of section
                 fields: [
                     {
                         title: "Add Instagram Posts",
                         placeholder: "Instagram Post Link",
+                        name: "instagramLink",
                         required: true,
                         type: "addLinkSection" // The type should be specified for each field as well
                     },
                     {
                         title: "Add Instagram Reels",
                         placeholder: "Instagram Reel Link",
+                        name: "instagramReel",
                         required: true,
                         type: "addLinkSection"
                     },
                     {
                         title: "Add YouTube Videos",
                         placeholder: "YouTube Video Link",
+                        name: "youtubeLink",
                         required: true,
                         type: "addLinkSection"
                     }

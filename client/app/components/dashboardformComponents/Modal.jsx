@@ -26,13 +26,15 @@ import PostLinksStep from './steps/PostLinksStep';
 import GalleryStep from './steps/GalleryStep';
 import BusinessHoursStep from './steps/BusinessHour';
 import HelpStep from './steps/HelpStep';
-import { initialFormData } from '../../utils/constant';
+import { cardForm, initialFormData } from '../../utils/constant';
 import { MdClose } from 'react-icons/md';
+import { useMediaQuery } from 'react-responsive';
 
 export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
     const dispatch = useDispatch();
     const [activeStep, setActiveStep] = useState(1);
     const [errors, setErrors] = useState({});
+    const isMobile = useMediaQuery({ maxWidth: 768 })
     const [formData, setFormData] = useState(initialFormData);
 
     // Steps Configuration
@@ -111,6 +113,7 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
     return (
         <div className="fixed inset-0 shadow-sm bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 p-4 md:p-0">
             <div className="bg-white relative rounded-lg w-full max-w-7xl h-[90vh] md:h-[80vh] flex flex-col md:flex-row overflow-hidden">
+                {isMobile && <MobileHeader activeStep={activeStep} steps={steps} />}
                 <button
                     className="absolute z-30 right-4 top-4 text-black"
                     onClick={() => setIsModalOpen(false)}
@@ -125,19 +128,21 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
                     />
                 </div>
                 <div className="w-full px-4 md:px-6 relative overflow-y-auto">
-                    <StepHeader activeStep={activeStep} steps={steps} />
+                    {!isMobile && <StepHeader activeStep={activeStep} steps={steps} />}
                     {ActiveStepComponent && (
                         <ActiveStepComponent
                             formData={formData}
                             setFormData={setFormData}
+                            gallery={formData?.gallery}
                             handleSave={handleSave}
+                            testimonials={formData?.testimonials}
                             handleTemplateSelection={handleTemplateSelection}
                             handleImageUpload={handleImageUpload}
                             handleInputChange={handleInputChange}
                             errors={errors}
                         />
                     )}
-                    <div className="py-6 flex justify-end">
+                    <div className="py-6 gap-2 flex justify-end">
                         {activeStep > 1 && (
                             <button
                                 onClick={handleBack}
@@ -158,7 +163,7 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
 
 
 const MobileHeader = ({ activeStep, steps }) => (
-    <div className="bg-gradient-to-r from-[#707FDD] to-[#1E2F98] p-4 text-white">
+    <div className="bg-gradient-to-r right-0 left-0 top-0 sticky from-[#707FDD] to-[#1E2F98] p-4 text-white">
         <h2 className="text-xl font-semibold">{steps.find(step => step.id === activeStep)?.label}</h2>
     </div>
 );
@@ -167,7 +172,7 @@ const StepHeader = ({ activeStep, steps }) => (
     <div
         className="text-[white] text-center text-2xl md:text-4xl sticky top-0 font-semibold py-4 md:py-6 px-4 md:px-6"
         style={{
-            backgroundImage: "url('/ModalHeader2.png')", // Corrected format
+            backgroundImage: "url('/ModalHeader2.png')", 
             backgroundSize: "contain",
             backgroundPosition: "top",
             backgroundRepeat: "no-repeat",

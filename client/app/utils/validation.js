@@ -50,7 +50,7 @@ const generateValidationRules = (structure) => {
 
         // Add the rule to the rules object if any validation exists
         if (Object.keys(rule).length > 0) {
-          const fieldName = field.name.replace(/\[\d+\]/g, ''); // Set all indices to 0 for validation
+          const fieldName = field.name?.replace(/\[\d+\]/g, ''); // Set all indices to 0 for validation
           rules[fieldName] = rule;
         }
 
@@ -109,8 +109,18 @@ export const validateFormData = (structure, setErrors, formData) => {
   const validationErrors = {};
 
   Object.keys(rules).forEach((field) => {
-    const value = formData[field];
+    let value = formData[field];
     const rule = rules[field];
+
+    // Trim the value before checking
+    if (value && typeof value === 'string') {
+      value = value.trim();
+    }
+
+    // If the value is an array, check the first element (value[0])
+    if (Array.isArray(value) && value.length > 0) {
+      value = value[0]?.trim();  // Handle the first element of the array
+    }
 
     // Check if field is required and empty
     if (rule.required) {
@@ -134,13 +144,18 @@ export const validateFormData = (structure, setErrors, formData) => {
     }
 
     // Check if field has a max value and validate it
-    if (rule.max !== undefined && value && value.length > rule?.max) {
+    if (rule.max !== undefined && value && value.length > rule.max) {
       validationErrors[field] = `${formatString(field)} must not exceed ${rule.max} characters.`;
     }
 
     // Check if field has a pattern (e.g., for phone numbers or email)
     if (rule.pattern && value && !rule.pattern.test(value)) {
-      validationErrors[field] = rule.message || `${formatString(field)} is not valid.`;
+      // For email specific validation
+      if (field === 'email') {
+        validationErrors[field] = rule.message || `${formatString(field)} is not valid.`;
+      } else {
+        validationErrors[field] = rule.message || `${formatString(field)} is not valid.`;
+      }
     }
   });
 

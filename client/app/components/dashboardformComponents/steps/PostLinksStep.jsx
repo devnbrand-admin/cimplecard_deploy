@@ -4,7 +4,7 @@ import { FormInput } from '../ModalFormMobile';
 
 const postLinksStructure = cardForm[7];
 
-const PostLinksStep = ({ setFormData, formData, errors, }) => {
+const PostLinksStep = ({ setFormData, formData, errors }) => {
 
     // Function to handle link addition for specific keys in `formData`
     const handleAddLink = (key, newLink) => {
@@ -22,26 +22,19 @@ const PostLinksStep = ({ setFormData, formData, errors, }) => {
         }));
     };
 
-    const renderAddLinkSection = (section) => {
-        // Map the section title to a corresponding key in `formData`
-        const keyMap = {
-            'Add Instagram Posts': 'instagramPost',
-            'Add Instagram Reels': 'instagramReel',
-            'Add YouTube Videos': 'youtubeVideoLink',
-        };
-
-        const key = keyMap[section.title];
+    const renderAddLinkSection = (field) => {
+        const key = field.name;  // Directly use the field name as the key in formData
         const items = formData[key] || []; // Default to an empty array if key is not present
 
         return (
             <AddLinkSection
-                key={section.title} // Unique key
-                title={section.title}
+                key={field.name}  // Use field name as unique key
+                title={field.title}
                 items={items}
                 onAdd={(newLink) => handleAddLink(key, newLink)}
                 onRemove={(indexToRemove) => handleRemoveLink(key, indexToRemove)}
-                placeholder={section.placeholder}
-                error={errors?.[key]} // Pass error for the specific section
+                placeholder={field.placeholder}
+                error={errors?.[key]} // Pass error for the specific field
             />
         );
     };
@@ -50,12 +43,11 @@ const PostLinksStep = ({ setFormData, formData, errors, }) => {
         <div className="space-y-6">
             {postLinksStructure.sections.map((section, index) => {
                 // Render each section correctly with the fields
-                return section.fields.map((field) => renderAddLinkSection(field)); 
+                return section.fields.map((field) => renderAddLinkSection(field));
             })}
         </div>
     );
 };
-
 
 export default PostLinksStep;
 
@@ -82,7 +74,7 @@ const AddLinkSection = ({ title, items, onAdd, onRemove, placeholder, error }) =
                 {items.length > 0 ? (
                     items.map((item, index) => (
                         <div key={index} className="flex justify-between items-center border-b py-2">
-                            <span>{item}</span>
+                            <FormInput disabled value={item} />
                             <button
                                 onClick={() => handleRemoveClick(index)}
                                 className="text-red-500 font-bold text-xl"
@@ -93,7 +85,7 @@ const AddLinkSection = ({ title, items, onAdd, onRemove, placeholder, error }) =
                         </div>
                     ))
                 ) : (
-                    <p></p>
+                    <p>No links added yet.</p>
                 )}
             </div>
 
@@ -106,7 +98,6 @@ const AddLinkSection = ({ title, items, onAdd, onRemove, placeholder, error }) =
                     placeholder={placeholder}
                     className={`border px-4 py-2 rounded-md w-4/5 ${error ? 'border-red-500' : ''}`}
                 />
-                {error && <p className="text-red-500 text-sm">{error}</p>}
                 <button
                     onClick={handleAddClick}
                     disabled={!newLink.trim()}  // Disable the button if the input is empty
@@ -115,6 +106,7 @@ const AddLinkSection = ({ title, items, onAdd, onRemove, placeholder, error }) =
                     Add
                 </button>
             </div>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>
     );
 };
