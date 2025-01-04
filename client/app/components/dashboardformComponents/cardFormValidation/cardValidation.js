@@ -72,23 +72,23 @@ export const validateStep3 = (formData) => {
   });
 
   // Emergency contact validations
-  if (!formData.emergencyName) {
-    errors.emergencyName = "Emergency contact name is required.";
-  }
+  // if (!formData.emergencyName) {
+  //   errors.emergencyName = "Emergency contact name is required.";
+  // }
 
-  if (!formData.emergencyRelationship) {
-    errors.emergencyRelationship = "Relationship is required.";
-  }
+  // if (!formData.emergencyRelationship) {
+  //   errors.emergencyRelationship = "Relationship is required.";
+  // }
 
-  if (!formData.emergencyNumber) {
-    errors.emergencyNumber = "Emergency contact phone number is required.";
-  } else if (!/^\d{10}$/.test(formData.emergencyNumber)) {
-    errors.emergencyNumber = "Emergency phone number must be 10 digits.";
-  }
+  // if (!formData.emergencyNumber) {
+  //   errors.emergencyNumber = "Emergency contact phone number is required.";
+  // } else if (!/^\d{10}$/.test(formData.emergencyNumber)) {
+  //   errors.emergencyNumber = "Emergency phone number must be 10 digits.";
+  // }
 
-  if (formData.emergencyEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.emergencyEmail)) {
-    errors.emergencyEmail = "Invalid emergency email address.";
-  }
+  // if (formData.emergencyEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.emergencyEmail)) {
+  //   errors.emergencyEmail = "Invalid emergency email address.";
+  // }
 
   console.log(errors, "step3")
 

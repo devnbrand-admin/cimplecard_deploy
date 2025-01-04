@@ -4,6 +4,15 @@ import axios from "../../api_resources/axios";
  * Uploads a single image file and returns its URL.
  */
 export const uploadSingleImage = async (imageFile,name) => {
+  if(!imageFile){
+    return null
+  }
+  if (typeof imageFile === 'string') {
+    if (imageFile?.includes('cloud')) {
+      return imageFile;
+    }
+  }
+  
     
     console.log(imageFile,imageFile?.type,"imageType")
     const validImageTypes = ["image/jpeg", "image/png", "image/gif","image/jpg","image/svg+xml","image/webp"];
@@ -40,6 +49,9 @@ export const uploadSingleImage = async (imageFile,name) => {
  */
 export const uploadImages = async (imageFiles) => {
   try {
+    if(imageFiles.length <= 0){
+      return null
+    }
     // Use Promise.all to upload all images concurrently
     const uploadPromises = imageFiles.map((file) => uploadSingleImage(file));
     const imageUrls = await Promise.all(uploadPromises);
