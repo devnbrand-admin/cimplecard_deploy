@@ -38,7 +38,7 @@ const GalleryStep = ({ gallery, setFormData, }) => {
         ></div>
       ))}
 
-      {[...Array(Math.max(5 - gallery?.length || 0, 0))].map((_, index) => (
+      {[...Array(Math.max(5 - gallery?.length || 0, 0))]?.map((_, index) => (
         <div
           key={`empty-${index}`}
           className="w-40 h-56 flex-1 basis-[200px] md:grow-0 !grow-0 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"
@@ -82,7 +82,7 @@ const GalleryStep = ({ gallery, setFormData, }) => {
 
   return (
     <div className="space-y-6">
-      {galleryStructure.sections.map((section) => {
+      {galleryStructure.sections?.map((section) => {
         switch (section.type) {
           case 'imageGallery':
             return renderImageGallery(section);

@@ -19,7 +19,7 @@ const Testimonal = ({ card }) => {
         {(card.testimonials && card.testimonials.length > 0
           ? card.testimonials
           : ["no testimonals added"]
-        ).map((testimonial, index) => (
+        )?.map((testimonial, index) => (
           <p
             key={index}
             className="rounded-lg bg-white p-2 md:p-3 m-1 md:m-2 text-xs md:text-sm"

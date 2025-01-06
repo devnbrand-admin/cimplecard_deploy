@@ -133,12 +133,13 @@ export const cardForm = [
             {
                 type: "formSection",
                 title: "",
+                name: "SocialMediaLink[]",
                 description: "Add your website, portfolio, and social media links.",
                 fields: [
                     {
                         type: "formSection",
                         fields: [
-                            { type: "url", name: "Website", placeholder: "Website/Portfolio URL", required: true },
+                            { type: "url", name: "Website", placeholder: "Website/Portfolio URL",required: true },
                             { type: "url", name: "LinkedIn", placeholder: "LinkedIn (Optional)" },
                             { type: "url", name: "Instagram", placeholder: "Instagram (Optional)" },
                         ]
@@ -167,6 +168,7 @@ export const cardForm = [
             {
                 type: "formSection",
                 title: "",
+                name:'companySocialMediaLink[]',
                 description: "Add your website, portfolio, and social media links.",
                 fields: [
                     {
@@ -203,8 +205,8 @@ export const cardForm = [
                 title: "Choose What To Add",
                 titleClassName: "text-2xl font-semibold text-[#707FDD] text-center",
                 buttons: [
-                    { label: "Product", value: "Product" },
-                    { label: "Service", value: "Service" }
+                    { label: "Products", value: "Products" },
+                    { label: "Services", value: "Services" }
                 ]
             },
             {
@@ -254,7 +256,7 @@ export const cardForm = [
                     {
                         title: "Add Instagram Posts",
                         placeholder: "Instagram Post Link",
-                        name: "instagramLink",
+                        name: "instagramPost",
                         required: true,
                         type: "addLinkSection" // The type should be specified for each field as well
                     },
@@ -268,7 +270,7 @@ export const cardForm = [
                     {
                         title: "Add YouTube Videos",
                         placeholder: "YouTube Video Link",
-                        name: "youtubeLink",
+                        name: "youtubeVideoLink",
                         required: true,
                         type: "addLinkSection"
                     }

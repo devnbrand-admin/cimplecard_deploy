@@ -35,7 +35,7 @@ function ContactInfo() {
   return (
     <div className="flex items-center justify-center min-h-screen p-6">
       <div className="bg-gradient-to-b from-[#578EB6] to-[#275679] rounded-xl shadow-lg p-8 max-w-4xl grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {contactData.map((item) => (
+        {contactData?.map((item) => (
           <div
             key={item.id}
             className="bg-gray-50 rounded-lg shadow-md p-6 flex flex-col items-center space-y-6"
@@ -43,7 +43,7 @@ function ContactInfo() {
             <div className="p-4 bg-blue-100 rounded-full">{item.icon}</div>
             <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
             <ul className="text-center text-gray-600 space-y-2">
-              {item.details.map((detail, index) => (
+              {item.details?.map((detail, index) => (
                 <li key={index} className="text-sm md:text-base">
                   {detail}
                 </li>

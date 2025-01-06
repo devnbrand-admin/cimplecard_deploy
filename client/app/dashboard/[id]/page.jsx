@@ -37,7 +37,7 @@ const DashboardPage = () => {
   // API call using fetch - will update it later using axios
   const [userDetails, setUserDetails] = useState();
 
-  const BASE_URL = "https://cimple-card-1.onrender.com/api/user";
+  const BASE_URL = "https://cimple-card-1.onrender.com/api/user/getdetails";
 
   const getUserDetails = async (token) => {
     try {
@@ -124,7 +124,7 @@ const DashboardPage = () => {
             <h3 className="text-lg font-semibold text-[#5A6ACF] mb-4">My Cards</h3>
             <div className="flex flex-wrap justify-center items-center gap-4">
               {userDetails
-                ? userDetails.cards.map((card, index) => (
+                ? userDetails.cards?.map((card, index) => (
                   // <div key={index} className="my-4 flex-1 basis-[100px]">
                   <Card card={card} key={index} />
                   // </div>
@@ -200,7 +200,7 @@ const DashboardPage = () => {
                   <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center rounded-xl justify-center text-xl opacity-0 group-hover:opacity-100 transition"></div>
                 </div>
                 {userDetails
-                  ? userDetails.cards.map((card, index) => (
+                  ? userDetails.cards?.map((card, index) => (
                     <Card key={index} card={card} />
                   ))
                   : ""}
@@ -313,7 +313,7 @@ const s = () => <Provider store={store}>
                 ? (newSearchedCards.length > 0 || navbarSearch.trim()
                   ? newSearchedCards
                   : userDetails.cards
-                ).map((card, index) => <Card key={index} card={card} />)
+                )?.map((card, index) => <Card key={index} card={card} />)
                 : []}
             </div>
           </div>

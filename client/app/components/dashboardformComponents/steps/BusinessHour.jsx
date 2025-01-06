@@ -16,7 +16,7 @@ const BusinessHoursStep = ({ formData, setFormData, }) => {
 
     // Function to update a specific field in a business hour entry
     const updateBusinessHour = (index, field, value) => {
-        const updatedBusinessHours = formData.businessHours.map((hour, i) =>
+        const updatedBusinessHours = formData.businessHours?.map((hour, i) =>
             i === index ? { ...hour, [field]: value } : hour
         );
         setFormData({ ...formData, businessHours: updatedBusinessHours });

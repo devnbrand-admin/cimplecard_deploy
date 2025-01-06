@@ -61,7 +61,7 @@ const MobileComponent = ({ userDetails, setIsModalOpen }) => {
           My Cards
         </h3>
         {userDetails
-          ? userDetails.cards.map((card, index) => (
+          ? userDetails.cards?.map((card, index) => (
             <div className="my-5" key={index}>
               <Card card={card} />
             </div>

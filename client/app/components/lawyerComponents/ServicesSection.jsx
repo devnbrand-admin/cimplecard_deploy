@@ -54,7 +54,7 @@ const ServicesSection = ({card}) => {
           }}
           className="flex items-center"
         >
-          {servicesData.map((service) => (
+          {servicesData?.map((service) => (
             <SwiperSlide key={service.id}>
               <div className="relative w-full h-96 overflow-hidden rounded-lg shadow-lg">
               

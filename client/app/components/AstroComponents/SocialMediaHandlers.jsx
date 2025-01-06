@@ -16,7 +16,7 @@ const SocialMediaSection = ({ card }) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12 lg:px-24 font-Figtree">
           {/* YouTube Video Cards */}
           {
-            card?.youtubeVideoLink.map((video, index) => (
+            card?.youtubeVideoLink?.map((video, index) => (
               <div key={index} className="bg-white text-black rounded-lg shadow-lg overflow-hidden">
                 <iframe
                   src={video}

@@ -60,11 +60,11 @@ const TestimonialCarousel = () => {
 
     return (
       <div className="flex">
-        {[...Array(fullStars)].map((_, i) => (
+        {[...Array(fullStars)]?.map((_, i) => (
           <FaStar key={i} className="text-yellow-500" />
         ))}
         {halfStar && <FaStarHalfAlt className="text-yellow-500" />}
-        {[...Array(5 - Math.ceil(rating))].map((_, i) => (
+        {[...Array(5 - Math.ceil(rating))]?.map((_, i) => (
           <FaRegStar key={i} className="text-gray-300" />
         ))}
       </div>
@@ -91,7 +91,7 @@ const TestimonialCarousel = () => {
             className="flex transition-transform ease-in-out duration-500"
             style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}
           >
-            {testimonials.map((testimonial, index) => (
+            {testimonials?.map((testimonial, index) => (
               <div
                 key={index}
                 className="w-full md:w-1/3 flex-shrink-0 p-4"

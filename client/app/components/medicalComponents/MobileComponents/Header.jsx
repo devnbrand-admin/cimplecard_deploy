@@ -55,7 +55,7 @@ const Header = () => {
       className="fixed top-0 left-0 w-full h-screen bg-white flex flex-col items-center justify-center space-y-6 shadow-lg"
       style={{ zIndex: 10 }}
     >
-      {links.map((link) => (
+      {links?.map((link) => (
         <div key={link} className="flex flex-col items-center">
           <button
             className={`text-2xl font-medium ${

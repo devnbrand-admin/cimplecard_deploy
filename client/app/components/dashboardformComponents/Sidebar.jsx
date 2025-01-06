@@ -7,7 +7,7 @@ const Sidebar = ({ activeStep, handleStepClick, steps }) => {
       <ul
         className='flex flex-col items-start gap-4'
       >
-        {steps.map((step) => (
+        {steps?.map((step) => (
           <li
             key={step.id}
             className={`cursor-pointer  ${activeStep === step.id?'opacity-100':'opacity-70'} w-full gap-2 p-4 rounded-md  flex items-center text-sm ${

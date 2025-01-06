@@ -1,33 +1,53 @@
 import React from 'react';
-import { FormButton, FormInput } from '../ModalFormMobile';
+import { FormInput } from '../ModalFormMobile';
 import { cardForm } from '../../../utils/constant';
 
-const structure = cardForm[3];
+const structure = cardForm[3];  
 
 const SocialMediaLinksStep = ({ formData, setFormData, handleSave, errors }) => {
 
-    // This function handles changes to input fields and updates the form data
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
+    let feildsName = structure?.sections?.find(obj => obj.name)?.name?.replace('[]','') || null
+    // Function to update the SocialMediaLink array
+    const updateSocialMediaLink = (platform, value) => {
+        setFormData((prevFormData) => {
+            const updatedLinks = prevFormData[feildsName]?.map((link) =>
+                link.platform === platform ? { ...link, url: value } : link
+            );
 
-        if (name === "SocialMediaLink") {
-            // If the field is SocialMediaLink, update the respective platform's URL
-            setFormData((prevFormData) => {
-                const updatedLinks = prevFormData.SocialMediaLink.map((link) =>
-                    link.platform === e.target.dataset.platform ? { ...link, url: value } : link
-                );
-                return { ...prevFormData, SocialMediaLink: updatedLinks };
-            });
-        } else {
-            // Otherwise, just update the formData for normal input fields
-            setFormData({
-                ...formData,
-                [name]: value,
-            });
-        }
+            // Add a new entry if the platform does not exist
+            if (!updatedLinks.some((link) => link.platform === platform)) {
+                updatedLinks.push({ platform, url: value });
+            }
+
+            return { ...prevFormData, [feildsName]: updatedLinks.filter((link) => link.url.trim()) };
+        });
     };
 
-    // Function to render image sections
+    // Ensure the SocialMediaLink array is initialized if it's not present
+    React.useEffect(() => {
+        if (!formData[feildsName] || formData[feildsName]?.length === 0) {
+            const initialLinks = [
+                { platform: "Website", url: "" },
+                { platform: "LinkedIn", url: "" },
+                { platform: "Instagram", url: "" },
+                { platform: "Twitter", url: "" },
+                { platform: "GitHub", url: "" },
+                { platform: "Additional", url: "" },
+            ];
+            setFormData((prevFormData) => ({ ...prevFormData, [feildsName]: initialLinks }));
+        }
+    }, [formData, setFormData]);
+
+    // Function to get error message for a specific platform
+    const getErrorMessage = (platform) => {
+        if (!errors) return '';
+
+        // Look for error using the platform name directly
+        console.log(feildsName)
+        return errors[`${feildsName}.${platform}`] || '';
+    };
+
+    // Render image section
     const renderImage = (section) => (
         <div
             key={section.src}
@@ -36,61 +56,56 @@ const SocialMediaLinksStep = ({ formData, setFormData, handleSave, errors }) => 
         ></div>
     );
 
-    // Function to render individual input fields
-    const renderField = (field) => (
-        <div
-            key={field.name}
-            className={`relative flex-1 after:content-[attr(after)] after:ms-1 after:text-red-500`}
-            after={errors[field.name]} // Dynamically display error messages
-        >
-            <FormInput
-                type={field.type}
-                placeholder={field.placeholder}
-                name={field.name}
-                value={formData[field.name] || ''}
-                onChange={(e) => handleInputChange(e)}
-                className={`flex-1 !border-none !outline-none ${field.className || ''}`}
-            />
-        </div>
-    );
+    // Render individual fields for each platform
+    const renderField = (field) => {
+        const socialMediaItem = formData[feildsName]?.find(
+            (link) => link.platform === field.name
+        );
 
-    // Function to render form sections with multiple fields
-    const renderFormSection = (section) => (
-        <div key={section.title || Math.random()} className="space-y-4">
-            {section.title && <h2 className={section.titleClassName || ''}>{section.title}</h2>}
-            {section.fields.map((field, index) =>
-                field.type === 'formSection' ? (
-                    <div key={index} className={`${field?.className} flex flex-wrap gap-4`}>
-                        {field.fields.map((nestedField) => renderField(nestedField))}
-                    </div>
-                ) : (
-                    renderField(field)
-                )
-            )}
-        </div>
-    );
+        const errorMessage = getErrorMessage(field.name);
 
-    // Function to render social media link fields
-    const renderSocialMediaLinks = () => {
-        return formData.SocialMediaLink.map((link, index) => (
-            <div key={index} className="flex gap-4 mb-4">
-                <input
-                    type="text"
-                    placeholder={`Enter ${link.platform} URL`}
-                    name="SocialMediaLink"
-                    data-platform={link.platform}
-                    value={link.url || ''}
-                    onChange={handleInputChange}
-                    className="flex-1 p-3 border rounded-md"
-                />
+        return (
+            <div key={field.name} className="flex-1">
+                <div className="relative">
+                    <FormInput
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        name={field.name}
+                        value={socialMediaItem?.url || ''}
+                        onChange={(e) => updateSocialMediaLink(field.name, e.target.value)}
+                        className={`flex-1 !border-none !outline-none ${errorMessage ? 'border-red-500' : ''} ${field.className || ''}`}
+                    />
+                    {errorMessage && (
+                        <p className="text-red-500 text-sm mt-1 left-0">
+                            {errorMessage}
+                        </p>
+                    )}
+                </div>
             </div>
-        ));
+        );
+    };
+
+    // Render form sections with nested fields
+    const renderFormSection = (section) => {
+        return (
+            <div key={section.title || Math.random()} className="space-y-4">
+                {section.title && <h2 className={section.titleClassName || ''}>{section.title}</h2>}
+                {section.fields?.map((field, index) =>
+                    field.type === 'formSection' ? (
+                        <div key={index} className={`${field?.className} flex flex-wrap gap-4`}>
+                            {field.fields?.map((nestedField) => renderField(nestedField))}
+                        </div>
+                    ) : (
+                        renderField(field)
+                    )
+                )}
+            </div>
+        )
     };
 
     return (
         <div className="space-y-6">
-            {/* Render Sections */}
-            {structure.sections.map((section) => {
+            {structure.sections?.map((section) => {
                 switch (section.type) {
                     case 'image':
                         return renderImage(section);
@@ -100,9 +115,6 @@ const SocialMediaLinksStep = ({ formData, setFormData, handleSave, errors }) => 
                         return null;
                 }
             })}
-
-            {/* Render Social Media Links Fields */}
-            {renderSocialMediaLinks()}
         </div>
     );
 };

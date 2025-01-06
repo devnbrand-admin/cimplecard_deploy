@@ -41,9 +41,9 @@ const PostLinksStep = ({ setFormData, formData, errors }) => {
 
     return (
         <div className="space-y-6">
-            {postLinksStructure.sections.map((section, index) => {
+            {postLinksStructure.sections?.map((section, index) => {
                 // Render each section correctly with the fields
-                return section.fields.map((field) => renderAddLinkSection(field));
+                return section.fields?.map((field) => renderAddLinkSection(field));
             })}
         </div>
     );
@@ -72,7 +72,7 @@ const AddLinkSection = ({ title, items, onAdd, onRemove, placeholder, error }) =
             {/* Display the list of existing links */}
             <div className="mt-4 space-y-2">
                 {items.length > 0 ? (
-                    items.map((item, index) => (
+                    items?.map((item, index) => (
                         <div key={index} className="flex justify-between items-center border-b py-2">
                             <FormInput disabled value={item} />
                             <button

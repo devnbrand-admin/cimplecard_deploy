@@ -7,7 +7,7 @@ const ChooseTemplateStep = ({ formData, handleTemplateSelection }) => {
   return (
     <div className="space-y-4 mt-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {templates.map((template, index) => (
+        {templates?.map((template, index) => (
           <div key={index} className="w-full mx-auto">
             <a href={`https://example.com/${template.toLowerCase()}`} target="_blank" rel="noopener noreferrer">
               <div className="bg-white shadow-lg rounded-xl">

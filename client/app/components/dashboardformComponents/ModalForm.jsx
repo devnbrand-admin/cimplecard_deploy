@@ -518,7 +518,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
   //     const reader = new FileReader();
   //     reader.onloadend = () => {
   //       setProductData((prevData) =>
-  //         prevData.map((item, i) =>
+  //         prevData?.map((item, i) =>
   //           i === index ? { ...item, imageUrl: reader.result } : item
   //         )
   //       );
@@ -531,7 +531,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     const file = event.target.files[0];
     if (file) {
       setProductData((prevData) =>
-        prevData.map((item, i) =>
+        prevData?.map((item, i) =>
           i === index ? { ...item, imageUrl: file } : item
         )
       );
@@ -560,7 +560,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
   // const handleImageUpload = (e) => {
   //   const files = Array.from(e.target.files);
-  //   const newImages = files.map((file) => URL.createObjectURL(file));
+  //   const newImages = files?.map((file) => URL.createObjectURL(file));
   //   setImages((prev) => [...prev, ...newImages]);
   // };
 
@@ -799,7 +799,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       try {
         // Extract files from `imageUrl` that are instances of `File`
         const filesToUpload = productData
-          .map((product) => product.imageUrl)
+          ?.map((product) => product.imageUrl)
           .filter((file) => file instanceof File);
 
         if (filesToUpload.length > 0) {
@@ -807,7 +807,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           const uploadedUrls = await uploadImages(filesToUpload);
 
           // Map uploaded URLs back to `productData`
-          updatedProductData = productData.map((product, index) => ({
+          updatedProductData = productData?.map((product, index) => ({
             ...product,
             imageUrl:
               uploadedUrls[index] || // Assign uploaded URL if available
@@ -1638,7 +1638,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          phoneNumbers: formData.phoneNumbers.map(
+                          phoneNumbers: formData.phoneNumbers?.map(
                             (num, index) => (index === 1 ? e.target.value : num)
                           ),
                         })
@@ -1659,7 +1659,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          phoneNumbers: formData.phoneNumbers.map(
+                          phoneNumbers: formData.phoneNumbers?.map(
                             (num, index) => (index === 2 ? e.target.value : num)
                           ),
                         })
@@ -1683,7 +1683,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          emails: formData.emails.map((email, index) =>
+                          emails: formData.emails?.map((email, index) =>
                             index === 0 ? e.target.value : email
                           ),
                         })
@@ -1704,7 +1704,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          emails: formData.emails.map((email, index) =>
+                          emails: formData.emails?.map((email, index) =>
                             index === 1 ? e.target.value : email
                           ),
                         })
@@ -2355,7 +2355,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                       borderRadius: "8px",
                     }}
                   >
-                    {productData.map((product, index) => (
+                    {productData?.map((product, index) => (
                       <div
                         key={index}
                         className="relative flex items-center justify-between mb-4"
@@ -2374,7 +2374,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                             value={product.name}
                             onChange={(e) =>
                               setProductData(
-                                productData.map((item, i) =>
+                                productData?.map((item, i) =>
                                   i === index
                                     ? { ...item, name: e.target.value }
                                     : item
@@ -2400,7 +2400,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                             value={product.description}
                             onChange={(e) =>
                               setProductData(
-                                productData.map((item, i) =>
+                                productData?.map((item, i) =>
                                   i === index
                                     ? { ...item, description: e.target.value }
                                     : item
@@ -2429,7 +2429,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                             value={product.serviceUrl}
                             onChange={(e) =>
                               setProductData(
-                                productData.map((item, i) =>
+                                productData?.map((item, i) =>
                                   i === index
                                     ? { ...item, serviceUrl: e.target.value }
                                     : item
@@ -2605,7 +2605,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                   className="flex flex-col gap-2"
                   style={{ width: "100%", maxWidth: "1080px" }}
                 >
-                  {[...Array(5)].map((_, index) => (
+                  {[...Array(5)]?.map((_, index) => (
                     <div
                       key={index}
                       className="flex items-center justify-center"
@@ -2820,7 +2820,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
           {activeStep === 9 && (
             <div className="relative p-6 w-full flex flex-col items-center">
               <div className="flex gap-4 flex-nowrap justify-start w-full overflow-x-auto p-4 scrollbar-thin scrollbar-thumb-[#707FDD] hover:scrollbar-thumb-[#5C6CCF]">
-                {images.map((image, index) => (
+                {images?.map((image, index) => (
                   <div
                     key={index}
                     className="w-40 h-56 rounded-lg flex-shrink-0"
@@ -2836,7 +2836,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                   </div>
                 ))}
 
-                {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
+                {[...Array(Math.max(5 - images.length, 0))]?.map((_, index) => (
                   <div
                     key={`empty-${index}`}
                     className="w-40 h-56 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"
@@ -2932,7 +2932,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                 }}
               ></div>
               <div className="space-y-6">
-                {formData.businessHours.map((hour, index) => (
+                {formData.businessHours?.map((hour, index) => (
                   <div
                     key={index}
                     className="flex gap-4 p-4 border rounded-md bg-[#F9FAFB] relative"

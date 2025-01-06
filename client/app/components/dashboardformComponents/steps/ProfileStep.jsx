@@ -66,7 +66,7 @@ const ProfileStep = ({ formData, setFormData, handleImageUpload, handleInputChan
 
   const renderFormSection = (section) => (
     <div key={section.title} className="flex flex-wrap gap-4 ">
-      {section.fields.map((field) => {
+      {section.fields?.map((field) => {
         if (field.type === 'select') return null; // Skip select here
         if (field.type === 'date') return null; // Skip date here
         return (
@@ -102,7 +102,7 @@ const ProfileStep = ({ formData, setFormData, handleImageUpload, handleInputChan
 
   const renderAdditionalDetails = (section) => (
     <div key={section.title + section.type} className="flex flex-wrap gap-4">
-      {section.fields.map((field) => {
+      {section.fields?.map((field) => {
         switch (field.type) {
           case 'select':
             return (
@@ -118,7 +118,7 @@ const ProfileStep = ({ formData, setFormData, handleImageUpload, handleInputChan
                   name={field.name}
                   onChange={handleInputChange}
                 >
-                  {field.options.map((option) => (
+                  {field.options?.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -153,7 +153,7 @@ const ProfileStep = ({ formData, setFormData, handleImageUpload, handleInputChan
 
   return (
     <div className="space-y-4">
-      {structure.sections.map((section) => {
+      {structure.sections?.map((section) => {
         switch (section.type) {
           case 'imageUpload':
             return renderImageUpload(section);

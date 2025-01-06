@@ -159,7 +159,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setProductData((prevData) =>
-          prevData.map((item, i) =>
+          prevData?.map((item, i) =>
             i === index ? { ...item, imageUrl: reader.result } : item
           )
         );
@@ -190,7 +190,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
-    const newImages = files.map((file) => URL.createObjectURL(file));
+    const newImages = files?.map((file) => URL.createObjectURL(file));
     setImages((prev) => [...prev, ...newImages]);
   };
 
@@ -697,7 +697,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
         <div className="w-full space-y-6">
           {/* Phone Numbers */}
           <div className="flex flex-col gap-4">
-            {[0, 1, 2].map((index) => (
+            {[0, 1, 2]?.map((index) => (
               <div key={index} className="flex-1">
                 <input
                   type="text"
@@ -716,7 +716,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
           {/* Emails */}
           <div className="flex flex-col gap-4">
-            {[0, 1].map((index) => (
+            {[0, 1]?.map((index) => (
               <div key={index} className="flex-1">
                 <input
                   type="text"
@@ -1283,7 +1283,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     className="flex flex-col gap-2 self-start"
                     style={{ width: "100%", maxWidth: "400px" }}
                   >
-                    {productData.map((product, index) => (
+                    {productData?.map((product, index) => (
                       <div
                         key={index}
                         className="flex items-center justify-between"
@@ -1316,7 +1316,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                               value={product.name || ""}
                               onChange={(e) =>
                                 setProductData(
-                                  productData.map((item, i) =>
+                                  productData?.map((item, i) =>
                                     i === index
                                       ? { ...item, name: e.target.value }
                                       : item
@@ -1340,7 +1340,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                               value={product.description || ""}
                               onChange={(e) =>
                                 setProductData(
-                                  productData.map((item, i) =>
+                                  productData?.map((item, i) =>
                                     i === index
                                       ? { ...item, description: e.target.value }
                                       : item
@@ -1364,7 +1364,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                               value={product.serviceUrl || ""}
                               onChange={(e) =>
                                 setProductData(
-                                  productData.map((item, i) =>
+                                  productData?.map((item, i) =>
                                     i === index
                                       ? { ...item, serviceUrl: e.target.value }
                                       : item
@@ -1561,7 +1561,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       id: 9, label: 'Gallery', icon: <BsImages />, component: <>
         <div className="w-full space-y-6">
           <div className="flex gap-4 flex-col flex-nowrap justify-start w-full overflow-x-auto p-4 scrollbar-thin scrollbar-thumb-[#707FDD] hover:scrollbar-thumb-[#5C6CCF]">
-            {images.map((image, index) => (
+            {images?.map((image, index) => (
               <div
                 key={index}
                 className="w-40 h-56 rounded-lg flex-shrink-0"
@@ -1573,7 +1573,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
               ></div>
             ))}
 
-            {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
+            {[...Array(Math.max(5 - images.length, 0))]?.map((_, index) => (
               <div
                 key={`empty-${index}`}
                 className="w-full h-56 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"
@@ -1633,7 +1633,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       id: 10, label: 'Business Hours', icon: <BsClockHistory />, component: <>
         <>
           <div className="space-y-6">
-            {formData.businessHours.map((hour, index) => (
+            {formData.businessHours?.map((hour, index) => (
               <div
                 key={index}
                 className="flex flex-col gap-4 p-4 border rounded-md bg-[#F9FAFB] relative"

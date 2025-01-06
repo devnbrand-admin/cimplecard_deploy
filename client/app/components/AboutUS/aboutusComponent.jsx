@@ -132,7 +132,7 @@ const AboutUSComponent = () => {
           Meet Our Team
         </h2>
         <div className="flex md:flex justify-center gap-y-6 flex-wrap ">
-          {[...Array(5)].map((_, idx) => (
+          {[...Array(5)]?.map((_, idx) => (
             <div key={idx} className="text-center z-[1] flex-1 basis-[150px] ">
               <div className="w-32 h-32  mx-auto">
                 <Image src={logoIcon} alt="Team Member" className="rounded-full" />

@@ -30,7 +30,7 @@ const Services = ({ card }) => {
           </h2>
 
           <ul className="text-white space-y-4 ms-3">
-            {services.map((item, i) => (
+            {services?.map((item, i) => (
               <li key={i} className="flex items-center font-semibold text-2xl">
                 <img
                   src="/path-to-your-icons/search-icon.png"

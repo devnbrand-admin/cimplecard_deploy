@@ -24,7 +24,7 @@ export const logWorkHours = async (req, res) => {
         if (workingHours) {
             // If a record exists, append new sessions to existing workSessions
             const updatedSessions = await prisma.workSession.createMany({
-                data: workSessions.map((session) => ({
+                data: workSessions?.map((session) => ({
                     startTime: new Date(session.startTime),
                     endTime: new Date(session.endTime),
                     workingHoursId: workingHours.id,
@@ -42,7 +42,7 @@ export const logWorkHours = async (req, res) => {
                     userId,
                     workDate: new Date(date),
                     workSessions: {
-                        create: workSessions.map((session) => ({
+                        create: workSessions?.map((session) => ({
                             startTime: new Date(session.startTime),
                             endTime: new Date(session.endTime),
                         })),
@@ -117,7 +117,7 @@ export const getWorkHours = async (req, res) => {
             },
         });
         // Prepare response data
-        const formattedSessions = workSessions.map((session) => ({
+        const formattedSessions = workSessions?.map((session) => ({
             startTime: session.startTime,
             endTime: session.endTime,
         }));

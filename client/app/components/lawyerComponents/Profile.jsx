@@ -85,7 +85,7 @@ function Profile({ card }) {
           <h3 className="text-xl font-bold">Email</h3>
           <div>
           {
-            card?.emails.map((email, index) => (
+            card?.emails?.map((email, index) => (
               <p className="text-base" key={index}>{email}</p>
             ))
             

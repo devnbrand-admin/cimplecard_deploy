@@ -10,7 +10,7 @@ const Footer = ({ card }) => {
         {/* Video Section */}
         <div className="flex h-72 align-center md:w-3/4 w-full m-4">
           {card?.youtubeVideoLink?.length > 0 ? (
-            card.youtubeVideoLink.slice(0, 3).map((link, index) => (
+            card.youtubeVideoLink.slice(0, 3)?.map((link, index) => (
               <div
                 key={index}
                 className="h-60 w-1/3 m-1 bg-gray-200 border border-gray-500 rounded-lg overflow-hidden"
@@ -39,7 +39,7 @@ const Footer = ({ card }) => {
           <h1 className="text-3xl font-bold text-green-600 mb-3">
             Health Videos
           </h1>
-          {["Youtube | Healthy Life", "TikTok | Healthy Life", "Instagram | Healthy Life"].map(
+          {["Youtube | Healthy Life", "TikTok | Healthy Life", "Instagram | Healthy Life"]?.map(
             (platform, index) => (
               <span
                 key={index}

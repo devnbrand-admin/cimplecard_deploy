@@ -16,7 +16,7 @@ const ContactDetailsStep = ({ formData, setFormData, handleInputChange, setError
     const renderField = (field) => {
         // Extract the base name and index if the field name is array-like (e.g., "phones[3]")
         const [baseName, index] = /\[.*\]/.test(field.name)
-            ? field.name.split(/[\[\]]/).filter(Boolean).map((item, i) => (i === 1 ? parseInt(item, 10) : item))
+            ? field.name.split(/[\[\]]/).filter(Boolean)?.map((item, i) => (i === 1 ? parseInt(item, 10) : item))
             : [field.name, null];
 
         const fieldValue = formData[baseName] || (index !== null ? [] : '');
@@ -30,7 +30,7 @@ const ContactDetailsStep = ({ formData, setFormData, handleInputChange, setError
                     // Render inputs for array-like fields (e.g., "phones[0]", "phones[1]")
                     <div className="flex gap-2 flex-col">
                         <div className="flex gap-2 relative">
-                            {[...Array(index)].map((_, idx) => {
+                            {[...Array(index)]?.map((_, idx) => {
                                 // Get the error message for the current index
                                 const errorMessage = errors[`${baseName}[${idx}]`];
 
@@ -115,10 +115,10 @@ const ContactDetailsStep = ({ formData, setFormData, handleInputChange, setError
     const renderFormSection = (section) => (
         <div className="space-y-4" key={section.title}>
             {section.title && <h2 className={section.titleClassName || ''}>{section.title}</h2>}
-            {section.fields.map((field, index) =>
+            {section.fields?.map((field, index) =>
                 field.type === 'formSection' ? (
                     <div key={index} className={`${field?.className} flex flex-wrap gap-4`}>
-                        {field.fields.map((nestedField) => renderField(nestedField))}
+                        {field.fields?.map((nestedField) => renderField(nestedField))}
                     </div>
                 ) : (
                     renderField(field)
@@ -129,7 +129,7 @@ const ContactDetailsStep = ({ formData, setFormData, handleInputChange, setError
 
     return (
         <div className="space-y-6">
-            {contactDetailsStructure.sections.map((section) => {
+            {contactDetailsStructure.sections?.map((section) => {
                 switch (section.type) {
                     case 'image':
                         return renderImage(section);

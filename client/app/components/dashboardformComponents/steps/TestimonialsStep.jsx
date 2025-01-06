@@ -58,7 +58,7 @@ const TestimonialsStep = ({ testimonials, setFormData, errors }) => {
         <div key="addTestimonial" className="space-y-4">
             <h2 className={section.titleClassName}>{section.title}</h2>
             <div className="flex flex-wrap gap-4">
-                {section.fields.map((field) =>
+                {section.fields?.map((field) =>
                     ['name', 'designation', 'imageUrl'].includes(field.name) ? (
                         <div key={field.name} className="flex-1">
                             <FormInput
@@ -77,7 +77,7 @@ const TestimonialsStep = ({ testimonials, setFormData, errors }) => {
                 )}
             </div>
             <div>
-                {section.fields.map((field) =>
+                {section.fields?.map((field) =>
                     field.name === 'description' ? (
                         <div key={field.name}>
                             <textarea
@@ -106,7 +106,7 @@ const TestimonialsStep = ({ testimonials, setFormData, errors }) => {
     const renderTestimonialList = (section) => (
         testimonials?.length > 0 && (
             <div key="testimonialList" className={section.className}>
-                {testimonials.map((testimonial, index) => (
+                {testimonials?.map((testimonial, index) => (
                     <div key={index} className="relative p-4 bg-gray-100 rounded-lg space-y-4">
                         {/* Delete Button */}
                         <button
@@ -182,7 +182,7 @@ const TestimonialsStep = ({ testimonials, setFormData, errors }) => {
 
     return (
         <div className="space-y-6 mx-2 md:mx-0">
-            {testimonialsStructure.sections.map((section) => {
+            {testimonialsStructure.sections?.map((section) => {
                 if (section.type === "addTestimonial") {
                     return renderAddTestimonialForm(section);
                 }

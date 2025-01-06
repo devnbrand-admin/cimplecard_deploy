@@ -184,7 +184,7 @@ export const validateStep6 = (formData, productData) => {
 };
 
 export const validateTestimonialsStep7 = (testimonials) => {
-  const errors = testimonials.map((testimonial) => {
+  const errors = testimonials?.map((testimonial) => {
     const testimonialErrors = {};
     if (!testimonial.name.trim()) {
       testimonialErrors.name = "Name is required.";
@@ -211,7 +211,7 @@ export const validateTestimonialsStep7 = (testimonials) => {
 };
 
 export const validateLinksStep8 = (items, type) => {
-  const errors = items.map((item) => {
+  const errors = items?.map((item) => {
     const trimmedItem = item.trim();
     if (!trimmedItem) {
       return "This field is required.";

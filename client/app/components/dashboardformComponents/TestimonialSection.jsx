@@ -17,7 +17,7 @@ console.log(testimonials,"test")
   };
 
   const handleInputChange = (index, field, value) => {
-    const updatedTestimonials = testimonials.map((testimonial, i) =>
+    const updatedTestimonials = testimonials?.map((testimonial, i) =>
       i === index ? { ...testimonial, [field]: value } : testimonial
     );
     setTestimonials(updatedTestimonials);
@@ -31,7 +31,7 @@ console.log(testimonials,"test")
           Add Testimonial
         </h1>
       </div>
-      {testimonials.map((testimonial, index) => (
+      {testimonials?.map((testimonial, index) => (
         <div key={index} className="space-y-4 relative">
           <button
             onClick={() => handleDeleteTestimonial(index)}

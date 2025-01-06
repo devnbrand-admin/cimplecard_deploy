@@ -17,7 +17,7 @@ const ContactInfo = ({ card }) => {
         <div>
           <h2 className="text-xl font-bold">{card?.phoneNumbers?.length > 1 ? 'Phone Numbers' : 'Phone Number'}</h2>
           {
-            card.phoneNumbers.map((phoneNumber, index) => (
+            card.phoneNumbers?.map((phoneNumber, index) => (
               <p key={index}>{phoneNumber}</p>
             ))
           }
@@ -29,7 +29,7 @@ const ContactInfo = ({ card }) => {
 
           <h2 className="text-xl font-bold">{card?.email?.length > 1 ? 'Emails' : 'Email'}</h2>
           {
-            card.emails.map((email, index) => (
+            card.emails?.map((email, index) => (
               <p key={index}>{email}</p>
             ))
           }
@@ -40,7 +40,7 @@ const ContactInfo = ({ card }) => {
 
           <h2 className="text-xl font-bold mt-2">Working Days & Hours</h2>
           <div className="flex space-x-2 text-lg">
-            {activeDays.map(({ day, status }, index) =>
+            {activeDays?.map(({ day, status }, index) =>
               status === "active" ? (
                 <span
                   key={index}

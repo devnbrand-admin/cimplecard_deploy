@@ -114,7 +114,7 @@ function TestimonialCarousel() {
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
           >
-            {testimonials.map((testimonial, index) => (
+            {testimonials?.map((testimonial, index) => (
               <div
                 key={index}
                 className="w-full flex-shrink-0 flex justify-center"

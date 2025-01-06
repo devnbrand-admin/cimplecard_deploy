@@ -5,7 +5,7 @@ export default function Services() {
             <div className="grid grid-cols-3 grid-rows-2 gap-4 mt-10 ml-[5vw]">
                 {Array(6)
                     .fill(0)
-                    .map((_, index) => (
+                    ?.map((_, index) => (
                         <div
                             key={index}
                             className="relative flex justify-center items-center w-[26vw] h-[28vw] bg-gradient-to-br from-white to-cyan-200 rounded-2xl overflow-hidden shadow-lg group hover:bg-black/60 transition duration-300"

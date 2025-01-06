@@ -11,36 +11,79 @@ const generateValidationRules = (structure) => {
   const extractRules = (section) => {
     if (!section) return;
 
-    // Handle a section with fields
-    if (section.fields && Array.isArray(section.fields)) {
+    // Handle array fields (sections ending with [])
+    if (section.name?.endsWith('[]')) {
+      const baseFieldName = section.name.slice(0, -2); // Remove [] from name
+      
+      // Create validation rules for each field in the array
+      section.fields?.forEach(formSection => {
+        if (formSection.fields && Array.isArray(formSection.fields)) {
+          formSection.fields.forEach(field => {
+            const fieldName = `${baseFieldName}.${field.name}`;
+            const rule = {};
+
+            // Add required validation if specified
+            if (field.required) {
+              rule.required = true;
+            }
+
+            // Add URL validation for all fields in array as they're links
+            if (field.type === 'url') {
+              rule.pattern = urlPattern;
+              rule.message = `Please enter a valid URL for ${field.name}`;
+            }
+
+            // If min or max is specified
+            if (field.min !== undefined) {
+              rule.min = field.min;
+            }
+            if (field.max !== undefined) {
+              rule.max = field.max;
+            }
+
+            // Only add rule if it has validations
+            if (Object.keys(rule).length > 0) {
+              rules[fieldName] = rule;
+            }
+          });
+        }
+      });
+    }
+
+    // Handle regular fields (non-array sections)
+    else if (section.fields && Array.isArray(section.fields)) {
       section.fields.forEach((field) => {
+        // Skip if field is part of an array section
+        if (field.name?.endsWith('[]')) {
+          extractRules(field);
+          return;
+        }
+
         // Initialize the rule object for the field
         const rule = {};
 
-        // If the field has a required property, add to rules
+        // If the field has a required property
         if (field.required) {
           rule.required = true;
         }
 
-        // If the field is of type 'tel', add validation for phone numbers
-        if (field.type === 'tel') {
-          rule.pattern = /^[0-9]{10,15}$/; // Example: Allow 10 to 15 digits only
-          rule.message = 'Please enter a valid phone number.';
+        // Field type specific validations
+        switch (field.type) {
+          case 'tel':
+            rule.pattern = /^[0-9]{10,15}$/;
+            rule.message = 'Please enter a valid phone number.';
+            break;
+          case 'email':
+            rule.pattern = emailPattern;
+            rule.message = 'Please enter a valid email address.';
+            break;
+          case 'url':
+            rule.pattern = urlPattern;
+            rule.message = 'Please enter a valid URL starting with http:// or https://';
+            break;
         }
 
-        // If the field is of type 'email', add validation for email format
-        if (field.type === 'email') {
-          rule.pattern = emailPattern; // Regex pattern for email validation
-          rule.message = 'Please enter a valid email address.';
-        }
-
-        // If the field is of type 'url', add validation for URL format
-        if (field.type === 'url') {
-          rule.pattern = urlPattern; // Regex pattern for URL validation
-          rule.message = 'Please enter a valid URL starting with http:// or https://';
-        }
-
-        // If min or max is specified, add them to the rule
+        // Add min/max validations if specified
         if (field.min !== undefined) {
           rule.min = field.min;
         }
@@ -48,24 +91,21 @@ const generateValidationRules = (structure) => {
           rule.max = field.max;
         }
 
-        // Add the rule to the rules object if any validation exists
+        // Add the rule to rules object if any validation exists
         if (Object.keys(rule).length > 0) {
-          const fieldName = field.name?.replace(/\[\d+\]/g, ''); // Set all indices to 0 for validation
+          const fieldName = field.name?.replace(/\[\d+\]/g, '');
           rules[fieldName] = rule;
         }
 
-        // Recursively process nested fields
+        // Process nested fields
         if (field.fields) {
           extractRules(field);
         }
       });
     }
 
-    // Handle other section types like textarea or select
-    if (section.type === 'textarea' && section.required) {
-      rules[section.name] = { required: true };
-    }
-    if (section.type === 'select' && section.required) {
+    // Handle textarea and select types
+    if ((section.type === 'textarea' || section.type === 'select') && section.required) {
       rules[section.name] = { required: true };
     }
   };
@@ -78,6 +118,7 @@ const generateValidationRules = (structure) => {
   console.log('Generated Rules:', rules);
   return rules;
 };
+
 
 
 
@@ -108,59 +149,82 @@ export const validateFormData = (structure, setErrors, formData) => {
   const rules = generateValidationRules(structure);
   const validationErrors = {};
 
+  const validateValue = (value, rule, fieldName) => {
+    // Handle empty or undefined values
+    if (!value || (typeof value === 'string' && value.trim() === '')) {
+      if (rule.required) {
+        return `${formatString(fieldName)} is required.`;
+      }
+      return null;
+    }
+
+    // Handle min length validation
+    if (rule.min !== undefined && value.length < rule.min) {
+      return `${formatString(fieldName)} must be at least ${rule.min} characters long.`;
+    }
+
+    // Handle max length validation
+    if (rule.max !== undefined && value.length > rule.max) {
+      return `${formatString(fieldName)} must not exceed ${rule.max} characters.`;
+    }
+
+    // Handle pattern validation
+    if (rule.pattern && !rule.pattern.test(value)) {
+      return rule.message || `${formatString(fieldName)} is not valid.`;
+    }
+
+    return null;
+  };
+
+  // First, handle array fields specifically
   Object.keys(rules).forEach((field) => {
-    let value = formData[field];
-    const rule = rules[field];
+    if (field.includes('.')) {
+      const [arrayName, fieldName] = field.split('.');
+      const rule = rules[field];
+      const arrayData = formData[arrayName];
 
-    // Trim the value before checking
-    if (value && typeof value === 'string') {
-      value = value.trim();
-    }
-
-    // If the value is an array, check the first element (value[0])
-    if (Array.isArray(value) && value.length > 0) {
-      value = value[0]?.trim();  // Handle the first element of the array
-    }
-
-    // Check if field is required and empty
-    if (rule.required) {
-      if (Array.isArray(value)) {
-        // Check if the array is empty or contains only empty values
-        const isArrayEmpty = value.length === 0 || value.every(item => !item || item.trim() === "");
-        if (isArrayEmpty) {
-          validationErrors[field] = `${formatString(field)} is required.`;
-        }
-      } else {
-        // For non-array values (strings, numbers, etc.)
-        if (!value || value.trim() === "") {
-          validationErrors[field] = `${formatString(field)} is required.`;
+      if (Array.isArray(arrayData)) {
+        // Get the matching item from the array
+        const item = arrayData.find(item => item.platform === fieldName);
+        
+        if (rule.required) {
+          // For required fields
+          if (!item || !item.url || item.url.trim() === '') {
+            // Find the correct index for the error message
+            const index = arrayData.findIndex(i => i.platform === fieldName);
+            validationErrors[`${arrayName}.${fieldName}`] = `${fieldName} is required.`;
+          } else if (item.url) {
+            // Validate URL format if value exists
+            const error = validateValue(item.url.trim(), rule, fieldName);
+            if (error) {
+              validationErrors[`${arrayName}.${fieldName}`] = error;
+            }
+          }
+        } else if (item?.url) {
+          // For optional fields, only validate if they have a value
+          const error = validateValue(item.url.trim(), rule, fieldName);
+          if (error) {
+            validationErrors[`${arrayName}.${fieldName}`] = error;
+          }
         }
       }
-    }
+    } else {
+      // Handle non-array fields
+      let value = formData[field];
+      const rule = rules[field];
 
-    // Check if field has a min value and validate it
-    if (rule.min !== undefined && value && value.length < rule.min) {
-      validationErrors[field] = `${formatString(field)} must be at least ${rule.min} characters long.`;
-    }
+      if (typeof value === 'string') {
+        value = value.trim();
+      }
 
-    // Check if field has a max value and validate it
-    if (rule.max !== undefined && value && value.length > rule.max) {
-      validationErrors[field] = `${formatString(field)} must not exceed ${rule.max} characters.`;
-    }
-
-    // Check if field has a pattern (e.g., for phone numbers or email)
-    if (rule.pattern && value && !rule.pattern.test(value)) {
-      // For email specific validation
-      if (field === 'email') {
-        validationErrors[field] = rule.message || `${formatString(field)} is not valid.`;
-      } else {
-        validationErrors[field] = rule.message || `${formatString(field)} is not valid.`;
+      const error = validateValue(value, rule, field);
+      if (error) {
+        validationErrors[field] = error;
       }
     }
   });
 
   setErrors(validationErrors);
-
-  // Return true if no errors, false if there are errors
+  console.log('Validation Errors:', validationErrors)
   return Object.keys(validationErrors).length === 0;
 };

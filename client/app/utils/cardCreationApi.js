@@ -27,21 +27,56 @@ export const loginUser = async () => {
   }
 };
 
-export const createCard = async (formData,images,updatedProductData,cardId) => {
+export const createCardOptimized = async (formData, cardId) => {
+  try {
+    const tokenString = sessionStorage.getItem("userToken");
+    const tokenObject = JSON.parse(tokenString);
+    const jwtToken = tokenObject?.value;
+
+    const requestData = {
+      headerImageUrl: formData.headerImageUrl, // Already uploaded
+      title: `${formData.firstName || ''} ${formData.middleName || ''} ${formData.lastName || ''}`.trim(),
+      cardName: `${formData.templateType}${Date.now()}`,
+      ...formData
+    };
+
+    // Log the final request data
+    console.log(requestData, cardId ? "Updating Card Data" : "Creating Card Data");
+
+    const apiUrl = cardId ? `/api/card/update/${cardId}` : "/api/card/create";
+    const httpMethod = cardId ? axios.put : axios.post;
+
+    // Make API request
+    const response = await httpMethod(apiUrl, requestData, {
+      headers: {
+        Authorization: jwtToken,
+      },
+    });
+
+    console.log(response.data, cardId ? "Updated Card Response" : "Created Card Response");
+    return response.data;
+  } catch (error) {
+    console.error('Error in createCardOptimized:', error.message || error.response?.data || error);
+    throw error;
+  }
+};
+
+
+export const createCard = async (formData, images, updatedProductData, cardId) => {
 
   try {
     const tokenString = sessionStorage.getItem("userToken");
     const tokenObject = JSON.parse(tokenString);
     const jwtToken = tokenObject.value;
-    console.log(      " dateOfBirth:" ,formData.dateOfBirth,
+    console.log(" dateOfBirth:", formData.dateOfBirth,
     )
     // return 
     console.log('services:', updatedProductData)
-    console.log("gallery :",images)
+    console.log("gallery :", images)
 
 
     const requestData = {
-      headerImageUrl:await uploadSingleImage(formData.headerImageUrl),
+      headerImageUrl: await uploadSingleImage(formData.headerImageUrl),
       title: `${formData.firstName && formData.firstName} ${formData.middleName && formData.middleName} ${formData.lastName && formData.lastName}`,
       companyName: formData.companyName,
       companyAddress: formData.companyAddress || formData.location,
@@ -49,7 +84,7 @@ export const createCard = async (formData,images,updatedProductData,cardId) => {
       bio: formData.bio,
       languageSpoken: formData.languageSpoken,
       dateOfBirth: JSON.stringify(formData.dateOfBirth),
-      gallery:await uploadImages(images.length > 0 ? images : []),
+      gallery: await uploadImages(images?.length > 0 ? images : []),
       phoneNumbers: formData.phoneNumbers,
       otherPhoneNumber: formData.otherPhoneNumber,
       emails: formData.emails,
@@ -58,9 +93,9 @@ export const createCard = async (formData,images,updatedProductData,cardId) => {
       emergencyRelationship: formData.emergencyRelationship,
       emergencyNumber: formData.emergencyNumber,
       emergencyEmail: formData.emergencyEmail,
-      cardName:  formData.templateType + Date.now(),
+      cardName: formData.templateType + Date.now(),
       instagramPost: formData?.instagramPost && formData?.instagramPost,
-      profileImageUrl:await uploadSingleImage(formData.profileImageUrl && formData.profileImageUrl,"profileUrl"),
+      profileImageUrl: await uploadSingleImage(formData.profileImageUrl && formData.profileImageUrl, "profileUrl"),
       githubLink: formData?.githubLink && formData?.githubLink,
       additionalLink: formData.additionalLink,
       productDesc: formData.productDesc,
@@ -70,17 +105,16 @@ export const createCard = async (formData,images,updatedProductData,cardId) => {
       templateType: formData.templateType,
       qrCodeUrl: formData?.qrCodeUrl,
       aboutUs: formData.aboutUs,
-      instagramReel : formData?.instagramReel && formData?.instagramReel,
-      youtubeVideoLink : formData?.youtubeVideoLink && formData.youtubeVideoLink,
+      instagramReel: formData?.instagramReel && formData?.instagramReel,
+      youtubeVideoLink: formData?.youtubeVideoLink && formData.youtubeVideoLink,
       services: updatedProductData,
       socialMediaLink: formData.SocialMediaLink,
-      gallery:await uploadImages(images?.length > 0 ? images : []),
-      gridType:formData?.gridType
+      gridType: formData?.gridType
     };
 
-    if(cardId){
+    if (cardId) {
       const requestData = {
-        headerImageUrl:await uploadSingleImage(formData.headerImageUrl),
+        headerImageUrl: await uploadSingleImage(formData.headerImageUrl),
         title: `${formData.firstName && formData.firstName} ${formData.middleName && formData.middleName} ${formData.lastName && formData.lastName}`,
         companyName: formData.companyName,
         companyAddress: formData.companyAddress || formData.location,
@@ -88,7 +122,7 @@ export const createCard = async (formData,images,updatedProductData,cardId) => {
         // bio: formData.bio,
         languageSpoken: formData.languageSpoken,
         dateOfBirth: JSON.stringify(formData.dateOfBirth),
-        gallery:await uploadImages(images.length > 0 ? images : []),
+        gallery: await uploadImages(images.length > 0 ? images : []),
         phoneNumbers: formData.phoneNumbers,
         // otherPhoneNumber: formData.otherPhoneNumber,
         emails: formData.emails,
@@ -97,9 +131,9 @@ export const createCard = async (formData,images,updatedProductData,cardId) => {
         emergencyRelationship: formData.emergencyRelationship,
         emergencyNumber: formData.emergencyNumber,
         emergencyEmail: formData.emergencyEmail,
-        cardName:  formData.templateType + Date.now(),
+        cardName: formData.templateType + Date.now(),
         instagramPost: formData?.instagramPost && formData?.instagramPost,
-        profileImageUrl:await uploadSingleImage(formData.profileImageUrl && formData.profileImageUrl,"profileUrl"),
+        profileImageUrl: await uploadSingleImage(formData.profileImageUrl && formData.profileImageUrl, "profileUrl"),
         githubLink: formData?.githubLink && formData?.githubLink,
         additionalLink: formData.additionalLink,
         productDesc: formData.productDesc,
@@ -109,12 +143,12 @@ export const createCard = async (formData,images,updatedProductData,cardId) => {
         templateType: formData.templateType,
         qrCodeUrl: formData?.qrCodeUrl,
         aboutUs: formData.aboutUs,
-        instagramReel : formData?.instagramReel && formData?.instagramReel,
-        youtubeVideoLink : formData?.youtubeVideoLink && formData.youtubeVideoLink,
+        instagramReel: formData?.instagramReel && formData?.instagramReel,
+        youtubeVideoLink: formData?.youtubeVideoLink && formData.youtubeVideoLink,
         services: updatedProductData,
         SocialMediaLink: formData.SocialMediaLink,
-        
-        gridType:formData?.gridType
+
+        gridType: formData?.gridType
       };
 
       console.log(requestData, "req-updated-data")
@@ -125,12 +159,12 @@ export const createCard = async (formData,images,updatedProductData,cardId) => {
           Authorization: `${jwtToken}`,
         },
       });
-      console.log(response.data,"updated res-data");
+      console.log(response.data, "updated res-data");
       return response.data;
 
 
-     
-    }else{
+
+    } else {
       console.log(requestData, "req-data")
 
       const response = await axios.post("/api/card/create", requestData, {
@@ -138,12 +172,12 @@ export const createCard = async (formData,images,updatedProductData,cardId) => {
           Authorization: `${jwtToken}`,
         },
       });
-      console.log(response.data,"created res-data");
+      console.log(response.data, "created res-data");
       return response.data;
 
     }
 
- 
+
   } catch (error) {
     console.log('Error creating card:', error.message || error.response?.data || error);
     throw error;

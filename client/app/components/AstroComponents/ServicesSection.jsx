@@ -64,7 +64,7 @@ const ServicesSection = () => {
 
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8 lg:px-16">
-        {services.map((service, index) => (
+        {services?.map((service, index) => (
           <div
             key={index}
             className="relative group rounded-lg overflow-hidden shadow-lg flex items-center justify-center"

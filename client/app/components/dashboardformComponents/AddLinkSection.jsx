@@ -39,7 +39,7 @@ import { validateLinksStep8 } from "./cardFormValidation/cardValidation";
 //           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
 //         }}
 //       >
-//         {items.map((item, index) => (
+//         {items?.map((item, index) => (
 //           <div
 //             key={index}
 //             className="flex items-center justify-between p-4"
@@ -155,7 +155,7 @@ export const AddLinkSection = ({
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <div
             key={index}
             className="flex items-center justify-between p-0 md:p-4"

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setStepData } from '../../../store/cardSlice';
-import { createCard } from '../../utils/cardCreationApi';
+import { createCard, createCardOptimized } from '../../utils/cardCreationApi';
 import "../../style/cardCreation.css";
 import { validateFormData } from '../../utils/validation';
 import Sidebar from './Sidebar';
@@ -89,7 +89,8 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
 
     const handleCreate = async () => {
         try {
-            await createCard(formData);
+            console.log("formData:", formData);
+            await createCardOptimized(formData);
             dispatch(setCardData(formData));
         } catch (error) {
             console.error("Failed to create card:", error);
@@ -133,6 +134,7 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
                         <ActiveStepComponent
                             formData={formData}
                             setFormData={setFormData}
+                            setErrors={setErrors}
                             gallery={formData?.gallery}
                             handleSave={handleSave}
                             testimonials={formData?.testimonials}
@@ -170,7 +172,7 @@ const MobileHeader = ({ activeStep, steps }) => (
 
 const StepHeader = ({ activeStep, steps }) => (
     <div
-        className="text-[white] text-center text-2xl md:text-4xl sticky top-0 font-semibold py-4 md:py-6 px-4 md:px-6"
+        className="text-[white] z-10 text-center text-2xl md:text-4xl sticky top-0 font-semibold py-4 md:py-6 px-4 md:px-6"
         style={{
             backgroundImage: "url('/ModalHeader2.png')", 
             backgroundSize: "contain",
