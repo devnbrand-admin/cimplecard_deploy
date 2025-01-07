@@ -12,7 +12,7 @@ const generateValidationRules = (structure) => {
     if (!section) return;
 
     // Handle array fields (sections ending with [])
-    if (section.name?.endsWith('[]')) {
+    if (/\[\]$/.test(section.name)) {
       const baseFieldName = section.name.slice(0, -2); // Remove [] from name
       
       // Create validation rules for each field in the array
@@ -213,18 +213,30 @@ export const validateFormData = (structure, setErrors, formData) => {
       let value = formData[field];
       const rule = rules[field];
 
-      if (typeof value === 'string') {
-        value = value.trim();
-      }
+      if (Array.isArray(value)) {
+        // Handle email array (or any array) validation
+        value.forEach((email, index) => {
+          const fieldNameWithIndex = `${field}[${index}]`;  // For example, 'emails[0]', 'emails[1]'
+          const error = validateValue(email.trim(), rule, fieldNameWithIndex);
+          if (error) {
+            validationErrors[fieldNameWithIndex] = error;
+          }
+        });
+      } else {
+        if (typeof value === 'string') {
+          value = value.trim();
+        }
 
-      const error = validateValue(value, rule, field);
-      if (error) {
-        validationErrors[field] = error;
+        const error = validateValue(value, rule, field);
+        if (error) {
+          validationErrors[field] = error;
+        }
       }
     }
   });
 
   setErrors(validationErrors);
-  console.log('Validation Errors:', validationErrors)
+  console.log('Emails Value:', formData['emails']);
+  console.log('Validation Errors:', validationErrors);
   return Object.keys(validationErrors).length === 0;
 };

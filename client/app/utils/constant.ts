@@ -133,7 +133,7 @@ export const cardForm = [
             {
                 type: "formSection",
                 title: "",
-                name: "SocialMediaLink[]",
+                name: "socialMediaLink[]",
                 description: "Add your website, portfolio, and social media links.",
                 fields: [
                     {

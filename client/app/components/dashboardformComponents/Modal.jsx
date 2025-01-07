@@ -91,7 +91,7 @@ export default function ResponsiveModalForm({ setIsModalOpen, cardId }) {
         try {
             console.log("formData:", formData);
             await createCardOptimized(formData);
-            dispatch(setCardData(formData));
+            // dispatch(setCardData(formData));
         } catch (error) {
             console.error("Failed to create card:", error);
         }

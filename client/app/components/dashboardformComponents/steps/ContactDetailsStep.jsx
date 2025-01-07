@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormButton, FormInput } from '../ModalFormMobile';
+import { FormInput } from '../ModalFormMobile';
 import { cardForm } from '../../../utils/constant';
 
 const contactDetailsStructure = cardForm[2];
@@ -56,14 +56,9 @@ const ContactDetailsStep = ({ formData, setFormData, handleInputChange, setError
                                             onBlur={() => {
                                                 // Validation: if required and empty, set error
                                                 if (field.required && !formData[baseName]?.[idx]) {
-                                                    setErrors((prevErrors) => ({
+                                                    idx === 0 && setErrors((prevErrors) => ({
                                                         ...prevErrors,
-                                                        [`${baseName}[${idx}]`]: `${field.placeholder} ${idx + 1} is required.`,
-                                                    }));
-                                                } else {
-                                                    setErrors((prevErrors) => ({
-                                                        ...prevErrors,
-                                                        [`${baseName}[${idx}]`]: '',
+                                                        [`${baseName}[${idx}]`]: `${field.placeholder} is required.`,
                                                     }));
                                                 }
                                             }}
