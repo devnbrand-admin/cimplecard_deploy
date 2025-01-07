@@ -7,8 +7,9 @@ import CompatibilityImage from "../../assets/astrologerTemplate/Compatibility.pn
 import FinanceImage from "../../assets/astrologerTemplate/Finance.png";
 import ConsultationImage from "../../assets/astrologerTemplate/Consultation.png";
 import BirthChartImage from "../../assets/astrologerTemplate/BirthChart.png";
+import Link from "next/link";
 
-const ServicesSection = () => {
+const ServicesSection = ({card}) => {
   const services = [
     {
       title: "Tarot Card Reading",
@@ -64,12 +65,14 @@ const ServicesSection = () => {
 
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8 lg:px-16">
-        {services?.map((service, index) => (
-          <div
+        {card?.services?.map((service, index) => (
+          <Link
+            href={`${service?.serviceUrl}`}
+            target="_blank"
             key={index}
             className="relative group rounded-lg overflow-hidden shadow-lg flex items-center justify-center"
             style={{
-              backgroundImage: `url(${service.bgImage.src})`,
+              backgroundImage: `url(${service?.imageUrl})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               aspectRatio: "4/4", // Maintain image proportions
@@ -77,12 +80,12 @@ const ServicesSection = () => {
           >
             <div className="absolute inset-0 bg-white bg-opacity-20 transition-opacity group-hover:bg-opacity-10"></div>
             <div className="relative z-10 text-center font-Mons px-4">
-              <h3 className="text-xl md:text-2xl font-bold">{service.title}</h3>
+              <h3 className="text-xl md:text-2xl font-bold">{service.name}</h3>
               <p className="text-sm md:text-base px-2 md:px-4 font-light mt-2">
                 {service.description}
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

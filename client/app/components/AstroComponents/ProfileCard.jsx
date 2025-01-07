@@ -33,34 +33,25 @@ const ProfileCard = ({ card }) => {
           <div className="font-Cormorant space-y-4">
             <h1 className="lg:text-5xl text-3xl font-bold">{card?.title}</h1>
             <p className="lg:text-3xl text-xl mt-2 font-medium">
-              Ph.D. in Vedic Astrology, Gold Medalist
+              {card?.jobTitle}
             </p>
             <p className="lg:text-xl text-3xl">Bengaluru, India</p>
           </div>
 
           {/* Social Media Icons */}
           <div className="flex space-x-4 px-4 md:px-0 flex-wrap w-full md:w-fit items-center justify-center gap-4">
-            <a
-              href="#"
-              className="bg-white text-blue-600 py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2"
-            >
-              <FaLinkedin size={24} />
-              <p className="text-black">Linkedin</p>
-            </a>
-            <a
-              href="#"
-              className="bg-white text-blue-400 py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2"
-            >
-              <FaTwitter size={24} />
-              <p className="text-black">Twitter</p>
-            </a>
-            <a
-              href="#"
-              className="bg-white text-blue-800 py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2"
-            >
-              <FaFacebook size={24} />
-              <p className="text-black">Facebook</p>
-            </a>
+            {card?.socialMediaLinks?.map((link) => (
+              <a
+                key={link.id}
+                href={link.url}
+                className={`bg-white text-${link.platform === 'LinkedIn' ? 'blue-600' : link.platform === 'Twitter' ? 'blue-400' : 'blue-800'} py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2`}
+              >
+                {link.platform === 'LinkedIn' && <FaLinkedin size={24} />}
+                {link.platform === 'Twitter' && <FaTwitter size={24} />}
+                {link.platform === 'Facebook' && <FaFacebook size={24} />}
+                <p className="text-black">{link.platform}</p>
+              </a>
+            ))}
           </div>
         </div>
       </div>

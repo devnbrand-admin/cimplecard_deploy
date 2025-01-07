@@ -50,6 +50,8 @@ const SocialMediaSection = ({ card }) => {
       {/* Instagram Section */}
       <div>
         <h3 className="text-center text-2xl md:text-3xl font-Mons mb-8">Our Instagram Channel</h3>
+        <div className="flex flex-wrap gap-2">
+
         {
           card?.instagramReel?.map((link, index) => (
             <div key={index} className="flex items-center justify-center px-6 md:px-12 lg:px-24">
@@ -60,9 +62,10 @@ const SocialMediaSection = ({ card }) => {
                 height="600"
                 allow="encrypted-media"
                 className="rounded-lg border border-gray-300 shadow-lg"
-              ></iframe>
+                ></iframe>
             </div>))
         }
+        </div>
       </div>
     </div>
   );

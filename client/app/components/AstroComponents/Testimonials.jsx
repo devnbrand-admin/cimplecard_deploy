@@ -8,7 +8,7 @@ import Profile2 from "../../assets/astrologerTemplate/Profile2.png";
 import Profile3 from "../../assets/astrologerTemplate/Profile3.png";
 import Profile4 from "../../assets/astrologerTemplate/Profile4.png";
 
-const TestimonialCarousel = () => {
+const TestimonialCarousel = ({card}) => {
   const testimonials = [
     {
       text: "After Astrolex reading, I now look up at the night sky and see a whole new wondrous Universe reflecting back at me. Their writings & courses have my attention, and that’s one of the most valuable currencies.",
@@ -91,24 +91,24 @@ const TestimonialCarousel = () => {
             className="flex transition-transform ease-in-out duration-500"
             style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}
           >
-            {testimonials?.map((testimonial, index) => (
+            {card?.testimonials?.map((testimonial, index) => (
               <div
                 key={index}
                 className="w-full md:w-1/3 flex-shrink-0 p-4"
               >
                 <div className="bg-white text-black rounded-lg shadow-lg p-6 flex flex-col justify-between h-full font-Mons">
-                  <p className="text-base md:text-lg font-light mb-4 text-center">{testimonial.text}</p>
+                  <p className="text-base md:text-lg font-light mb-4 text-center">{testimonial.description}</p>
                   <div className="flex flex-col items-center mt-4">
                     <img
-                      src={testimonial.image.src}
+                      src={testimonial.imageUrl}
                       alt={testimonial.name}
                       className="w-16 h-16 rounded-full mb-4"
                     />
                     <h3 className="text-lg md:text-2xl font-extrabold">
                       {testimonial.name}
                     </h3>
-                    <p className="text-sm md:text-xl font-light">{testimonial.position}</p>
-                    <div className="mt-2">{renderStars(testimonial.rating)}</div>
+                    <p className="text-sm md:text-xl font-light">{testimonial.designation}</p>
+                    {/* <div className="mt-2">{renderStars(testimonial.rating)}</div> */}
                   </div>
                 </div>
               </div>

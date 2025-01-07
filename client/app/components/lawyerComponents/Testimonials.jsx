@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import TestimonialImage from "../../assets/lawyerTemplate/Testimonial.png";
 import testimonials from "../../data/LawyerTemplate/testimonial.json";
 
-const Testimonials = ({card}) => {
+const Testimonials = ({ card }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -34,25 +34,29 @@ const Testimonials = ({card}) => {
         </div>
       </div>
 
-      <div className="w-full lg:w-1/2 relative">
-        <div className="relative w-full h-96 lg:h-[700px]">
-          <Image
-            src={TestimonialImage}
-            alt="Client Handshake"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-md"
-          />
-        </div>
+      {
+        card?.testimonials?.map((testimonial, index) => (
+          <div key={index} className="w-full lg:w-1/2 relative">
+            <div className="relative w-full h-96 lg:h-[700px]">
+              <Image
+                src={testimonial.imageUrl}
+                alt="Client Handshake"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-md"
+              />
+            </div>
 
-        <div className="absolute bottom-0 left-0 lg:hidden bg-[#EEC297] p-6 w-[90%] shadow-lg">
-          <p className="leading-relaxed text-sm md:text-base mb-4">
-            {testimonials[currentIndex].text}
-          </p>
-          <p className="font-bold text-lg">{testimonials[currentIndex].name}</p>
-          <p className="text-sm">{testimonials[currentIndex].position}</p>
-        </div>
-      </div>
+            <div className="absolute bottom-0 left-0 lg:hidden bg-[#EEC297] p-6 w-[90%] shadow-lg">
+              <p className="leading-relaxed text-sm md:text-base mb-4">
+                {testimonial.text}
+              </p>
+              <p className="font-bold text-lg">{testimonial.name}</p>
+              <p className="text-sm">{testimonial.position}</p>
+            </div>
+          </div>
+        ))
+      }
     </div>
   );
 };

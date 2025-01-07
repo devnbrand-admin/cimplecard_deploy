@@ -1,6 +1,6 @@
 "use client";
 
-const OurServices = () => {
+const OurServices = ({card}) => {
   const cards = [
     {
       id: 1,
@@ -69,18 +69,18 @@ const OurServices = () => {
 
       {/* Cards Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto py-16 px-6">
-        {cards?.map((card) => (
+        {card?.services?.map((card) => (
           <div
             key={card.id}
-            onClick={() => window.open(card.url, "_blank")}
+            onClick={() => window.open(card.serviceUrl, "_blank")}
             className="cursor-pointer rounded-xl overflow-hidden border-2 shadow-md bg-white border-[#578EB6] transition-all hover:shadow-lg hover:scale-105"
           >
             {/* Top Half: Image Section */}
             <div className="flex items-center justify-center py-8 bg-white relative">
               <div className="w-24 h-24 md:w-40 md:h-40 rounded-full bg-blue-100 flex items-center justify-center border-4 border-white p-2">
                 <img
-                  src={card.serviceImage}
-                  alt={card.serviceName}
+                  src={card.imageUrl}
+                  alt={card.name}
                   className="object-contain w-16 h-16 md:w-28 md:h-28"
                 />
               </div>
@@ -89,7 +89,7 @@ const OurServices = () => {
             {/* Bottom Half: Text Section */}
             <div className="p-6 text-center bg-[#578EB6]">
               <h3 className="text-lg font-semibold text-white mb-2">
-                {card.serviceName}
+                {card.name}
               </h3>
               <p className="text-sm text-[#dcf0ff]">{card.description}</p>
             </div>

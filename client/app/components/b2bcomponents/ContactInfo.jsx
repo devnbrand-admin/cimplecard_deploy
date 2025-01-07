@@ -1,33 +1,32 @@
 import React from "react";
 import { MdEmail, MdPhone, MdEvent, MdLocationOn } from "react-icons/md";
 
-function ContactInfo() {
+function ContactInfo({card}) {
   const contactData = [
     {
       id: 1,
       title: "Email",
       icon: <MdEmail className="text-5xl text-blue-500" />,
-      details: ["johndoe@techsolutions.com", "contact@techsolutions.com"],
+      details: card?.emails,
     },
     {
       id: 2,
       title: "Mobile",
       icon: <MdPhone className="text-5xl text-blue-500" />,
-      details: ["+1-234-667-9876", "+999-234-87960"],
+      details: card?.phoneNumbers,
     },
     {
       id: 3,
       title: "Date of Birth",
       icon: <MdEvent className="text-5xl text-blue-500" />,
-      details: ["1985-06-18"],
+      details: [card?.dateOfBirth],
     },
     {
       id: 4,
       title: "Address",
       icon: <MdLocationOn className="text-5xl text-blue-500" />,
       details: [
-        "1234 Elm Street, Springfield, IL, 62345",
-        "56744, Queenstreet, IL, 62345",
+        card?.companyAddress
       ],
     },
   ];

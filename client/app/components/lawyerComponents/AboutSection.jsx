@@ -24,24 +24,9 @@ function AboutSection({card}) {
         </h1>
 
        
-        <p className="text-lg md:text-xl leading-relaxed font-serif text-gray-800">
-          Arjun Mehra is a seasoned legal professional specializing in corporate
-          law and civil litigation. Currently a Senior Associate at Integrity
-          Legal Partners in New Delhi, he is known for providing tailored legal
-          solutions to individuals and businesses alike.
-          <br />
-          
-          A graduate of Symbiosis Law School, Pune, Arjun combines sharp
-          analytical skills with a client-first approach. His work on complex
-          legal matters and high-profile cases has earned him recognition as a
-          trusted advisor in the industry.
-          
-          <br />
-          Committed to protecting and empowering his clients, Arjun Mehra stands
-          for integrity, precision, and results.
-          <br/>
+        <pre className="text-lg md:text-xl leading-relaxed font-serif text-gray-800">
           {card.aboutUs}
-        </p>
+        </pre>
       </div>
     </section>
   );

@@ -16,17 +16,17 @@ import "../../../style/b2btemplate.css";
 const Page = ({ card }) => {
   return (
     <>
-      <HeroSection card={card.card} />
-      <ContactInfo card={card.card} />
-      <AboutUs card={card.card} />
-      <OurServices card={card.card} />
-      <TestimonialCarousel card={card.card} />
-      <AppointmentForm card={card.card} />
-      <SocialMediaEmbeds card={card.card} />
-      <ContactForm card={card.card} />
-      <WhatsappContact card={card.card} />
-      <ContactCardButton card={card.card} />
-      <Gallery card={card.card} />
+      <HeroSection card={card} />
+      <ContactInfo card={card} />
+      <AboutUs card={card} />
+      <OurServices card={card} />
+      <TestimonialCarousel card={card} />
+      <AppointmentForm card={card} />
+      <SocialMediaEmbeds card={card} />
+      <ContactForm card={card} />
+      <WhatsappContact card={card} />
+      <ContactCardButton card={card} />
+      <Gallery card={card} />
     </>
   );
 };
