@@ -53,7 +53,7 @@ const Page = () => {
   }, []);
   const TEMPLATE_MAP = {
     medical: MedicalCard,
-    lawyer: B2bCard,
+    lawyer: LawyerCard,
     astrologer: AstrologerCard,
     b2b: B2bCard,
   };
