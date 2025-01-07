@@ -19,6 +19,7 @@ const isValidEmail = (email: string) => {
   return emailRegex.test(email);
 };
 
+
 const generateOTP = () =>
   Math.floor(100000 + Math.random() * 900000).toString();
 
@@ -65,7 +66,7 @@ export const sendOTP: any = async (req: Request, res: Response) => {
 
 export const verifyOTP: any = async (req: Request, res: Response) => {
   try {
-    const { email, otp, username, password } = req.body;
+    const { email, otp, username, password, referralCode } = req.body;
 
     // Check if required fields are provided
     if (!email || !otp) {
@@ -85,32 +86,53 @@ export const verifyOTP: any = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Invalid or expired OTP" });
     }
 
-    // Delete the OTP after verification
+    
     await prisma.oTP.delete({
       where: { id: storedOTP.id },
     });
 
-    // Hash the password before storing it
+  
     const hashedPassword = await bcrypt.hash(password, 10);
     const hashedId = crypto.createHash("sha256").update(email).digest("hex");
- 
-    // Create the new user in the database
+
+const code=generateReferralCode(hashedId);
+
+
     const newUser = await prisma.user.create({
       data: {
-        id: (hashedId), // Assign the hashed value to the id field
+        publicId: hashedId, // Assign the hashed value to the id field
         email,
         username: username || null, // Username is optional
         password: hashedPassword,
+        referralCode:code, // Store generated referral code
       },
     });
-const title ="Cimple card";
-    await mailSender(email,title,username)
+
+    // Handle referral system if a referral code is provided
+    if (referralCode) {
+      const referringUser = await prisma.user.findUnique({
+        where: { referralCode }, // Find the user with the given referral code
+      });
+
+      if (referringUser) {
+        // Increase the referral count for the referring user
+        await prisma.user.update({
+          where: { id: referringUser.id },
+          data: { referralCount: referringUser.referralCount + 1 },
+        });
+      }
+    }
+
+    const title = "Welcome to Cimple Card";
+    await mailSender(email, title, username);
+
     return res.status(201).json({
       message: "User registered successfully",
       user: {
-        id: newUser.id,
+        id: newUser.publicId,
         email: newUser.email,
         username: newUser.username,
+        referralCode: newUser.referralCode, // Return the generated referral code to the user
       },
     });
   } catch (error: any) {
@@ -165,7 +187,7 @@ export const login: any = async (req: Request, res: Response) => {
     return res.status(200).json({
       message: "Login successful",
       user: {
-        id: user.id,
+        id: user.publicId,
         token: token,
         email: user.email,
 
@@ -189,6 +211,23 @@ export const logout: any = (req: Request, res: Response) => {
 
     // Send response indicating logout was successful
     return res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.error("Logout error:", error);
+    return res.status(500).json({ message: "Server error during logout" });
+  }
+};
+export const refer: any = (req: Request, res: Response) => {
+  try {
+  
+    // Clear the JWT token cookie by setting it to an empty value and an immediate expiration time
+    const userId=req.user.id;
+    const email = req.body.email;
+    // const {email } = req.body;
+    // // const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedId = crypto.createHash("sha256").update(email).digest("hex");
+
+    const x=generateReferralCode(hashedId);
+    return res.status(200).json({ message: "Logout successful",referralCode:x });
   } catch (error) {
     console.error("Logout error:", error);
     return res.status(500).json({ message: "Server error during logout" });
@@ -222,10 +261,11 @@ export const getUserDetails: any = async (req: Request, res: Response) => {
     const userDetails = await prisma.user.findUnique({
       where: { id: userId },
       include: {
-        cards: true, // Include the cards related to the user
+        cards: true,
+        Appointment:true, // Include the cards related to the user
       },
     });
-
+  
     if (!userDetails) {
       return res
         .status(404)
@@ -241,6 +281,8 @@ export const getUserDetails: any = async (req: Request, res: Response) => {
 
 
  // Adjust the import based on your setup
+import { referralCodes } from 'referralcodes';
+import { generateReferralCode } from "../utils/referralCode.js";
 
 export const updateUserDetails: any = async (req: Request, res: Response) => {
   const userId: string = req.user?.id; // Assume user ID is attached to `req.user` by authentication middleware
