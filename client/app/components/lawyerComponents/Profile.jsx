@@ -34,7 +34,7 @@ function Profile({ card }) {
         <div className="flex justify-center w-full md:w-1/2 mb-6 md:mb-0 mt-16">
           <div className="relative w-[250px] h-[250px] md:w-[350px] md:h-[350px] border-[10px] md:border-[14px] border-[#CB935D] rounded-full overflow-hidden">
             <Image
-              src={card.profileImageUrl}
+              src={card?.profileImageUrl}
               alt="Profile"
               layout="fill"
               objectFit="cover"
@@ -45,10 +45,10 @@ function Profile({ card }) {
         {/* Content Section */}
         <div className="w-full md:w-1/2 text-center md:text-left">
           <h1 className="text-3xl md:text-6xl font-bold mb-4 md:mb-8 font-Garamond">
-            {card.title}
+            {card?.title}
           </h1>
           <h2 className="text-lg md:text-2xl md:mb-2">
-            {card.businessType} at {card.companyName}
+            {card?.businessType} at {card?.companyName}
           </h2>
           {/* Location is not added in data */}
           <p className="text-base md:text-xl mb-6">New Delhi, India</p>
@@ -83,8 +83,14 @@ function Profile({ card }) {
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-4 text-center bg-gray-100 hover:shadow-lg transition overflow-auto">
           <FaEnvelope className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Email</h3>
-          <p className="text-base">{card.emails}</p>
-          <p className="text-base">{card.otherEmails}</p>
+          <div>
+          {
+            card?.emails?.map((email, index) => (
+              <p className="text-base" key={index}>{email}</p>
+            ))
+            
+          }
+          </div>
           
         </div>
 
@@ -92,22 +98,22 @@ function Profile({ card }) {
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaPhone className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Mobile</h3>
-          <p className="text-base">{card.emergencyNumber}</p>
-          <p className="text-base">{card.otherPhoneNumber}</p>
+          <p className="text-base">{card?.emergencyNumber}</p>
+          <p className="text-base">{card?.otherPhoneNumber}</p>
         </div>
 
       
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaCalendarAlt className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Date of Birth</h3>
-          <p className="text-base">{card.dateOfBirth}</p>
+          <p className="text-base">{card?.dateOfBirth}</p>
         </div>
 
      
         <div className="p-6 shadow-md rounded-lg flex flex-col items-center gap-2 text-center bg-gray-100 hover:shadow-lg transition">
           <FaMapMarkerAlt className="text-3xl text-[#CB935D]" />
           <h3 className="text-xl font-bold">Address</h3>
-          <p className="text-base">{card.companyAddress}</p>
+          <p className="text-base">{card?.companyAddress}</p>
         </div>
       </section>
     </div>

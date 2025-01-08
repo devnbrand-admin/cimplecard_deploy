@@ -11,7 +11,7 @@ export const createAvailabilityHours = async (req, res) => {
                 availabilityDate: new Date(date),
                 notes,
                 availableTimes: {
-                    create: availableTimes.map((time) => ({
+                    create: availableTimes?.map((time) => ({
                         startTime: new Date(time.startTime),
                         endTime: new Date(time.endTime),
                     })),
@@ -70,7 +70,7 @@ export const updateAvailabilityHours = async (req, res) => {
                 notes,
                 availableTimes: {
                     deleteMany: {}, // Clear existing availableTimes before updating
-                    create: availableTimes.map((time) => ({
+                    create: availableTimes?.map((time) => ({
                         startTime: new Date(time.startTime),
                         endTime: new Date(time.endTime),
                     })),

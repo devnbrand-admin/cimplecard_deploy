@@ -53,7 +53,7 @@ const Header = () => {
   return (
     <div className="right-0 left-0 fixed" style={{ zIndex: 10 }}>
       <div className="bg-white m-2 w-fit mx-auto rounded-lg shadow-md px-5 py-2 flex justify-center mt-3 space-x-6">
-        {links.map((link) => (
+        {links?.map((link) => (
           <div key={link}>
             <button
               className={`text-lg ${

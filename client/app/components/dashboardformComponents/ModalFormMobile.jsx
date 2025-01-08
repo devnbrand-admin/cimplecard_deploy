@@ -159,7 +159,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setProductData((prevData) =>
-          prevData.map((item, i) =>
+          prevData?.map((item, i) =>
             i === index ? { ...item, imageUrl: reader.result } : item
           )
         );
@@ -190,7 +190,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
-    const newImages = files.map((file) => URL.createObjectURL(file));
+    const newImages = files?.map((file) => URL.createObjectURL(file));
     setImages((prev) => [...prev, ...newImages]);
   };
 
@@ -695,57 +695,86 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
     3: {
       id: 3, label: 'Contact Details', icon: <BsTelephone />, component: <>
         <div className="w-full space-y-6">
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <input
-                type="text"
-                placeholder="Phone Number"
-                value={formData.phoneNumbers[0]}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    phoneNumbers: [
-                      e.target.value,
-                      ...formData.phoneNumbers.slice(1),
-                    ],
-                  })
-                }
-                className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
-              />
-            </div>
+          {/* Phone Numbers */}
+          <div className="flex flex-col gap-4">
+            {[0, 1, 2]?.map((index) => (
+              <div key={index} className="flex-1">
+                <input
+                  type="text"
+                  placeholder={index === 0 ? "Phone Number" : "Other Phone Number"}
+                  value={formData.phoneNumbers[index] || ""}
+                  onChange={(e) => {
+                    const updatedPhoneNumbers = [...formData.phoneNumbers];
+                    updatedPhoneNumbers[index] = e.target.value;
+                    setFormData({ ...formData, phoneNumbers: updatedPhoneNumbers });
+                  }}
+                  className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+                />
+              </div>
+            ))}
           </div>
 
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <input
-                type="text"
-                placeholder="Email"
-                value={formData.emails[0]}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    emails: formData.emails.map((email, index) =>
-                      index === 0 ? e.target.value : email
-                    ),
-                  })
-                }
-                className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
-              />
-            </div>
+          {/* Emails */}
+          <div className="flex flex-col gap-4">
+            {[0, 1]?.map((index) => (
+              <div key={index} className="flex-1">
+                <input
+                  type="text"
+                  placeholder={index === 0 ? "Email" : "Other Email"}
+                  value={formData.emails[index] || ""}
+                  onChange={(e) => {
+                    const updatedEmails = [...formData.emails];
+                    updatedEmails[index] = e.target.value;
+                    setFormData({ ...formData, emails: updatedEmails });
+                  }}
+                  className="w-full p-3 border border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+                />
+              </div>
+            ))}
           </div>
 
+          {/* Emergency Contact Header */}
           <div className="flex flex-col justify-center items-center gap-1">
-            <h1 className="text-l font-semibold text-[#707FDD]">Emergency Contact</h1>
+            <h1 className="text-l font-semibold text-center text-[#707FDD]">Emergency Contact</h1>
             <h2 className="text-xs font-semithin text-[#707FDD] text-center px-4">
               Add your contact information and Emergency Contact
             </h2>
           </div>
 
+          {/* Emergency Contact Fields */}
           <div className="flex gap-4">
             <div className="flex-1">
               <input
                 type="text"
-                placeholder="Phone Number"
+                placeholder="Emergency Name"
+                value={formData.emergencyName}
+                onChange={(e) =>
+                  setFormData({ ...formData, emergencyName: e.target.value })
+                }
+                className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <input
+                type="text"
+                placeholder="Relationship"
+                value={formData.emergencyRelationship}
+                onChange={(e) =>
+                  setFormData({ ...formData, emergencyRelationship: e.target.value })
+                }
+                className="w-full p-3 border-2 border-[#7987DF] text-sm text-[#A8AED2] bg-[#707FDD] bg-opacity-10 rounded-md"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <input
+                type="text"
+                placeholder="Emergency Phone Number"
                 value={formData.emergencyNumber}
                 onChange={(e) =>
                   setFormData({
@@ -762,7 +791,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
             <div className="flex-1">
               <input
                 type="text"
-                placeholder="Email"
+                placeholder="Emergency Email"
                 value={formData.emergencyEmail}
                 onChange={(e) =>
                   setFormData({
@@ -775,6 +804,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
             </div>
           </div>
 
+          {/* Action Buttons */}
           <div className="py-6 flex justify-between space-x-2">
             <button
               onClick={handleGoBack}
@@ -785,11 +815,13 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
             <button
               onClick={handleSave}
-              className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:transform active:scale-110">
+              className="py-2 px-4 rounded-md text-white bg-gradient-to-r from-[#707FDD] to-[#1E2F98] transform transition-transform duration-200 ease-out active:transform active:scale-110"
+            >
               Save
             </button>
           </div>
         </div>
+
       </>,
       imageUrl: '../../ContactDetails.svg'
     },
@@ -1251,7 +1283,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                     className="flex flex-col gap-2 self-start"
                     style={{ width: "100%", maxWidth: "400px" }}
                   >
-                    {productData.map((product, index) => (
+                    {productData?.map((product, index) => (
                       <div
                         key={index}
                         className="flex items-center justify-between"
@@ -1284,7 +1316,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                               value={product.name || ""}
                               onChange={(e) =>
                                 setProductData(
-                                  productData.map((item, i) =>
+                                  productData?.map((item, i) =>
                                     i === index
                                       ? { ...item, name: e.target.value }
                                       : item
@@ -1308,7 +1340,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                               value={product.description || ""}
                               onChange={(e) =>
                                 setProductData(
-                                  productData.map((item, i) =>
+                                  productData?.map((item, i) =>
                                     i === index
                                       ? { ...item, description: e.target.value }
                                       : item
@@ -1332,7 +1364,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
                               value={product.serviceUrl || ""}
                               onChange={(e) =>
                                 setProductData(
-                                  productData.map((item, i) =>
+                                  productData?.map((item, i) =>
                                     i === index
                                       ? { ...item, serviceUrl: e.target.value }
                                       : item
@@ -1529,7 +1561,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       id: 9, label: 'Gallery', icon: <BsImages />, component: <>
         <div className="w-full space-y-6">
           <div className="flex gap-4 flex-col flex-nowrap justify-start w-full overflow-x-auto p-4 scrollbar-thin scrollbar-thumb-[#707FDD] hover:scrollbar-thumb-[#5C6CCF]">
-            {images.map((image, index) => (
+            {images?.map((image, index) => (
               <div
                 key={index}
                 className="w-40 h-56 rounded-lg flex-shrink-0"
@@ -1541,7 +1573,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
               ></div>
             ))}
 
-            {[...Array(Math.max(5 - images.length, 0))].map((_, index) => (
+            {[...Array(Math.max(5 - images.length, 0))]?.map((_, index) => (
               <div
                 key={`empty-${index}`}
                 className="w-full h-56 bg-[#707FDD] bg-opacity-70 rounded-lg flex-shrink-0 flex items-center justify-center"
@@ -1601,7 +1633,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
       id: 10, label: 'Business Hours', icon: <BsClockHistory />, component: <>
         <>
           <div className="space-y-6">
-            {formData.businessHours.map((hour, index) => (
+            {formData.businessHours?.map((hour, index) => (
               <div
                 key={index}
                 className="flex flex-col gap-4 p-4 border rounded-md bg-[#F9FAFB] relative"
@@ -1757,8 +1789,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
 
           <div className="z-20 sticky">
             <Image
-                className={`absolute right-0 left-0 scale-150 ${steps[activeStep].label === 'Profile' ? 'translate-y-[-25%]' : 'translate-y-[-5%]'
-                } md:translate-y-[-20%] transition-transform duration-300`}
+              className='absolute right-0 left-0 scale-150 translate-y-[-5%] md:translate-y-[-20%] transition-transform duration-300'
               fill
               src={'../../ModalMobileTop.svg'}
             />
@@ -1843,7 +1874,7 @@ export default function ModalForm({ setIsModalOpen, cardId }) {
             </div>
           </div>
 
-
+          {/* content */}
           <div className=" bg-white top-10 w-full h-full flex relative overflow-hidden">
             <div className="absolute -left-[8%] top-0 bottom-0 flex items-center justify-center w-[6rem]">
               <img src="../../ModalMobileLeft.svg" alt="Left SVG" className="h-[86%] w-full" />

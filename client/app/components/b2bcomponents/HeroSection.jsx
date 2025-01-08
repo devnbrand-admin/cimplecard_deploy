@@ -29,8 +29,9 @@ function HeroSection({ card }) {
           <div className="">
             {/* Profile Image */}
             <div className="absolute w-40 h-40 md:w-[380px] md:h-[380px] left-44 top-0 md:left-24 md:top-36 rounded-full overflow-hidden border-[12px] border-[#CFEFFC] ">
-              <div className="w-[148px] h-[148px] md:w-[364px] md:h-[364px] rounded-full overflow-hidden border-[10px] border-[#37729D] ">
+              <div className="w-[148px] h-[148px] md:w-[364px] md:h-[364px] rounded-full z-10 overflow-hidden border-[10px] border-[#37729D] ">
                 <Image
+                  className="z-10 !w-full !h-full"
                   src={card.profileImageUrl} // Replace with the actual path of the profile image
                   alt="Profile Picture"
                   layout="responsive"

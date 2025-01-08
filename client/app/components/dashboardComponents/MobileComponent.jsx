@@ -1,12 +1,15 @@
+
 import React, { useState } from "react";
 import Card from "./Card";
 import Navbar from "./Navbar";
 import ModalFormMobile from "../dashboardformComponents/ModalFormMobile";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
-const MobileComponent = ({ userDetails }) => {
+import ResponsiveModalForm from "../dashboardformComponents/Modal";
+const MobileComponent = ({ userDetails, setIsModalOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+
   return (
     <div
       style={{ backgroundColor: "#EADAF4" }}
@@ -52,17 +55,17 @@ const MobileComponent = ({ userDetails }) => {
       <div className="h-40"></div>
       <div
         className="flex flex-col p-3 items-center"
-        style={{ backgroundColor: "#EADAF4", minHeight: "80vh" }}
+        style={{ backgroundColor: "#EADAF4" }}
       >
         <h3 className="font-semibold text-lg m-5" style={{ color: "#5A6ACF" }}>
           My Cards
         </h3>
         {userDetails
-          ? userDetails.cards.map((card, index) => (
-              <div className="my-5" key={index}>
-                <Card card={card} />
-              </div>
-            ))
+          ? userDetails.cards?.map((card, index) => (
+            <div className="my-5" key={index}>
+              <Card card={card} />
+            </div>
+          ))
           : "no cards"}
         <div className="h-40"></div>
       </div>
@@ -117,9 +120,11 @@ const MobileComponent = ({ userDetails }) => {
       {isOpen && (
         <Provider store={store}>
           <ModalFormMobile />
+          {/* <ResponsiveModalForm setIsModalOpen={setIsModalOpen} /> */}
         </Provider>
       )}
     </div>
+
   );
 };
 

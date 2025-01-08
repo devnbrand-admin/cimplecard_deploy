@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import OfficeImage from "../../assets/group.png";
 
-function AboutUs() {
+function AboutUs({card}) {
   return (
     <div
       className="relative h-screen bg-cover bg-center bg-no-repeat"
@@ -17,7 +17,7 @@ function AboutUs() {
           About Us
         </h2>
         <p className="text-lg md:text-[14px] text-white text-start leading-relaxed tracking-wide font-medium max-w-4xl mb-6">
-          We provide{" "}
+          {/* We provide{" "}
           <span className="font-semibold text-blue-300">
             innovative technology solutions
           </span>{" "}
@@ -29,7 +29,8 @@ function AboutUs() {
         <p className="text-lg md:text-[14px] text-white text-start leading-relaxed tracking-wide font-medium max-w-4xl">
           With a dedicated team of professionals, we prioritize delivering
           quality, reliability, and value to our clients, ensuring their journey
-          to success is seamless and impactful.
+          to success is seamless and impactful. */}
+          {card?.aboutUs}
         </p>
       </div>
     </div>

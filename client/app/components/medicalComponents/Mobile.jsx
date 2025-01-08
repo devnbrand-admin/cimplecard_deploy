@@ -6,6 +6,7 @@ import Testimonal from "./Testimonal";
 import Contact from "./Contact";
 import Social from "./Social";
 import Footer from "./Footer";
+import Gallery from "../lawyerComponents/Gallery";
 
 const Mobile = ({ card }) => {
   return (
@@ -14,6 +15,7 @@ const Mobile = ({ card }) => {
        */}
       <Hero card={card} />
       <About card={card} />
+      <Gallery card={card} />
       <Testimonal card={card} />
       <Contact card={card} />
       <Social card={card} />

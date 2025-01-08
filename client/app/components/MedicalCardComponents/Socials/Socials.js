@@ -31,7 +31,7 @@ export default function Socials() {
         <div className="text-center px-[50px] my-[5vh]">
           <h1 className="text-[25px] mb-[1vh]">Connect with me</h1>
           <div className="flex justify-center">
-            {personalLinks.map((link, index) => (
+            {personalLinks?.map((link, index) => (
               <SocialIcon
                 key={index}
                 className="ml-[2vw] transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.8)]"
@@ -45,7 +45,7 @@ export default function Socials() {
         <div className="text-center px-[50px] my-[5vh]">
           <h1 className="text-[25px] mb-[1vh]">Connect with the company</h1>
           <div className="flex justify-center">
-            {companyLinks.map((link, index) => (
+            {companyLinks?.map((link, index) => (
               <SocialIcon
                 key={index}
                 className="ml-[2vw] transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.8)]"

@@ -88,7 +88,7 @@ const OtpVerification = ({
         {/* OTP Inputs */}
         <form onSubmit={handleSubmit} className="text-center">
           <div className="flex justify-center mb-6">
-            {otp.map((value, index) => (
+            {otp?.map((value, index) => (
               <input
                 key={index}
                 id={`otp-${index}`}

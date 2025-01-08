@@ -42,7 +42,7 @@ const OtpInput = ({ length = 4, onOtpSubmit = () => {} }) => {
 
   return (
     <div className="flex justify-center">
-      {otp.map((value, index) => (
+      {otp?.map((value, index) => (
         <input
           key={index}
           ref={(input) => (inputsRefs.current[index] = input)}

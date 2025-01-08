@@ -36,7 +36,7 @@ const HowItOperates = () => {
       <div className="flex flex-col lg:flex-row justify-center items-center gap-8">
         {/* Features Left */}
         <div className="space-y-8 px-14 md:px-0 self-start -mt-[150px] lg:-mt-0 text-center lg:text-right w-full lg:w-1/4 order-2 lg:order-1">
-          {features.map((feature, index) => (
+          {features?.map((feature, index) => (
             <div key={index} className="flex flex-col lg:flex-row items-center gap-4">
               <div className="text-[#161973]">
                 <h4 className="text-lg font-bold">{feature.title}</h4>
@@ -72,7 +72,7 @@ const HowItOperates = () => {
 
         {/* Features Right */}
         <div className="space-y-8 px-14 md:px-0 self-start text-center lg:text-left w-full lg:w-1/4 order-3">
-          {featuresRight.map((feature, index) => (
+          {featuresRight?.map((feature, index) => (
             <div key={index} className="flex flex-col lg:flex-row items-center gap-4">
               <div className="hidden w-[60px] h-[55px] border-[3px] border-gray-300 bg-[#d5d6e1] rounded-full lg:flex items-center justify-center shadow-md">
                 <div className="w-[50px] h-[50px] bg-[#acb3e2] rounded-full flex items-center justify-center">

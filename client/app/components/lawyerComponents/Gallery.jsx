@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,25 +6,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
-import image1 from "../../assets/lawyerTemplate/Gallery1.png";
-import image2 from "../../assets/lawyerTemplate/Gallery2.png";
-import image3 from "../../assets/lawyerTemplate/Gallery3.png";
 
-
-// Image Data
-const galleryImages = [
-  { id: 1, src: image1, alt: "Gallery Image 1" },
-  { id: 2, src: image2, alt: "Gallery Image 2" },
-  { id: 3, src: image3, alt: "Gallery Image 3" },
-  { id: 4, src: image1, alt: "Gallery Image 4" },
-  { id: 5, src: image2, alt: "Gallery Image 5" },
-  { id: 6, src: image3, alt: "Gallery Image 6" },
-];
-
-function Gallery() {
+const Gallery = ({ card }) => {
   const swiperRef = useRef(null);
 
-  
   const handlePrev = () => {
     if (swiperRef.current) swiperRef.current.slidePrev();
   };
@@ -67,15 +52,15 @@ function Gallery() {
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         pagination={{ el: ".custom-pagination", clickable: true }}
         loop={true}
-        className="max-w-5xl mx-auto rounded-lg"
+        className="max-w-5xl !overflow-y-visible py-2 mx-auto rounded-lg"
       >
-        {galleryImages.map((image) => (
-          <SwiperSlide key={image.id}>
+        {card?.gallery?.map((image, index) => (
+          <SwiperSlide className="" key={index}>
             <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-white rounded-lg shadow-lg overflow-hidden group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
-              <div className="w-full h-full rounded-lg overflow-hidden">
+              <div className="w-full h-full rounded-lg ">
                 <Image
                   src={image.src}
-                  alt={image.alt}
+                  alt={image.alt || `Gallery Image ${index + 1}`}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-lg"
@@ -89,6 +74,6 @@ function Gallery() {
       <div className="custom-pagination flex justify-center gap-2 mt-6 text-white pb-6"></div>
     </div>
   );
-}
+};
 
 export default Gallery;

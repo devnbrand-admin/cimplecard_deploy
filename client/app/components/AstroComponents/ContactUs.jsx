@@ -39,7 +39,7 @@ function ContactInfo() {
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-[#2b1923]">
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-8">
-        {contactData.map((item) => (
+        {contactData?.map((item) => (
           <div
             key={item.id}
             className={`rounded-lg p-8 flex flex-col items-center space-y-4 border border-teal-500 bg-gradient-to-br from-black via-teal-900 to-black shadow-lg transition-transform transform hover:scale-105 ${item.hoverBg}`}
@@ -51,7 +51,7 @@ function ContactInfo() {
             <h3 className="text-xl font-bold text-white">{item.title}</h3>
 
             <ul className="text-gray-300 space-y-2 text-center">
-              {item.details.map((detail, index) => (
+              {item.details?.map((detail, index) => (
                 <li key={index} className="text-sm md:text-base text-wrap">
                   {detail}
                 </li>

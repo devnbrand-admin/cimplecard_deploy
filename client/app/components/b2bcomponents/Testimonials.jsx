@@ -37,7 +37,7 @@ const testimonials = [
   },
 ];
 
-function TestimonialCarousel() {
+function TestimonialCarousel({card}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dragStart, setDragStart] = useState(null);
   const [dragDistance, setDragDistance] = useState(0);
@@ -114,7 +114,7 @@ function TestimonialCarousel() {
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
           >
-            {testimonials.map((testimonial, index) => (
+            {card?.testimonials?.map((testimonial, index) => (
               <div
                 key={index}
                 className="w-full flex-shrink-0 flex justify-center"
@@ -124,7 +124,7 @@ function TestimonialCarousel() {
                   <div className="flex-shrink-0 relative">
                     <div className="w-40 h-40 rounded-full border-4 border-blue-400 overflow-hidden">
                       <img
-                        src={testimonial.profileImg}
+                        src={testimonial.imageUrl}
                         alt={testimonial.name}
                         className="w-full h-full object-cover"
                       />
@@ -134,7 +134,7 @@ function TestimonialCarousel() {
                   {/* Testimonial Content */}
                   <div className="flex flex-col space-y-4">
                     <p className="text-xl italic text-gray-700">
-                      "{testimonial.testimonial}"
+                      "{testimonial.description}"
                     </p>
                     <div>
                       <p className="text-2xl font-bold text-blue-600">

@@ -3,7 +3,7 @@ import React from "react";
 const About = ({ card }) => {
   return (
     <div
-      className="relative h-[200vh] w-screen overflow-hidden"
+      className="relative mb-5 flex justify-center items-center overflow-hidden"
       style={{ width: "100vw" }}
     >
       <img
@@ -19,7 +19,7 @@ const About = ({ card }) => {
         className="absolute top-1/4 left-0 w-1/3 opacity-100"
       />
 
-      <div className="absolute z-8 flex flex-col">
+      <div className="self-center z-8 left-1/4 mx-auto justify-center items-center top-20 flex flex-col">
         <div
           className=" text-center text-black m-4 text-start"
           style={{ color: "#0B8823" }}

@@ -49,11 +49,11 @@ export const uploadSingleImage = async (imageFile,name) => {
  */
 export const uploadImages = async (imageFiles) => {
   try {
-    if(imageFiles.length <= 0){
+    if(imageFiles?.length <= 0){
       return null
     }
     // Use Promise.all to upload all images concurrently
-    const uploadPromises = imageFiles.map((file) => uploadSingleImage(file));
+    const uploadPromises = imageFiles?.map((file) => uploadSingleImage(file));
     const imageUrls = await Promise.all(uploadPromises);
     console.log(imageUrls,"gallery")
     return imageUrls;
