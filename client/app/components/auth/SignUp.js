@@ -19,7 +19,7 @@ export default function SignUp({ setIsLogin }) {
   });
   const [isPwdVisible, setIsPwdVisible] = useState(false);
   const [isConfirmPwdVisible, setIsConfirmPwdVisible] = useState(false);
-  const [isOpt, setIsOtp] = useState(false);
+  const [isOpt, setIsOtp] = useState(true);
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
