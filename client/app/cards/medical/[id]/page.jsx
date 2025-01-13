@@ -13,6 +13,7 @@ import axios from "axios";
 import WhatsAppButton from "../../../components/b2bcomponents/WhatsappContact";
 import ContactCardButton from "../../../components/b2bcomponents/ContactCardButton";
 import { useParams } from "next/navigation";
+import Gallery from "../../../components/lawyerComponents/Gallery";
 
 const page = ({ card }) => {
   // const [cardi, setCard] = useState(null);
@@ -41,20 +42,20 @@ const page = ({ card }) => {
       }}
     >
       {isMobile ? (
-        card && <Mobile card={card.card} /> // Render mobile-specific component
+        card && <Mobile card={card} /> // Render mobile-specific component
       ) : card ? (
         <>
-          <Header card={card.card} />
-          <Hero card={card.card} />
-          <Services card={card.card} />
-          <About card={card.card} />
-          <Testimonal card={card.card} />
-          <Contact card={card.card} />
-
+          <Header card={card} />
+          <Hero card={card} />
+          <Services card={card} />
+          <About card={card} />
+          <Gallery card={card} />
+          <Testimonal card={card} />
+          <Contact card={card} />
           <WhatsAppButton />
           <ContactCardButton />
-          <Social card={card.card} />
-          <Footer card={card.card} />
+          <Social card={card} />
+          <Footer card={card} />
         </>
       ) : (
         "LOADING"

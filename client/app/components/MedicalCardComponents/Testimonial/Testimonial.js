@@ -64,7 +64,7 @@ const Testimonial = () => {
             transform: `translateX(-${currentIndex * 100}%)`,
           }}
         >
-          {testimonials.map((testimonial, index) => (
+          {testimonials?.map((testimonial, index) => (
             <div
               key={index}
               className="flex-shrink-0 w-full flex items-center justify-between p-8 h-[400px]"
@@ -88,7 +88,7 @@ const Testimonial = () => {
         </div>
       </main>
       <div className="flex mt-6 space-x-2">
-        {testimonials.map((_, index) => (
+        {testimonials?.map((_, index) => (
           <button
             key={index}
             className={`h-4 w-4 rounded-full transition-all ${

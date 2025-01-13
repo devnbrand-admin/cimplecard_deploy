@@ -31,36 +31,27 @@ const ProfileCard = ({ card }) => {
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 lg:space-y-16 px-0 py-0 lg:px-14 lg:py-16">
           {/* Name and Details */}
           <div className="font-Cormorant space-y-4">
-            <h1 className="lg:text-5xl text-3xl font-bold">{card.title}</h1>
+            <h1 className="lg:text-5xl text-3xl font-bold">{card?.title}</h1>
             <p className="lg:text-3xl text-xl mt-2 font-medium">
-              Ph.D. in Vedic Astrology, Gold Medalist
+              {card?.jobTitle}
             </p>
             <p className="lg:text-xl text-3xl">Bengaluru, India</p>
           </div>
 
           {/* Social Media Icons */}
           <div className="flex space-x-4 px-4 md:px-0 flex-wrap w-full md:w-fit items-center justify-center gap-4">
-            <a
-              href="#"
-              className="bg-white text-blue-600 py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2"
-            >
-              <FaLinkedin size={24} />
-              <p className="text-black">Linkedin</p>
-            </a>
-            <a
-              href="#"
-              className="bg-white text-blue-400 py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2"
-            >
-              <FaTwitter size={24} />
-              <p className="text-black">Twitter</p>
-            </a>
-            <a
-              href="#"
-              className="bg-white text-blue-800 py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2"
-            >
-              <FaFacebook size={24} />
-              <p className="text-black">Facebook</p>
-            </a>
+            {card?.socialMediaLinks?.map((link) => (
+              <a
+                key={link.id}
+                href={link.url}
+                className={`bg-white text-${link.platform === 'LinkedIn' ? 'blue-600' : link.platform === 'Twitter' ? 'blue-400' : 'blue-800'} py-2 lg:py-3 px-3 lg:px-4 rounded-sm hover:scale-110 transition flex justify-center items-center gap-2`}
+              >
+                {link.platform === 'LinkedIn' && <FaLinkedin size={24} />}
+                {link.platform === 'Twitter' && <FaTwitter size={24} />}
+                {link.platform === 'Facebook' && <FaFacebook size={24} />}
+                <p className="text-black">{link.platform}</p>
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -71,16 +62,26 @@ const ProfileCard = ({ card }) => {
           <div className="flex flex-col items-center gap-4">
             <FaEnvelope size={28} />
             <p className="text-xl font-bold">Email</p>
-            <p className="text-sm">johndoe@techsolutions.com</p>
-            <p className="text-sm">contact@techsolutions.com</p>
+            {
+              card?.emails?.map((email, index) => (
+                <p key={index} className="text-sm">{email}</p>
+              ))
+            }
+            {/* <p className="text-sm">johndoe@techsolutions.com</p>
+            <p className="text-sm">contact@techsolutions.com</p> */}
           </div>
         </div>
         <div className="bg-[#020013] border border-violet-950 pt-8 pb-8 text-center rounded-lg flex flex-col items-center space-x-4 gap-4">
           <div className="flex flex-col items-center gap-4">
             <FaPhone size={28} />
             <p className="text-xl font-bold">Mobile</p>
-            <p className="text-sm">+1-234-667-9876</p>
-            <p className="text-sm">+999-234-87960</p>
+            {
+              card?.phoneNumbers?.map((phone, index) => (
+                <p key={index} className="text-sm">{phone}</p>
+              ))
+            }
+            {/* <p className="text-sm">+1-234-667-9876</p>
+            <p className="text-sm">+999-234-87960</p> */}
           </div>
         </div>
         <div className="bg-[#020013] border border-violet-950 pt-8 pb-8 text-center rounded-lg flex flex-col items-center space-x-4 gap-4">

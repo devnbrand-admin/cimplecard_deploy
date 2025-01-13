@@ -1,5 +1,6 @@
 import React from "react";
 import ContactDiv from "../ContactDiv";
+import Image from "next/image";
 
 const HeroMobile = ({ card }) => {
   return (
@@ -17,23 +18,25 @@ const HeroMobile = ({ card }) => {
       }}
       id="Profile"
     >
-      <img
-        src={card.profileImageUrl}
+      <Image
+        src={card?.profileImageUrl}
         alt="profile img"
-        className="rounded-full"
+        width={200}
+        height={200}
+        className="rounded-full shadow-md"
         style={{ width: "50vw", height: "50vw", marginBottom: "20px" }}
       />
 
       {/* Title Section */}
       <div className="text-center my-4">
         <h1 className="text-3xl font-bold" style={{ color: "#0B8823" }}>
-          {card.title}
+          {card?.title}
         </h1>
         <span className="text-lg font-medium" style={{ color: "#0B8823" }}>
-          {card.jobTitle}
+          {card?.jobTitle}
         </span>{" "}
         <span className="text-lg font-light" style={{ color: "#0B8823" }}>
-          | {card.companyName}
+          | {card?.companyName}
         </span>
       </div>
 
@@ -58,13 +61,13 @@ const HeroMobile = ({ card }) => {
             src="/Assets/MedicalAssets/linkedin.png"
             alt="linkedin icon"
             className="w-5 h-5 mx-1"
-            onClick={() => window.open(card.companySocialMediaLink)}
+            onClick={() => window.open(card?.companySocialMediaLink)}
           />
           <img
             src="/Assets/MedicalAssets/instagram.png"
             alt="instagram icon"
             className="w-5 h-5 mx-1"
-            onClick={() => window.open(card.instagramVideoLink)}
+            onClick={() => window.open(card?.instagramVideoLink)}
           />
         </div>
         {/* Company Socials */}
@@ -76,13 +79,13 @@ const HeroMobile = ({ card }) => {
             src="/Assets/MedicalAssets/linkedin.png"
             alt="linkedin icon"
             className="w-5 h-5 mx-1"
-            onClick={() => window.open(card.companySocialMediaLink)}
+            onClick={() => window.open(card?.companySocialMediaLink)}
           />
           <img
             src="/Assets/MedicalAssets/instagram.png"
             alt="instagram icon"
             className="w-5 h-5 mx-1"
-            onClick={() => window.open(card.instagramVideoLink)}
+            onClick={() => window.open(card?.instagramVideoLink)}
           />
         </div>
       </div>
@@ -90,7 +93,7 @@ const HeroMobile = ({ card }) => {
       {/* Contact Section */}
       <div className="w-full flex justify-center mt-4">
         <div
-          className="relative w-full h-96 my-3 text-green-700"
+          className="relative w-full my-3 text-green-700"
           style={{
             maxWidth: "300px",
             padding: "10px",

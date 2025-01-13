@@ -274,7 +274,7 @@ const page = () => {
             </div>
           </div>
           <div className="mt-4 space-y-4">
-            {[1, 2, 3, 4, 5].map((item, index) => (
+            {[1, 2, 3, 4, 5]?.map((item, index) => (
               <div
                 key={index}
                 className="flex items-center gap-4 p-3 border rounded-lg"

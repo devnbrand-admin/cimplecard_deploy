@@ -22,16 +22,16 @@ const page = ({ card}) => {
       }}
       className="w-full"
     >
-      <ProfileCard card={card.card} />
-      <HeroSection card={card.card} />
-      <ServicesSection card={card.card} />
-      <Testimonial card={card.card} />
-      <BookingForm card={card.card} />
-      <SocialMediaHandlers card={card.card} />
-      <ContactSection card={card.card} />
-      <Gallery card={card.card} />
-      <WhatsappContact card={card.card} />
-      <ContactCardButton card={card.card} />
+      <ProfileCard card={card} />
+      <HeroSection card={card} />
+      <ServicesSection card={card} />
+      <Testimonial card={card} />
+      <BookingForm card={card} />
+      <SocialMediaHandlers card={card} />
+      <ContactSection card={card} />
+      <Gallery card={card} />
+      <WhatsappContact card={card} />
+      <ContactCardButton card={card} />
     </div>
   );
 };

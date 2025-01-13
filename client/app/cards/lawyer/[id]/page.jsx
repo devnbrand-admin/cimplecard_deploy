@@ -17,16 +17,16 @@ function page({ card }) {
   return (
     <>
       <Navbar />
-      <Profile card={card.card} />
-      <AboutSection card={card.card} />
-      <ServicesSection card={card.card} />
-      <Testimonial card={card.card} />
-      <Appointment card={card.card} />
-      <SocialMediaHandle card={card.card} />
-      <ContactForm card={card.card} />
-      <Gallery card={card.card} />
-      <ContactCardButton card={card.card} />
-      <WhatsappContact card={card.card} />
+      <Profile card={card} />
+      <AboutSection card={card} />
+      <ServicesSection card={card} />
+      <Testimonial card={card} />
+      <Appointment card={card} />
+      <SocialMediaHandle card={card} />
+      <ContactForm card={card} />
+      <Gallery card={card} />
+      <ContactCardButton card={card} />
+      <WhatsappContact card={card} />
     </>
   );
 }

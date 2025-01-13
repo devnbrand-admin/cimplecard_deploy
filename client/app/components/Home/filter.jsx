@@ -8,7 +8,7 @@ const Filter = ({ filters, onFilterChange }) => {
       <h2 className="text-2xl font-bold text-[#161973]">Filter</h2>
       <h2 className="text-lg font-medium mt-3 text-[#161973]">Profession</h2>
 
-      {professions.map((profession) => (
+      {professions?.map((profession) => (
         <div key={profession}>
           <label className='text-black '>
             <input

@@ -17,7 +17,7 @@ console.log(testimonials,"test")
   };
 
   const handleInputChange = (index, field, value) => {
-    const updatedTestimonials = testimonials.map((testimonial, i) =>
+    const updatedTestimonials = testimonials?.map((testimonial, i) =>
       i === index ? { ...testimonial, [field]: value } : testimonial
     );
     setTestimonials(updatedTestimonials);
@@ -25,13 +25,13 @@ console.log(testimonials,"test")
 
   return (
     <div>
-    <div className="space-y-4 mt-4">
+    <div className="space-y-4 mt-4 mx-2 md:mx-0">
       <div className="flex justify-center gap-4">
         <h1 className="text-2xl font-semibold text-[#707FDD]">
           Add Testimonial
         </h1>
       </div>
-      {testimonials.map((testimonial, index) => (
+      {testimonials?.map((testimonial, index) => (
         <div key={index} className="space-y-4 relative">
           <button
             onClick={() => handleDeleteTestimonial(index)}
@@ -61,15 +61,15 @@ console.log(testimonials,"test")
               <input
                 type="text"
                 placeholder="Job Role"
-                value={testimonial.designation  }
+                value={testimonial.designation}
                 onChange={(e) =>
                   handleInputChange(index, "designation", e.target.value)
                 }
                 className="w-full p-3 border text-[#787F89] bg-[#707FDD] bg-opacity-10 rounded-md"
               />
-              {clientErrors?.errors?.[index]?.designation   && (
+              {clientErrors?.errors?.[index]?.designation && (
                 <p className="text-red-500 text-sm">
-                  {clientErrors.errors[index].designation  }
+                  {clientErrors.errors[index].designation}
                 </p>
               )}
             </div>

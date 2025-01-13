@@ -57,7 +57,7 @@ const Card = ({ card }) => {
 
   console.log("click", card.qrCodeUrl);
   return (
-    <div className="w-80 flex-col relative m-3 rounded-xl bg-white">
+    <div className="w-80 flex-1 basis-[350px] grow-0 flex-col relative m-3 rounded-xl bg-white">
       <div
         className="w-56 h-36 absolute rounded-xl"
         style={{
